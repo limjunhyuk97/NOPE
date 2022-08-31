@@ -35,7 +35,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@supabase/supabase-js": "^2.0.0-rc.8",
-		"dotenv": "^16.0.1"
+		"@supabase/supabase-js": "^2.0.0-rc.8"
 	}
 }
