@@ -6,7 +6,7 @@
 </script>
 
 <!-- <div class="2xl:w-[{DESKTOP_WIDTH}] sm:w-[{TABLET_WIDTH}] w-[{MOBILD_WIDTH}] mx-auto"> -->
-<div class="2xl:w-[1528px] sm:w-[1024px] w-[640px] mx-auto">
+<div class="2xl:w-[{DESKTOP_WIDTH}] sm:w-[{TABLET_WIDTH}] w-[{MOBILD_WIDTH}] mx-auto">
 	<slot />
 </div>
 <Loading />
