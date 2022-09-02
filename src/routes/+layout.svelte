@@ -2,24 +2,25 @@
 	import '../app.css';
 	import Loading from '$lib/Loading.svelte';
 	import Toast from '$lib/Toast.svelte';
-	import { DESKTOP_WIDTH, MOBILE_WIDTH, TABLET_WIDTH } from '$lib/constant';
-	import { beforeUpdate } from 'svelte';
+	import { onMount } from 'svelte';
 	import { user } from '$lib/stores';
 	import { supabase } from '$lib/supabase';
 
-	beforeUpdate(async () => {
+	onMount(async () => {
 		const { data } = await supabase.auth.getUser();
+		console.log(data);
 		$user = data.user;
 	});
 
-	supabase.auth.onAuthStateChange((_, session) => {
-		$user = session?.user ?? null;
+	supabase.auth.onAuthStateChange(async (_, session) => {
+		console.log(session);
+		$user = session?.user || null;
 	});
 </script>
 
-<div class="w-full bg-gray-100">
+<div class="w-full bg-gray-100 font-NOPE">
 	<div
-		class="h-screen 2xl:w-[{DESKTOP_WIDTH}] lg:w-[{TABLET_WIDTH}] w-[{MOBILE_WIDTH}] mx-auto bg-white"
+		class="DESKTOP-TEMPLATE-WIDTH TABLET-TEMPLATE-WIDTH MOBILE-TEMPLATE-WIDTH h-screen relative mx-auto bg-white"
 	>
 		<slot />
 	</div>

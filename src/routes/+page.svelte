@@ -6,7 +6,7 @@
 	import { beforeUpdate } from 'svelte';
 
 	beforeUpdate(() => {
-		if (!$user) goto('/users/login');
+		if (!$user) goto('/users/signin');
 	});
 </script>
 

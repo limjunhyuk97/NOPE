@@ -16,6 +16,7 @@
 		"@playwright/test": "^1.25.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
+		"@types/uuid": "^8.3.4",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
 		"autoprefixer": "^10.4.8",
@@ -27,6 +28,7 @@
 		"prettier-plugin-svelte": "^2.7.0",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.7.1",
+		"svelte-loading-spinners": "^0.1.7",
 		"svelte-preprocess": "^4.10.7",
 		"tailwindcss": "^3.1.8",
 		"tslib": "^2.3.1",
@@ -35,6 +37,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@supabase/supabase-js": "^2.0.0-rc.8"
+		"@supabase/supabase-js": "^2.0.0-rc.8",
+		"feather-icons": "^4.29.0",
+		"uuid": "^8.3.2"
 	}
 }

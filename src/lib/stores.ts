@@ -10,8 +10,9 @@ export const modal = writable(null);
 export const loading = writable(false);
 
 // Toast
-type toastType = {
+type ToastType = {
 	message: string;
 	top: number;
+	width: number;
 };
-export const toast: Writable<toastType | null> = writable(null);
+export const toast: Writable<ToastType | null> = writable(null);

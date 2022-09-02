@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer component {
+	/* TEMPLATE WIDTH */
+	.TEMPLATE-WIDTH {
+		@apply 2xl:w-[1536px] lg:w-[1024px] w-[640px];
+	}
+
+	/* SignIn */
+	.SIGNIN-TEMPLATE-WIDTH {
+		@apply 2xl:w-[640px] lg:w-[560px] w-[420px];
+	}
+
+	/* SignUp */
+	.SIGNUP-TEMPLATE-WIDTH {
+		@apply 2xl:w-[640px] lg:w-[560px] w-[420px];
+	}
+}

@@ -8,19 +8,18 @@
 		if ($toast) {
 			setTimeout(() => {
 				$toast = null;
-			}, 2000);
+			}, 1000);
 		}
 	}
 </script>
 
-{#if $toast}
+{#if $toast !== null}
 	<div
 		on:click={() => {
 			$toast = null;
 		}}
 		transition:scale={{ duration: 300, delay: 500, start: 0.5, easing: quintOut }}
-		class="w-screen mx-auto px-3 py-1 fixed right-0 left-0 top-{$toast.top ??
-			20} flex items-center justify-center rounded-3xl opacity-70 bg-blue-500 text-white text-center text-xs z-20"
+		class="w-{$toast.width} px-3 py-1 fixed top-{$toast.top} right-0 left-0 mx-auto rounded-3xl opacity-70 bg-gray-600 text-white text-center text-xs z-20"
 	>
 		{$toast.message}
 	</div>
