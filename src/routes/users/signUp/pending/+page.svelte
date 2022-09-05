@@ -1,9 +1,10 @@
 <script>
 	import { Jumper } from 'svelte-loading-spinners';
-	import { LOGO } from '$lib/constants';
 	import Icon from '$lib/Icon.svelte';
 	import { user, toast } from '$lib/stores';
 	import { goto } from '$app/navigation';
+	import Logo from '$lib/assets/Logo.svelte';
+	import LeftArrow from '$lib/assets/LeftArrow.svelte';
 </script>
 
 {#if $user}
@@ -11,11 +12,8 @@
 {:else}
 	<div class="w-full h-screen flex justify-center items-center">
 		<div class="SIGNUP-TEMPLATE-WIDTH relative mx-auto border rounded shadow-2xl text-xl">
-			<button type="button" class="absolute left-8 top-8" on:click={() => window.history.go(-1)}>
-				<Icon icon="arrow-left" size={32} stroke_width={3} />
-			</button>
-
-			<a href="/"><img src={LOGO} class="mx-auto" alt="NOPE" /></a>
+			<LeftArrow left={8} top={8} />
+			<Logo />
 
 			<div class="w-full py-32 flex flex-col items-center justify-center">
 				<Jumper color="#9FC9F3" />

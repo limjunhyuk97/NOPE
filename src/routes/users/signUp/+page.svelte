@@ -2,8 +2,9 @@
 	import { supabase } from '$lib/supabase';
 	import Icon from '$lib/Icon.svelte';
 	import { toast } from '$lib/stores';
-	import { LOGO } from '$lib/constants';
 	import { goto } from '$app/navigation';
+	import Logo from '$lib/assets/Logo.svelte';
+	import LeftArrow from '$lib/assets/LeftArrow.svelte';
 
 	let email = '',
 		password = '',
@@ -23,7 +24,7 @@
 			} else {
 				let { data, error } = await supabase.from('users_private').insert([{ id, password }]);
 				if (error) $toast = { message: '회원가입 실패', top: 20, width: 24 };
-				else goto('/users/signup/pending');
+				else goto('/users/signUp/pending');
 			}
 		}
 	};
@@ -31,11 +32,8 @@
 
 <div class="w-full h-screen flex justify-center items-center">
 	<div class="SIGNUP-TEMPLATE-WIDTH relative mx-auto border rounded shadow-2xl text-xl">
-		<button type="button" class="absolute left-8 top-8" on:click={() => window.history.go(-1)}>
-			<Icon icon="arrow-left" size={32} stroke_width={3} />
-		</button>
-
-		<a href="/"><img src={LOGO} class="mx-auto" alt="NOPE" /></a>
+		<LeftArrow left={8} top={8} />
+		<Logo />
 
 		<form
 			on:submit|preventDefault={handleSignup}

@@ -1,9 +1,10 @@
 <script>
-	import { LOGO } from '$lib/constants';
 	import Icon from '$lib/Icon.svelte';
 	import { supabase } from '$lib/supabase';
 	import { goto } from '$app/navigation';
 	import { toast } from '$lib/stores';
+	import Logo from '$lib/assets/Logo.svelte';
+	import LeftArrow from '$lib/assets/LeftArrow.svelte';
 
 	let loading = false;
 	let email = '',
@@ -22,13 +23,11 @@
 
 <div class="w-full h-screen flex justify-center items-center">
 	<div class="SIGNIN-TEMPLATE-WIDTH pb-12 relative border rounded shadow-2xl text-xl">
-		<button type="button" class="absolute left-8 top-8" on:click={() => window.history.go(-1)}>
-			<Icon icon="arrow-left" stroke_width={3} size={32} />
-		</button>
-		<a href="/"><img src={LOGO} class="mx-auto" alt="NOPE" /></a>
+		<LeftArrow left={8} top={8} />
+		<Logo />
 		<form
 			on:submit|preventDefault={handleLogin}
-			class="2xl:px-28 px-16 flex flex-col justify-between"
+			class="2xl:px-28 px-16 flex flex-col"
 			action="submit"
 		>
 			<label for="email" class="mt-20"> 이메일 </label>
@@ -49,7 +48,7 @@
 			/>
 
 			<div class="w-full mt-8 flex justify-end text-sm drop-shadow-lg">
-				<a href="/users/signup"> 회원가입 </a>
+				<a href="/users/signUp"> 회원가입 </a>
 			</div>
 
 			<div class="lg:px-16 px-8 mt-12 flex flex justify-between drop-shadow-lg">
