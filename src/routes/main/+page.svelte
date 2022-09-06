@@ -1,5 +1,5 @@
 <script>
-	import Activity from '$lib/Activity.svelte';
+	import Activity from './components/activity.svelte';
 	import moment from 'moment';
 	import { supabase } from '$lib/supabase';
 	import { onMount } from 'svelte';

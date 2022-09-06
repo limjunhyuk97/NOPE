@@ -1,7 +1,5 @@
 <script>
 	import '../app.css';
-	import Loading from '$lib/Loading.svelte';
-	import Toast from '$lib/Toast.svelte';
 	import { onMount } from 'svelte';
 	import { user } from '$lib/stores';
 	import { supabase } from '$lib/supabase';
@@ -23,7 +21,3 @@
 		<slot />
 	</div>
 </div>
-
-<Loading />
-
-<Toast />

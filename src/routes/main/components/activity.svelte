@@ -1,5 +1,5 @@
 <script>
-	export let url = '/#';
+	export let href = '/main';
 	export let imgUrl = '';
 	export let title = '';
 	export let recruiting = true;
@@ -8,7 +8,7 @@
 	export let endDate = '';
 </script>
 
-<a href={url} class="w-1/3 flex flex-col shadow-2xl">
+<a {href} class="w-1/3 flex flex-col shadow-2xl">
 	<img src={imgUrl} alt={title} class="h-3/4 w-full border-b" />
 	<div class="h-1/4 font-bold flex flex-col px-4 justify-center">
 		<div class="text-start text-lg truncate">{title}</div>
