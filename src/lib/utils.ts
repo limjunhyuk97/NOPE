@@ -16,7 +16,6 @@ export const getImageKey = async (file: Blob, bucket = 'app') => {
 	if (error) {
 		return null;
 	} else {
-		console.log(data);
 		return fileName;
 	}
 };

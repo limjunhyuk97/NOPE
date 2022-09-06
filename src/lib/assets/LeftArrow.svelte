@@ -1,10 +1,10 @@
 <script>
 	export let size = 32;
-	export let left = 0;
-	export let top = 0;
+	export let left = 4;
+	export let top = 4;
 </script>
 
-<div class="relative left-{left} top-{top}">
+<div class="absolute left-{left} top-{top}">
 	<button on:click={() => window.history.go(-1)}>
 		<svg
 			width={size}

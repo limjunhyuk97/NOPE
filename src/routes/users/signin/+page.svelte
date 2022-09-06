@@ -22,8 +22,8 @@
 </script>
 
 <div class="w-full h-screen flex justify-center items-center">
-	<div class="SIGNIN-TEMPLATE-WIDTH pb-12 relative border rounded shadow-2xl text-xl">
-		<LeftArrow left={8} top={8} />
+	<div class="SIGNIN-TEMPLATE-WIDTH relative pb-12 border rounded shadow-2xl text-xl">
+		<LeftArrow left={6} top={6} size={32} />
 		<Logo />
 		<form
 			on:submit|preventDefault={handleLogin}
@@ -51,7 +51,7 @@
 				<a href="/users/signUp"> 회원가입 </a>
 			</div>
 
-			<div class="lg:px-16 px-8 mt-12 flex flex justify-between drop-shadow-lg">
+			<div class="lg:px-16 px-8 mt-12 flex drop-shadow-lg">
 				<button>로그인</button>
 				<a href="/users/">아이디/PW 찾기</a>
 			</div>

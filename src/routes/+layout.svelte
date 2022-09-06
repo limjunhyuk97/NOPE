@@ -8,12 +8,10 @@
 
 	onMount(async () => {
 		const { data } = await supabase.auth.getUser();
-		console.log(data);
 		$user = data.user;
 	});
 
 	supabase.auth.onAuthStateChange(async (_, session) => {
-		console.log(session);
 		$user = session?.user || null;
 	});
 </script>
