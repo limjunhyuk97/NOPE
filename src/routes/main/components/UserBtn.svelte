@@ -38,13 +38,13 @@
 				<button
 					class="ml-2"
 					on:click|preventDefault|stopPropagation={() => {
-						goto('/users/signIn');
+						goto('/users/signin');
 					}}>로그인</button
 				>
 				<button
 					class="ml-2"
 					on:click|preventDefault|stopPropagation={() => {
-						goto('/users/signUp');
+						goto('/users/signup');
 					}}>회원가입</button
 				>
 			</div>

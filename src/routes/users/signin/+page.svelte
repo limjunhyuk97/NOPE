@@ -44,7 +44,7 @@
 			/>
 
 			<div class="w-full mt-8 flex justify-end text-sm drop-shadow-lg">
-				<a href="/users/signUp"> 회원가입 </a>
+				<a href="/users/signup"> 회원가입 </a>
 			</div>
 
 			<div class="px-8 mt-12 flex justify-between drop-shadow-lg">

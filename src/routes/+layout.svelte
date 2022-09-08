@@ -38,7 +38,6 @@
 					<Ongoing activityTypes={data.activityTypes} />
 					{#if $user}
 						<Undergoing />
-
 						<Notices />
 						<SignOut />
 					{/if}
