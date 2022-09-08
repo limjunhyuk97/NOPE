@@ -27,14 +27,12 @@ export interface Activity_Types {
 
 /** @type {import('./$types').PageLoad} */
 export async function load() {
-	const Activities = await supabase
+	const { data } = await supabase
 		.from('activities')
 		.select(
 			'title, recruiting, start_at, end_at, id, status, contents, activities_type("type"), activities_info_images(images("url"))'
 		)
 		.order('created_at', { ascending: false });
 
-	const ActivityTypes = await supabase.from('activities_type').select('type, type_kor');
-
-	return { activities: Activities.data, activityTypes: ActivityTypes.data };
+	return { activities: data };
 }

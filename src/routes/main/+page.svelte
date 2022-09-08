@@ -6,8 +6,6 @@
 	/** @type {import('./$types').PageData} */
 	export let data;
 
-	let types: ArrayLike<Activity_Types> = data.activityTypes;
-
 	let studies: ArrayLike<Activities> = data.activities.filter(
 		(el: Activities) => el.activities_type.type === 'study'
 	);

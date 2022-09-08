@@ -6,7 +6,7 @@
 	import { onMount } from 'svelte';
 	import { toast, user } from '$lib/stores';
 	import { supabase } from '$lib/supabase';
-	import { slide } from 'svelte/transition';
+	import { slide, fade } from 'svelte/transition';
 
 	// menu 선택
 	let menu = 'all';
@@ -68,10 +68,7 @@
 					<nav class="border-t flex flex-col text-xl font-bold">
 						<Button innerText="함께하기" let:hovering={active}>
 							{#if active}
-								<div
-									class="w-full pl-3 flex flex-col items-start gap-5"
-									transition:slide={{ duration: 500 }}
-								>
+								<div class="w-full pl-3 flex flex-col items-start gap-5" transition:slide>
 									<Link href="/users/signIn" innerText="로그인" />
 									<Link href="/users/signUp" innerText="회원가입" />
 								</div>
@@ -79,10 +76,7 @@
 						</Button>
 						<Button innerText="진행중인 활동" let:hovering={active}>
 							{#if active}
-								<div
-									class="w-full pl-3 flex flex-col items-start gap-5"
-									transition:slide={{ duration: 500 }}
-								>
+								<div class="w-full pl-3 flex flex-col items-start gap-5" transition:slide>
 									<Link href="/users/signUp" innerText="회원가입" />
 								</div>
 							{/if}
