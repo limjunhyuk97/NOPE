@@ -1,7 +1,7 @@
 import { supabase } from '$lib/supabase';
 
 // Activities
-export interface Activities {
+export interface activities {
 	activities_info_images: {
 		images: {
 			url: string;
@@ -17,12 +17,6 @@ export interface Activities {
 	start_at: Date;
 	end_at: Date;
 	title: string;
-}
-
-// Activity Type
-export interface Activity_Types {
-	type: string;
-	type_kor: string;
 }
 
 /** @type {import('./$types').PageLoad} */

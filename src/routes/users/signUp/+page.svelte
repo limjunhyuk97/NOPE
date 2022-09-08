@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { supabase } from '$lib/supabase';
 	import Icon from '$lib/Icon.svelte';
 	import { toast } from '$lib/stores';
@@ -13,34 +13,31 @@
 
 	const handleSignup = async () => {
 		let { data, error } = await supabase.auth.signUp({ email, password });
-		const id = data.user.id;
+		const id = typeof data !== null ? data.user.id : null;
 		if (error) {
-			$toast = { message: '회원가입 실패', top: 20, width: 24 };
+			$toast = '회원가입 실패';
 		} else {
 			// 회원 정보 입력 뒤에 pending으로 이동
 			let { data, error } = await supabase.from('users').insert([{ name, email, id }]);
 			if (error) {
-				$toast = { message: '회원가입 실패', top: 20, width: 24 };
+				$toast = '회원가입 실패';
 			} else {
 				let { data, error } = await supabase.from('users_private').insert([{ id, password }]);
-				if (error) $toast = { message: '회원가입 실패', top: 20, width: 24 };
+				if (error) $toast = '회원가입 실패';
 				else goto('/users/signUp/pending');
 			}
 		}
 	};
 </script>
 
-<div class="w-full h-screen flex justify-center items-center">
+<div class="w-full h-full flex justify-center items-center">
 	<div class="SIGNUP-TEMPLATE-WIDTH relative mx-auto border rounded shadow-2xl text-xl">
-		<LeftArrow left={8} top={8} />
-		<Logo />
-
 		<form
 			on:submit|preventDefault={handleSignup}
 			class="px-16 flex flex-col justify-between"
 			action="submit"
 		>
-			<label for="email" class="mt-6">
+			<label for="email" class="mt-12">
 				아이디
 				<input
 					type="email"
@@ -53,7 +50,7 @@
 					required
 				/>
 			</label>
-			<label for="password" class="mt-6">
+			<label for="password" class="mt-12">
 				비밀번호
 				<input
 					type="password"
@@ -66,13 +63,13 @@
 				/>
 			</label>
 
-			<label for="password" class="mt-6">
+			<label for="password" class="mt-12">
 				비밀번호 확인
-				{#if password !== passwordCheck}<span class="text-xs text-red-500"
+				{#if password !== passwordCheck}<span class="ml-3 text-xs text-red-500"
 						>비밀번호와 일치하지 않습니다.</span
 					>
 				{:else if password}
-					<span class="text-xs text-blue-500">비밀번호와 일치합니다.</span>
+					<span class="ml-3 text-xs text-green-500">비밀번호와 일치합니다.</span>
 				{/if}
 				<input
 					type="password"
@@ -84,7 +81,7 @@
 					required
 				/>
 			</label>
-			<label for="password" class="mt-6">
+			<label for="password" class="mt-12">
 				이름
 				<input
 					type="text"
@@ -97,7 +94,7 @@
 				/>
 			</label>
 			<button
-				class="flex justify-center my-8 drop-shadow-lg"
+				class="flex justify-center my-12 drop-shadow-lg"
 				disabled={password.length !== 0 && password !== passwordCheck}
 			>
 				회원가입 완료
@@ -107,7 +104,9 @@
 </div>
 
 <style>
-	input {
+	::placeholder {
 		font-size: 14px;
+		color: gray;
+		opacity: 0.5;
 	}
 </style>

@@ -1,26 +1,25 @@
-<script>
+<script lang="ts">
 	import { toast } from '$lib/stores';
-	import { scale } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
+	import { fly } from 'svelte/transition';
 
+	// $toastMessage에 문자열이 들어오고 2초 뒤에 null로 바꿔라
 	$: {
-		// $toastMessage에 문자열이 들어오고 2초 뒤에 null로 바꿔라
 		if ($toast) {
 			setTimeout(() => {
-				$toast = null;
+				$toast = '';
 			}, 1000);
 		}
 	}
 </script>
 
-{#if $toast !== null}
+{#if $toast}
 	<div
 		on:click={() => {
-			$toast = null;
+			$toast = '';
 		}}
-		transition:scale={{ duration: 300, delay: 500, start: 0.5, easing: quintOut }}
-		class="w-{$toast.width} px-3 py-1 fixed top-{$toast.top} right-0 left-0 mx-auto rounded-3xl opacity-70 bg-gray-600 text-white text-center text-xs z-20"
+		transition:fly={{ duration: 300, delay: 500, y: -20 }}
+		class="w-max fixed top-6 right-0 left-0 mx-auto rounded-3xl opacity-70 bg-gray-600 text-white text-center text-xs z-10"
 	>
-		{$toast.message}
+		<p class="px-4 py-1">{$toast}</p>
 	</div>
 {/if}
