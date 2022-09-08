@@ -24,30 +24,13 @@
 		마이페이지
 	</button>
 {:else}
-	<button
-		on:click|preventDefault={() => {
-			goto('/');
-		}}
-		class="border-b p-4 text-left"
-		on:mouseenter={mouseEnter}
-		on:mouseleave={mouseOut}
-	>
+	<a href="/" class="border-b p-4 text-left" on:mouseenter={mouseEnter} on:mouseleave={mouseOut}>
 		함께하기
 		{#if hovering}
 			<div class="pt-4 flex flex-col items-start gap-4 text-sm" transition:slide>
-				<button
-					class="ml-2"
-					on:click|preventDefault|stopPropagation={() => {
-						goto('/users/signin');
-					}}>로그인</button
-				>
-				<button
-					class="ml-2"
-					on:click|preventDefault|stopPropagation={() => {
-						goto('/users/signup');
-					}}>회원가입</button
-				>
+				<a class="ml-2" href="/users/signin" sveltekit:reload>로그인</a>
+				<a class="ml-2" href="/users/signup" sveltekit:reload>회원가입</a>
 			</div>
 		{/if}
-	</button>
+	</a>
 {/if}
