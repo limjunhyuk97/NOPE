@@ -9,6 +9,7 @@ export interface activities {
 	}[];
 	activities_type: {
 		type: string;
+		type_kor: string;
 	};
 	contents: string;
 	id: string;
@@ -24,9 +25,8 @@ export async function load() {
 	const { data } = await supabase
 		.from('activities')
 		.select(
-			'title, recruiting, start_at, end_at, id, status, contents, activities_type("type"), activities_info_images(images("url"))'
+			'title, recruiting, start_at, end_at, id, status, contents, activities_type("type", "type_kor"), activities_info_images(images("url"))'
 		)
 		.order('created_at', { ascending: false });
-
 	return { activities: data };
 }

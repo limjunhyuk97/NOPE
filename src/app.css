@@ -5,12 +5,12 @@
 @layer component {
 	/* TEMPLATE WIDTH */
 	.TEMPLATE-WIDTH {
-		@apply 2xl:w-[1536px] lg:w-[1024px] w-[640px];
+		@apply 2xl:w-[1536px] lg:w-[1024px] w-[300px];
 	}
 
 	/* SIDEBAR WIDTH */
 	.SIDEBAR-WIDTH {
-		@apply 2xl:w-[420px] lg:w-[250px];
+		@apply 2xl:w-[420px] lg:w-[250px] w-[0px];
 	}
 
 	/* SignIn */
@@ -25,6 +25,6 @@
 
 	/* Main */
 	.MAIN-ACTIVITY-WIDTH {
-		@apply 2xl:w-[340px] lg:w-[190px];
+		@apply 2xl:w-[340px] lg:w-[240px];
 	}
 }
