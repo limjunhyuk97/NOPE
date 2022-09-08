@@ -37,7 +37,8 @@
 			class="px-16 flex flex-col justify-between"
 			action="submit"
 		>
-			<label for="email" class="mt-12">
+			<h1 class="w-full mt-16 text-2xl">회원가입</h1>
+			<label for="email" class="mt-16">
 				아이디
 				<input
 					type="email"

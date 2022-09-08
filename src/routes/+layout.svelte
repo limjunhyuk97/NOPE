@@ -5,16 +5,15 @@
 	import { user } from '$lib/stores';
 	import { supabase } from '$lib/supabase';
 	import type { ActivityTypes } from './+layout';
-	import { fade } from 'svelte/transition';
-	// Back Component
-	import Back from '$lib/Back.svelte';
+
 	// SideBar Component
 	import SignOut from './main/components/SignOut.svelte';
-	import Likes from './main/components/Likes.svelte';
+
 	import Notices from './main/components/Notices.svelte';
 	import Ongoing from './main/components/Ongoing.svelte';
 	import UserBtn from './main/components/UserBtn.svelte';
 	import Version from './main/components/Version.svelte';
+	import Undergoing from './main/components/Undergoing.svelte';
 
 	// activity, user data 받아오기
 	export let data: any;
@@ -38,7 +37,8 @@
 					<UserBtn />
 					<Ongoing activityTypes={data.activityTypes} />
 					{#if $user}
-						<Likes />
+						<Undergoing />
+
 						<Notices />
 						<SignOut />
 					{/if}
