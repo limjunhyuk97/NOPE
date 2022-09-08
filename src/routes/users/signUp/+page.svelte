@@ -24,7 +24,7 @@
 			} else {
 				let { data, error } = await supabase.from('users_private').insert([{ id, password }]);
 				if (error) $toast = '회원가입 실패';
-				else goto('/users/signUp/pending');
+				else goto('/users/signup/pending');
 			}
 		}
 	};
