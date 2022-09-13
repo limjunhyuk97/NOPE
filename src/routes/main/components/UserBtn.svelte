@@ -1,7 +1,8 @@
 <script>
 	import { user } from '$lib/stores';
 	import { goto } from '$app/navigation';
-	import { slide } from 'svelte/transition';
+	import { slide, fly } from 'svelte/transition';
+	import { page } from '$app/stores';
 
 	let hovering = false;
 	const mouseEnter = () => {
@@ -13,16 +14,25 @@
 </script>
 
 {#if $user}
-	<button
-		on:click|preventDefault={() => {
-			goto('/users');
-		}}
-		class="border-b p-4 text-left"
-		on:mouseenter={mouseEnter}
-		on:mouseleave={mouseOut}
-	>
-		마이페이지
-	</button>
+	{#if $page.routeId === 'users/mypage'}
+		<button
+			on:click|preventDefault={() => {
+				goto('/users/mypage');
+			}}
+			class="border-b p-4 text-left"
+		>
+			<div in:fly={{ x: -64 }} class="pl-32">마이페이지</div>
+		</button>
+	{:else}
+		<button
+			on:click|preventDefault={() => {
+				goto('/users/mypage');
+			}}
+			class="border-b p-4 text-left"
+		>
+			<div in:fly={{ x: 64 }}>마이페이지</div>
+		</button>
+	{/if}
 {:else}
 	<button
 		on:click|preventDefault={() => {
