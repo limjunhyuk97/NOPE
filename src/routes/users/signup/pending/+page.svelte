@@ -17,6 +17,9 @@
 				<Jumper color="#9FC9F3" />
 				<a href="/" class="flex flex-col items-center">
 					<div class="pt-24 text-blue-300">인증 대기중입니다</div>
+					<div class="pt-4 text-sm text-blue-300">
+						이메일로 본인인증을 완료하시면 회원가입이 완료됩니다!
+					</div>
 					<div class="pt-1 text-xs text-blue-300">홈으로 가기</div>
 				</a>
 			</div>
