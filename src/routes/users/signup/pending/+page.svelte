@@ -1,10 +1,7 @@
 <script>
 	import { Jumper } from 'svelte-loading-spinners';
-	import Icon from '$lib/Icon.svelte';
 	import { user, toast } from '$lib/stores';
 	import { goto } from '$app/navigation';
-	import Logo from '$lib/assets/Logo.svelte';
-	import LeftArrow from '$lib/assets/LeftArrow.svelte';
 </script>
 
 {#if $user}
