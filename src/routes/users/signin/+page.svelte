@@ -17,19 +17,15 @@
 	};
 </script>
 
-<div class="w-full h-full flex flex-col justify-center items-center">
-	<div class="SIGNIN-TEMPLATE-WIDTH relative pb-12 pt-4 border rounded shadow-2xl text-xl">
-		<form
-			on:submit|preventDefault={handleLogin}
-			class="2xl:px-28 px-16 flex flex-col"
-			action="submit"
-		>
+<div class="w-full h-full flex justify-center items-center">
+	<div class="mx-auto pb-12 pt-4 border rounded shadow-2xl text-xl">
+		<form on:submit|preventDefault={handleLogin} class="px-16 flex flex-col" action="submit">
 			<h1 class="w-full mt-16 text-2xl">로그인</h1>
 			<label for="email" class="mt-16"> 이메일 </label>
 			<input
 				type="email"
 				id="email"
-				class="mt-8 border-b focus:outline-none border-gray-300 bg-white"
+				class="w-96 mt-8 border-b focus:outline-none border-gray-300 bg-white"
 				bind:value={email}
 				required
 			/>
@@ -37,7 +33,7 @@
 			<label for="password" class="mt-16"> 비밀번호 </label>
 			<input
 				type="password"
-				class="mt-8 border-b focus:outline-none border-gray-300 bg-white"
+				class="w-96 mt-8 border-b focus:outline-none border-gray-300 bg-white"
 				bind:value={password}
 				required
 			/>
