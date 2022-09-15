@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Activity from './components/Activity.svelte';
-	import type { Activities } from './+page.js';
+	import Activity from '$lib/components/main/Activity.svelte';
+	import type { activities } from './+page.js';
 	import { activitiesToShow } from '$lib/stores';
 	import { fade } from 'svelte/transition';
 	import moment from 'moment';
