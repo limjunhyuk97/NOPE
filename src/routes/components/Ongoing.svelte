@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ActivityTypes } from '../../+layout';
+	import type { ActivityTypes } from '../+layout';
 	import { slide } from 'svelte/transition';
 	import { activitiesToShow } from '$lib/stores';
 	import { goto } from '$app/navigation';
