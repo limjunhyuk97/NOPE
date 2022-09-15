@@ -7,12 +7,12 @@
 	import type { ActivityTypes } from './+layout';
 
 	// SideBar Component
-	import SignOut from './components/SignOut.svelte';
-	import Notices from './components/Notices.svelte';
-	import Ongoing from './components/Ongoing.svelte';
-	import UserBtn from './components/UserBtn.svelte';
-	import Version from './components/Version.svelte';
-	import Undergoing from './components/Undergoing.svelte';
+	import SignOut from '$lib/components/SignOut.svelte';
+	import Notices from '$lib/components/Notices.svelte';
+	import Ongoing from '$lib/components/Ongoing.svelte';
+	import UserBtn from '$lib/components/UserBtn.svelte';
+	import Version from '$lib/components/Version.svelte';
+	import Undergoing from '$lib/components/Undergoing.svelte';
 
 	// activity, user data 받아오기
 	export let data: any;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Activity from './components/Activity.svelte';
+	import Activity from '$lib/components/main/Activity.svelte';
 	import type { activities } from './+page.js';
 	import { activitiesToShow } from '$lib/stores';
 	import { fade } from 'svelte/transition';
