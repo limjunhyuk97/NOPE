@@ -8,8 +8,8 @@
 	{goto('/')}
 {:else}
 	<div class="w-full h-full flex justify-center items-center">
-		<div class="SIGNUP-TEMPLATE-WIDTH relative mx-auto border rounded shadow-2xl text-xl">
-			<div class="w-full py-24 flex flex-col items-center justify-center">
+		<div class="relative mx-auto border rounded shadow-2xl text-xl">
+			<div class="w-full py-24 px-24 flex flex-col items-center justify-center">
 				<h1 class="mb-24 text-blue-300">정보 입력 완료!</h1>
 				<Jumper color="#9FC9F3" />
 				<a href="/" class="flex flex-col items-center">

@@ -5,22 +5,12 @@
 @layer component {
 	/* TEMPLATE WIDTH */
 	.TEMPLATE-WIDTH {
-		@apply 2xl:w-[1536px] lg:w-[1024px] w-[300px];
+		@apply 2xl:w-[1536px] lg:w-[1124px] w-[360px];
 	}
 
 	/* SIDEBAR WIDTH */
 	.SIDEBAR-WIDTH {
-		@apply 2xl:w-[420px] lg:w-[250px] w-[0px];
-	}
-
-	/* SignIn */
-	.SIGNIN-TEMPLATE-WIDTH {
-		@apply 2xl:w-[640px] lg:w-[560px] w-[420px];
-	}
-
-	/* SignUp */
-	.SIGNUP-TEMPLATE-WIDTH {
-		@apply 2xl:w-[640px] lg:w-[560px] w-[420px];
+		@apply 2xl:w-[420px] lg:w-[250px];
 	}
 
 	/* Main */

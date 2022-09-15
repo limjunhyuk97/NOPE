@@ -32,9 +32,11 @@
 </script>
 
 <a {href} class="MAIN-ACTIVITY-WIDTH shadow-2xl" bind:clientWidth={w}>
-	<img src={imgUrl} alt={title} class="w-full h-3/4 object-cover border-b" />
 	<!-- 브라우저 사이즈 -->
 	{#if w >= 340}
+		<div class="w-full h-3/4 flex justify-center items-center rounded bg-gray-100 overflow-hidden">
+			<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
+		</div>
 		<div class="h-1/4 flex flex-col px-4 py-2 justify-center text-sm">
 			<div class="flex flex-col justify-between items-start text-start text-lg truncate">
 				<h1>{title}</h1>
@@ -49,6 +51,9 @@
 		</div>
 		<!-- 패드 사이즈 -->
 	{:else if w >= 190}
+		<div class="w-full h-3/4 flex justify-center items-center rounded bg-gray-100 overflow-hidden">
+			<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
+		</div>
 		<div class="flex flex-col px-2 justify-center ">
 			<div class="mt-2 text-start truncate">{title}</div>
 			<div class="mt-2 text-xs">{type}</div>
@@ -62,17 +67,13 @@
 		</div>
 		<!-- 휴대폰 사이즈 -->
 	{:else}
-		<div class="flex flex-col px-4 justify-center">
-			<div class="text-start text-lg truncate">{title}</div>
-			<div class="lg:block hidden text-end text-xs gap-1">
-				{#if recruiting}
-					<div class="text-blue-600">지원 가능</div>
-				{:else}
-					<div class="text-red-600">지원 불가</div>
-				{/if}
-
-				<div>시작일 {startDate}</div>
-				<div>종료일 {endDate ? endDate : '-'}</div>
+		<div class="mb-8">
+			<div class="w-full h-96 flex justify-center items-center rounded bg-gray-100 overflow-hidden">
+				<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
+			</div>
+			<div class="pt-2 flex justify-between items-end">
+				<h1 class="mt-1">{title}</h1>
+				<div class="text-sm text-gray-600">{type}</div>
 			</div>
 		</div>
 	{/if}
