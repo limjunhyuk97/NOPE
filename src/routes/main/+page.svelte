@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Activity from './components/Activity.svelte';
-	import type { activities } from './+page.js';
+	import type { Activities } from './+page.js';
 	import { activitiesToShow } from '$lib/stores';
 	import { fade } from 'svelte/transition';
 	import moment from 'moment';
@@ -8,13 +8,13 @@
 	/** @type {import('./$types').PageData} */
 	export let data;
 
-	const Activites: ArrayLike<activities> = data.activities;
+	const Activites: ArrayLike<Activities> = data.activities;
 
-	const Studies: ArrayLike<activities> = data.activities.filter(
-		(el: activities) => el.activities_type.type === 'study'
+	const Studies: ArrayLike<Activities> = data.activities.filter(
+		(el: Activities) => el.activities_type.type === 'study'
 	);
-	const Projects: ArrayLike<activities> = data.activities.filter(
-		(el: activities) => el.activities_type.type === 'project'
+	const Projects: ArrayLike<Activities> = data.activities.filter(
+		(el: Activities) => el.activities_type.type === 'project'
 	);
 </script>
 

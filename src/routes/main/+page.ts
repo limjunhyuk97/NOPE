@@ -1,7 +1,7 @@
 import { supabase } from '$lib/supabase';
 
 // Activities
-export interface activities {
+export interface Activities {
 	activities_info_images: {
 		images: {
 			url: string;
