@@ -1,25 +1,5 @@
 import { supabase } from '$lib/supabase';
 
-// Activities
-export interface Activities {
-	activities_info_images: {
-		images: {
-			url: string;
-		};
-	}[];
-	activities_type: {
-		type: string;
-		type_kor: string;
-	};
-	contents: string;
-	id: string;
-	status: string;
-	recruiting: boolean;
-	start_at: Date;
-	end_at: Date;
-	title: string;
-}
-
 /** @type {import('./$types').PageLoad} */
 export async function load() {
 	const { data } = await supabase
