@@ -3,7 +3,6 @@
 	import { goto } from '$app/navigation';
 	import { toast } from '$lib/stores';
 
-	let loading = false;
 	let email = '',
 		password = '';
 
