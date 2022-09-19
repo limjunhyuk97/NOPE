@@ -38,8 +38,18 @@
 		함께하기
 		{#if hovering}
 			<div class="pt-4 flex flex-col items-start gap-4 text-sm" transition:slide>
-				<a class="ml-2" href="/users/signin" sveltekit:reload>로그인</a>
-				<a class="ml-2" href="/users/signup" sveltekit:reload>회원가입</a>
+				<button
+					class="ml-2"
+					on:click|preventDefault|stopPropagation={() => {
+						goto('/users/signIn');
+					}}>로그인</button
+				>
+				<button
+					class="ml-2"
+					on:click|preventDefault|stopPropagation={() => {
+						goto('/users/signUp');
+					}}>회원가입</button
+				>
 			</div>
 		{/if}
 	</a>

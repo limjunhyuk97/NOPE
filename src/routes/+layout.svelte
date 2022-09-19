@@ -25,7 +25,6 @@
 	// activity, user data 받아오기
 	export let data: any;
 	const activityTypes: ArrayLike<ActivityTypes> = data.activityTypes;
-	$user = data.user.user;
 
 	supabase.auth.onAuthStateChange(async (_, session) => {
 		$user = session?.user || null;
