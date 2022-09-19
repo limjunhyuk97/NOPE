@@ -32,50 +32,24 @@
 	};
 </script>
 
-<a {href} class="MAIN-ACTIVITY-WIDTH shadow-2xl" bind:clientWidth={w}>
-	<!-- 브라우저 사이즈 -->
-	{#if w >= 340}
-		<div class="w-full h-3/4 flex justify-center items-center rounded bg-gray-100 overflow-hidden">
-			<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
+<a
+	{href}
+	class="MAIN-ACTIVITY-WIDTH mb-12 shadow-2xl rounded-lg overflow-hidden"
+	bind:clientWidth={w}
+>
+	<div
+		class="w-full 2xl:h-96 lg:h-72 h-96 flex justify-center items-center bg-gray-100 lg:rounded-t-lg overflow-hidden"
+	>
+		<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
+	</div>
+	<div class="w-full pb-12 lg:px-3 h-1/4 flex flex-col">
+		<div class="mt-2">{title}</div>
+		<div class="text-xs">
+			{#if recruiting}
+				<div class="text-blue-600">지원 가능</div>
+			{:else}
+				<div class="text-red-600">지원 불가</div>
+			{/if}
 		</div>
-		<div class="h-1/4 flex flex-col px-4 py-2 justify-center text-sm">
-			<div class="flex flex-col justify-between items-start text-start text-lg truncate">
-				<h1>{title}</h1>
-				<h2 class="text-xs">{type}</h2>
-			</div>
-			<div class="text-end gap-1">
-				{@html recruitingMSG()}
-				{@html statusMSG()}
-				<div>시작일 {startDate}</div>
-				<div>종료일 {endDate ? endDate : '-'}</div>
-			</div>
-		</div>
-		<!-- 패드 사이즈 -->
-	{:else if w >= 190}
-		<div class="w-full h-3/4 flex justify-center items-center rounded bg-gray-100 overflow-hidden">
-			<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
-		</div>
-		<div class="flex flex-col px-2 justify-center ">
-			<div class="mt-2 text-start truncate">{title}</div>
-			<div class="mt-2 text-xs">{type}</div>
-			<div class="lg:block hidden text-start text-xs gap-1">
-				{#if recruiting}
-					<div class="text-blue-600">지원 가능</div>
-				{:else}
-					<div class="text-red-600">지원 불가</div>
-				{/if}
-			</div>
-		</div>
-		<!-- 휴대폰 사이즈 -->
-	{:else}
-		<div class="mb-8">
-			<div class="w-full h-96 flex justify-center items-center rounded bg-gray-100 overflow-hidden">
-				<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
-			</div>
-			<div class="pt-2 flex justify-between items-end">
-				<h1 class="mt-1">{title}</h1>
-				<div class="text-sm text-gray-600">{type}</div>
-			</div>
-		</div>
-	{/if}
+	</div>
 </a>
