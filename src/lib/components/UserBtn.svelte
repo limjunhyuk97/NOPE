@@ -17,7 +17,7 @@
 	{#if $page.routeId === 'users/mypage'}
 		<button
 			on:click|preventDefault={() => {
-				goto('/users/mypage');
+				goto('/users');
 			}}
 			class="border-b p-4 text-left"
 		>
@@ -26,7 +26,7 @@
 	{:else}
 		<button
 			on:click|preventDefault={() => {
-				goto('/users/mypage');
+				goto('/users');
 			}}
 			class="border-b p-4 text-left"
 		>
@@ -41,13 +41,13 @@
 				<button
 					class="ml-2"
 					on:click|preventDefault|stopPropagation={() => {
-						goto('/users/signIn');
+						goto('/users/signin');
 					}}>로그인</button
 				>
 				<button
 					class="ml-2"
 					on:click|preventDefault|stopPropagation={() => {
-						goto('/users/signUp');
+						goto('/users/signup');
 					}}>회원가입</button
 				>
 			</div>

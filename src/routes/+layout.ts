@@ -11,25 +11,20 @@ export interface ActivityTypes {
 
 const setUserData = async () => {
 	const { data, error } = await supabase.auth.getUser();
-	if (error) {
-		console.log(error);
-	} else {
+	if (data) {
 		user.set(data.user);
 	}
+	return error ? null : data;
 };
 
 const getActivityTypes = async () => {
 	const { data, error } = await supabase.from('activities_type').select('*');
-	if (error) {
-		console.log(error);
-	} else {
-		return data;
-	}
+	return error ? null : data;
 };
 
 /** @type {import('./$types').LayoutLoad} */
 export async function load() {
-	await setUserData();
+	const user = await setUserData();
 	const activityTypes = await getActivityTypes();
 	return { activityTypes: activityTypes };
 }
