@@ -2,7 +2,8 @@
 	export let href = '/';
 	export let imgUrl = '';
 	export let title = '';
-	export let contents = '';
+	export let details = '';
+	export let short_details = '';
 	export let recruiting = true;
 	export let startDate = '';
 	export let endDate = '';

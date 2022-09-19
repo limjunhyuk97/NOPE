@@ -12,9 +12,8 @@ export interface ActivityTypes {
 const setUserData = async () => {
 	const { data, error } = await supabase.auth.getUser();
 	if (data) {
-		user.set(data.user);
+		user.set(error ? null : data.user);
 	}
-	return error ? null : data;
 };
 
 const getActivityTypes = async () => {
@@ -24,7 +23,7 @@ const getActivityTypes = async () => {
 
 /** @type {import('./$types').LayoutLoad} */
 export async function load() {
-	const user = await setUserData();
+	await setUserData();
 	const activityTypes = await getActivityTypes();
 	return { activityTypes: activityTypes };
 }
