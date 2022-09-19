@@ -1,7 +1,8 @@
 <script>
 	import { user } from '$lib/stores';
 	import { goto } from '$app/navigation';
-	import { slide } from 'svelte/transition';
+	import { slide, fly } from 'svelte/transition';
+	import { page } from '$app/stores';
 
 	let hovering = false;
 	const mouseEnter = () => {
@@ -13,23 +14,42 @@
 </script>
 
 {#if $user}
-	<button
-		on:click|preventDefault={() => {
-			goto('/users');
-		}}
-		class="border-b p-4 text-left"
-		on:mouseenter={mouseEnter}
-		on:mouseleave={mouseOut}
-	>
-		마이페이지
-	</button>
+	{#if $page.routeId === 'users/mypage'}
+		<button
+			on:click|preventDefault={() => {
+				goto('/users');
+			}}
+			class="border-b p-4 text-left"
+		>
+			<div in:fly={{ x: -64 }} class="pl-32">마이페이지</div>
+		</button>
+	{:else}
+		<button
+			on:click|preventDefault={() => {
+				goto('/users');
+			}}
+			class="border-b p-4 text-left"
+		>
+			<div in:fly={{ x: 64 }}>마이페이지</div>
+		</button>
+	{/if}
 {:else}
 	<a href="/" class="border-b p-4 text-left" on:mouseenter={mouseEnter} on:mouseleave={mouseOut}>
 		함께하기
 		{#if hovering}
 			<div class="pt-4 flex flex-col items-start gap-4 text-sm" transition:slide>
-				<a class="ml-2" href="/users/signin" sveltekit:reload>로그인</a>
-				<a class="ml-2" href="/users/signup" sveltekit:reload>회원가입</a>
+				<button
+					class="ml-2"
+					on:click|preventDefault|stopPropagation={() => {
+						goto('/users/signin');
+					}}>로그인</button
+				>
+				<button
+					class="ml-2"
+					on:click|preventDefault|stopPropagation={() => {
+						goto('/users/signup');
+					}}>회원가입</button
+				>
 			</div>
 		{/if}
 	</a>

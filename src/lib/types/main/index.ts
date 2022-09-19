@@ -9,7 +9,8 @@ export interface Activities {
 		type: string;
 		type_kor: string;
 	};
-	contents: string;
+	details: string;
+	short_details: string;
 	id: string;
 	status: string;
 	recruiting: boolean;
