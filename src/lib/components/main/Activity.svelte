@@ -1,17 +1,27 @@
 <script lang="ts">
 	import { slide, fade } from 'svelte/transition';
-	export let href = '/';
+	import { user, toast } from '$lib/stores';
+	import Icon from '$lib/Icon.svelte';
 	export let imgUrl = '';
 	export let title = '';
-	export let details = '';
+	export let id = '';
 	export let short_details = '';
 	export let recruiting = true;
 	export let startDate = '';
 	export let endDate = '';
 	export let status = '';
-	export let type = '';
+	export let likes = {};
 	import moment from 'moment';
 	moment.locale('ko');
+
+	// 찜하기 기능 위한 import
+	import { postLike, postDisLike } from '$lib/API/main';
+	let liked = Object.keys(likes).length !== 0;
+	const likeBtn = async () => {
+		liked = !liked;
+		const result = liked ? await postLike($user?.id, id) : await postDisLike($user?.id, id);
+		$toast = result ? (liked ? '찜하기 완료' : '찜한항목 제거') : '찜하기 실패';
+	};
 
 	// 진행상태 메시지 가공 위한 객체
 	type statusDivType = { content: string; color: string };
@@ -38,7 +48,7 @@
 </script>
 
 <a
-	{href}
+	href="/activities/{id}"
 	class="w-full 2xl:h-[524px] lg:h-[434px] h-[524px] mb-12 shadow-2xl rounded-lg overflow-hidden"
 >
 	{#if !hovering}
@@ -59,9 +69,27 @@
 			hovering = false;
 		}}
 	>
-		<p class="w-full mt-2 text-lg {hovering ? '' : 'truncate'}">
-			{title}
-		</p>
+		<div class="flex justify-between items-center">
+			<p class="w-full mt-2 text-lg {hovering ? '' : 'truncate'}">
+				{title}
+			</p>
+			{#if $user}
+				<button
+					class="ml-2"
+					on:click|preventDefault={async () => {
+						await likeBtn();
+					}}
+				>
+					<Icon
+						icon="heart-fill"
+						size={16}
+						fill={liked ? 'red' : 'none'}
+						stroke={liked ? '' : 'black'}
+					/>
+				</button>
+			{/if}
+		</div>
+
 		{@html statusMSG()}
 		{@html recruitingMSG()}
 		<div class="mt-3">시작일 {moment(startDate).format('YYYY.MM.DD')}</div>
