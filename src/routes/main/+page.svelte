@@ -6,7 +6,7 @@
 	/** @type {import('./$types').PageData} */
 	export let data: any;
 
-	const Activites: ArrayLike<Activities> = data.activities;
+	const All: ArrayLike<Activities> = data.activities;
 
 	const Studies: ArrayLike<Activities> = data.activities.filter(
 		(el: Activities) => el.activities_type.type === 'study'
@@ -20,7 +20,7 @@
 <div class="w-full">
 	<!-- all -->
 	{#if $activitiesToShow === 'all'}
-		<ActivityWrapper {Activites} activities_type_kor={'전체활동'} />
+		<ActivityWrapper Activites={All} activities_type_kor={'전체활동'} />
 
 		<!-- study -->
 	{:else if $activitiesToShow === 'study'}
