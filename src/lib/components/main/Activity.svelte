@@ -44,8 +44,8 @@
 	{#if !hovering}
 		<div
 			class="w-full 2xl:h-96 lg:h-72 h-96 flex justify-center items-center bg-gray-100 lg:rounded-t-lg overflow-hidden"
-			in:fade={{ duration: 400 }}
-			out:slide={{ duration: 600 }}
+			in:fade|local={{ duration: 400 }}
+			out:slide|local={{ duration: 600 }}
 		>
 			<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
 		</div>
