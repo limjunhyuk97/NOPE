@@ -13,15 +13,7 @@
 	};
 </script>
 
-<button
-	on:click|preventDefault={() => {
-		goto('/');
-		$activitiesToShow = 'all';
-	}}
-	on:mouseenter={mouseEnter}
-	on:mouseleave={mouseOut}
-	class="p-4 border-b text-start"
->
+<button on:mouseenter={mouseEnter} on:mouseleave={mouseOut} class="p-4 border-b text-start">
 	내 활동
 	{#if hovering}
 		<div class="pt-4 flex flex-col items-start gap-4 text-sm" transition:slide>
