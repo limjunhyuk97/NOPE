@@ -3,11 +3,9 @@
 	import type { Activities } from '$lib/types/main';
 	import { fade } from 'svelte/transition';
 	import moment from 'moment';
-	import { identity } from 'svelte/internal';
 
 	export let activities_type_kor = '전체활동';
 	export let Activites: ArrayLike<Activities>;
-	console.log(Activites);
 </script>
 
 <div in:fade={{ duration: 500 }}>
