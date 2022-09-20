@@ -3,25 +3,26 @@
 	import type { Activities } from '$lib/types/main';
 	import { fade } from 'svelte/transition';
 	import moment from 'moment';
+	import { identity } from 'svelte/internal';
 
 	export let activities_type_kor = '전체활동';
 	export let Activites: ArrayLike<Activities>;
+	console.log(Activites);
 </script>
 
 <div in:fade={{ duration: 500 }}>
 	<div class="lg:mt-8 mb-4 lg:text-3xl text-xl">{activities_type_kor}</div>
 	{#if Activites?.length}
-		<div class="mb-8 lg:grid lg:grid-cols-3 lg:gap-6">
-			{#each Activites as { title, recruiting, start_at, end_at, status, activities_info_images, activities_type, details, short_details }}
+		<div class="mb-8 grid lg:grid-cols-3 2xl:gap-10 lg:gap-3">
+			{#each Activites as { title, recruiting, start_at, end_at, id, status, activities_info_images, short_details, likes }}
 				<Activity
 					imgUrl={activities_info_images[0].images.url}
-					type={activities_type.type_kor}
-					href="/"
+					{id}
 					{title}
 					{recruiting}
 					{status}
-					{details}
 					{short_details}
+					{likes}
 					startDate={moment(start_at).format('YYYY-MM-DD')}
 					endDate={moment(end_at).format('YYYY-MM-DD')}
 				/>

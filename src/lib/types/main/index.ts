@@ -17,4 +17,7 @@ export interface Activities {
 	start_at: Date;
 	end_at: Date;
 	title: string;
+	likes: {
+		id: string;
+	}[];
 }

@@ -33,42 +33,50 @@
 
 <div class="w-full min-h-screen bg-gray-100 font-NOPE">
 	<div class="TEMPLATE-WIDTH min-h-screen relative mx-auto bg-white" bind:clientWidth={w}>
-		{#if w === 0}
-			<div class="w-full h-screen flex flex-col justify-center items-center text-gray-400">
-				<ScaleOut size="120" color="#cfcfcf" duration="1s" />
-				<div class="mt-5">잠시만 기다려주세요</div>
-			</div>
-		{:else if w > 360}
-			<div class="w-full min-h-screen flex">
-				<!-- 사이드 바 -->
-				<div
-					class="SIDEBAR-WIDTH min-h-screen relative flex flex-col border-r-2 border-gray-200 shadow-xl overflow-hidden"
-				>
-					<Logo />
-					<nav class="flex flex-col text-xl font-bold border-t">
-						<UserBtn />
-						<Ongoing {activityTypes} />
-						{#if $user}
-							<Undergoing />
-							<Notices />
-							<SignOut />
-						{/if}
-						<div class="absolute bottom-0"><Version /></div>
-					</nav>
+		<div class="w-full min-h-screen flex">
+			{#if w === 0}
+				<!-- 대기 -->
+				<div class="w-full h-screen flex flex-col justify-center items-center text-gray-400">
+					<ScaleOut size="120" color="#cfcfcf" duration="1s" />
+					<div class="mt-5">잠시만 기다려주세요</div>
 				</div>
+			{:else}
+				{#if w > 360}
+					<!-- 데스크톱, 태블릿 사이드 바 -->
+					<div
+						class="SIDEBAR-WIDTH min-h-screen relative flex flex-col border-r-2 border-gray-200 shadow-xl overflow-hidden"
+					>
+						<Logo />
+						<nav class="flex flex-col text-xl font-bold border-t">
+							<UserBtn />
+							<Ongoing {activityTypes} />
+							{#if $user}
+								<Undergoing />
+								<Notices />
+								<SignOut />
+							{/if}
+							<div class="absolute bottom-0"><Version /></div>
+						</nav>
+					</div>
+				{:else}
+					<!-- 모바일 -->
+					<div class="w-0 min-h-screen">
+						<Header />
+						<Navigator />
+					</div>
+				{/if}
 				<!-- 컨텐츠 들어가는 곳 -->
-				<div class="w-full p-12 shadow-2xl">
+				<div class="w-full lg:p-12 p-3">
+					{#if w < 361}
+						<div class="h-20" />
+					{/if}
 					<slot />
+					{#if w < 361}
+						<div class="h-12" />
+					{/if}
 				</div>
-			</div>
-		{:else}
-			<Header />
-			<!-- 컨텐츠 들어가는 곳 -->
-			<div class="w-full p-3">
-				<slot />
-			</div>
-			<Navigator />
-		{/if}
+			{/if}
+		</div>
 	</div>
 </div>
 

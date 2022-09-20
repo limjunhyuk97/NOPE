@@ -34,7 +34,7 @@
 			<button
 				class="ml-2"
 				on:click|preventDefault|stopPropagation={() => {
-					goto('/users/admin');
+					goto('/users/activities/incharge');
 				}}>운영중인 활동</button
 			>
 			<button
