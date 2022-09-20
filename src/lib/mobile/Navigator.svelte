@@ -2,8 +2,6 @@
 	import Icon from '$lib/Icon.svelte';
 </script>
 
-<div class="w-full h-16" />
-
 <div
 	class="w-[360px] h-16 px-8 fixed bottom-0 border-t-2 flex bg-white justify-between items-center z-20 text-xs text-gray-700"
 >
