@@ -14,7 +14,7 @@
 		<div class="mb-8 grid lg:grid-cols-3 2xl:gap-10 lg:gap-3">
 			{#each Activites as { title, recruiting, start_at, end_at, id, status, activities_info_images, short_details, likes }}
 				<Activity
-					imgUrl={activities_info_images[0].images.url}
+					imgUrl={activities_info_images[0]?.images.url}
 					{id}
 					{title}
 					{recruiting}

@@ -9,11 +9,11 @@ export const getImageKey = async (file: Blob, bucket = 'app') => {
 	const fileName = `${uuidv4()}`;
 
 	// 'file명 - file자체'를 특정 bucket으로 업로드 한다.
-	const { data, error } = await supabase.storage.from(bucket).upload(fileName, file, {
+	const { error } = await supabase.storage.from(bucket).upload(fileName, file, {
 		contentType: 'image/jpg'
 	});
-
 	if (error) {
+		console.log(error);
 		return null;
 	} else {
 		return fileName;
@@ -28,4 +28,18 @@ export const getUrl = async (key: string, bucket = 'app') => {
 
 	const { data } = await supabase.storage.from(bucket).getPublicUrl(key);
 	return data;
+};
+
+export const getSignedUrl = async (key: string | null, bucket = 'app') => {
+	if (!key) {
+		return '/empty.png';
+	}
+
+	const { data, error } = await supabase.storage.from(bucket).createSignedUrl(key, 100000);
+	if (error) {
+		console.log(error);
+		return null;
+	} else {
+		return data?.signedUrl;
+	}
 };
