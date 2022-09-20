@@ -10,7 +10,7 @@
 	export let endDate = '';
 	export let status = '';
 	export let type = '';
-	import moment from 'moment/min/moment-with-locales';
+	import moment from 'moment';
 	moment.locale('ko');
 
 	// 진행상태 메시지 가공 위한 객체
