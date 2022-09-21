@@ -45,6 +45,7 @@
 		"bytemd": "^1.17.2",
 		"feather-icons": "^4.29.0",
 		"marked": "^4.1.0",
-		"moment": "^2.29.4"
+		"moment": "^2.29.4",
+		"node-fetch": "^2.6.7"
 	}
 }
