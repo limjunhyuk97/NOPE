@@ -6,7 +6,9 @@ export interface ActivityDetail {
 export type Users = {
 	name: string;
 	id: string;
-	image_id: string | null;
+	images: {
+		url: string;
+	};
 };
 
 export interface Comments {
