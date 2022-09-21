@@ -28,7 +28,7 @@
 		else return false;
 	};
 
-	let liked = Object.keys(likes).length !== 0;
+	let liked = true;
 	const likeBtn = async () => {
 		liked = !liked;
 		const result = liked ? await postLike($user?.id, id) : await postDisLike($user?.id, id);
@@ -59,57 +59,62 @@
 	let hovering = false;
 </script>
 
-<a
-	href="/activities/{id}"
-	class="w-full relative 2xl:h-[524px] lg:h-[434px] h-[524px] mb-12 shadow-2xl rounded-lg overflow-hidden"
->
-	{#if !hovering}
-		<div
-			class="w-full 2xl:h-96 lg:h-72 h-96 flex justify-center items-center bg-gray-100 lg:rounded-t-lg overflow-hidden"
-			in:fade|local={{ duration: 400 }}
-			out:slide|local={{ duration: 600 }}
-		>
-			<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
-		</div>
-	{/if}
-	<div
-		class="w-full h-full px-4 flex flex-col text-xs"
-		on:mouseenter={() => {
-			hovering = true;
-		}}
-		on:mouseleave={(e) => {
-			hovering = false;
-		}}
+{#if liked}
+	<a
+		href="/activities/{id}"
+		class="w-full relative 2xl:h-[524px] lg:h-[434px] h-[524px] mb-12 shadow-2xl rounded-lg overflow-hidden {liked
+			? ''
+			: 'hidden'}"
+		out:fade|local
 	>
-		<div class="flex justify-between items-center">
-			<p class="w-full mt-2 text-lg {hovering ? '' : 'truncate'}">
-				{title}
-			</p>
-		</div>
-
-		{@html statusMSG()}
-		{@html recruitingMSG()}
-		<div class="mt-3">시작일 {moment(startDate).format('YYYY.MM.DD')}</div>
-		<div class="mt-1">종료일 {moment(endDate).format('YYYY.MM.DD')}</div>
-		{#if hovering}
-			<p class="w-full h-max pt-8 text-xs text-ellipsis" in:fade={{ duration: 800 }}>
-				{short_details}
-			</p>
+		{#if !hovering}
+			<div
+				class="w-full 2xl:h-96 lg:h-72 h-96 flex justify-center items-center bg-gray-100 lg:rounded-t-lg overflow-hidden"
+				in:fade|local={{ duration: 400 }}
+				out:slide|local={{ duration: 600 }}
+			>
+				<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
+			</div>
 		{/if}
-	</div>
-	{#if $user}
-		<button
-			class="ml-2 absolute bottom-3 right-3"
-			on:click|preventDefault={async () => {
-				await likeBtn();
+		<div
+			class="w-full h-full px-4 flex flex-col text-xs"
+			on:mouseenter={() => {
+				hovering = true;
+			}}
+			on:mouseleave={(e) => {
+				hovering = false;
 			}}
 		>
-			<Icon
-				icon="heart-fill"
-				size={16}
-				fill={liked ? 'red' : 'none'}
-				stroke={liked ? '' : 'black'}
-			/>
-		</button>
-	{/if}
-</a>
+			<div class="flex justify-between items-center">
+				<p class="w-full mt-2 text-lg {hovering ? '' : 'truncate'}">
+					{title}
+				</p>
+			</div>
+
+			{@html statusMSG()}
+			{@html recruitingMSG()}
+			<div class="mt-3">시작일 {moment(startDate).format('YYYY.MM.DD')}</div>
+			<div class="mt-1">종료일 {moment(endDate).format('YYYY.MM.DD')}</div>
+			{#if hovering}
+				<p class="w-full h-max pt-8 text-xs text-ellipsis" in:fade={{ duration: 800 }}>
+					{short_details}
+				</p>
+			{/if}
+		</div>
+		{#if $user}
+			<button
+				class="ml-2 absolute bottom-3 right-3"
+				on:click|preventDefault={async () => {
+					await likeBtn();
+				}}
+			>
+				<Icon
+					icon="heart-fill"
+					size={16}
+					fill={liked ? 'red' : 'none'}
+					stroke={liked ? '' : 'black'}
+				/>
+			</button>
+		{/if}
+	</a>
+{/if}

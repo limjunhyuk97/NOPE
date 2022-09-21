@@ -31,7 +31,7 @@
 	});
 </script>
 
-<div class="w-full min-h-screen bg-gray-100 font-NOPE">
+<div class="w-full h-full bg-gray-100 font-NOPE">
 	<div class="TEMPLATE-WIDTH min-h-screen relative mx-auto bg-white" bind:clientWidth={w}>
 		<div class="w-full min-h-screen flex">
 			{#if w === 0}
@@ -66,7 +66,7 @@
 					</div>
 				{/if}
 				<!-- 컨텐츠 들어가는 곳 -->
-				<div class="w-full lg:p-12 p-3">
+				<div class="w-full min-h-screen">
 					{#if w < 361}
 						<div class="h-20" />
 					{/if}

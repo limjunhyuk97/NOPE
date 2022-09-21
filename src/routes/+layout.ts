@@ -1,6 +1,5 @@
 import { user } from '$lib/stores';
 import { supabase } from '$lib/supabase';
-import { get } from 'svelte/store';
 
 // Activity_Types Type
 export interface ActivityTypes {
