@@ -1,10 +1,8 @@
 // Activities
 export interface Activities {
-	activities_info_images: {
-		images: {
-			url: string;
-		};
-	}[];
+	images: {
+		url: string;
+	};
 	activities_type: {
 		type: string;
 		type_kor: string;

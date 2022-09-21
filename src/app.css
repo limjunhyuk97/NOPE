@@ -13,3 +13,92 @@
 		@apply 2xl:w-[300px] lg:w-[250px];
 	}
 }
+
+/* md 문서를 위한 스타일 정의 */
+@layer utilities {
+	pre {
+		font-family: 'Jua';
+	}
+	.md-body {
+		font-size: 16px;
+		font-weight: 200;
+		padding: 10px 0px;
+		/* h1 */
+		h1 {
+			margin-bottom: 14px;
+			font-size: 24px;
+			color: #850e35;
+		}
+		/* a */
+		a {
+			text-decoration: underline;
+		}
+		/* h2 */
+		h2 {
+			margin-bottom: 8px;
+			font-size: 20px;
+			color: #850e35;
+		}
+		/* h3 */
+		h3 {
+			margin-bottom: 6px;
+			font-size: 20px;
+			color: #850e35;
+		}
+		/* ol */
+		ol {
+			list-style-type: decimal;
+			margin-top: 10px;
+			margin-bottom: 20px;
+		}
+		/* ul */
+		ul {
+			list-style-type: disc;
+			margin-top: 10px;
+			margin-bottom: 20px;
+		}
+		/* li */
+		li {
+			margin-left: 20px;
+			margin-bottom: 10px;
+		}
+		/* strong */
+		strong {
+			background-color: yellow;
+		}
+		/* pre - code */
+		pre {
+			padding: 5px 20px;
+			margin-bottom: 20px;
+			background-color: #c8c8c8;
+			border-radius: 20px;
+			padding: 5px 20px;
+			overflow: scroll;
+			code {
+				font-size: 14px;
+			}
+		}
+		/* code */
+		code {
+			padding: 1px 2px;
+			font-size: 14px;
+			background-color: #c8c8c8;
+			border-radius: 5px;
+		}
+		/* table */
+		table {
+			width: 100%;
+			border: 2px solid gray;
+		}
+		/* th */
+		th,
+		td {
+			border: 2px solid gray;
+			text-align: center;
+		}
+		/* p */
+		p {
+			margin-bottom: 10px;
+		}
+	}
+}
