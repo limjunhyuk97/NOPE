@@ -103,7 +103,10 @@
 		</div>
 	</div>
 	{#if pageState === 'default'}
-		<div in:fly={{ x: -64 }} class="flex flex-col w-1/2 h-screen pt-28 pl-12 gap-8 text-start">
+		<div
+			in:fly|local={{ x: -64 }}
+			class="flex flex-col w-1/2 h-screen pt-28 pl-12 gap-8 text-start"
+		>
 			<div class="text-3xl pb-4">활동 관리</div>
 			<button class="text-start text-gray-500 text-xl">활동 개설</button>
 			<button class="text-start text-gray-500 text-xl">주최 활동 관리</button>
@@ -112,10 +115,13 @@
 			<button class="text-start text-gray-500 text-xl">회원 탈퇴</button>
 		</div>
 	{:else if pageState === 'editProfile'}
-		<div in:fly={{ x: -64 }} class="flex flex-col w-1/2 h-screen pt-28 pl-12 gap-6 text-start">
+		<div
+			in:fly|local={{ x: -64 }}
+			class="flex flex-col w-1/2 h-screen pt-28 pl-12 gap-6 text-start"
+		>
 			<div class="text-3xl pb-4">내 정보 변경</div>
 			<label for="id" class="text-xl flex justify-between items-center">
-				<span> 아이디</span>
+				<span>아이디</span>
 				<input
 					class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
 					type="text"
@@ -124,7 +130,7 @@
 			</label>
 			<span class="flex justify-end"><button>아이디 변경</button></span>
 			<label for="beforePassword" class="text-xl flex justify-between items-center">
-				<span> 이전 비밀 번호</span>
+				<span>이전 비밀 번호</span>
 				<input
 					class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
 					type="text"
@@ -132,18 +138,18 @@
 				/>
 			</label>
 			<label for="newPassword" class="text-xl flex justify-between items-center"
-				><span> 새 비밀번호</span>
+				><span>새 비밀번호</span>
 				<input
 					class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
-					type="text"
+					type="password"
 					id="newPassword"
 				/>
 			</label>
-			<label for="passwordCheck" class="text-end text-xl flex justify-between">
+			<label for="passwordCheck" class="text-xl flex justify-between">
 				<span>새 비밀번호 확인</span>
 				<input
-					class="px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
-					type="text"
+					class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
+					type="password"
 					id="passwordCheck"
 				/>
 			</label>

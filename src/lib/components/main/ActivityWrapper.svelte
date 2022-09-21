@@ -12,9 +12,9 @@
 	<div class="lg:mt-8 mb-4 lg:text-3xl text-xl">{activities_type_kor}</div>
 	{#if Activites?.length}
 		<div class="mb-8 grid lg:grid-cols-3 2xl:gap-10 lg:gap-3">
-			{#each Activites as { title, recruiting, start_at, end_at, id, status, activities_info_images, short_details, likes }}
+			{#each Activites as { title, recruiting, start_at, end_at, id, status, images, short_details, likes }}
 				<Activity
-					imgUrl={activities_info_images[0]?.images.url}
+					imgUrl={images.url}
 					{id}
 					{title}
 					{recruiting}
