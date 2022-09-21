@@ -44,7 +44,7 @@
 				/>
 				<div class="bg-black rounded-full text-white">
 					{#if profileImage}
-						<img src={profileImage} class="w-36 h-36 rounded-full" alt="프로필사진" />
+						<img src={profileImage} class="w-36 h-36 rounded-full object-cover" alt="프로필사진" />
 					{:else}
 						<Icon icon="user" size={144} />
 					{/if}
