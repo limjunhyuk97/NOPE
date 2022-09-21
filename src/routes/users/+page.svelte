@@ -121,14 +121,14 @@
 		>
 			<div class="text-3xl pb-4">내 정보 변경</div>
 			<label for="id" class="text-xl flex justify-between items-center">
-				<span>아이디</span>
+				<span>이름</span>
 				<input
 					class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
 					type="text"
 					id="id"
 				/>
 			</label>
-			<span class="flex justify-end"><button>아이디 변경</button></span>
+			<span class="flex justify-end"><button>이름 변경</button></span>
 			<label for="beforePassword" class="text-xl flex justify-between items-center">
 				<span>이전 비밀 번호</span>
 				<input
