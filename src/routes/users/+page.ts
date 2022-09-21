@@ -50,6 +50,10 @@ const setUserImage = async (id: string) => {
 
 const deleteImage = async (id: string) => {
 	const { error } = await supabase.from('images').delete().match({ id: id });
+
+	if (error) {
+		console.log(error);
+	}
 };
 
 const deleteUserImage = async (id: string) => {
