@@ -27,7 +27,7 @@ const updateUsers = async (data) => {
 };
 
 const upsertProfileImage = async (imageId: string, url: string) => {
-	const { data, error } = await supabase
+	const { error } = await supabase
 		.from('images')
 		.upsert({ id: imageId, url: url }, { onConflict: 'id' });
 
@@ -41,16 +41,13 @@ export const editProfileImage = async (imageId: string | null, url: string | nul
 		return;
 	}
 	if (!imageId) {
-		imageId = uuidv4();
+		const newImageId: string = uuidv4();
+		await upsertProfileImage(newImageId, url);
+		await updateUsers({ image_id: newImageId });
+	} else {
+		await upsertProfileImage(imageId, url);
 	}
-
-	//images 테이블 행 upsert
-	await upsertProfileImage(imageId, url);
-
-	//users의 image_id가 null일 때는 처음 상태이므로 처음에만 실행
-	if (!imageId) {
-		await updateUsers({ image_id: imageId });
-	}
+	return await getProfile();
 };
 
 /** @type {import('./$types').PageLoad} */

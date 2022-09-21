@@ -6,17 +6,17 @@
 
 	export let data: any;
 
-	console.log(data);
 	let profile = data.profile;
-	let profileImageUrl: string | null = data.profile.images?.url;
+	let profileImageUrl: string | null = profile.images?.url;
 	let profileEdit = false;
 	let pageState = 'default';
 
 	const fileSelectedHandler = async (event: any) => {
 		const key = await getImageKey(event.target.files[0]);
 		const signedUrl = await getSignedUrl(key);
+
 		profileImageUrl = signedUrl;
-		editProfileImage(profile.image_id, signedUrl);
+		profile = await editProfileImage(profile.image_id, signedUrl);
 	};
 
 	const changePageState = (state: string) => {
