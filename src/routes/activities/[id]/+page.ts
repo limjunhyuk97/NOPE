@@ -1,5 +1,7 @@
 import { supabase } from '$lib/supabase';
 
+export const ssr = false;
+
 const getActivity = async (id: string) => {
 	const { data, error } = await supabase
 		.from('activities')
