@@ -73,8 +73,8 @@ const deleteBeforeImage = async () => {
 	if (error) {
 		console.log(error);
 	} else if (data[0]) {
-		deleteUserImage(data[0].image_id);
-		deleteImage(data[0].image_id);
+		await deleteUserImage(data[0].image_id);
+		await deleteImage(data[0].image_id);
 	}
 };
 
