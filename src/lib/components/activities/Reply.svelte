@@ -11,6 +11,7 @@
 	export let contents = '';
 	export let created_at = '';
 	export let comment_id = '';
+	console.log(users);
 
 	// 댓글 삭제 시에 상위로 이벤트 전달하여 댓글 목록을 다시 받아온다.
 	// 이를 하위컴포넌트 -> 상위 컴포넌트로 전달하는 방식으로 구현한다. (eventDispatcher)
@@ -30,8 +31,8 @@
 
 <div class="px-3 mb-7">
 	<div class="mb-4 flex items-center text-sm">
-		{#if users.image_id}
-			<img src={users.image_id} alt={users.name} />
+		{#if users.images}
+			<img src={users.images.url} alt={users.name} class="w-7 h-7 rounded-full object-cover" />
 		{:else}
 			<div class="w-min p-1 bg-gray-200 rounded-full"><Icon icon="user" size={20} /></div>
 		{/if}
