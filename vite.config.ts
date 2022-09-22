@@ -1,9 +1,14 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import dynamicImport from 'vite-plugin-dynamic-import';
 import type { UserConfig } from 'vite';
-import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 
 const config: UserConfig = {
-	plugins: [sveltekit(), esbuildCommonjs(['codemirror-ssr'])]
+	plugins: [
+		sveltekit(),
+		dynamicImport({
+			onFiles: (files) => files.filter((f) => !f.includes('codemirror.js'))
+		})
+	]
 };
 
 export default config;
