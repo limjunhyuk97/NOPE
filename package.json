@@ -41,6 +41,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@rollup/plugin-commonjs": "^22.0.2",
 		"@supabase/supabase-js": "^2.0.0-rc.8",
 		"bytemd": "^1.17.2",
 		"feather-icons": "^4.29.0",
