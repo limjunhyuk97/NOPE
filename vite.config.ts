@@ -1,9 +1,9 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import type { UserConfig } from 'vite';
-import commonjs from '@rollup/plugin-commonjs';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 
 const config: UserConfig = {
-	plugins: [sveltekit(), commonjs()]
+	plugins: [sveltekit(), viteCommonjs()]
 };
 
 export default config;
