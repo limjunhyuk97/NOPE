@@ -17,6 +17,7 @@
 		"@bytemd/plugin-gfm": "^1.17.2",
 		"@playwright/test": "^1.25.0",
 		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.78",
 		"@sveltejs/kit": "next",
 		"@types/feather-icons": "^4.7.0",
 		"@types/uuid": "^8.3.4",
@@ -43,7 +44,6 @@
 	"dependencies": {
 		"@supabase/supabase-js": "^2.0.0-rc.8",
 		"bytemd": "^1.17.2",
-		"codemirror-ssr": "^0.65.0",
 		"feather-icons": "^4.29.0",
 		"marked": "^4.1.0",
 		"moment": "^2.29.4"
