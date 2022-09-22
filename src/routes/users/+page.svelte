@@ -12,11 +12,13 @@
 	let pageState = 'default';
 
 	const fileSelectedHandler = async (event: any) => {
-		const key = await getImageKey(event.target.files[0]);
-		const signedUrl = await getSignedUrl(key);
+		if (event.target.files.length === 1) {
+			const key = await getImageKey(event.target.files[0]);
+			const signedUrl = await getSignedUrl(key);
 
-		profileImageUrl = signedUrl;
-		profile = await editProfileImage(profile.image_id, signedUrl);
+			profileImageUrl = signedUrl;
+			profile = await editProfileImage(profile.image_id, signedUrl);
+		}
 	};
 
 	const changePageState = (state: string) => {
