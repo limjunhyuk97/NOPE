@@ -36,6 +36,25 @@ const upsertProfileImage = async (imageId: string, url: string) => {
 	}
 };
 
+const getBucketFilePath = async (imageId: string, path = '') => {
+	const { data, error } = await supabase.from('images').select('url').eq('id', imageId).single();
+
+	if (error) {
+		console.log(error);
+		return null;
+	} else {
+		return path + data.url.split('/').pop().split('?')[0];
+	}
+};
+
+const deleteBucket = async (storageName: string, filePath: string) => {
+	const { error } = await supabase.storage.from(storageName).remove([filePath]);
+
+	if (error) {
+		console.log(error);
+	}
+};
+
 export const editProfileImage = async (imageId: string | null, url: string | null) => {
 	if (!url) {
 		return;
@@ -45,6 +64,11 @@ export const editProfileImage = async (imageId: string | null, url: string | nul
 		await upsertProfileImage(newImageId, url);
 		await updateUsers({ image_id: newImageId });
 	} else {
+		const bucketFilePath = await getBucketFilePath(imageId);
+
+		if (bucketFilePath) {
+			await deleteBucket('app', bucketFilePath);
+		}
 		await upsertProfileImage(imageId, url);
 	}
 	return await getProfile();
