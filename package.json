@@ -15,9 +15,9 @@
 	"devDependencies": {
 		"@bytemd/plugin-gemoji": "^1.17.2",
 		"@bytemd/plugin-gfm": "^1.17.2",
-		"@originjs/vite-plugin-commonjs": "^1.0.3",
 		"@playwright/test": "^1.25.0",
 		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.78",
 		"@sveltejs/kit": "next",
 		"@types/feather-icons": "^4.7.0",
 		"@types/uuid": "^8.3.4",
