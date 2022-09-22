@@ -2,7 +2,7 @@
 	import Icon from '$lib/Icon.svelte';
 	import { getImageKey, getSignedUrl } from '$lib/utils';
 	import { fade, fly } from 'svelte/transition';
-	import { editProfileImage } from './+page';
+	import { editProfile, editProfileImage } from './+page';
 
 	export let data: any;
 
@@ -10,6 +10,9 @@
 	let profileImageUrl: string | null = profile.images?.url;
 	let profileEdit = false;
 	let pageState = 'default';
+	let name = profile.name;
+	let password = '';
+	let passwordCheck = '';
 
 	const fileSelectedHandler = async (event: any) => {
 		if (event.target.files.length === 1) {
@@ -25,7 +28,9 @@
 		pageState = state;
 	};
 
-	const changeName = (name: string) => {};
+	const changeName = async (name: string) => {
+		profile = await editProfile({ name: name });
+	};
 </script>
 
 <div in:fade class="flex text-xl px-8">
@@ -46,6 +51,7 @@
 					type="file"
 					accept=".png, .jpg, .jpeg"
 					id="img_export"
+					autocomplete="off"
 					on:change={(e) => fileSelectedHandler(e)}
 				/>
 				<div class="bg-black rounded-full text-white">
@@ -130,43 +136,58 @@
 			class="flex flex-col w-1/2 h-screen pt-28 pl-12 gap-6 text-start"
 		>
 			<div class="text-3xl pb-4">내 정보 변경</div>
-			<label for="id" class="text-xl flex justify-between items-center">
-				<span>이름</span>
-				<input
-					class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
-					type="text"
-					id="id"
-					value={profile.name}
-				/>
-			</label>
-			<span class="flex justify-end"
-				><button on:click={(e) => changeName('')}>이름 변경</button></span
-			>
-			<label for="beforePassword" class="text-xl flex justify-between items-center">
-				<span>이전 비밀 번호</span>
-				<input
-					class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
-					type="text"
-					id="beforePassword"
-				/>
-			</label>
-			<label for="newPassword" class="text-xl flex justify-between items-center"
-				><span>새 비밀번호</span>
-				<input
-					class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
-					type="password"
-					id="newPassword"
-				/>
-			</label>
-			<label for="passwordCheck" class="text-xl flex justify-between">
-				<span>새 비밀번호 확인</span>
-				<input
-					class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
-					type="password"
-					id="passwordCheck"
-				/>
-			</label>
-			<span class="flex justify-end"><button>비밀번호 변경</button></span>
+			<form on:submit|preventDefault={() => changeName(name)} class="flex flex-col gap-6">
+				<label for="id" class="text-xl flex justify-between items-center">
+					<span>이름</span>
+					<input
+						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
+						type="text"
+						id="id"
+						bind:value={name}
+						autocomplete="off"
+					/>
+				</label>
+				<span class="flex justify-end"><button>이름 변경</button></span>
+			</form>
+			<form action="" class="flex flex-col gap-6">
+				<label for="beforePassword" class="text-xl flex justify-between items-center">
+					<span>이전 비밀 번호</span>
+					<input
+						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
+						type="text"
+						id="beforePassword"
+						autocomplete="off"
+					/>
+				</label>
+				<label for="newPassword" class="text-xl flex justify-between items-center"
+					><span>새 비밀번호</span>
+					<input
+						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
+						type="password"
+						id="newPassword"
+						bind:value={password}
+						autocomplete="off"
+					/>
+				</label>
+				<label for="passwordCheck" class="text-xl flex justify-between">
+					<span>새 비밀번호 확인</span>
+					<input
+						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
+						type="password"
+						id="passwordCheck"
+						bind:value={passwordCheck}
+						autocomplete="off"
+					/>
+				</label>
+				<span class="flex justify-end"><button>비밀번호 변경</button></span>
+			</form>
+			{#if password !== passwordCheck}<span class="ml-3 text-xs text-red-500"
+					>비밀번호와 일치하지 않습니다.</span
+				>
+			{:else if password || passwordCheck}
+				<span class="ml-3 text-xs text-green-500">비밀번호와 일치합니다.</span>
+			{/if}
+
 			<label for="descriptions"> 자기소개 </label>
 			<textarea class="h-32 border-y outline-none" />
 		</div>

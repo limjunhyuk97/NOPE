@@ -55,6 +55,16 @@ const deleteBucket = async (storageName: string, filePath: string) => {
 	}
 };
 
+export const editProfile = async (profileData) => {
+	const { error } = await supabase.from('users').update(profileData).eq('id', get(user)?.id);
+
+	if (error) {
+		console.log(error);
+	} else {
+		return await getProfile();
+	}
+};
+
 export const editProfileImage = async (imageId: string | null, url: string | null) => {
 	if (!url) {
 		return;
