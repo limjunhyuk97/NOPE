@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Activity from '$lib/components/main/Activity.svelte';
+	import Activity from '$lib/components/likes/Activity.svelte';
 	import type { Activities } from '$lib/types/main';
 	import { fade } from 'svelte/transition';
 	import moment from 'moment';
@@ -27,6 +27,6 @@
 			{/each}
 		</div>
 	{:else}
-		<div class="mt-12">아직 진행중인 활동이 없습니다!</div>
+		<div class="mt-12">아직 찜한 활동이 없습니다!</div>
 	{/if}
 </div>

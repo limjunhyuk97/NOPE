@@ -28,7 +28,7 @@
 	const changeName = (name: string) => {};
 </script>
 
-<div in:fade class="flex text-xl">
+<div in:fade class="flex text-xl px-8">
 	<div class="flex flex-col w-1/2 h-screen pt-12 pr-12 border-r gap-16">
 		<div class="flex justify-between items-end">
 			<label

@@ -13,6 +13,8 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
+		"@bytemd/plugin-gemoji": "^1.17.2",
+		"@bytemd/plugin-gfm": "^1.17.2",
 		"@playwright/test": "^1.25.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
@@ -25,6 +27,7 @@
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"postcss": "^8.4.16",
+		"postcss-nesting": "^10.2.0",
 		"prettier": "^2.6.2",
 		"prettier-plugin-svelte": "^2.7.0",
 		"svelte": "^3.44.0",
@@ -39,7 +42,9 @@
 	"type": "module",
 	"dependencies": {
 		"@supabase/supabase-js": "^2.0.0-rc.8",
+		"bytemd": "^1.17.2",
 		"feather-icons": "^4.29.0",
+		"marked": "^4.1.0",
 		"moment": "^2.29.4",
 		"uuid": "^9.0.0"
 	}

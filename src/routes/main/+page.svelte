@@ -5,6 +5,7 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data: any;
+	console.log(data);
 
 	const All: ArrayLike<Activities> = data.activities;
 
@@ -17,7 +18,7 @@
 </script>
 
 <!-- Activity 컴포넌트 주입 -->
-<div class="w-full">
+<div class="w-full lg:p-12 p-3">
 	<!-- all -->
 	{#if $activitiesToShow === 'all'}
 		<ActivityWrapper Activites={All} activities_type_kor={'전체활동'} />
