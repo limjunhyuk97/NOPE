@@ -1,7 +1,9 @@
 <script lang="ts">
+	import type { Likes } from '$lib/types/main';
 	import { supabase } from '$lib/supabase';
 	import { slide, fade } from 'svelte/transition';
 	import { user, toast } from '$lib/stores';
+	import { getContext } from 'svelte';
 	import Icon from '$lib/Icon.svelte';
 	export let imgUrl = '';
 	export let title = '';
@@ -11,7 +13,6 @@
 	export let startDate = '';
 	export let endDate = '';
 	export let status = '';
-	export let likes = {};
 	import moment from 'moment';
 	moment.locale('ko');
 
@@ -28,7 +29,9 @@
 		else return false;
 	};
 
-	let liked = Object.keys(likes).length !== 0;
+	let liked = $user
+		? getContext('likes').filter((el: Likes) => el?.activity_id === id)?.length
+		: false;
 	const likeBtn = async () => {
 		liked = !liked;
 		const result = liked ? await postLike($user?.id, id) : await postDisLike($user?.id, id);

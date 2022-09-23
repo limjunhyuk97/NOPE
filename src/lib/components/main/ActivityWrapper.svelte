@@ -12,7 +12,7 @@
 	<div class=" lg:mt-8 mb-4 lg:text-3xl text-xl">{activities_type_kor}</div>
 	{#if Activites?.length}
 		<div class="mb-8 grid lg:grid-cols-3 2xl:gap-10 lg:gap-3">
-			{#each Activites as { title, recruiting, start_at, end_at, id, status, images, short_details, likes }}
+			{#each Activites as { title, recruiting, start_at, end_at, id, status, images, short_details }}
 				<Activity
 					imgUrl={images.url}
 					{id}
@@ -20,7 +20,6 @@
 					{recruiting}
 					{status}
 					{short_details}
-					{likes}
 					startDate={moment(start_at).format('YYYY-MM-DD')}
 					endDate={moment(end_at).format('YYYY-MM-DD')}
 				/>
