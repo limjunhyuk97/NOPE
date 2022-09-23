@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { Activities } from '$lib/types/main';
+	import type { Likes } from '$lib/types/likes';
 	import ActivityWrapper from '$lib/components/likes/ActivityWrapper.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data: any;
 
-	const Likes: ArrayLike<Activities> = data.activities;
+	const Likes: ArrayLike<Likes> = data.likes;
 </script>
 
 <!-- Activity 컴포넌트 주입 -->
 <div class="w-full lg:p-12 p-3">
 	<!-- all -->
-	<ActivityWrapper Activites={Likes} activities_type_kor={'찜한 활동'} />
+	<ActivityWrapper {Likes} />
 </div>

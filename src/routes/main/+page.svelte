@@ -1,12 +1,17 @@
 <script lang="ts">
-	import type { Activities } from '$lib/types/main';
+	import type { Activities, Likes } from '$lib/types/main';
 	import { activitiesToShow } from '$lib/stores';
 	import ActivityWrapper from '$lib/components/main/ActivityWrapper.svelte';
+	import { setContext } from 'svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data: any;
-	console.log(data);
 
+	// 찜하기 관련 정보 : context로 전달
+	const likes: ArrayLike<Likes> = data.likes;
+	setContext('likes', likes);
+
+	// 활동 관련 정보 : props로 전달 후 ActivityWrapper에서 뿌려주기
 	const All: ArrayLike<Activities> = data.activities;
 
 	const Studies: ArrayLike<Activities> = data.activities.filter(
