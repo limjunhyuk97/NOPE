@@ -17,6 +17,5 @@ export type Activities = {
 };
 
 export interface Likes {
-	id: string;
 	activities: Activities;
 }
