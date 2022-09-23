@@ -5,7 +5,6 @@
 	import { user, toast } from '$lib/stores';
 	import Icon from '$lib/Icon.svelte';
 
-	export let id = '';
 	export let activities: Activities;
 
 	import moment from 'moment';

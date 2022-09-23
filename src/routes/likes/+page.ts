@@ -6,7 +6,7 @@ const getLikes = async () => {
 	const { data, error } = await supabase
 		.from('likes')
 		.select(
-			'id, activities(title, recruiting, start_at, end_at, id, status, short_details, details, activities_type("type", "type_kor"), images("url"))'
+			'activities(title, recruiting, start_at, end_at, id, status, short_details, details, activities_type("type", "type_kor"), images("url"))'
 		)
 		.match({ user_id: get(user)?.id });
 	return error ? [] : data;
