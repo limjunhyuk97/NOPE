@@ -7,7 +7,6 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data: any;
-	console.log(data);
 
 	// 활동 정보
 	const activity_id = data.activity_id;
@@ -28,7 +27,6 @@
 
 	onMount(async () => {
 		status = await checkParticipating();
-		console.log(status);
 	});
 </script>
 
