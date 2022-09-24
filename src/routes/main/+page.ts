@@ -15,7 +15,7 @@ const getActivities = async () => {
 const getLikes = async () => {
 	const { data, error } = await supabase
 		.from('likes')
-		.select('id, activity_id')
+		.select('activity_id')
 		.match({ user_id: get(user)?.id });
 	return error ? [] : data;
 };

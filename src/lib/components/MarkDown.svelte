@@ -9,6 +9,7 @@
 	export let value = '# 환영합니다!';
 </script>
 
-<div class="w-full h-full md-body">
+<div class="w-full h-full md-body ">
 	<Viewer {value} {plugins} />
+	<div class="w-full h-4" />
 </div>
