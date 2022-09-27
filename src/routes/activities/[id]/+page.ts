@@ -10,7 +10,7 @@ const getActivity = async (id: string) => {
 
 export const getComments = async (id: string) => {
 	const { data, error } = await supabase
-		.from('activities_comments')
+		.from('activity_comments')
 		.select('id, created_at, contents,  users(name, id, images(url))')
 		.match({ activity_id: id })
 		.order('created_at', { ascending: false });

@@ -19,7 +19,7 @@
 
 	// 댓글 삭제
 	const deleteComment = async () => {
-		const { error } = await supabase.from('activities_comments').delete().match({ id: comment_id });
+		const { error } = await supabase.from('activity_comments').delete().match({ id: comment_id });
 		$toast = error ? '삭제 실패' : '댓글이 삭제 되었습니다!';
 		if (!error) {
 			dispatch('reload_message', {
