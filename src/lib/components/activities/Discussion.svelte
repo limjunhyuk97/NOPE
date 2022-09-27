@@ -11,7 +11,7 @@
 	// 댓글 다시 받아오기
 	const getComments = async (id: string) => {
 		const { data, error } = await supabase
-			.from('activities_comments')
+			.from('activity_comments')
 			.select('id, created_at, contents,  users(name, id, images(url))')
 			.match({ activity_id: id })
 			.order('created_at', { ascending: false });
@@ -27,7 +27,7 @@
 	let newContent = '';
 	const postComment = async () => {
 		const { data, error } = await supabase
-			.from('activities_comments')
+			.from('activity_comments')
 			.insert([{ user_id: $user?.id, activity_id, contents: newContent }]);
 		$toast = error ? '등록이 실패했습니다' : '댓글이 등록되었습니다!';
 		if (!error) comments = await getComments(activity_id);

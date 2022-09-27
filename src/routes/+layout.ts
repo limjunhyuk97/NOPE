@@ -16,7 +16,7 @@ const setUserData = async () => {
 };
 
 const getActivityTypes = async () => {
-	const { data, error } = await supabase.from('activities_type').select('*');
+	const { data, error } = await supabase.from('activity_types').select('*');
 	return error ? null : data;
 };
 
@@ -24,5 +24,6 @@ const getActivityTypes = async () => {
 export async function load() {
 	await setUserData();
 	const activityTypes = await getActivityTypes();
-	return { activityTypes: activityTypes };
+
+	return { activityTypes };
 }

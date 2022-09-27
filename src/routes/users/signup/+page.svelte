@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { supabase } from '$lib/supabase';
 	import { toast } from '$lib/stores';
-	import { goto } from '$app/navigation';
 
 	let email = '',
 		password = '',
@@ -10,7 +9,7 @@
 
 	const handleSignup = async () => {
 		let { data, error } = await supabase.auth.signUp({ email, password });
-		const id = typeof data !== null ? data.user.id : null;
+		const id = typeof data !== null ? data.user?.id : null;
 		if (error) {
 			$toast = '회원가입 실패';
 		} else {
@@ -18,10 +17,6 @@
 			let { data, error } = await supabase.from('users').insert([{ name, email, id }]);
 			if (error) {
 				$toast = '회원가입 실패';
-			} else {
-				let { data, error } = await supabase.from('users_private').insert([{ id, password }]);
-				if (error) $toast = '회원가입 실패';
-				else goto('/users/signup/pending');
 			}
 		}
 	};
