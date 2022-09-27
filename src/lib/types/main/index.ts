@@ -1,9 +1,9 @@
-// Activities
-export interface Activities {
+// ActivityType
+export interface ActivityType {
 	images: {
 		url: string;
 	};
-	activities_type: {
+	activity_types: {
 		type: string;
 		type_kor: string;
 	};
