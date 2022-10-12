@@ -5,12 +5,12 @@
 @layer component {
 	/* TEMPLATE WIDTH */
 	.TEMPLATE-WIDTH {
-		@apply 2xl:w-[1536px] lg:w-[1024px] w-[360px];
+		@apply 2xl:w-[1536px] lg:w-[1024px] w-[880px];
 	}
 
 	/* SIDEBAR WIDTH */
 	.SIDEBAR-WIDTH {
-		@apply 2xl:w-[300px] lg:w-[250px];
+		@apply 2xl:w-[300px] lg:w-[200px] w-[200px];
 	}
 }
 

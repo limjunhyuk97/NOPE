@@ -43,3 +43,8 @@ export const getSignedUrl = async (key: string | null, bucket = 'app') => {
 		return data?.signedUrl;
 	}
 };
+
+export const checkEmail = (email: string) => {
+	const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+	return reg_email.test(email) ? true : false;
+};

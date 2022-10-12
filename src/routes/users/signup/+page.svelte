@@ -1,105 +1,112 @@
 <script lang="ts">
-	import { supabase } from '$lib/supabase';
 	import { toast } from '$lib/stores';
+	import { checkEmail } from '$lib/utils';
+	import { checkDuplication } from './+page';
 
-	let email = '',
-		password = '',
-		passwordCheck = '',
-		name = '';
+	let email = '';
+	let emailVerified: string | null = null;
+	let phone = '';
+	let password = '';
+	let passwordCheck = '';
+	let name = '';
+	let nameVerified: string | null = null;
 
-	const handleSignup = async () => {
-		let { data, error } = await supabase.auth.signUp({ email, password });
-		const id = typeof data !== null ? data.user?.id : null;
-		if (error) {
-			$toast = '회원가입 실패';
-		} else {
-			// 회원 정보 입력 뒤에 pending으로 이동
-			let { data, error } = await supabase.from('users').insert([{ name, email, id }]);
-			if (error) {
-				$toast = '회원가입 실패';
-			}
-		}
+	const verifyEmail = (result: string | null) => {
+		emailVerified = result;
+	};
+
+	const verifyName = (result: string | null) => {
+		nameVerified = result;
+	};
+
+	const duplicationHandler = (verfication: Function, column: string) => {
+		const handler = async (e: Event) => {
+			const input = (<HTMLInputElement>e?.target)?.value;
+			emailVerified = (await checkEmail(input))
+				? checkDuplication({ input, column }) + ''
+				: 'NOT_EMAIL_FORM';
+		};
+		return handler;
 	};
 </script>
 
 <div class="w-full h-full flex justify-center items-center">
-	<div class="relative mx-auto lg:border rounded shadow-2xl text-xl">
+	<div class="2xl:w-2/5 lg:w-3/5 w-4/5 h-5/6 border rounded shadow-2xl text-xl">
 		<form
-			on:submit|preventDefault={handleSignup}
-			class="px-16 flex flex-col justify-between"
+			on:submit|preventDefault={() => {}}
+			class="grid gap-y-12 lg:w-full px-4 py-12 justify-center items-center"
 			action="submit"
 		>
-			<h1 class="w-full lg:mt-16 mt-8 text-2xl">회원가입</h1>
-			<label for="email" class="lg:mt-16 mt-6">
+			<h1 class="w-full text-2xl">회원가입</h1>
+			<!-- 아이디 -->
+			<label for="email" class="w-96">
 				<div>아이디</div>
 				<input
 					type="email"
 					id="email"
-					class="lg:w-96 w-44 mt-3 border-b border-gray-300 focus:outline-none"
-					onfocus="this.placeholder=''"
-					onblur="this.placeholder='본인의 이메일을 기입해주세요!'"
+					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none"
 					bind:value={email}
-					placeholder="본인의 이메일을 기입해주세요!"
+					placeholder="본인의 이메일을 기입해주세요"
+					on:keyup={duplicationHandler(verifyEmail, 'email')}
 					required
 				/>
 			</label>
-			<label for="password" class="lg:mt-16 mt-6">
+			<!-- 전화번호 -->
+			<label for="password" class="w-96">
+				<div>전화번호</div>
+				<input
+					type="text"
+					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none"
+					bind:value={phone}
+					placeholder="본인의 전화번호를 기입해주세요 (- 생략)"
+					required
+				/>
+			</label>
+			<!-- 비밀번호 -->
+			<label for="password" class="w-96">
 				<div>비밀번호</div>
 				<input
 					type="password"
-					class="lg:w-96 w-44 mt-3 border-b border-gray-300 focus:outline-none"
-					onfocus="this.placeholder=''"
-					onblur="this.placeholder='비밀번호를 기입해주세요!'"
+					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none"
 					bind:value={password}
-					placeholder="비밀번호를 기입해주세요!"
+					placeholder="비밀번호를 기입해주세요"
 					required
 				/>
 			</label>
 
-			<label for="password" class="lg:mt-16 mt-6">
+			<label for="password" class="w-96">
 				<div>비밀번호 확인</div>
-				{#if password !== passwordCheck}<span class="ml-3 text-xs text-red-500"
-						>비밀번호와 일치하지 않습니다.</span
-					>
-				{:else if password}
-					<span class="ml-3 text-xs text-green-500">비밀번호와 일치합니다.</span>
-				{/if}
 				<input
 					type="password"
-					class="lg:w-96 w-44 mt-3 border-b border-gray-300 focus:outline-none"
-					onfocus="this.placeholder=''"
-					onblur="this.placeholder='비밀번호 재확인'"
+					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none"
 					bind:value={passwordCheck}
-					placeholder="비밀번호 재확인"
+					placeholder="비밀번호를 확인해주세요"
 					required
 				/>
 			</label>
-			<label for="password" class="lg:mt-16 mt-6">
+			<label for="password" class="w-96">
 				<div>이름</div>
 				<input
 					type="text"
-					class="lg:w-96 w-44 mt-3 border-b border-gray-300 focus:outline-none"
-					onfocus="this.placeholder=''"
-					onblur="this.placeholder='실명을 기입해주세요!'"
+					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none"
 					bind:value={name}
-					placeholder="실명을 기입해주세요!"
+					placeholder="사용하고자 하는 이름을 적어주세요!"
+					on:keyup={duplicationHandler(verifyName, 'name')}
 					required
 				/>
 			</label>
-			<button
-				class="flex justify-center my-12 drop-shadow-lg"
-				disabled={password.length !== 0 && password !== passwordCheck}
-			>
-				회원가입 완료
-			</button>
+			<button class="flex justify-center drop-shadow-xl"> 회원가입 완료 </button>
 		</form>
 	</div>
 </div>
 
 <style>
 	::placeholder {
-		font-size: 14px;
 		color: gray;
+		font-size: 14px;
 		opacity: 0.5;
+	}
+	input {
+		font-size: 16px;
 	}
 </style>

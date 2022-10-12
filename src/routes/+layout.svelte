@@ -18,10 +18,6 @@
 	import Version from '$lib/components/Version.svelte';
 	import Undergoing from '$lib/components/Undergoing.svelte';
 
-	// Navigator
-	import Navigator from '$lib/mobile/Navigator.svelte';
-	import Header from '$lib/mobile/Header.svelte';
-
 	// activity, user data 받아오기
 	export let data: any;
 	const activityTypes: ArrayLike<ActivityTypes> = data.activityTypes;
@@ -41,39 +37,25 @@
 					<div class="mt-5">잠시만 기다려주세요</div>
 				</div>
 			{:else}
-				{#if w > 360}
-					<!-- 데스크톱, 태블릿 사이드 바 -->
-					<div
-						class="SIDEBAR-WIDTH min-h-screen relative flex flex-col border-r-2 border-gray-200 shadow-xl overflow-hidden"
-					>
-						<Logo />
-						<nav class="flex flex-col text-xl font-bold border-t">
-							<UserBtn />
-							<Ongoing {activityTypes} />
-							{#if $user}
-								<Undergoing />
-								<Notices />
-								<SignOut />
-							{/if}
-							<div class="absolute bottom-0"><Version /></div>
-						</nav>
-					</div>
-				{:else}
-					<!-- 모바일 -->
-					<div class="w-0 min-h-screen">
-						<Header />
-						<Navigator />
-					</div>
-				{/if}
+				<!-- 데스크톱, 태블릿 사이드 바 -->
+				<div
+					class="SIDEBAR-WIDTH min-h-screen relative flex flex-col border-r-2 border-gray-200 shadow-xl overflow-hidden"
+				>
+					<Logo />
+					<nav class="flex flex-col text-xl font-bold border-t">
+						<UserBtn />
+						<Ongoing {activityTypes} />
+						{#if $user}
+							<Undergoing />
+							<Notices />
+							<SignOut />
+						{/if}
+						<div class="absolute bottom-0"><Version /></div>
+					</nav>
+				</div>
 				<!-- 컨텐츠 들어가는 곳 -->
 				<div class="w-full min-h-screen">
-					{#if w < 361}
-						<div class="h-20" />
-					{/if}
 					<slot />
-					{#if w < 361}
-						<div class="h-12" />
-					{/if}
 				</div>
 			{/if}
 		</div>
