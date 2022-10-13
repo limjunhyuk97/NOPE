@@ -1,3 +1,4 @@
+import * as EmailValidator from 'email-validator';
 import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '$lib/supabase';
 
@@ -44,7 +45,12 @@ export const getSignedUrl = async (key: string | null, bucket = 'app') => {
 	}
 };
 
+// signup에서 email 체크
 export const checkEmail = (email: string) => {
-	const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-	return reg_email.test(email) ? true : false;
+	return EmailValidator.validate(email);
+};
+
+// 빈문자열인지 아닌지 체크
+export const isEmptyString = (target: string | null) => {
+	return target?.length === 0;
 };

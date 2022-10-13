@@ -44,6 +44,7 @@
 	"dependencies": {
 		"@supabase/supabase-js": "^2.0.0-rc.8",
 		"bytemd": "^1.17.2",
+		"email-validator": "^2.0.4",
 		"feather-icons": "^4.29.0",
 		"marked": "^4.1.0",
 		"moment": "^2.29.4",
