@@ -15,11 +15,14 @@
 	let passwordVerified: string | null = null;
 
 	const verifyEmail = async (value: string) => {
-		emailVerified = isEmptyString(value)
-			? UNIFICATION_STATUS.EMPTY
-			: checkEmail(value)
-			? UNIFICATION_STATUS.NOT_AVAILABLE_FORM
-			: await checkDuplication(value, 'email');
+		if (isEmptyString(value)) {
+			emailVerified = UNIFICATION_STATUS.EMPTY;
+		} else {
+			emailVerified = checkEmail(value)
+				? await checkDuplication(value, 'email')
+				: UNIFICATION_STATUS.NOT_AVAILABLE_FORM;
+		}
+		console.log('email', value, emailVerified);
 	};
 
 	const verifyName = async (value: string) => {
@@ -48,7 +51,7 @@
 
 	const passwordErrorHandler = (e: Event) => {
 		if (isEmptyString(password)) {
-			$toast = '비밀번호를 입력해주세요!';
+			$toast = '비밀번호를 먼저 입력해주세요!';
 			passwordInput.focus();
 		}
 	};
@@ -78,7 +81,7 @@
 					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
 					bind:value={email}
 					placeholder="본인의 이메일을 기입해주세요"
-					on:keyup={duplicationHandler(verifyEmail)}
+					on:keyup|preventDefault={duplicationHandler(verifyEmail)}
 					required
 				/>
 			</label>
@@ -105,7 +108,7 @@
 						? '비밀번호를 입력하세요!'
 						: '비밀번호를 한번 더 입력해주세요'}
 					required
-					on:keyup={verifyPassword}
+					on:keyup|preventDefault={verifyPassword}
 					disabled={isEmptyString(password)}
 				/>
 			</label>
@@ -116,11 +119,14 @@
 					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none"
 					bind:value={name}
 					placeholder="사용하고자 하는 이름을 적어주세요!"
-					on:keyup={duplicationHandler(verifyName)}
+					on:keyup|preventDefault={duplicationHandler(verifyName)}
 					required
 				/>
 			</label>
-			<button class="flex justify-center drop-shadow-xl text-gray-600" disabled={disableSubmit}>
+			<button
+				class="flex justify-center drop-shadow-xl {disableSubmit ? 'text-gray-600' : 'text-black'}"
+				disabled={disableSubmit}
+			>
 				회원가입 완료
 			</button>
 		</form>
@@ -139,8 +145,8 @@
 	input:focus {
 		border-color: #9fc9f3;
 	}
-	input:focus.warning--style {
-		border-color: red;
+	input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 1000px #fff inset;
 	}
 	input:disabled {
 		background-color: white;
