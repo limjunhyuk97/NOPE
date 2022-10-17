@@ -18,7 +18,7 @@
 			$toast = '';
 		}}
 		transition:fly={{ duration: 300, delay: 500, y: -20 }}
-		class="w-max fixed top-6 right-0 left-0 mx-auto rounded-3xl opacity-70 bg-gray-600 text-white text-center text-xs z-10"
+		class="w-max fixed top-6 right-0 left-0 mx-auto rounded-3xl opacity-70 bg-blue-600 text-white text-center text-xs z-10"
 	>
 		<p class="px-4 py-1">{$toast}</p>
 	</div>
