@@ -4,6 +4,16 @@
 	import { checkEmail, isEmptyString } from '$lib/utils';
 	import { checkDuplication } from './+page';
 
+	// [form actions]
+	// form action
+	//	- request가 submitted된 경우 server side에서 동작하는 함수이다.
+	//  - props와 form data를 svelte end point system에 svelte actions를 사용하여 녹여내는 아주 진보적인 방식이다.
+	//  - js를 끄더라도(turn off) form data를 올바른 end point로 이동시키게 함으로써, making these things truly part of the platform
+	// form 태그의 use:enhance를 사용하면 form 태그 요청 -> 페이지 리로딩 사이의 무언가를 지시할 수 있다.
+	// 혹은 cancel을 사용하면 form의 submit 직전에 막을 수 있다.
+	// form 요청 이후 결과를 받아서 return에 전달된 callback을 실행시킨다.
+	import { enhance } from '$app/forms';
+
 	let passwordInput: HTMLInputElement;
 
 	let email = '';
@@ -14,6 +24,10 @@
 	let nameVerified: string | null = null;
 	let passwordVerified: string | null = null;
 
+	const isShortPassword = (pw: string) => {
+		return pw.length < 6;
+	};
+
 	const verifyEmail = async (value: string) => {
 		if (isEmptyString(value)) {
 			emailVerified = UNIFICATION_STATUS.EMPTY;
@@ -22,7 +36,6 @@
 				? await checkDuplication(value, 'email')
 				: UNIFICATION_STATUS.NOT_AVAILABLE_FORM;
 		}
-		console.log('email', value, emailVerified);
 	};
 
 	const verifyName = async (value: string) => {
@@ -32,16 +45,20 @@
 	};
 
 	const verifyPassword = (e: Event) => {
-		if (isEmptyString(password) || isEmptyString(passwordCheck)) {
+		if (isShortPassword(password)) {
+			passwordCheck = '';
 			passwordVerified = PASSWORD_VERIFICATION_STATUS.EMPTY;
 			return;
 		}
-		passwordVerified =
-			password.length < 6
-				? PASSWORD_VERIFICATION_STATUS.NON_VALID
-				: password === passwordCheck
-				? PASSWORD_VERIFICATION_STATUS.VERIFIED
-				: PASSWORD_VERIFICATION_STATUS.MISMATCHED;
+		if (isEmptyString(passwordCheck)) {
+			passwordVerified = PASSWORD_VERIFICATION_STATUS.EMPTY;
+			return;
+		}
+		passwordVerified = isShortPassword(password)
+			? PASSWORD_VERIFICATION_STATUS.NON_VALID
+			: password === passwordCheck
+			? PASSWORD_VERIFICATION_STATUS.VERIFIED
+			: PASSWORD_VERIFICATION_STATUS.MISMATCHED;
 	};
 
 	const duplicationHandler = (verification: Function) => {
@@ -52,7 +69,7 @@
 	};
 
 	const passwordErrorHandler = (e: Event) => {
-		if (password.length < 6) {
+		if (isShortPassword(password)) {
 			$toast = '비밀번호를 형식에 맞게 입력해주세요!';
 			passwordInput.focus();
 		}
@@ -68,7 +85,15 @@
 	<div
 		class="flex flex-col justify-center items-center 2xl:w-1/2 lg:w-3/4 w-4/5 h-4/5 border rounded shadow-2xl text-xl"
 	>
-		<form method="POST" class="flex flex-col gap-14 w-full px-16 py-12 justify-center items-center">
+		<form
+			method="POST"
+			class="flex flex-col gap-14 w-full px-16 py-12 justify-center items-center"
+			use:enhance={({ form, data, cancel }) => {
+				return ({ result }) => {
+					console.log(result);
+				};
+			}}
+		>
 			<h1 class="w-full text-2xl ">회원가입</h1>
 
 			<!-- 아이디 -->
@@ -110,14 +135,17 @@
 					bind:value={password}
 					bind:this={passwordInput}
 					placeholder="최소 6자리의 비밀번호를 기입해주세요"
+					on:keyup|preventDefault={verifyPassword}
 					on:paste|preventDefault={() => false}
 					required
 				/>
 				<!-- 비밀번호 유효성 문구 -->
 				<div
-					class="w-max h-1 mt-1 text-xs {password.length < 6 ? 'text-red-600' : 'text-green-600'}"
+					class="w-max h-1 mt-1 text-xs {isShortPassword(password)
+						? 'text-red-600'
+						: 'text-green-600'}"
 				>
-					{#if password.length < 6 && password.length > 0}
+					{#if isShortPassword(password) && !isEmptyString(password)}
 						6자리 이상 입력해주세요.
 					{:else if password.length >= 6}
 						형식에 만족합니다.
@@ -131,19 +159,21 @@
 				<input
 					type="password"
 					name="passwordcheck"
-					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none {password.length < 6
+					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none {isShortPassword(
+						password
+					)
 						? 'hover:cursor-not-allowed'
 						: ''}"
 					bind:value={passwordCheck}
 					placeholder={isEmptyString(password)
 						? '비밀번호를 먼저 적어주세요'
-						: password.length < 6
+						: isShortPassword(password)
 						? '6자리 이상의 비밀번호를 적어주세요'
 						: '비밀번호를 한번 더 입력해주세요'}
 					required
 					on:keyup|preventDefault={verifyPassword}
 					on:paste|preventDefault={() => false}
-					disabled={password.length < 6}
+					disabled={isShortPassword(password)}
 				/>
 				<!-- 비밀번호 확인 유효성 문구 -->
 				<div
