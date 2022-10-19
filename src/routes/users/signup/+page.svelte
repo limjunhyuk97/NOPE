@@ -1,18 +1,12 @@
 <script lang="ts">
+	import type { ActionResult } from '@sveltejs/kit';
 	import { toast } from '$lib/stores';
 	import { PASSWORD_VERIFICATION_STATUS, UNIFICATION_STATUS } from '$lib/constants';
-	import { checkEmail, isEmptyString } from '$lib/utils';
+	import { isEmptyString } from '$lib/utils';
 	import { checkDuplication } from './+page';
-
-	// [form actions]
-	// form action
-	//	- request가 submitted된 경우 server side에서 동작하는 함수이다.
-	//  - props와 form data를 svelte end point system에 svelte actions를 사용하여 녹여내는 아주 진보적인 방식이다.
-	//  - js를 끄더라도(turn off) form data를 올바른 end point로 이동시키게 함으로써, making these things truly part of the platform
-	// form 태그의 use:enhance를 사용하면 form 태그 요청 -> 페이지 리로딩 사이의 무언가를 지시할 수 있다.
-	// 혹은 cancel을 사용하면 form의 submit 직전에 막을 수 있다.
-	// form 요청 이후 결과를 받아서 return에 전달된 callback을 실행시킨다.
+	import * as EmailValidator from 'email-validator';
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 
 	let passwordInput: HTMLInputElement;
 
@@ -24,15 +18,20 @@
 	let nameVerified: string | null = null;
 	let passwordVerified: string | null = null;
 
+	//** input validation check */
+	const isValidEmail = (email: string) => {
+		return EmailValidator.validate(email);
+	};
+
 	const isShortPassword = (pw: string) => {
-		return pw.length < 6;
+		return pw.length < 8;
 	};
 
 	const verifyEmail = async (value: string) => {
 		if (isEmptyString(value)) {
 			emailVerified = UNIFICATION_STATUS.EMPTY;
 		} else {
-			emailVerified = checkEmail(value)
+			emailVerified = isValidEmail(value)
 				? await checkDuplication(value, 'email')
 				: UNIFICATION_STATUS.NOT_AVAILABLE_FORM;
 		}
@@ -75,6 +74,15 @@
 		}
 	};
 
+	//** form response */
+	const formResponseHandler = (
+		response: ActionResult<Record<string, any>, Record<string, any>>
+	) => {
+		if (response.type === 'success') goto('/users/signup/pending');
+		else $toast = response.data.message;
+	};
+
+	//** reactive value */
 	$: disableSubmit =
 		passwordVerified !== PASSWORD_VERIFICATION_STATUS.VERIFIED ||
 		emailVerified !== UNIFICATION_STATUS.VERIFIED ||
@@ -90,7 +98,7 @@
 			class="flex flex-col gap-14 w-full px-16 py-12 justify-center items-center"
 			use:enhance={({ form, data, cancel }) => {
 				return ({ result }) => {
-					console.log(result);
+					formResponseHandler(result);
 				};
 			}}
 		>
@@ -134,7 +142,7 @@
 					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none"
 					bind:value={password}
 					bind:this={passwordInput}
-					placeholder="최소 6자리의 비밀번호를 기입해주세요"
+					placeholder="최소 8자리의 비밀번호를 기입해주세요"
 					on:keyup|preventDefault={verifyPassword}
 					on:paste|preventDefault={() => false}
 					required
@@ -146,7 +154,7 @@
 						: 'text-green-600'}"
 				>
 					{#if isShortPassword(password) && !isEmptyString(password)}
-						6자리 이상 입력해주세요.
+						8자리 이상 입력해주세요.
 					{:else if password.length >= 6}
 						형식에 만족합니다.
 					{/if}
@@ -168,7 +176,7 @@
 					placeholder={isEmptyString(password)
 						? '비밀번호를 먼저 적어주세요'
 						: isShortPassword(password)
-						? '6자리 이상의 비밀번호를 적어주세요'
+						? '8자리 이상의 비밀번호를 적어주세요'
 						: '비밀번호를 한번 더 입력해주세요'}
 					required
 					on:keyup|preventDefault={verifyPassword}
