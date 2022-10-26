@@ -1,7 +1,8 @@
 import type { Actions } from './$types';
 import { admin } from '$lib/admin';
+import { supabase } from '$lib/supabase';
 import * as EmailValidator from 'email-validator';
-import { invalid } from '@sveltejs/kit';
+import { invalid, json } from '@sveltejs/kit';
 
 //** email 유효성 검사 */
 const isValidEmailType = (email: string) => {
@@ -67,6 +68,7 @@ const validations = async (
 	return null;
 };
 
+//** form actions */
 export const actions: Actions = {
 	default: async ({ request }): Promise<any> => {
 		const data = await request.formData();
@@ -79,16 +81,25 @@ export const actions: Actions = {
 
 		if (validationResult) return invalid(400, { message: validationResult });
 		else {
-			const { data, error } = await admin.auth.admin.generateLink({
-				type: 'signup',
-				email: email,
-				options: {
-					password: 'secret'
+			// 회원가입 등록
+			const { data, error } = await admin.auth.admin.createUser({
+				email,
+				password,
+				user_metadata: {
+					name
 				}
 			});
-			console.log(error);
 			if (error) return invalid(400, { message: '회원가입이 불가능합니다!' });
-			return { success: true };
+			else {
+				// confirm 메일 전송
+				const { data, error } = await admin.auth.admin.generateLink({
+					type: 'signup',
+					email
+				});
+				console.log(data, error);
+				if (error) return invalid(400, { message: '회원가입이 불가능합니다!' });
+				else return { success: true };
+			}
 		}
 	}
 };
