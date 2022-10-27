@@ -92,11 +92,7 @@ export const actions: Actions = {
 			if (error) return invalid(400, { message: '회원가입이 불가능합니다!' });
 			else {
 				// confirm 메일 전송
-				const { data, error } = await admin.auth.admin.generateLink({
-					type: 'signup',
-					email
-				});
-				console.log(data, error);
+				const { data, error } = await admin.auth.admin.inviteUserByEmail(email);
 				if (error) return invalid(400, { message: '회원가입이 불가능합니다!' });
 				else return { success: true };
 			}

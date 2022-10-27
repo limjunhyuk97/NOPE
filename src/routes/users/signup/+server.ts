@@ -1,5 +1,4 @@
 import type { RequestHandler } from './$types';
-import { error } from '@sveltejs/kit';
 import { admin } from '$lib/admin';
 import { UNIFICATION_STATUS } from '$lib/constants';
 
