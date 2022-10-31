@@ -1,50 +1,91 @@
 <script lang="ts">
-	import { supabase } from '$lib/supabase';
-	import { goto } from '$app/navigation';
+	import type { ActionResult } from '@sveltejs/kit';
+	import { enhance } from '$app/forms';
+	import { RESPONSE_TYPE } from '$lib/constants';
 	import { toast } from '$lib/stores';
+	import { goto } from '$app/navigation';
 
-	let email = '',
-		password = '';
-
-	const handleLogin = async () => {
-		const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-		if (error) {
-			$toast = '로그인 실패';
-		} else {
-			$toast = '로그인 성공!';
-			goto('/');
-		}
+	//** form response */
+	const formResponseHandler = (
+		response: ActionResult<Record<string, any>, Record<string, any>>
+	) => {
+		if (response.type === RESPONSE_TYPE.SUCCESS) {
+			$toast = '로그인 성공';
+		} else $toast = response.data.message;
 	};
 </script>
 
 <div class="w-full h-full flex justify-center items-center">
-	<div class="mx-auto pb-12 pt-4 border rounded shadow-2xl text-xl">
-		<form on:submit|preventDefault={handleLogin} class="px-16 flex flex-col" action="submit">
-			<h1 class="w-full mt-16 text-2xl">로그인</h1>
-			<label for="email" class="mt-16"> 이메일 </label>
-			<input
-				type="email"
-				id="email"
-				class="w-96 mt-8 border-b focus:outline-none border-gray-300 bg-white"
-				bind:value={email}
-				required
-			/>
+	<div
+		class="flex flex-col justify-center items-center 2xl:w-1/2 lg:w-2/3 w-4/5 h-3/5 border rounded shadow-2xl text-xl"
+	>
+		<form
+			method="POST"
+			use:enhance={({ form, data, cancel }) => {
+				return async ({ result }) => {
+					await formResponseHandler(result);
+				};
+			}}
+			class="flex flex-col gap-20 w-full px-16"
+		>
+			<h1 class="w-full text-2xl">로그인</h1>
 
-			<label for="password" class="mt-16"> 비밀번호 </label>
-			<input
-				type="password"
-				class="w-96 mt-8 border-b focus:outline-none border-gray-300 bg-white"
-				bind:value={password}
-				required
-			/>
+			<!-- 아이디 -->
+			<label class="w-full">
+				<div>아이디</div>
+				<input
+					type="email"
+					id="email"
+					name="email"
+					class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
+					placeholder="본인의 이메일을 기입해주세요"
+					required
+				/>
+			</label>
 
-			<div class="w-full mt-8 flex justify-end text-sm drop-shadow-lg">
-				<a href="/users/signup"> 회원가입 </a>
-			</div>
-			<div class="px-8 mt-12 flex justify-between drop-shadow-lg">
-				<button>로그인</button>
-				<a href="/users/">아이디/PW 찾기</a>
+			<!-- 비밀번호 -->
+			<label class="w-full">
+				<div>비밀번호</div>
+				<input
+					type="password"
+					id="password"
+					name="password"
+					class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
+					placeholder="비밀번호를 입력해주세요"
+					required
+				/>
+				<div class="w-full mt-8 flex gap-2 justify-end text-xs text-gray-700">
+					<a href="/users/help/findid">아이디 찾기</a>
+					<div>|</div>
+					<a href="/users/signup">회원가입</a>
+				</div>
+			</label>
+
+			<!-- 버튼 -->
+			<div class="w-full px-12 flex justify-between">
+				<button type="submit" class="drop-shadow-xl">로그인</button>
+				<a href="/users/help/inquerypassword" class="drop-shadow-xl">비밀번호 재설정</a>
 			</div>
 		</form>
 	</div>
 </div>
+
+<style>
+	::placeholder {
+		color: gray;
+		font-size: 14px;
+		opacity: 0.5;
+	}
+	input {
+		font-size: 16px;
+	}
+	input:focus {
+		border-color: #9fc9f3;
+	}
+	input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 1000px #fff inset;
+	}
+	input:disabled {
+		background-color: white;
+	}
+</style>

@@ -15,7 +15,7 @@ const isUniqueEmail = async (email: string) => {
 
 //** password 유효성 검사 */
 const isValidPassword = (password: string) => {
-	const regex = /^[ㄱ-ㅎ|가-힣]+$/;
+	const regex = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 	return !regex.test(password);
 };
 

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { ActionResult } from '@sveltejs/kit';
-	import axios from 'axios';
 	import { toast } from '$lib/stores';
-	import { PASSWORD_VERIFICATION_STATUS, UNIFICATION_STATUS } from '$lib/constants';
+	import { PASSWORD_VERIFICATION_STATUS, UNIFICATION_STATUS, RESPONSE_TYPE } from '$lib/constants';
 	import { isEmptyString } from '$lib/utils';
+	import { checkDuplication } from './+page';
 	import * as EmailValidator from 'email-validator';
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
@@ -17,21 +17,6 @@
 	let emailVerified: string | null = null;
 	let nameVerified: string | null = null;
 	let passwordVerified: string | null = null;
-
-	//** input validation check */
-	const checkDuplication = async (input: string, column: string) => {
-		try {
-			const response = await axios({
-				method: 'post',
-				url: `/users/signup`,
-				data: { column, input }
-			});
-			return response.data;
-		} catch (err) {
-			$toast = '네트워크 오류. 다음에 시도해주세요';
-			console.log(err);
-		}
-	};
 
 	const isValidEmail = (email: string) => {
 		return EmailValidator.validate(email);
@@ -92,7 +77,7 @@
 	const formResponseHandler = (
 		response: ActionResult<Record<string, any>, Record<string, any>>
 	) => {
-		if (response.type === 'success') goto('/users/signup/pending');
+		if (response.type === RESPONSE_TYPE.SUCCESS) goto('/users/signup/pending');
 		else $toast = response.data.message;
 	};
 

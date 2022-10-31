@@ -12,3 +12,8 @@ export const PASSWORD_VERIFICATION_STATUS = {
 	MISMATCHED: 'MISMATCHED',
 	NON_VALID: 'NON_VALID'
 };
+
+export const RESPONSE_TYPE = {
+	SUCCESS: 'success',
+	INVALID: 'invalid'
+};
