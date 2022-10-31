@@ -1,8 +1,7 @@
 import type { Actions } from './$types';
 import { admin } from '$lib/admin';
-import { supabase } from '$lib/supabase';
 import * as EmailValidator from 'email-validator';
-import { invalid, json } from '@sveltejs/kit';
+import { invalid } from '@sveltejs/kit';
 
 //** email 유효성 검사 */
 const isValidEmailType = (email: string) => {
@@ -61,7 +60,7 @@ const validations = async (
 		return '사용할 이름을 입력해주세요!';
 	}
 
-	if (!isUniqueEmail(name)) {
+	if (!isUniqueName(name)) {
 		return '중복된 이름입니다!';
 	}
 
