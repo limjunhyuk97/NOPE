@@ -1,16 +1,23 @@
 <script lang="ts">
 	import type { ActionResult } from '@sveltejs/kit';
 	import { enhance } from '$app/forms';
-	import { RESPONSE_TYPE } from '$lib/constants';
+	import { RESPONSE_TYPE, SIGNIN_STATUS } from '$lib/constants';
 	import { toast } from '$lib/stores';
+	import { signin } from './+page';
 	import { goto } from '$app/navigation';
 
 	//** form response */
-	const formResponseHandler = (
+	const formResponseHandler = async (
 		response: ActionResult<Record<string, any>, Record<string, any>>
 	) => {
 		if (response.type === RESPONSE_TYPE.SUCCESS) {
-			$toast = '로그인 성공';
+			const result = await signin({ email: response.data.email, password: response.data.password });
+			if (result === SIGNIN_STATUS.SUCCESS) {
+				$toast = '로그인 성공';
+				goto('/');
+			} else {
+				$toast = '로그인 실패';
+			}
 		} else $toast = response.data.message;
 	};
 </script>
@@ -55,8 +62,6 @@
 					required
 				/>
 				<div class="w-full mt-8 flex gap-2 justify-end text-xs text-gray-700">
-					<a href="/users/help/findid">아이디 찾기</a>
-					<div>|</div>
 					<a href="/users/signup">회원가입</a>
 				</div>
 			</label>
@@ -64,7 +69,7 @@
 			<!-- 버튼 -->
 			<div class="w-full px-12 flex justify-between">
 				<button type="submit" class="drop-shadow-xl">로그인</button>
-				<a href="/users/help/inquerypassword" class="drop-shadow-xl">비밀번호 재설정</a>
+				<a href="/users/reset" class="drop-shadow-xl">비밀번호 재설정</a>
 			</div>
 		</form>
 	</div>

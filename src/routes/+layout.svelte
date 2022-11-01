@@ -1,11 +1,13 @@
 <script lang="ts">
+	import type { ActivityTypes } from '$lib/types';
 	import '../app.css';
 	import Logo from '$lib/assets/Logo.svelte';
 	import Toast from '$lib/Toast.svelte';
 	import { user } from '$lib/stores';
 	import { supabase } from '$lib/supabase';
 	import { ScaleOut } from 'svelte-loading-spinners';
-	import type { ActivityTypes } from '$lib/types';
+	import { PASSWORD_RECOVERY } from '$lib/constants';
+	import { goto } from '$app/navigation';
 
 	// view width
 	let w = 0;
@@ -22,7 +24,8 @@
 	export let data: any;
 	const activityTypes: ArrayLike<ActivityTypes> = data.activityTypes;
 
-	supabase.auth.onAuthStateChange(async (_, session) => {
+	supabase.auth.onAuthStateChange(async (event, session) => {
+		if (event == PASSWORD_RECOVERY) goto('/users/reset/password');
 		$user = session?.user || null;
 	});
 </script>

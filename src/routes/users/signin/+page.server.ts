@@ -15,10 +15,14 @@ export const actions: Actions = {
 
 		if (error) {
 			const { data, error } = await admin.from('users').select('*').match({ email });
-			if (data?.length == 0) return invalid(400, { message: '존재하지 않는 아이디입니다' });
-			else return invalid(400, { message: '비밀번호 오류' });
+			if (error) {
+				return invalid(500, { message: '네트워크 오류' });
+			} else {
+				if (data?.length == 0) return invalid(400, { message: '존재하지 않는 아이디입니다' });
+				else return invalid(400, { message: '비밀번호 오류' });
+			}
 		} else {
-			return { success: true };
+			return { success: true, email, password };
 		}
 	}
 };
