@@ -42,7 +42,6 @@
 				<div>아이디</div>
 				<input
 					type="email"
-					id="email"
 					name="email"
 					class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
 					placeholder="본인의 이메일을 기입해주세요"
@@ -55,7 +54,6 @@
 				<div>비밀번호</div>
 				<input
 					type="password"
-					id="password"
 					name="password"
 					class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
 					placeholder="비밀번호를 입력해주세요"

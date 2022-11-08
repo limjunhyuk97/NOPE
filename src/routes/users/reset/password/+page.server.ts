@@ -5,7 +5,7 @@ import { admin } from '$lib/admin';
 import { MAINPAGE_URL } from '$lib/constants';
 
 const resetPassword = async (email: string) => {
-	const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+	const { error } = await supabase.auth.resetPasswordForEmail(email, {
 		redirectTo: `${MAINPAGE_URL}/users/reset/password`
 	});
 	if (error) {

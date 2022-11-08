@@ -2,7 +2,7 @@
 	import type { ActionResult } from '@sveltejs/kit';
 	import { Jumper } from 'svelte-loading-spinners';
 	import { enhance } from '$app/forms';
-	import { user, toast } from '$lib/stores';
+	import { toast } from '$lib/stores';
 	import { THEME_COLOR } from '$lib/constants';
 
 	let send = false;
@@ -20,10 +20,10 @@
 
 <div class="w-full h-full flex justify-center items-center">
 	<div
-		class="flex flex-col justify-center items-center 2xl:w-1/2 lg:w-2/3 w-4/5 h-[420px] border rounded shadow-2xl text-xl"
+		class="flex flex-col justify-center items-center 2xl:w-1/2 lg:w-2/3 w-4/5 h-[440px] border rounded shadow-2xl text-xl"
 	>
 		<form
-			class="flex flex-col gap-20 w-full px-16"
+			class="flex flex-col w-full px-16"
 			method="POST"
 			use:enhance={({ form, data, cancel }) => {
 				return async ({ result }) => {
@@ -39,23 +39,24 @@
 			</div>
 
 			<!-- 아이디 -->
-			<label class="w-full">
+			<label class="w-full mt-20">
 				<div>아이디</div>
 				<input
 					type="email"
-					id="email"
 					name="email"
 					class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
 					placeholder="본인의 이메일을 기입해주세요"
 					required
 				/>
 				{#if send}
-					<span class="text-xs text-green-600">전송완료</span>
+					<span class="text-xs text-green-600">전송완료 / 이메일로 본인인증을 진행해주세요</span>
+				{:else}
+					<div class="w-full h-7" />
 				{/if}
 			</label>
 
 			<!-- 버튼 -->
-			<div class="w-full px-12 flex justify-center">
+			<div class="w-full mt-12 px-12 flex justify-center">
 				<button type="submit" class="drop-shadow-xl">본인확인 이메일 전송</button>
 			</div>
 		</form>
