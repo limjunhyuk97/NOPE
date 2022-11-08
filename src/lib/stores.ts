@@ -6,7 +6,6 @@ export const user: Writable<User | null> = writable(null);
 export const profile = writable(null);
 
 // UX
-type Mo
 export const modal = writable(null);
 
 // Toast
