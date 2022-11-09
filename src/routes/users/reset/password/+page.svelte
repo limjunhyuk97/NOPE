@@ -36,35 +36,33 @@
 			>
 				<h1 class="w-full text-2xl">비밀번호 재설정</h1>
 
-				<!-- 이전 비밀번호 -->
-				<label class="w-full">
-					<div>이전 비밀번호</div>
-					<input
-						type="email"
-						id="email"
-						name="email"
-						class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
-						placeholder="이전 비밀번호를 기입해주세요"
-						required
-					/>
-				</label>
-
 				<!-- 새 비밀번호 -->
 				<label class="w-full">
-					<div>이전 비밀번호</div>
+					<div>새 비밀번호</div>
 					<input
-						type="email"
-						id="email"
-						name="email"
+						type="password"
+						name="password"
 						class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
 						placeholder="새 비밀번호를 기입해주세요"
 						required
 					/>
 				</label>
 
+				<!-- 비밀번호 재확인 -->
+				<label class="w-full">
+					<div>비밀번호 재확인</div>
+					<input
+						type="password"
+						name="passwordcheck"
+						class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
+						placeholder="새 비밀번호를 다시 기입해주세요"
+						required
+					/>
+				</label>
+
 				<!-- 버튼 -->
 				<div class="w-full px-12 flex justify-center">
-					<button type="submit" class="drop-shadow-xl">본인확인 이메일 전송</button>
+					<button type="submit" class="drop-shadow-xl">비밀번호 변경</button>
 				</div>
 			</form>
 		</div>
