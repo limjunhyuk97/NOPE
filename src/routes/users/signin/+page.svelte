@@ -24,7 +24,7 @@
 
 <div class="w-full h-full flex justify-center items-center">
 	<div
-		class="flex flex-col justify-center items-center 2xl:w-1/2 lg:w-2/3 w-4/5 h-3/5 border rounded shadow-2xl text-xl"
+		class="flex flex-col justify-center items-center 2xl:w-1/2 lg:w-2/3 w-4/5 h-[600px] border rounded shadow-2xl text-xl"
 	>
 		<form
 			method="POST"
@@ -33,7 +33,7 @@
 					await formResponseHandler(result);
 				};
 			}}
-			class="flex flex-col gap-20 w-full px-16"
+			class="flex flex-col gap-12 w-full px-16"
 		>
 			<h1 class="w-full text-2xl">로그인</h1>
 
@@ -42,7 +42,6 @@
 				<div>아이디</div>
 				<input
 					type="email"
-					id="email"
 					name="email"
 					class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
 					placeholder="본인의 이메일을 기입해주세요"
@@ -55,7 +54,6 @@
 				<div>비밀번호</div>
 				<input
 					type="password"
-					id="password"
 					name="password"
 					class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
 					placeholder="비밀번호를 입력해주세요"
@@ -69,7 +67,7 @@
 			<!-- 버튼 -->
 			<div class="w-full px-12 flex justify-between">
 				<button type="submit" class="drop-shadow-xl">로그인</button>
-				<a href="/users/reset" class="drop-shadow-xl">비밀번호 재설정</a>
+				<a href="/users/reset/password" class="drop-shadow-xl">비밀번호 재설정</a>
 			</div>
 		</form>
 	</div>

@@ -138,7 +138,7 @@
 			<div class="text-3xl pb-4">내 정보 변경</div>
 			<form on:submit|preventDefault={() => changeName(name)} class="flex flex-col gap-6">
 				<label for="id" class="text-xl flex justify-between items-center">
-					<span>이름</span>
+					<span class="whitespace-nowrap">이름</span>
 					<input
 						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
 						type="text"
@@ -150,17 +150,8 @@
 				<span class="flex justify-end"><button>이름 변경</button></span>
 			</form>
 			<form action="" class="flex flex-col gap-6">
-				<label for="beforePassword" class="text-xl flex justify-between items-center">
-					<span>이전 비밀 번호</span>
-					<input
-						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
-						type="text"
-						id="beforePassword"
-						autocomplete="off"
-					/>
-				</label>
 				<label for="newPassword" class="text-xl flex justify-between items-center"
-					><span>새 비밀번호</span>
+					><span class="whitespace-nowrap">새 비밀번호</span>
 					<input
 						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
 						type="password"
@@ -170,7 +161,7 @@
 					/>
 				</label>
 				<label for="passwordCheck" class="text-xl flex justify-between">
-					<span>새 비밀번호 확인</span>
+					<span class="whitespace-nowrap">새 비밀번호 확인</span>
 					<input
 						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
 						type="password"
@@ -187,7 +178,6 @@
 			{:else if password || passwordCheck}
 				<span class="ml-3 text-xs text-green-500">비밀번호와 일치합니다.</span>
 			{/if}
-
 			<label for="descriptions"> 자기소개 </label>
 			<textarea class="h-32 border-y outline-none" />
 		</div>

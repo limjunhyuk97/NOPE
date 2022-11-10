@@ -1,73 +1,69 @@
 <script lang="ts">
 	import type { ActionResult } from '@sveltejs/kit';
+	import { Jumper } from 'svelte-loading-spinners';
 	import { enhance } from '$app/forms';
-	import { user, toast } from '$lib/stores';
-	import { beforeUpdate } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { toast } from '$lib/stores';
+	import { THEME_COLOR } from '$lib/constants';
+	import { supabase } from '$lib/supabase';
+	import { onMount } from 'svelte';
+
+	let send = false;
 
 	//** form response */
 	const formResponseHandler = async (
 		response: ActionResult<Record<string, any>, Record<string, any>>
 	) => {
-		console.log(response);
+		if (response.status === 200) {
+			$toast = '본인확인이 전송되었습니다';
+			send = true;
+		} else $toast = response.data.message;
 	};
-
-	beforeUpdate(() => {
-		if (!$user) {
-			$toast = '이메일 인증을 해주세요';
-			goto('/users/reset');
-		}
-	});
 </script>
 
-{#if user}
-	<div class="w-full h-full flex justify-center items-center">
-		<div
-			class="flex flex-col justify-center items-center 2xl:w-1/2 lg:w-2/3 w-4/5 h-3/5 border rounded shadow-2xl text-xl"
+<div class="w-full h-full flex justify-center items-center">
+	<div
+		class="flex flex-col justify-center items-center 2xl:w-1/2 lg:w-2/3 w-4/5 h-[440px] border rounded shadow-2xl text-xl"
+	>
+		<form
+			class="flex flex-col w-full px-16"
+			method="POST"
+			use:enhance={({ form, data, cancel }) => {
+				return async ({ result }) => {
+					await formResponseHandler(result);
+				};
+			}}
 		>
-			<form
-				class="flex flex-col gap-20 w-full px-16"
-				method="POST"
-				use:enhance={({ form, data, cancel }) => {
-					return async ({ result }) => {
-						await formResponseHandler(result);
-					};
-				}}
-			>
-				<h1 class="w-full text-2xl">비밀번호 재설정</h1>
+			<div class="flex items-center gap-4">
+				<h1 class="text-2xl">비밀번호 재설정</h1>
+				{#if send}
+					<Jumper color={THEME_COLOR} size={32} />
+				{/if}
+			</div>
 
-				<!-- 새 비밀번호 -->
-				<label class="w-full">
-					<div>새 비밀번호</div>
-					<input
-						type="password"
-						name="password"
-						class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
-						placeholder="새 비밀번호를 기입해주세요"
-						required
-					/>
-				</label>
+			<!-- 아이디 -->
+			<label class="w-full mt-20">
+				<div>아이디</div>
+				<input
+					type="email"
+					name="email"
+					class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
+					placeholder="본인의 이메일을 기입해주세요"
+					required
+				/>
+				{#if send}
+					<span class="text-xs text-green-600">전송완료 / 이메일로 본인인증을 진행해주세요</span>
+				{:else}
+					<div class="w-full h-7" />
+				{/if}
+			</label>
 
-				<!-- 비밀번호 재확인 -->
-				<label class="w-full">
-					<div>비밀번호 재확인</div>
-					<input
-						type="password"
-						name="passwordcheck"
-						class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
-						placeholder="새 비밀번호를 다시 기입해주세요"
-						required
-					/>
-				</label>
-
-				<!-- 버튼 -->
-				<div class="w-full px-12 flex justify-center">
-					<button type="submit" class="drop-shadow-xl">비밀번호 변경</button>
-				</div>
-			</form>
-		</div>
+			<!-- 버튼 -->
+			<div class="w-full mt-12 px-12 flex justify-center">
+				<button type="submit" class="drop-shadow-xl">본인확인 이메일 전송</button>
+			</div>
+		</form>
 	</div>
-{/if}
+</div>
 
 <style>
 	::placeholder {

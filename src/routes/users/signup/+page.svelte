@@ -108,7 +108,6 @@
 				<div>아이디</div>
 				<input
 					type="email"
-					id="email"
 					name="email"
 					class="w-full mt-2 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
 					bind:value={email}
