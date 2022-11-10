@@ -6,8 +6,6 @@
 	import { user } from '$lib/stores';
 	import { supabase } from '$lib/supabase';
 	import { ScaleOut } from 'svelte-loading-spinners';
-	import { PASSWORD_RECOVERY } from '$lib/constants';
-	import { goto } from '$app/navigation';
 
 	// view width
 	let w = 0;
@@ -19,14 +17,15 @@
 	import UserBtn from '$lib/components/UserBtn.svelte';
 	import Version from '$lib/components/Version.svelte';
 	import Undergoing from '$lib/components/Undergoing.svelte';
+	import Modal from '$lib/Modal.svelte';
 
 	// activity, user data 받아오기
 	export let data: any;
 	const activityTypes: ArrayLike<ActivityTypes> = data.activityTypes;
 
 	supabase.auth.onAuthStateChange(async (event, session) => {
-		if (event == PASSWORD_RECOVERY) goto('/users/reset/password');
 		$user = session?.user || null;
+		console.log(event, session);
 	});
 </script>
 
@@ -57,8 +56,9 @@
 					</nav>
 				</div>
 				<!-- 컨텐츠 들어가는 곳 -->
-				<div class="w-full min-h-screen">
+				<div class="relative w-full min-h-screen">
 					<slot />
+					<Modal />
 				</div>
 			{/if}
 		</div>
