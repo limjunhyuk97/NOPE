@@ -7,7 +7,6 @@ export const profile = writable(null);
 
 // UX
 export const modal = writable(null);
-export const loading = writable(false);
 
 // Toast
 export const toast = writable('');
