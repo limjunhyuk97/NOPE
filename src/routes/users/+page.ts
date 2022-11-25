@@ -5,6 +5,7 @@ import { user } from '$lib/stores';
 import { supabase } from '$lib/supabase';
 import { get } from 'svelte/store';
 
+// 프로필 정보 가져오기
 const getProfile = async () => {
 	const { data, error } = await supabase
 		.from('users')
@@ -18,6 +19,7 @@ const getProfile = async () => {
 	}
 };
 
+// user 정보 업데이트
 const updateUsers = async (data) => {
 	const { error } = await supabase.from('users').update(data).eq('id', get(user)?.id);
 
@@ -26,6 +28,7 @@ const updateUsers = async (data) => {
 	}
 };
 
+// user 이미지 업데이트
 const upsertProfileImage = async (imageId: string, url: string) => {
 	const { error } = await supabase
 		.from('images')
@@ -36,6 +39,7 @@ const upsertProfileImage = async (imageId: string, url: string) => {
 	}
 };
 
+// bucket에
 const getBucketFilePath = async (imageId: string, path = '') => {
 	const { data, error } = await supabase.from('images').select('url').eq('id', imageId).single();
 

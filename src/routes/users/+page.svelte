@@ -1,6 +1,6 @@
 <script type="ts">
 	import Icon from '$lib/Icon.svelte';
-	import { getImageKey, getSignedUrl } from '$lib/utils';
+	import { getImageKey, getUrl, resize } from '$lib/utils';
 	import { fade, fly } from 'svelte/transition';
 	import { editProfile, editProfileImage } from './+page';
 
@@ -14,13 +14,17 @@
 	let password = '';
 	let passwordCheck = '';
 
+	// input handler 함수
 	const fileSelectedHandler = async (event: any) => {
 		if (event.target.files.length === 1) {
-			const key = await getImageKey(event.target.files[0]);
-			const signedUrl = await getSignedUrl(key);
+			// 이미지 리사이징, 이미지에 대한 key값 반환과 버킷 저장,
+			const ProfileImg = event.target.files[0];
+			const ResizedImg = await resize(ProfileImg);
+			const ImgKey = await getImageKey(ResizedImg ?? ProfileImg);
+			const ImgUrl = await getUrl(ImgKey);
 
-			profileImageUrl = signedUrl;
-			profile = await editProfileImage(profile.image_id, signedUrl);
+			profileImageUrl = ImgUrl;
+			profile = await editProfileImage(profile.image_id, profileImageUrl);
 		}
 	};
 
@@ -33,7 +37,7 @@
 	};
 </script>
 
-<div in:fade class="flex text-xl px-8">
+<div in:fade|local class="flex w-full px-8">
 	<div class="flex flex-col w-1/2 h-screen pt-12 pr-12 border-r gap-16">
 		<div class="flex justify-between items-end">
 			<label

@@ -11,12 +11,12 @@
 	let w = 0;
 
 	// SideBar Component
-	import SignOut from '$lib/components/SignOut.svelte';
-	import Notices from '$lib/components/Notices.svelte';
-	import Ongoing from '$lib/components/Ongoing.svelte';
-	import UserBtn from '$lib/components/UserBtn.svelte';
-	import Version from '$lib/components/Version.svelte';
-	import Undergoing from '$lib/components/Undergoing.svelte';
+	import SignOut from '$lib/components/sidebar/SignOut.svelte';
+	import Notices from '$lib/components/sidebar/Notices.svelte';
+	import Ongoing from '$lib/components/sidebar/Ongoing.svelte';
+	import UserBtn from '$lib/components/sidebar/UserBtn.svelte';
+	import Version from '$lib/components/sidebar/Version.svelte';
+	import Undergoing from '$lib/components/sidebar/Undergoing.svelte';
 	import Modal from '$lib/Modal.svelte';
 
 	// activity, user data 받아오기
@@ -25,7 +25,6 @@
 
 	supabase.auth.onAuthStateChange(async (event, session) => {
 		$user = session?.user || null;
-		console.log(event, session);
 	});
 </script>
 
