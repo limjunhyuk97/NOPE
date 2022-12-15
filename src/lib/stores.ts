@@ -1,3 +1,4 @@
+import { ACTIVITY_TYPE } from './constants';
 import type { User } from '@supabase/supabase-js';
 import { writable, type Writable } from 'svelte/store';
 
@@ -12,4 +13,4 @@ export const modal = writable(null);
 export const toast = writable('');
 
 // Main
-export const activitiesToShow = writable('all');
+export const activitiesToShow = writable(ACTIVITY_TYPE.ALL);

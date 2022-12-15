@@ -4,8 +4,6 @@
 	import { enhance } from '$app/forms';
 	import { toast } from '$lib/stores';
 	import { THEME_COLOR } from '$lib/constants';
-	import { supabase } from '$lib/supabase';
-	import { onMount } from 'svelte';
 
 	let send = false;
 

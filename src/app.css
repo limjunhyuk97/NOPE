@@ -12,6 +12,11 @@
 	.SIDEBAR-WIDTH {
 		@apply 2xl:w-[300px] lg:w-[200px] w-[200px];
 	}
+
+	/* HIDE SCROLL*/
+	.hide-scroll::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 /* md 문서를 위한 스타일 정의 */

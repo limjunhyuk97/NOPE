@@ -5,16 +5,14 @@ import { get } from 'svelte/store';
 const getActivities = async () => {
 	const { data, error } = await supabase
 		.from('activities')
-		.select(
-			'title, recruiting, start_at, end_at, id, status, short_details, details, activity_types("type", "type_kor"), images("url"), likes("id")'
-		)
+		.select('*, activity_types("type", "type_kor"), images("url")')
 		.order('created_at', { ascending: false });
 	return error ? [] : data;
 };
 
 const getLikes = async () => {
 	const { data, error } = await supabase
-		.from('likes')
+		.from('activity_likes')
 		.select('activity_id')
 		.match({ user_id: get(user)?.id });
 	return error ? [] : data;

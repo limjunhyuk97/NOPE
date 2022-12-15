@@ -1,8 +1,12 @@
 <script lang="ts">
-	import type { ActivityType, Likes } from '$lib/types/main';
+	import type { ActivityCard, Likes, ActivityType } from '$lib/types/activities';
 	import { activitiesToShow } from '$lib/stores';
-	import ActivityWrapper from '$lib/components/main/ActivityWrapper.svelte';
+	import { ACTIVITY_TYPE, ACTIVITY_FILTER } from '$lib/constants';
+	import Activity from '$lib/components/activities/Activity.svelte';
+	import ActivityFilter from '$lib/components/filter/Filter.svelte';
 	import { setContext } from 'svelte';
+	import { fade } from 'svelte/transition';
+	import moment from 'moment';
 
 	/** @type {import('./$types').PageData} */
 	export let data: any;
@@ -11,29 +15,53 @@
 	const likes: ArrayLike<Likes> = data.likes;
 	setContext('likes', likes);
 
-	// 활동 관련 정보 : props로 전달 후 ActivityWrapper에서 뿌려주기
-	const All: ArrayLike<ActivityType> = data.activities;
+	// 활동 타입에 따라 분할
+	const Activities = data.activityTypes.reduce((acc: any, cur: ActivityType) => {
+		acc[cur.type] = data.activities.filter(
+			(el: ActivityCard) => el.activity_types.type === cur.type
+		);
+		return acc;
+	}, {});
+	Activities[ACTIVITY_TYPE.ALL] = data.activities;
 
-	const Studies: ArrayLike<ActivityType> = data.activities.filter(
-		(el: ActivityType) => el.activity_types.type === 'study'
-	);
-	const Projects: ArrayLike<ActivityType> = data.activities.filter(
-		(el: ActivityType) => el.activity_types.type === 'project'
-	);
+	// 활동 타입명 지정
+	$: filteredActivityType =
+		$activitiesToShow === ACTIVITY_TYPE.ALL
+			? '전체활동'
+			: data.activityTypes.filter((el) => el.type === $activitiesToShow)[0].type_kor;
+
+	// 필터 적용
+	$: recruitFilter = ACTIVITY_FILTER.ALL.type;
+	$: filteredActivities = () => {
+		return Activities[$activitiesToShow].filter((el: ActivityCard) => {
+			if (recruitFilter === ACTIVITY_FILTER.ALL.type) return true;
+			else return el.recruiting === (ACTIVITY_FILTER.RECRUITING.type === recruitFilter);
+		});
+	};
 </script>
 
-<!-- Activity 컴포넌트 주입 -->
-<div class="w-full lg:p-12 p-3">
-	<!-- all -->
-	{#if $activitiesToShow === 'all'}
-		<ActivityWrapper Activites={All} activity_type_kor={'전체활동'} />
+<div class="lg:p-10 py-14 px-6" in:fade={{ duration: 500 }}>
+	<div class="flex items-center gap-8 w-full lg:mt-8 mb-4 ">
+		<div class="lg:text-3xl text-xl">{filteredActivityType}</div>
+		<ActivityFilter bind:filtered={recruitFilter} />
+	</div>
 
-		<!-- study -->
-	{:else if $activitiesToShow === 'study'}
-		<ActivityWrapper Activites={Studies} activity_type_kor={'스터디'} />
-
-		<!-- project -->
-	{:else if $activitiesToShow === 'project'}
-		<ActivityWrapper Activites={Projects} activity_type_kor={'프로젝트'} />
+	{#if filteredActivities()?.length}
+		<div class="grid grid-cols-3 2xl:gap-10 gap-3 mb-8 ">
+			{#each filteredActivities() as { title, recruiting, start_at, end_at, id, status, images, short_details }}
+				<Activity
+					imgUrl={images?.url}
+					{id}
+					{title}
+					{recruiting}
+					{status}
+					{short_details}
+					startDate={moment(start_at).format('YYYY-MM-DD')}
+					endDate={moment(end_at).format('YYYY-MM-DD')}
+				/>
+			{/each}
+		</div>
+	{:else}
+		<div class="mt-12">해당되는 활동이 없습니다!</div>
 	{/if}
 </div>

@@ -1,38 +1,43 @@
 <script lang="ts">
-	import type { ActivityTypes } from '$lib/types';
+	import type { ActivityType } from '$lib/types/activities';
 	import '../app.css';
 	import Logo from '$lib/assets/Logo.svelte';
 	import Toast from '$lib/Toast.svelte';
 	import { user } from '$lib/stores';
 	import { supabase } from '$lib/supabase';
 	import { ScaleOut } from 'svelte-loading-spinners';
+	import { onMount } from 'svelte';
 
 	// view width
-	let w = 0;
+	let spinner = true;
 
 	// SideBar Component
-	import SignOut from '$lib/components/SignOut.svelte';
-	import Notices from '$lib/components/Notices.svelte';
-	import Ongoing from '$lib/components/Ongoing.svelte';
-	import UserBtn from '$lib/components/UserBtn.svelte';
-	import Version from '$lib/components/Version.svelte';
-	import Undergoing from '$lib/components/Undergoing.svelte';
+	import SignOut from '$lib/components/sidebar/SignOut.svelte';
+	import Notices from '$lib/components/sidebar/Notices.svelte';
+	import UserBtn from '$lib/components/sidebar/UserBtn.svelte';
+	import Version from '$lib/components/sidebar/Version.svelte';
+	import Likes from '$lib/components/sidebar/Likes.svelte';
 	import Modal from '$lib/Modal.svelte';
+	import Ongoing from '$lib/components/sidebar/Ongoing.svelte';
 
 	// activity, user data 받아오기
 	export let data: any;
-	const activityTypes: ArrayLike<ActivityTypes> = data.activityTypes;
+	const activityTypes: ArrayLike<ActivityType> = data.activityTypes;
 
 	supabase.auth.onAuthStateChange(async (event, session) => {
 		$user = session?.user || null;
 		console.log(event, session);
 	});
+
+	onMount(() => {
+		spinner = false;
+	});
 </script>
 
 <div class="w-full h-full bg-gray-100 font-NOPE">
-	<div class="TEMPLATE-WIDTH min-h-screen relative mx-auto bg-white" bind:clientWidth={w}>
+	<div class="TEMPLATE-WIDTH min-h-screen relative mx-auto bg-white">
 		<div class="w-full min-h-screen flex">
-			{#if w === 0}
+			{#if spinner}
 				<!-- 대기 -->
 				<div class="w-full h-screen flex flex-col justify-center items-center text-gray-400">
 					<ScaleOut size="120" color="#cfcfcf" duration="1s" />
@@ -41,14 +46,14 @@
 			{:else}
 				<!-- 데스크톱, 태블릿 사이드 바 -->
 				<div
-					class="SIDEBAR-WIDTH min-h-screen relative flex flex-col border-r-2 border-gray-200 shadow-xl overflow-hidden"
+					class="fixed top-0 SIDEBAR-WIDTH min-h-screen relative flex flex-col border-r-2 border-gray-200 shadow-xl overflow-hidden"
 				>
 					<Logo />
 					<nav class="flex flex-col text-xl font-bold border-t">
 						<UserBtn />
 						<Ongoing {activityTypes} />
 						{#if $user}
-							<Undergoing />
+							<Likes />
 							<Notices />
 							<SignOut />
 						{/if}

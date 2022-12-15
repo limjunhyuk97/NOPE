@@ -11,7 +11,7 @@
 			console.log(error);
 		} else {
 			$toast = '로그아웃 되었습니다';
-			goto('/main');
+			goto('/activities');
 		}
 	}}
 	class="border-b text-start p-4"

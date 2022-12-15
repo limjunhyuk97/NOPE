@@ -1,7 +1,5 @@
 <script lang="ts">
-	import type { ActivityTypes } from '../../routes/+layout';
 	import { slide } from 'svelte/transition';
-	import { activitiesToShow } from '$lib/stores';
 	import { goto } from '$app/navigation';
 
 	let hovering = false;
@@ -13,8 +11,13 @@
 	};
 </script>
 
-<button on:mouseenter={mouseEnter} on:mouseleave={mouseOut} class="p-4 border-b text-start">
-	내 활동
+<a
+	href="/likes"
+	on:mouseenter={mouseEnter}
+	on:mouseleave={mouseOut}
+	class="p-4 border-b text-start"
+>
+	찜한 내역
 	{#if hovering}
 		<div class="pt-4 flex flex-col items-start gap-4 text-sm" transition:slide>
 			<button
@@ -26,15 +29,9 @@
 			<button
 				class="ml-2"
 				on:click|preventDefault|stopPropagation={() => {
-					goto('/users/activities/incharge');
-				}}>운영중인 활동</button
-			>
-			<button
-				class="ml-2"
-				on:click|preventDefault|stopPropagation={() => {
-					goto('/users/activites');
-				}}>참여중인 활동</button
+					goto('/likes/articles');
+				}}>찜한 게시글</button
 			>
 		</div>
 	{/if}
-</button>
+</a>

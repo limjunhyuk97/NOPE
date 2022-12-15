@@ -1,5 +1,5 @@
-import { MAINPAGE_URL } from '$lib/constants';
 import type { Actions } from './$types';
+import { MAINPAGE_URL } from '$lib/constants';
 import { invalid } from '@sveltejs/kit';
 import { supabase } from '$lib/supabase';
 import { admin } from '$lib/admin';

@@ -1,9 +1,11 @@
 <script lang="ts">
-	import type { ActivityTypes } from '../../routes/+layout';
+	import type { ActivityType } from '$lib/types/activities';
 	import { slide } from 'svelte/transition';
 	import { activitiesToShow } from '$lib/stores';
 	import { goto } from '$app/navigation';
-	export let activityTypes: ArrayLike<ActivityTypes>;
+
+	// 활동 타입 정보
+	export let activityTypes: ArrayLike<ActivityType>;
 
 	let hovering = false;
 	const mouseEnter = () => {
@@ -16,7 +18,7 @@
 
 <button
 	on:click|preventDefault={() => {
-		goto('/');
+		goto('/activities');
 		$activitiesToShow = 'all';
 	}}
 	on:mouseenter={mouseEnter}
@@ -30,7 +32,7 @@
 				<button
 					class="ml-2"
 					on:click|preventDefault|stopPropagation={() => {
-						goto('/');
+						goto('/activities');
 						$activitiesToShow = activity.type;
 					}}>{activity.type_kor}</button
 				>

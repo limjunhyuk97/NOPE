@@ -18,6 +18,7 @@ export const UNIFICATION_STATUS = {
 	NOT_AVAILABLE_FORM: 'NOT_AVAILABLE_FORM'
 };
 
+//** password verification */
 export const PASSWORD_VERIFICATION_STATUS = {
 	EMPTY: 'EMPTY',
 	VERIFIED: 'VERIFIED',
@@ -31,4 +32,26 @@ export const SIGNIN_STATUS = {
 	FAIL: 'FAIL'
 };
 
+//** password recovery */
 export const PASSWORD_RECOVERY = 'PASSWORD_RECOVERY';
+
+//** activity types */
+export const ACTIVITY_TYPE = {
+	ALL: 'all',
+	STUDY: 'study',
+	PROJECT: 'project'
+};
+
+//** activity status */
+export const ACTIVITY_STATUS = {
+	PENDING: 'pending',
+	STARTED: 'started',
+	FINISHED: 'finished'
+};
+
+//** activity filter */
+export const ACTIVITY_FILTER = {
+	ALL: { type: 'all', name: '전체' },
+	RECRUITING: { type: 'recruit_ongoing', name: '모집중' },
+	NONRECRUITING: { type: 'recruit_finished', name: '모집종료' }
+};
