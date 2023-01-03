@@ -19,6 +19,5 @@ const getActivityTypes = async () => {
 export async function load() {
 	await setUserData();
 	const activityTypes = await getActivityTypes();
-
 	return { activityTypes };
 }

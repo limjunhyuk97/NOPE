@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ActivityType } from '$lib/types/activities';
 	import '../app.css';
-	import Logo from '$lib/assets/Logo.svelte';
+	import Logo from '$lib/components/common/Logo.svelte';
 	import Toast from '$lib/Toast.svelte';
 	import { user } from '$lib/stores';
 	import { supabase } from '$lib/supabase';
@@ -26,7 +26,6 @@
 
 	supabase.auth.onAuthStateChange(async (event, session) => {
 		$user = session?.user || null;
-		console.log(event, session);
 	});
 
 	onMount(() => {

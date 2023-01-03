@@ -55,3 +55,19 @@ export const ACTIVITY_FILTER = {
 	RECRUITING: { type: 'recruit_ongoing', name: '모집중' },
 	NONRECRUITING: { type: 'recruit_finished', name: '모집종료' }
 };
+
+//** user state */
+// 로그인 안 한 경우 -> null
+// 로그인 + 지원 안한 경우 -> none
+// 로그인 + 지원 완료 후 대기 -> pending
+// 로그인 + 지원 완료 -> participant
+// 로그인 + 관리자 -> admin
+// 로그인 + 임명된 관리자 -> superadmin
+export const USER_STATUS = {
+	LOGOUT: Symbol('logout'),
+	NOTAPPLIED: Symbol('nonapply'),
+	APPLIED: Symbol('applied'),
+	PARTICIPANT: Symbol('applied'),
+	ADMIN: Symbol('applied'),
+	SUPER: Symbol('applied')
+};

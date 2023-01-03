@@ -4,7 +4,6 @@
 	import { ACTIVITY_STATUS } from '$lib/constants';
 	import { slide, fade } from 'svelte/transition';
 	import { user, toast } from '$lib/stores';
-	import { getContext, hasContext } from 'svelte';
 	import Icon from '$lib/Icon.svelte';
 	import moment from 'moment';
 	moment.locale('ko');
@@ -18,6 +17,7 @@
 	export let startDate = '';
 	export let endDate = '';
 	export let status = '';
+	export let liked = true;
 
 	// 좋아요 핸들러
 	const likeBtn = async () => {
@@ -29,11 +29,6 @@
 
 	// 좋아요 여부 확인 (찜하기에서는 무조건 찜한 항목 띄워주기)
 	export let isLikePage = false;
-	let liked = $user
-		? hasContext('likes')
-			? getContext('likes').filter((el: Likes) => el?.activity_id === id)?.length
-			: true
-		: false;
 
 	// 진행상태 메시지 가공 위한 객체
 	const statusVariation: { [key: string]: { content: string; color: string } } = {

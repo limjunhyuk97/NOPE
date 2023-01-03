@@ -4,16 +4,11 @@
 	import { ACTIVITY_TYPE, ACTIVITY_FILTER } from '$lib/constants';
 	import Activity from '$lib/components/activities/Activity.svelte';
 	import ActivityFilter from '$lib/components/filter/Filter.svelte';
-	import { setContext } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import moment from 'moment';
 
 	/** @type {import('./$types').PageData} */
 	export let data: any;
-
-	// 찜하기 관련 정보 : context로 전달
-	const likes: ArrayLike<Likes> = data.likes;
-	setContext('likes', likes);
 
 	// 활동 타입에 따라 분할
 	const Activities = data.activityTypes.reduce((acc: any, cur: ActivityType) => {
@@ -58,6 +53,7 @@
 					{short_details}
 					startDate={moment(start_at).format('YYYY-MM-DD')}
 					endDate={moment(end_at).format('YYYY-MM-DD')}
+					liked={data.likes.some((likedActivityId) => likedActivityId.activity_id === id)}
 				/>
 			{/each}
 		</div>

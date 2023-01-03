@@ -20,8 +20,8 @@ const getLikes = async () => {
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ parent }) {
-	await parent();
+	const inherit = await parent();
 	const activities = await getActivities();
 	const likes = get(user) ? await getLikes() : [];
-	return { activities, likes };
+	return { ...inherit, activities, likes };
 }
