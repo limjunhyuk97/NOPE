@@ -67,7 +67,7 @@ export const USER_STATUS = {
 	LOGOUT: Symbol('logout'),
 	NOTAPPLIED: Symbol('nonapply'),
 	APPLIED: Symbol('applied'),
-	PARTICIPANT: Symbol('applied'),
-	ADMIN: Symbol('applied'),
-	SUPER: Symbol('applied')
+	PARTICIPANT: Symbol('particiapnt'),
+	ADMIN: Symbol('admin'),
+	SUPER: Symbol('super')
 };

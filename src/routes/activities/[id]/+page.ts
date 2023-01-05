@@ -1,12 +1,10 @@
+import type { ActivityCard } from '$lib/types/activities';
 import { supabase } from '$lib/supabase';
 import { user } from '$lib/stores';
 import { get } from 'svelte/store';
+import { USER_STATUS } from '$lib/constants';
+import axios from 'axios';
 
-// 로그인 안 한 경우 -> null
-// 로그인 + 지원 안한 경우 -> none
-// 로그인 + 지원 완료 후 대기 -> pending
-// 로그인 + 지원 완료 -> participant
-// 로그인 + 관리자 -> admin
 const getActivityData = async (id: string) => {
 	const { data, error } = await supabase
 		.from('activities')
@@ -15,10 +13,23 @@ const getActivityData = async (id: string) => {
 	return error ? [] : data;
 };
 
+const getUserStatus = async (userID: string | undefined, activityID: string | null) => {
+	try {
+		const status = await axios({
+			method: 'post',
+			url: `/activities/${activityID}`,
+			data: { userID, activityID }
+		});
+		return status;
+	} catch (err) {
+		return USER_STATUS.LOGOUT;
+	}
+};
+
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, parent }) {
-	const inherit = await parent();
-	const userID = get(user);
+	await parent();
 	const activityData = await getActivityData(params.id);
-	return { ...inherit };
+	const userStatus = await getUserStatus(get(user)?.id, activityData[0]?.id);
+	return { activityData, userStatus: userStatus.data };
 }

@@ -4,4 +4,4 @@
 	export let data: any;
 </script>
 
-<div />
+<div class="w-full h-full bg-red-500" />
