@@ -8,7 +8,9 @@ import axios from 'axios';
 const getActivityData = async (id: string) => {
 	const { data, error } = await supabase
 		.from('activities')
-		.select('*, activity_types("type", "type_kor"), images("url")')
+		.select(
+			'*, comments(users(name), contents, created_at), activity_types("type", "type_kor"), images("url")'
+		)
 		.match({ id });
 	return error ? [] : data;
 };

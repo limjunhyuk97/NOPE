@@ -34,7 +34,7 @@ export async function POST({ request }: { request: Request }) {
 			.match({ id: activityID });
 		return error
 			? new Response(null, { status: 400 })
-			: new Response(String(compareUserStatus(data, userID)), { status: 200 });
+			: new Response(compareUserStatus(data, userID).description, { status: 200 });
 	}
 	return new Response(String(USER_STATUS.LOGOUT), { status: 200 });
 }

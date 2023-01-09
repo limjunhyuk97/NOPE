@@ -64,10 +64,10 @@ export const ACTIVITY_FILTER = {
 // 로그인 + 관리자 -> admin
 // 로그인 + 임명된 관리자 -> superadmin
 export const USER_STATUS = {
-	LOGOUT: Symbol('logout'),
-	NOTAPPLIED: Symbol('nonapply'),
-	APPLIED: Symbol('applied'),
-	PARTICIPANT: Symbol('particiapnt'),
-	ADMIN: Symbol('admin'),
-	SUPER: Symbol('super')
+	LOGOUT: Symbol.for('logout'),
+	NOTAPPLIED: Symbol.for('nonapply'),
+	APPLIED: Symbol.for('applied'),
+	PARTICIPANT: Symbol.for('participant'),
+	ADMIN: Symbol.for('admin'),
+	SUPER: Symbol.for('super')
 };
