@@ -50,6 +50,7 @@
 		"feather-icons": "^4.29.0",
 		"marked": "^4.1.0",
 		"moment": "^2.29.4",
+		"tailwind-scrollbar-hide": "^1.1.7",
 		"uuid": "^9.0.0"
 	}
 }
