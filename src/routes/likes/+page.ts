@@ -5,7 +5,7 @@ import { get } from 'svelte/store';
 const getLikes = async () => {
 	const { data, error } = await supabase
 		.from('activity_likes')
-		.select('activity_id, activities(*, images("storage_id"))')
+		.select('activity_id, activities(*, images(url))')
 		.match({ user_id: get(user)?.id });
 	return error ? [] : data;
 };
