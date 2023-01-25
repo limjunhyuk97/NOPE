@@ -42,6 +42,11 @@
 	>
 {:else}
 	{@html feather.icons[icon]
-		? feather.icons[icon].toSvg({ width: size, height: size, 'stroke-width': stroke_width })
+		? feather.icons[icon].toSvg({
+				width: size,
+				height: size,
+				'stroke-width': stroke_width,
+				color: fill
+		  })
 		: '-'}
 {/if}
