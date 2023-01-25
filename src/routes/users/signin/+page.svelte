@@ -67,7 +67,7 @@
 			<!-- 버튼 -->
 			<div class="w-full px-12 flex justify-between">
 				<button type="submit" class="drop-shadow-xl">로그인</button>
-				<a href="/users/reset/password" class="drop-shadow-xl">비밀번호 재설정</a>
+				<a href="/users/reset" class="drop-shadow-xl">비밀번호 재설정</a>
 			</div>
 		</form>
 	</div>
