@@ -5,7 +5,7 @@
 @layer component {
 	/* TEMPLATE WIDTH */
 	.TEMPLATE-WIDTH {
-		@apply 2xl:w-[1536px] lg:w-[1024px] w-[880px];
+		@apply 2xl:w-[1536px] xl:w-[1320px] lg:w-[1024px] w-[960px];
 	}
 
 	/* SIDEBAR WIDTH */
