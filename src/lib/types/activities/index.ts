@@ -1,10 +1,3 @@
-// ActivityType
-export interface ActivityType {
-	id: string;
-	type: string;
-	type_kor: string;
-}
-
 // Activity
 export type ActivityCard = {
 	id: string;
@@ -23,8 +16,9 @@ export type ActivityCard = {
 		type: string;
 		type_kor: string;
 	};
+	comments: Comment[];
 	images: {
-		url: string;
+		storage_id: string;
 	};
 };
 
@@ -46,10 +40,10 @@ export type Users = {
 	};
 };
 
-export interface Comments {
+// Comment
+export interface Comment {
 	id: string;
 	contents: string;
 	created_at: string;
-	users: Users;
+	users: { name: string; images: string | null; id: string };
 }
-[];

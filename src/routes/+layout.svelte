@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ActivityType } from '$lib/types/activities';
+	import type { ActivityTypes } from '$lib/types';
 	import '../app.css';
 	import Logo from '$lib/components/common/Logo.svelte';
 	import Toast from '$lib/Toast.svelte';
@@ -22,7 +22,7 @@
 
 	// activity, user data 받아오기
 	export let data: any;
-	const activityTypes: ArrayLike<ActivityType> = data.activityTypes;
+	const activityTypes: ArrayLike<ActivityTypes> = data.activityTypes;
 
 	supabase.auth.onAuthStateChange(async (event, session) => {
 		$user = session?.user || null;

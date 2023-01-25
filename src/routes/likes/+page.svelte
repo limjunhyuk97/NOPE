@@ -16,7 +16,7 @@
 		<div class="grid grid-cols-3 2xl:gap-10 gap-3">
 			{#each Likes as { activities: { title, recruiting, start_at, end_at, id, status, images, short_details } }}
 				<Activity
-					imgUrl={images?.url}
+					imgUrl={images?.storage_id}
 					{id}
 					{title}
 					{recruiting}

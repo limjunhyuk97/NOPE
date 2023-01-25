@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { Likes } from '$lib/types/activities';
 	import { handleLike, handleUnLike } from './Activity';
 	import { ACTIVITY_STATUS } from '$lib/constants';
 	import { slide, fade } from 'svelte/transition';
 	import { user, toast } from '$lib/stores';
+	import { getSignedUrl } from '$lib/utils';
 	import Icon from '$lib/Icon.svelte';
 	import moment from 'moment';
 	moment.locale('ko');
@@ -19,11 +19,10 @@
 	export let status = '';
 	export let liked = true;
 
-	// 좋아요 핸들러
-	const likeBtn = async () => {
+	// 좋아요 handler
+	const likeHandler = async () => {
 		liked = !liked;
 		const result = liked ? await handleLike($user?.id, id) : await handleUnLike($user?.id, id);
-		console.log(result);
 		$toast = result ? (liked ? '찜하기 완료' : '찜한항목 제거') : '찜하기 실패';
 	};
 
@@ -55,15 +54,29 @@
 			in:fade|local={{ duration: 400 }}
 			out:slide|local={{ duration: 600 }}
 		>
-			{#if imgUrl}
-				<img src={imgUrl} alt={title} class="w-full hover:scale-125 duration-200" />
-			{:else}
+			{#await getSignedUrl(imgUrl)}
 				<div
 					class="flex items-center justify-center w-full h-full hover:scale-125 duration-200 text-lg"
 				>
 					{title}
 				</div>
-			{/if}
+			{:then image}
+				{#if image}
+					<img src={image} alt={title} class="w-full hover:scale-125 duration-200" />
+				{:else}
+					<div
+						class="flex items-center justify-center w-full h-full hover:scale-125 duration-200 text-lg"
+					>
+						{title}
+					</div>
+				{/if}
+			{:catch error}
+				<div
+					class="flex items-center justify-center w-full h-full hover:scale-125 duration-200 text-lg"
+				>
+					{title}
+				</div>
+			{/await}
 		</div>
 	{/if}
 	<!-- 하단 : 설명부분 -->
@@ -107,7 +120,7 @@
 		<button
 			class="ml-2 absolute bottom-3 right-3"
 			on:click|preventDefault={async () => {
-				await likeBtn();
+				await likeHandler();
 			}}
 		>
 			<Icon

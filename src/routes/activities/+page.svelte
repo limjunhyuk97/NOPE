@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { ActivityCard, Likes, ActivityType } from '$lib/types/activities';
+	import type { ActivityCard } from '$lib/types/activities';
+	import type { ActivityTypes } from '$lib/types';
 	import { activitiesToShow } from '$lib/stores';
 	import { ACTIVITY_TYPE, ACTIVITY_FILTER } from '$lib/constants';
 	import Activity from '$lib/components/activities/Activity.svelte';
@@ -11,7 +12,7 @@
 	export let data: any;
 
 	// 활동 타입에 따라 분할
-	const Activities = data.activityTypes.reduce((acc: any, cur: ActivityType) => {
+	const Activities = data.activityTypes.reduce((acc: any, cur: ActivityTypes) => {
 		acc[cur.type] = data.activities.filter(
 			(el: ActivityCard) => el.activity_types.type === cur.type
 		);
@@ -45,7 +46,7 @@
 		<div class="grid grid-cols-3 2xl:gap-10 gap-3 mb-8 ">
 			{#each filteredActivities() as { title, recruiting, start_at, end_at, id, status, images, short_details }}
 				<Activity
-					imgUrl={images?.url}
+					imgUrl={images?.storage_id}
 					{id}
 					{title}
 					{recruiting}

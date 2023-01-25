@@ -8,7 +8,7 @@ import { get } from 'svelte/store';
 const getProfile = async () => {
 	const { data, error } = await supabase
 		.from('users')
-		.select('email, name, descriptions, image_id, images("url")')
+		.select('email, name, descriptions, image_id, images("storage_id")')
 		.eq('id', get(user)?.id)
 		.single();
 	if (error) {
