@@ -23,16 +23,17 @@ export const getImageKey = async (file: Blob, bucket = 'app') => {
 // bucket에 들어있는 img 파일의 주소를 반환해준다. 즉, 어떻게 접근해야하는지 알려준다.
 export const getUrl = async (key: string, bucket = 'app') => {
 	if (!key) {
-		return '/empty.png';
+		return null;
 	}
 
 	const { data } = await supabase.storage.from(bucket).getPublicUrl(key);
+
 	return data;
 };
 
 export const getSignedUrl = async (key: string | null, bucket = 'app') => {
 	if (!key) {
-		return '/empty.png';
+		return null;
 	}
 
 	const { data, error } = await supabase.storage.from(bucket).createSignedUrl(key, 100000);
