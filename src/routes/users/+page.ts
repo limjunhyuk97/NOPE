@@ -1,5 +1,3 @@
-/** @type {import('./$types').LayoutLoad} */
-
 import { v4 as uuidv4 } from 'uuid';
 import { user } from '$lib/stores';
 import { supabase } from '$lib/supabase';
@@ -12,11 +10,7 @@ const getUser = async () => {
 		.select('email, name, descriptions, image_id, images("storage_id")')
 		.eq('id', get(user)?.id)
 		.single();
-	if (error) {
-		console.log(error);
-	} else {
-		return data;
-	}
+	return error ? null : data;
 };
 
 const getStacks = async () => {
@@ -90,8 +84,21 @@ export const editProfileImage = async (imageId: string | null, url: string | nul
 	return await getProfile();
 };
 
-export const addStack = async (stack_id: string, user_id: string) => {
+export const getUserStacks = async () => {
+	const { data, error } = await supabase
+		.from('user_stacks')
+		.select('id, stacks(*)')
+		.eq('user_id', get(user)?.id);
+	return error ? [] : data;
+};
+
+export const addUserStack = async (stack_id: string, user_id: string) => {
 	const { error } = await supabase.from('user_stacks').insert({ user_id, stack_id });
+	return error ? false : true;
+};
+
+export const deleteUserStack = async (id: string) => {
+	const { error } = await supabase.from('user_stacks').delete().eq('id', id);
 	return error ? false : true;
 };
 
@@ -99,8 +106,8 @@ export const addStack = async (stack_id: string, user_id: string) => {
 export async function load({ parent }) {
 	await parent();
 	const user = await getUser();
-
+	const userStacks = await getUserStacks();
 	const stacks = await getStacks();
 
-	return { user, stacks };
+	return { user, stacks, userStacks };
 }

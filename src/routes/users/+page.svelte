@@ -2,18 +2,27 @@
 	import Icon from '$lib/Icon.svelte';
 	import { getImageKey, getSignedUrl } from '$lib/utils';
 	import { fade, fly } from 'svelte/transition';
-	import { toast } from '$lib/stores';
-	import { editProfile, editProfileImage, addStack } from './+page';
+	import { toast, user } from '$lib/stores';
+	import {
+		editProfile,
+		editProfileImage,
+		addUserStack,
+		deleteUserStack,
+		getUserStacks
+	} from './+page';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let data: any;
 
 	const stacks = data.stacks;
-	let pageState = 'stack';
-
+	let pageState = 'default';
 	let searchedStack = '';
-	console.log(data);
 
 	let profile = data.user;
+	let userStacks = data.userStacks;
+	console.log(userStacks);
+
 	let profileImageUrl: string | null = profile.images?.url;
 	let profileEdit = false;
 	let name = profile.name;
@@ -30,7 +39,17 @@
 		}
 	};
 
-	const addStackHandler = async (event: Event) => {};
+	const addStackHandler = async (stack_id: string) => {
+		const result = await addUserStack(stack_id, $user?.id);
+		$toast = result ? '스택 뱃지 추가 성공' : '추가 실패';
+		if (result) userStacks = await getUserStacks();
+	};
+
+	const deletStackHandler = async (id: string) => {
+		const result = await deleteUserStack(id);
+		$toast = result ? '스택 뱃지 삭제 성공' : '삭제 실패';
+		if (result) userStacks = await getUserStacks();
+	};
 
 	const changePageState = () => {
 		pageState = pageState === 'default' ? 'edit' : 'default';
@@ -43,6 +62,13 @@
 	const searchState = (stackName: string) => {
 		return stacks.filter((stack) => stack.name.toLowerCase().includes(stackName.toLowerCase()));
 	};
+
+	onMount(() => {
+		if (!$user) {
+			$toast = '로그인을 해주세요';
+			goto('/');
+		}
+	});
 </script>
 
 <div in:fade|local class="flex text-xl">
@@ -118,7 +144,7 @@
 			</div>
 			<div class="flex flex-col gap-2">
 				<div class="text-blue-300">자기소개</div>
-				<p class="w-full h-64 py-2 border-y overflow-y-auto scrollbar-hide">
+				<p class="w-full h-56 py-2 border-y overflow-y-auto scrollbar-hide">
 					{data.descriptions ? data.descriptions : `자기소개를 작성해주세요!`}
 				</p>
 			</div>
@@ -131,7 +157,21 @@
 						><Icon icon="plus" size={12} stroke_width={4} /></button
 					>
 				</div>
-				<div class="grid grid-cols-3 gap-2" />
+				<div class="grid grid-cols-3 gap-2 h-40 overflow-y-auto scrollbar-hide">
+					{#each userStacks as stack}
+						<button
+							class="flex flex-col items-center relative w-full h-16 hover:bg-gray-200 rounded "
+							on:click={async () => await deletStackHandler(stack.id)}
+						>
+							<img
+								src={stack.stacks.url}
+								alt={stack.stacks.id}
+								class="w-full h-12 object-cover hover:object-contain rounded"
+							/>
+							<h3 class="text-sm">{stack.stacks.name}</h3>
+						</button>
+					{/each}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -220,9 +260,18 @@
 			</div>
 			<div class="grid grid-cols-3 gap-3 gap-y-4 pb-12 overflow-y-auto scrollbar-hide">
 				{#each searchState(searchedStack) as stack}
-					<button class="w-full h-18 hover:bg-gray-200 rounded">
-						<img src={stack.url} alt={stack.id} class="w-full object-contain rounded" />
-						<h3 class="text-xs">{stack.name}</h3>
+					<button
+						class="w-full h-18 hover:bg-gray-200 rounded"
+						on:click|preventDefault={async () => {
+							addStackHandler(stack.id);
+						}}
+					>
+						<img
+							src={stack.url}
+							alt={stack.id}
+							class="w-full h-10 object-cover hover:object-contain rounded"
+						/>
+						<h3 class="text-sm">{stack.name}</h3>
 					</button>
 				{/each}
 			</div>
