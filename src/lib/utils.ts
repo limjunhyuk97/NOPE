@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '$lib/supabase';
+import ImageResize from 'image-resize';
 
 // bucket에 넣고 key를 반환해줌
 export const getImageKey = async (file: Blob, bucket = 'app') => {
@@ -42,6 +43,20 @@ export const getSignedUrl = async (key: string | null, bucket = 'app') => {
 		return null;
 	} else {
 		return data?.signedUrl;
+	}
+};
+
+export const resize = async (file, width = 400, quality = 0.7) => {
+	try {
+		const imageResize = new ImageResize({
+			format: 'jpg',
+			width: width,
+			quality: quality,
+			outputType: 'blob'
+		});
+		return await imageResize.play(file);
+	} catch (e) {
+		return null;
 	}
 };
 
