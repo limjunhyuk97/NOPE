@@ -4,8 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { user } from '$lib/stores';
 import { supabase } from '$lib/supabase';
 import { get } from 'svelte/store';
+import { resize } from '$lib/utils';
 
-const getProfile = async () => {
+const getUser = async () => {
 	const { data, error } = await supabase
 		.from('users')
 		.select('email, name, descriptions, image_id, images("storage_id")')
@@ -16,6 +17,11 @@ const getProfile = async () => {
 	} else {
 		return data;
 	}
+};
+
+const getStacks = async () => {
+	const { data, error } = await supabase.from('stacks').select('*');
+	return error ? [] : data;
 };
 
 const updateUsers = async (data) => {
@@ -84,10 +90,17 @@ export const editProfileImage = async (imageId: string | null, url: string | nul
 	return await getProfile();
 };
 
+export const addStack = async (stack_id: string, user_id: string) => {
+	const { error } = await supabase.from('user_stacks').insert({ user_id, stack_id });
+	return error ? false : true;
+};
+
 /** @type {import('./$types').PageLoad} */
 export async function load({ parent }) {
 	await parent();
-	const profile = await getProfile();
+	const user = await getUser();
 
-	return { profile };
+	const stacks = await getStacks();
+
+	return { user, stacks };
 }
