@@ -12,7 +12,7 @@
 
 	const activityData: ActivityCard = data.activityData;
 	const activityImage = data.activityImage;
-	const userStatus = data?.userStatus ? USER_STATUS.LOGOUT : USER_STATUS.LOGOUT;
+	const userStatus = Symbol.for(data?.userStatus ? data?.userStatus : USER_STATUS.LOGOUT);
 
 	let comments = data.comments;
 
