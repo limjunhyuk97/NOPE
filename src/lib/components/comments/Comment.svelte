@@ -9,7 +9,7 @@
 	moment.locale('ko');
 
 	export let comment: Comment;
-	const editable = $user.id === comment.users.id;
+	const editable = $user?.id === comment.users.id;
 
 	// 댓글 리로딩
 	const reloadComment = createEventDispatcher();
