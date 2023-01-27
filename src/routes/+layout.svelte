@@ -33,7 +33,7 @@
 	});
 </script>
 
-<div class="w-full h-full bg-gray-100 font-NOPE">
+<div class="bg-gray-100 font-NOPE">
 	<div class="TEMPLATE-WIDTH min-h-screen relative mx-auto bg-white">
 		<div class="w-full min-h-screen flex">
 			{#if spinner}
@@ -60,7 +60,7 @@
 					</nav>
 				</div>
 				<!-- 컨텐츠 들어가는 곳 -->
-				<div class="relative w-full min-h-screen">
+				<div class="relative w-full min-h-screen overflow-x-auto scrollbar-hide">
 					<slot />
 					<Modal />
 				</div>
