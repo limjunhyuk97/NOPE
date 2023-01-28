@@ -1,4 +1,4 @@
-import type { Actions } from './password/$types';
+import type { Actions } from './$types';
 import { MAINPAGE_URL } from '$lib/constants';
 import { invalid } from '@sveltejs/kit';
 import { supabase } from '$lib/supabase';
@@ -6,7 +6,7 @@ import { admin } from '$lib/admin';
 
 const resetPassword = async (email: string) => {
 	const { error } = await supabase.auth.resetPasswordForEmail(email, {
-		redirectTo: `${MAINPAGE_URL}`
+		redirectTo: `${MAINPAGE_URL}/users/reset/password`
 	});
 	if (error) {
 		return error.status === 429
