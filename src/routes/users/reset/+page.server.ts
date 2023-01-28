@@ -6,7 +6,7 @@ import { admin } from '$lib/admin';
 
 const resetPassword = async (email: string) => {
 	const { error } = await supabase.auth.resetPasswordForEmail(email, {
-		redirectTo: `${MAINPAGE_URL}/users/reset/password`
+		redirectTo: `${MAINPAGE_URL}`
 	});
 	if (error) {
 		return error.status === 429
