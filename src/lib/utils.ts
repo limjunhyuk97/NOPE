@@ -3,7 +3,7 @@ import { supabase } from '$lib/supabase';
 import ImageResize from 'image-resize';
 
 // bucket에 넣고 key를 반환해줌
-export const getImageKey = async (file: Blob, bucket = 'app') => {
+export const getImageKey = async (file: File, bucket = 'app') => {
 	if (!file) {
 		return null;
 	}
@@ -46,7 +46,16 @@ export const getSignedUrl = async (key: string | null, bucket = 'app') => {
 	}
 };
 
-export const resize = async (file, width = 400, quality = 0.7) => {
+//* images table에 {id, storage_id} 정보 저장 후 id 반환 */
+export const upsertImage = async ({ id, storage_id }: { id: string; storage_id: string }) => {
+	if (id === null) id = `${uuidv4()}`;
+
+	const { error } = await supabase.from('images').upsert({ id, storage_id }, { onConflict: 'id' });
+
+	return error ? false : id;
+};
+
+export const resizeImage = async (file: File, width = 400, quality = 0.7) => {
 	try {
 		const imageResize = new ImageResize({
 			format: 'jpg',
