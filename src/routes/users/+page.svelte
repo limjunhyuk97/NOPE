@@ -1,13 +1,12 @@
 <script type="ts">
 	import Icon from '$lib/Icon.svelte';
-	import { getImageKey, getSignedUrl } from '$lib/utils';
+	import { resizeImage, getImageKey, getSignedUrl } from '$lib/utils';
+	import { upsertUserProfileImage, removeUserProfileImage } from './+page';
 	import { fade, fly } from 'svelte/transition';
 	import { toast, user } from '$lib/stores';
 	import axios from 'axios';
 	import { supabase } from '$lib/supabase';
 	import {
-		editProfile,
-		editProfileImage,
 		addUserStack,
 		getUser,
 		deleteUserStack,
@@ -24,20 +23,43 @@
 	let searchedStack = '';
 
 	let profile = data.user;
+	let userImage = data.userImage;
 	let userStacks = data.userStacks;
 
 	let nameDuplicated = false;
+	let hoveringImageUpload = false;
 
-	let profileImageUrl: string | null = profile.images?.url;
-	let editImage = false;
+	const uploadImageHandler = async (event: Event) => {
+		if (event.target.files.length > 0) {
+			const image = event.target.files[0];
+			const resized = await resizeImage(image);
+			const key = await getImageKey(resized);
+			if (!key) {
+				$toast = '이미지 등록이 불가능합니다.';
+			} else {
+				const access_token = await supabase.auth
+					.getSession()
+					.then(({ data }) => data.session?.access_token);
+				const result = await upsertUserProfileImage(profile.image_id, key, access_token);
+				if (result) {
+					$toast = '이미지 등록 완료';
+					profile = await getUser();
+					userImage = await getSignedUrl(profile.images?.storage_id);
+				} else {
+					$toast = '이미지 등록 실패';
+				}
+			}
+		}
+	};
 
-	const fileSelectedHandler = async (event: Event) => {
-		if (event.target.files.length === 1) {
-			const key = await getImageKey(event.target.files[0]);
-			const signedUrl = await getSignedUrl(key);
-
-			profileImageUrl = signedUrl;
-			profile = await editProfileImage(profile.image_id, signedUrl);
+	const removeImageHandler = async (event: Event) => {
+		const result = await removeUserProfileImage(profile.image_id);
+		if (result) {
+			$toast = '이미지 삭제 완료';
+			profile = await getUser();
+			userImage = await getSignedUrl(profile.images?.storage_id);
+		} else {
+			$toast = '이미지 삭제 실패';
 		}
 	};
 
@@ -105,10 +127,10 @@
 			<!-- 프로필 사진 업로드 -->
 			<label
 				on:mouseenter={() => {
-					editImage = true;
+					hoveringImageUpload = true;
 				}}
 				on:mouseleave={() => {
-					editImage = false;
+					hoveringImageUpload = false;
 				}}
 				for="img_export"
 				class="relative cursor-pointer"
@@ -119,15 +141,11 @@
 					accept=".png, .jpg, .jpeg"
 					id="img_export"
 					autocomplete="off"
-					on:change={(e) => fileSelectedHandler(e)}
+					on:change={uploadImageHandler}
 				/>
 				<div class="bg-black rounded-full text-white">
-					{#if profileImageUrl}
-						<img
-							src={profileImageUrl}
-							class="w-36 h-36 rounded-full object-cover"
-							alt="프로필사진"
-						/>
+					{#if userImage}
+						<img src={userImage} class="w-36 h-36 rounded-full object-cover" alt="프로필사진" />
 					{:else}
 						<div
 							class="flex items-center justify-center w-36 h-36 rounded-full bg-blue-100 border-2 border-gray-100"
@@ -137,11 +155,14 @@
 					{/if}
 				</div>
 				<div
-					class="{editImage
+					class="{hoveringImageUpload
 						? ''
-						: 'hidden'} absolute right-0 bottom-0 bg-white rounded-full p-2 border border-gray-800"
+						: 'hidden'} absolute left-24 bottom-0 flex gap-2 p-2 bg-white rounded-full border border-gray-800"
 				>
 					<Icon icon="edit-2" />
+					<button on:click|preventDefault={removeImageHandler}>
+						<Icon icon="x" />
+					</button>
 				</div>
 			</label>
 			<!-- 내 정보 변경 / 활동 관리 선택 -->

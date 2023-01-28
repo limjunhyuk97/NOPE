@@ -1,76 +1,7 @@
-import { v4 as uuidv4 } from 'uuid';
 import { user } from '$lib/stores';
-import { supabase } from '$lib/supabase';
+import { supabase, supabaseWithToken } from '$lib/supabase';
 import { get } from 'svelte/store';
-import { resize } from '$lib/utils';
-
-//* 확인 해야하는 사항
-const updateUsers = async (data) => {
-	const { error } = await supabase.from('users').update(data).eq('id', get(user)?.id);
-
-	if (error) {
-		console.log(error);
-	}
-};
-
-const upsertProfileImage = async (imageId: string, url: string) => {
-	const { error } = await supabase
-		.from('images')
-		.upsert({ id: imageId, url: url }, { onConflict: 'id' });
-
-	if (error) {
-		console.log(error);
-	}
-};
-
-const getBucketFilePath = async (imageId: string, path = '') => {
-	const { data, error } = await supabase.from('images').select('url').eq('id', imageId).single();
-
-	if (error) {
-		console.log(error);
-		return null;
-	} else {
-		return path + data.url.split('/').pop().split('?')[0];
-	}
-};
-
-const deleteBucket = async (storageName: string, filePath: string) => {
-	const { error } = await supabase.storage.from(storageName).remove([filePath]);
-
-	if (error) {
-		console.log(error);
-	}
-};
-
-export const editProfile = async (profileData) => {
-	const { error } = await supabase.from('users').update(profileData).eq('id', get(user)?.id);
-
-	if (error) {
-		console.log(error);
-	} else {
-		return await getUser();
-	}
-};
-
-export const editProfileImage = async (imageId: string | null, url: string | null) => {
-	if (!url) {
-		return;
-	}
-	if (!imageId) {
-		const newImageId: string = uuidv4();
-		await upsertProfileImage(newImageId, url);
-		await updateUsers({ image_id: newImageId });
-	} else {
-		const bucketFilePath = await getBucketFilePath(imageId);
-
-		if (bucketFilePath) {
-			await deleteBucket('app', bucketFilePath);
-		}
-		await upsertProfileImage(imageId, url);
-	}
-	return await getUser();
-};
-//*
+import { getSignedUrl, upsertImage } from '$lib/utils';
 
 export const getUser = async () => {
 	const { data, error } = await supabase
@@ -79,6 +10,28 @@ export const getUser = async () => {
 		.eq('id', get(user)?.id)
 		.single();
 	return error ? null : data;
+};
+
+export const upsertUserProfileImage = async (
+	image_id: string,
+	storage_id: string,
+	access_token: string | null
+) => {
+	const profileImageID = await upsertImage({ id: image_id, storage_id });
+	if (!profileImageID || !access_token) return false;
+	const updateResult = await supabaseWithToken(access_token)
+		.from('users')
+		.update({ image_id: profileImageID })
+		.eq('id', get(user)?.id);
+	return updateResult.status === 204;
+};
+
+// images 테이블의 row - storage 연결을 끊어버린다.
+export const removeUserProfileImage = async (image_id: string) => {
+	if (image_id === null) return true;
+	const result = await supabase.from('images').update({ storage_id: '' }).eq('id', image_id);
+	console.log(result, image_id);
+	return result.status === 204 ? true : false;
 };
 
 export const getUserStacks = async () => {
@@ -118,8 +71,9 @@ export const checkNameDuplication = async (name: string, id: string) => {
 export async function load({ parent }) {
 	await parent();
 	const user = await getUser();
+	const userImage = await getSignedUrl(user?.images?.storage_id);
 	const userStacks = await getUserStacks();
 	const stacks = await getStacks();
 
-	return { user, stacks, userStacks };
+	return { user, stacks, userStacks, userImage };
 }
