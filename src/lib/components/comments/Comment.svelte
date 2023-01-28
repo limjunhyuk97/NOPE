@@ -28,7 +28,7 @@
 			<div class="w-9 h-9 p-1 rounded-full bg-gray-300" />
 		{:then image}
 			{#if image}
-				<img src={image} alt="profile" class="w-9 h-9 rounded-full object-cover" />
+				<img src={image} alt="profile" class="w-10 h-10 rounded-full object-cover" />
 			{:else}
 				<div class="p-1 rounded-full bg-gray-500">
 					<Icon icon="user" size={28} stroke_width={1.5} fill={'white'} />
@@ -37,7 +37,7 @@
 		{:catch error}
 			<div class="p-1 rounded-full border border-black"><Icon icon="user" size={28} /></div>
 		{/await}
-		<span class="w-36 truncate">{comment.users.name}</span>
+		<span class="xl:w-36 w-24 truncate">{comment.users.name}</span>
 	</div>
 	<div class="flex flex-col gap-1">
 		<p class="break-all">{comment.contents}</p>
