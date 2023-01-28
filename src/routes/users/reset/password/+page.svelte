@@ -49,7 +49,7 @@
 		<label class="w-full mt-20">
 			<div>새 비밀번호</div>
 			<input
-				type="text"
+				type="password"
 				name="password"
 				class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
 				placeholder="새로 사용할 비밀번호를 기입해주세요"
@@ -63,7 +63,7 @@
 		<label class="w-full mt-12">
 			<div>비밀번호 확인</div>
 			<input
-				type="text"
+				type="password"
 				name="passwordcheck"
 				class="w-full mt-6 border-b-2 border-gray-300 focus:outline-none focus:bg-white"
 				placeholder="새로 사용할 비밀번호를 기입해주세요"
