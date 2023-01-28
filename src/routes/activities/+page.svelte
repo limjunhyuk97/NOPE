@@ -11,7 +11,7 @@
 	/** @type {import('./$types').PageData} */
 	export let data: any;
 
-	// 활동 타입에 따라 분할
+	// 활동 타입에 따라 전체 활동 분할
 	const Activities = data.activityTypes.reduce((acc: any, cur: ActivityTypes) => {
 		acc[cur.type] = data.activities.filter(
 			(el: ActivityCard) => el.activity_types.type === cur.type
@@ -20,7 +20,7 @@
 	}, {});
 	Activities[ACTIVITY_TYPE.ALL] = data.activities;
 
-	// 활동 타입명 지정
+	// 활동 타입 한글명
 	$: filteredActivityType =
 		$activitiesToShow === ACTIVITY_TYPE.ALL
 			? '전체활동'
@@ -28,6 +28,8 @@
 
 	// 필터 적용
 	$: recruitFilter = ACTIVITY_FILTER.ALL.type;
+
+	// '필터링'된 & '타입에 일치'하는 활동
 	$: filteredActivities = () => {
 		return Activities[$activitiesToShow].filter((el: ActivityCard) => {
 			if (recruitFilter === ACTIVITY_FILTER.ALL.type) return true;
