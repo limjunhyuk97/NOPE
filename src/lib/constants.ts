@@ -1,5 +1,5 @@
 // page url
-export const MAINPAGE_URL = 'https://nopedev.netlify.app/';
+export const MAINPAGE_URL = 'https://nopedev.netlify.app';
 
 //** color Theme */
 export const THEME_COLOR = '#9FC9F3';
