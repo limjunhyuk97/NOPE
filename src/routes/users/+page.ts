@@ -4,20 +4,7 @@ import { supabase } from '$lib/supabase';
 import { get } from 'svelte/store';
 import { resize } from '$lib/utils';
 
-const getUser = async () => {
-	const { data, error } = await supabase
-		.from('users')
-		.select('email, name, descriptions, image_id, images("storage_id")')
-		.eq('id', get(user)?.id)
-		.single();
-	return error ? null : data;
-};
-
-const getStacks = async () => {
-	const { data, error } = await supabase.from('stacks').select('*');
-	return error ? [] : data;
-};
-
+//* 확인 해야하는 사항
 const updateUsers = async (data) => {
 	const { error } = await supabase.from('users').update(data).eq('id', get(user)?.id);
 
@@ -61,7 +48,7 @@ export const editProfile = async (profileData) => {
 	if (error) {
 		console.log(error);
 	} else {
-		return await getProfile();
+		return await getUser();
 	}
 };
 
@@ -81,7 +68,17 @@ export const editProfileImage = async (imageId: string | null, url: string | nul
 		}
 		await upsertProfileImage(imageId, url);
 	}
-	return await getProfile();
+	return await getUser();
+};
+//*
+
+export const getUser = async () => {
+	const { data, error } = await supabase
+		.from('users')
+		.select('email, name, descriptions, image_id, images("storage_id")')
+		.eq('id', get(user)?.id)
+		.single();
+	return error ? null : data;
 };
 
 export const getUserStacks = async () => {
@@ -89,6 +86,11 @@ export const getUserStacks = async () => {
 		.from('user_stacks')
 		.select('id, stacks(*)')
 		.eq('user_id', get(user)?.id);
+	return error ? [] : data;
+};
+
+const getStacks = async () => {
+	const { data, error } = await supabase.from('stacks').select('*');
 	return error ? [] : data;
 };
 
@@ -100,6 +102,16 @@ export const addUserStack = async (stack_id: string, user_id: string) => {
 export const deleteUserStack = async (id: string) => {
 	const { error } = await supabase.from('user_stacks').delete().eq('id', id);
 	return error ? false : true;
+};
+
+export const checkNameDuplication = async (name: string, id: string) => {
+	if (name.length === 0) return true;
+	const { data, error } = await supabase
+		.from('users')
+		.select('name')
+		.eq('name', name)
+		.neq('id', id);
+	return error ? true : data.length > 0 ? true : false;
 };
 
 /** @type {import('./$types').PageLoad} */

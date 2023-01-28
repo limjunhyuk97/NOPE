@@ -3,12 +3,16 @@
 	import { getImageKey, getSignedUrl } from '$lib/utils';
 	import { fade, fly } from 'svelte/transition';
 	import { toast, user } from '$lib/stores';
+	import axios from 'axios';
+	import { supabase } from '$lib/supabase';
 	import {
 		editProfile,
 		editProfileImage,
 		addUserStack,
+		getUser,
 		deleteUserStack,
-		getUserStacks
+		getUserStacks,
+		checkNameDuplication
 	} from './+page';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
@@ -21,13 +25,11 @@
 
 	let profile = data.user;
 	let userStacks = data.userStacks;
-	console.log(userStacks);
+
+	let nameDuplicated = false;
 
 	let profileImageUrl: string | null = profile.images?.url;
-	let profileEdit = false;
-	let name = profile.name;
-	let password = '';
-	let passwordCheck = '';
+	let editImage = false;
 
 	const fileSelectedHandler = async (event: Event) => {
 		if (event.target.files.length === 1) {
@@ -49,6 +51,31 @@
 		const result = await deleteUserStack(id);
 		$toast = result ? '스택 뱃지 삭제 성공' : '삭제 실패';
 		if (result) userStacks = await getUserStacks();
+	};
+
+	const nameCheckHandler = async (name: string, e: Event) => {
+		nameDuplicated = await checkNameDuplication(name, $user.id);
+	};
+
+	const submitProfileHandler = async (e: SubmitEvent) => {
+		const name = e.target.name.value;
+		const descriptions = e.target.descriptions.value;
+		const accesstoken = await supabase.auth
+			.getSession()
+			.then(({ data }) => data.session?.access_token);
+		try {
+			const response = await axios({
+				method: 'post',
+				url: '/users',
+				data: { name, descriptions, id: $user?.id },
+				headers: { Bearer: accesstoken }
+			});
+			$toast = '내 정보 변경 성공';
+			profile = await getUser();
+		} catch (err) {
+			$toast = err.response.data;
+			console.log(err);
+		}
 	};
 
 	const changePageState = () => {
@@ -73,15 +100,15 @@
 
 <div in:fade|local class="flex text-xl">
 	<!-- 내 정보 섹션 -->
-	<div class=" w-1/2 h-screen py-12 px-6 border-r ">
+	<div class=" w-1/2 h-screen py-12 px-6 border-r overflow-y-auto scrollbar-hide">
 		<div class="flex justify-between items-end">
 			<!-- 프로필 사진 업로드 -->
 			<label
 				on:mouseenter={() => {
-					profileEdit = true;
+					editImage = true;
 				}}
 				on:mouseleave={() => {
-					profileEdit = false;
+					editImage = false;
 				}}
 				for="img_export"
 				class="relative cursor-pointer"
@@ -110,7 +137,7 @@
 					{/if}
 				</div>
 				<div
-					class="{profileEdit
+					class="{editImage
 						? ''
 						: 'hidden'} absolute right-0 bottom-0 bg-white rounded-full p-2 border border-gray-800"
 				>
@@ -130,22 +157,22 @@
 		</div>
 		<!-- 내 정보 섹션 -->
 		<div class="flex flex-col gap-16 mt-14">
-			<div class="flex gap-14">
-				<div class="w-20 text-blue-300">이름</div>
-				<div>{profile.name}</div>
+			<div class="flex gap-12">
+				<div class="w-24 text-blue-300">이름</div>
+				<p class="w-full text-start">{profile.name}</p>
 			</div>
-			<div class="flex gap-14">
-				<div class="w-20 text-blue-300">이메일</div>
-				<div>{profile.email}</div>
+			<div class="flex gap-12">
+				<div class="w-24 text-blue-300">이메일</div>
+				<p class="w-full truncate text-start">{profile.email}</p>
 			</div>
-			<div class="flex gap-14">
-				<div class="w-20 text-blue-300">비밀번호</div>
-				<div>****</div>
+			<div class="flex gap-12">
+				<div class="w-24 text-blue-300">비밀번호</div>
+				<p class="w-full text-start">****</p>
 			</div>
 			<div class="flex flex-col gap-2">
 				<div class="text-blue-300">자기소개</div>
 				<p class="w-full h-56 py-2 border-y overflow-y-auto scrollbar-hide">
-					{data.descriptions ? data.descriptions : `자기소개를 작성해주세요!`}
+					{profile.descriptions ? profile.descriptions : `자기소개를 작성해주세요!`}
 				</p>
 			</div>
 			<div class="flex flex-col gap-2">
@@ -196,56 +223,61 @@
 			class="flex flex-col w-1/2 h-screen pt-40 px-12 gap-8 text-start"
 		>
 			<h2 class="text-3xl pb-4">내 정보 변경</h2>
-			<form on:submit|preventDefault={() => {}} class="flex flex-col gap-6">
-				<label for="id" class="text-xl flex justify-between items-center">
-					<span class="whitespace-nowrap">이름</span>
-					<input
-						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
-						type="text"
-						id="id"
-						bind:value={name}
-						autocomplete="off"
+			<form class="flex flex-col gap-16 w-full" on:submit|preventDefault={submitProfileHandler}>
+				<div class="flex gap-6 w-full">
+					<div class="w-24 text-blue-300">이름</div>
+					<div class="relative w-full">
+						<input
+							class="w-full border-b {nameDuplicated
+								? 'border-red-300'
+								: 'border-blue-300'} focus:outline-none"
+							name="name"
+							value={profile.name}
+							on:keyup={async (e) => {
+								nameCheckHandler(e.target.value, e);
+							}}
+							type="text"
+						/>
+						<div
+							class="absolute top-8 text-xs {nameDuplicated ? 'text-red-500' : 'text-green-500'}"
+						>
+							{nameDuplicated ? '중복된 이름이 있습니다!' : '가능한 이름입니다!'}
+						</div>
+					</div>
+				</div>
+				<div class="flex gap-6">
+					<div class="w-24 text-blue-300">이메일</div>
+					<p class="w-full truncate text-start">{profile.email}</p>
+				</div>
+				<div class="flex justify-between gap-6 w-full">
+					<div class="w-24 text-blue-300">비밀번호</div>
+					<a
+						class="flex items-center w-fit px-2 text-sm rounded bg-blue-300 text-white"
+						href="/users/reset/password">비밀번호 변경</a
+					>
+				</div>
+				<div class="flex flex-col gap-2">
+					<div class="text-blue-300">자기소개</div>
+					<textarea
+						class="w-full h-56 py-2 border-y overflow-y-auto scrollbar-hide resize-none"
+						name="descriptions"
+						value={profile.descriptions ? profile.descriptions : ''}
 					/>
-				</label>
-				<span class="flex justify-end"><button>이름 변경</button></span>
+				</div>
+				<input type="text" class="hidden" value={$user?.id} name="user_id" />
+				<div class="flex justify-end w-full">
+					<button
+						class="flex items-center gap-2 {nameDuplicated ? '' : 'hover:scale-110 duration-300'}"
+						disabled={nameDuplicated}>수정완료<Icon icon="edit-2" size={20} /></button
+					>
+				</div>
 			</form>
-			<form action="" class="flex flex-col gap-6">
-				<label for="newPassword" class="text-xl flex justify-between items-center"
-					><span class="whitespace-nowrap">새 비밀번호</span>
-					<input
-						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
-						type="password"
-						id="newPassword"
-						bind:value={password}
-						autocomplete="off"
-					/>
-				</label>
-				<label for="passwordCheck" class="text-xl flex justify-between">
-					<span class="whitespace-nowrap">새 비밀번호 확인</span>
-					<input
-						class="text-end px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
-						type="password"
-						id="passwordCheck"
-						bind:value={passwordCheck}
-						autocomplete="off"
-					/>
-				</label>
-				<span class="flex justify-end"><button>비밀번호 변경</button></span>
-			</form>
-			{#if password !== passwordCheck}<span class="ml-3 text-xs text-red-500"
-					>비밀번호와 일치하지 않습니다.</span
-				>
-			{:else if password || passwordCheck}
-				<span class="ml-3 text-xs text-green-500">비밀번호와 일치합니다.</span>
-			{/if}
-			<label for="descriptions"> 자기소개 </label>
-			<textarea class="h-32 border-y outline-none" />
 		</div>
 	{:else if pageState === 'stack'}
 		<!-- 스택 선택 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/2 h-screen pt-40 px-12 gap-12 text-start"
+			class="flex flex-col w-1/2 h-screen pt-12 px-12 gap-12 text-start"
 		>
 			<div class="flex flex-col gap-12">
 				<h2 class="w-40 text-3xl">스택 선택</h2>
