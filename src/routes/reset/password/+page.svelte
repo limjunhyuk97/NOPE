@@ -31,7 +31,7 @@
 			try {
 				const status = await axios({
 					method: 'post',
-					url: `/users/reset/password`,
+					url: `/reset/password`,
 					data: { user_id: $user?.id, password, passwordcheck }
 				});
 				$toast = status.data;

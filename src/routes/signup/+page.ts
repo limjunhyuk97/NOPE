@@ -6,7 +6,7 @@ export const _checkDuplication = async (input: string, column: string) => {
 	try {
 		const response = await axios({
 			method: 'post',
-			url: `/users/signup`,
+			url: `/signup`,
 			data: { column, input }
 		});
 		return response.data;

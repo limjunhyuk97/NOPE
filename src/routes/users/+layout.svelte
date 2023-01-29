@@ -13,8 +13,6 @@
 		_upsertUserProfileImage,
 		_removeUserProfileImage
 	} from './+layout';
-	import { onMount, onDestroy } from 'svelte';
-	import { goto } from '$app/navigation';
 
 	export let data: any;
 
@@ -61,17 +59,6 @@
 	const searchState = (stackName: string) => {
 		return stacks.filter((stack) => stack.name.toLowerCase().includes(stackName.toLowerCase()));
 	};
-
-	onMount(() => {
-		if (!$user) {
-			$toast = '로그인을 해주세요';
-			goto('/');
-		}
-	});
-
-	onDestroy(() => {
-		$mypageSidebar = 'default';
-	});
 </script>
 
 <div in:fade|local class="flex text-xl">
@@ -86,7 +73,7 @@
 			class="flex flex-col w-1/2 h-screen pt-40 pl-12 gap-8 text-start"
 		>
 			<h2 class="text-3xl pb-4">활동 관리</h2>
-			<a class="text-start text-gray-500 text-xl" href="/activities/post">활동 개설</a>
+			<a class="text-start text-gray-500 text-xl" href="/activities/form">활동 개설</a>
 			<button class="text-start text-gray-500 text-xl">주최 활동 관리</button>
 			<button class="text-start text-gray-500 text-xl">참여 활동 관리</button>
 			<button class="text-start text-gray-500 text-xl">게시글 관리</button>
@@ -130,7 +117,7 @@
 					<div class="w-24 text-blue-300">비밀번호</div>
 					<a
 						class="flex items-center w-fit px-2 text-sm rounded bg-blue-300 text-white"
-						href="/users/reset/password">비밀번호 변경</a
+						href="/reset/password">비밀번호 변경</a
 					>
 				</div>
 				<div class="flex flex-col gap-2">

@@ -77,7 +77,7 @@
 	const formResponseHandler = (
 		response: ActionResult<Record<string, any>, Record<string, any>>
 	) => {
-		if (response.type === RESPONSE_TYPE.SUCCESS) goto('/users/signup/pending');
+		if (response.type === RESPONSE_TYPE.SUCCESS) goto('/signup/pending');
 		else $toast = response.data.message;
 	};
 

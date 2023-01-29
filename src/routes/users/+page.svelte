@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/Icon.svelte';
-	import { toast, mypageSidebar, myProfile, myStacks } from '$lib/stores';
+	import { goto } from '$app/navigation';
+	import { toast, mypageSidebar, myProfile, myStacks, user } from '$lib/stores';
 	import { resizeImage, getImageKey, getSignedUrl } from '$lib/utils';
 	import {
 		_upsertUserProfileImage,
@@ -11,6 +12,7 @@
 		_getUserStacks
 	} from './+layout';
 	import { supabase } from '$lib/supabase';
+	import { onDestroy, onMount } from 'svelte';
 
 	export let data;
 
@@ -64,6 +66,17 @@
 	const selectStackState = () => {
 		$mypageSidebar = $mypageSidebar === 'stack' ? 'default' : 'stack';
 	};
+
+	onMount(() => {
+		if (!$user) {
+			$toast = '로그인을 해주세요';
+			goto('/');
+		}
+	});
+
+	onDestroy(() => {
+		$mypageSidebar = 'default';
+	});
 </script>
 
 <div class="flex justify-between items-end">
