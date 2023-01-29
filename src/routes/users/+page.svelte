@@ -1,17 +1,18 @@
 <script type="ts">
 	import Icon from '$lib/Icon.svelte';
 	import { resizeImage, getImageKey, getSignedUrl } from '$lib/utils';
-	import { upsertUserProfileImage, removeUserProfileImage } from './+page';
 	import { fade, fly } from 'svelte/transition';
 	import { toast, user } from '$lib/stores';
 	import axios from 'axios';
 	import { supabase } from '$lib/supabase';
 	import {
-		addUserStack,
-		getUser,
-		deleteUserStack,
-		getUserStacks,
-		checkNameDuplication
+		_addUserStack,
+		_getUser,
+		_deleteUserStack,
+		_getUserStacks,
+		_checkNameDuplication,
+		_upsertUserProfileImage,
+		_removeUserProfileImage
 	} from './+page';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
@@ -40,10 +41,10 @@
 				const access_token = await supabase.auth
 					.getSession()
 					.then(({ data }) => data.session?.access_token);
-				const result = await upsertUserProfileImage(profile.image_id, key, access_token);
+				const result = await _upsertUserProfileImage(profile.image_id, key, access_token);
 				if (result) {
 					$toast = '이미지 등록 완료';
-					profile = await getUser();
+					profile = await _getUser();
 					userImage = await getSignedUrl(profile.images?.storage_id);
 				} else {
 					$toast = '이미지 등록 실패';
@@ -53,10 +54,10 @@
 	};
 
 	const removeImageHandler = async (event: Event) => {
-		const result = await removeUserProfileImage(profile.image_id);
+		const result = await _removeUserProfileImage(profile.image_id);
 		if (result) {
 			$toast = '이미지 삭제 완료';
-			profile = await getUser();
+			profile = await _getUser();
 			userImage = await getSignedUrl(profile.images?.storage_id);
 		} else {
 			$toast = '이미지 삭제 실패';
@@ -64,19 +65,19 @@
 	};
 
 	const addStackHandler = async (stack_id: string) => {
-		const result = await addUserStack(stack_id, $user?.id);
+		const result = await _addUserStack(stack_id, $user?.id);
 		$toast = result ? '스택 뱃지 추가 성공' : '추가 실패';
 		if (result) userStacks = await getUserStacks();
 	};
 
 	const deletStackHandler = async (id: string) => {
-		const result = await deleteUserStack(id);
+		const result = await _deleteUserStack(id);
 		$toast = result ? '스택 뱃지 삭제 성공' : '삭제 실패';
-		if (result) userStacks = await getUserStacks();
+		if (result) userStacks = await _getUserStacks();
 	};
 
 	const nameCheckHandler = async (name: string, e: Event) => {
-		nameDuplicated = await checkNameDuplication(name, $user.id);
+		nameDuplicated = await _checkNameDuplication(name, $user.id);
 	};
 
 	const submitProfileHandler = async (e: SubmitEvent) => {
@@ -93,7 +94,7 @@
 				headers: { Bearer: accesstoken }
 			});
 			$toast = '내 정보 변경 성공';
-			profile = await getUser();
+			profile = await _getUser();
 		} catch (err) {
 			$toast = err.response.data;
 			console.log(err);

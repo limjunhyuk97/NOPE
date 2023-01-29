@@ -3,7 +3,7 @@
 	import Icon from '$lib/Icon.svelte';
 	import { USER_STATUS } from '$lib/constants';
 	import { user, toast } from '$lib/stores';
-	import { getCommentData, writeComment } from './+page';
+	import { _getCommentData, _writeComment } from './+page';
 	import Comment from '$lib/components/comments/Comment.svelte';
 	import { Viewer } from 'bytemd';
 
@@ -18,7 +18,7 @@
 
 	// reload comments
 	const reloadComments = async () => {
-		comments = await getCommentData(activityData.id);
+		comments = await _getCommentData(activityData.id);
 	};
 
 	let myComment = '';
@@ -29,7 +29,7 @@
 			$toast = '내용을 입력해주세요!';
 			return;
 		}
-		await writeComment($user?.id, activityData.id, myComment);
+		await _writeComment($user?.id, activityData.id, myComment);
 		await reloadComments();
 	};
 </script>

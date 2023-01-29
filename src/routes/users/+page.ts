@@ -3,7 +3,7 @@ import { supabase, supabaseWithToken } from '$lib/supabase';
 import { get } from 'svelte/store';
 import { getSignedUrl, upsertImage } from '$lib/utils';
 
-export const getUser = async () => {
+export const _getUser = async () => {
 	const { data, error } = await supabase
 		.from('users')
 		.select('email, name, descriptions, image_id, images("storage_id")')
@@ -12,7 +12,7 @@ export const getUser = async () => {
 	return error ? null : data;
 };
 
-export const upsertUserProfileImage = async (
+export const _upsertUserProfileImage = async (
 	image_id: string,
 	storage_id: string,
 	access_token: string | null
@@ -27,14 +27,14 @@ export const upsertUserProfileImage = async (
 };
 
 // images 테이블의 row - storage 연결을 끊어버린다.
-export const removeUserProfileImage = async (image_id: string) => {
+export const _removeUserProfileImage = async (image_id: string) => {
 	if (image_id === null) return true;
 	const result = await supabase.from('images').update({ storage_id: '' }).eq('id', image_id);
 	console.log(result, image_id);
 	return result.status === 204 ? true : false;
 };
 
-export const getUserStacks = async () => {
+export const _getUserStacks = async () => {
 	const { data, error } = await supabase
 		.from('user_stacks')
 		.select('id, stacks(*)')
@@ -47,17 +47,17 @@ const getStacks = async () => {
 	return error ? [] : data;
 };
 
-export const addUserStack = async (stack_id: string, user_id: string) => {
+export const _addUserStack = async (stack_id: string, user_id: string) => {
 	const { error } = await supabase.from('user_stacks').insert({ user_id, stack_id });
 	return error ? false : true;
 };
 
-export const deleteUserStack = async (id: string) => {
+export const _deleteUserStack = async (id: string) => {
 	const { error } = await supabase.from('user_stacks').delete().eq('id', id);
 	return error ? false : true;
 };
 
-export const checkNameDuplication = async (name: string, id: string) => {
+export const _checkNameDuplication = async (name: string, id: string) => {
 	if (name.length === 0) return true;
 	const { data, error } = await supabase
 		.from('users')
@@ -70,9 +70,9 @@ export const checkNameDuplication = async (name: string, id: string) => {
 /** @type {import('./$types').PageLoad} */
 export async function load({ parent }) {
 	await parent();
-	const user = await getUser();
+	const user = await _getUser();
 	const userImage = await getSignedUrl(user?.images?.storage_id);
-	const userStacks = await getUserStacks();
+	const userStacks = await _getUserStacks();
 	const stacks = await getStacks();
 
 	return { user, stacks, userStacks, userImage };

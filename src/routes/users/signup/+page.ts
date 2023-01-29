@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from '$lib/stores';
 
 //** input validation check */
-export const checkDuplication = async (input: string, column: string) => {
+export const _checkDuplication = async (input: string, column: string) => {
 	try {
 		const response = await axios({
 			method: 'post',

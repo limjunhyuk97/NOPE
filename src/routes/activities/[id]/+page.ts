@@ -14,7 +14,7 @@ const getActivityData = async (id: string) => {
 	return error ? [] : data[0];
 };
 
-export const getCommentData = async (id: string) => {
+export const _getCommentData = async (id: string) => {
 	const { data, error } = await supabase
 		.from('comments')
 		.select('id, users(name, id, images("storage_id")), contents, created_at')
@@ -36,7 +36,7 @@ const getUserStatus = async (user_id: string | undefined, activity_id: string | 
 	}
 };
 
-export const writeComment = async (user_id: string, activity_id: string, contents: string) => {
+export const _writeComment = async (user_id: string, activity_id: string, contents: string) => {
 	const { data, error } = await supabase
 		.from('comments')
 		.insert({ activity_id, user_id, contents });
@@ -48,7 +48,7 @@ export async function load({ params, parent }) {
 	const activityData: ActivityCard = await getActivityData(params.id);
 	const userStatus = await getUserStatus(get(user)?.id, params.id);
 	const activityImage = await getSignedUrl(activityData.images?.storage_id);
-	const comments = await getCommentData(params.id);
+	const comments = await _getCommentData(params.id);
 
 	return { activityData, userStatus: userStatus, activityImage, comments };
 }

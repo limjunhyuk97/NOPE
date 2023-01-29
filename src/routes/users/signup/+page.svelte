@@ -3,7 +3,7 @@
 	import { toast } from '$lib/stores';
 	import { PASSWORD_VERIFICATION_STATUS, UNIFICATION_STATUS, RESPONSE_TYPE } from '$lib/constants';
 	import { isEmptyString } from '$lib/utils';
-	import { checkDuplication } from './+page';
+	import { _checkDuplication } from './+page';
 	import * as EmailValidator from 'email-validator';
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
@@ -31,7 +31,7 @@
 			emailVerified = UNIFICATION_STATUS.EMPTY;
 		} else {
 			emailVerified = isValidEmail(value)
-				? await checkDuplication(value, 'email')
+				? await _checkDuplication(value, 'email')
 				: UNIFICATION_STATUS.NOT_AVAILABLE_FORM;
 		}
 	};
@@ -39,7 +39,7 @@
 	const verifyName = async (value: string) => {
 		nameVerified = isEmptyString(value)
 			? UNIFICATION_STATUS.EMPTY
-			: await checkDuplication(value, 'name');
+			: await _checkDuplication(value, 'name');
 	};
 
 	const verifyPassword = (e: Event) => {

@@ -3,7 +3,7 @@
 	import { enhance } from '$app/forms';
 	import { RESPONSE_TYPE, SIGNIN_STATUS } from '$lib/constants';
 	import { toast } from '$lib/stores';
-	import { signin } from './+page';
+	import { _signin } from './+page';
 	import { goto } from '$app/navigation';
 
 	//** form response */
@@ -11,7 +11,10 @@
 		response: ActionResult<Record<string, any>, Record<string, any>>
 	) => {
 		if (response.type === RESPONSE_TYPE.SUCCESS) {
-			const result = await signin({ email: response.data.email, password: response.data.password });
+			const result = await _signin({
+				email: response.data.email,
+				password: response.data.password
+			});
 			if (result === SIGNIN_STATUS.SUCCESS) {
 				$toast = '로그인 성공';
 				goto('/');

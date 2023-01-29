@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { user, toast } from '$lib/stores';
 	import { goto } from '$app/navigation';
-	import { isValidPassword, isMatchingPassword, isShortPassword, isValid } from './+page';
+	import { _isValidPassword, _isMatchingPassword, _isShortPassword, _isValid } from './+page';
 	import axios from 'axios';
 
 	let password = '';
@@ -10,15 +10,15 @@
 	let pwcheckPermission = false;
 
 	const passwordValidationHandler = (e: Event) => {
-		pwPermission = isValidPassword(password) && !isShortPassword(password);
+		pwPermission = _isValidPassword(password) && !_isShortPassword(password);
 	};
 
 	const passwordCheckValidationHandler = (e: Event) => {
-		pwcheckPermission = isMatchingPassword(password, passwordcheck);
+		pwcheckPermission = _isMatchingPassword(password, passwordcheck);
 	};
 
 	const submitHandler = (e: Event) => {
-		const result = isValid(password, passwordcheck);
+		const result = _isValid(password, passwordcheck);
 		if (result !== null) $toast = result;
 	};
 </script>
