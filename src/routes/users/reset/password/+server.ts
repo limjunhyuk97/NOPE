@@ -1,4 +1,4 @@
-import { isValid } from './+page';
+import { _isValid } from './+page';
 import { admin } from '$lib/admin';
 
 /** @type {import('./$types').RequestHandler} */
@@ -8,8 +8,8 @@ export async function POST({ request }: { request: Request }) {
 	const passwordcheck = requested.passwordcheck;
 	const user_id = requested.user_id;
 
-	if (isValid(password, passwordcheck)) {
-		return new Response(isValid(password, passwordcheck), { status: 400 });
+	if (_isValid(password, passwordcheck)) {
+		return new Response(_isValid(password, passwordcheck), { status: 400 });
 	}
 
 	if (!user_id) {
