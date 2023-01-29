@@ -49,16 +49,22 @@
 			<h1 class="w-fit p-5 text-3xl bg-white rounded-t">{activityData.title}</h1>
 			<div class="min-h-[80%] md-body bg-white"><Viewer value={activityData.details} /></div>
 			<div class="flex gap-12 text-xl bg-white">
-				{#if userStatus === USER_STATUS.NOTAPPLIED}
-					<button class="text-green-700 hover:scale-110 duration-300">참여 신청하기</button>
-					<button class="hover:scale-110 duration-300">세션 둘러보기</button>
-				{:else if userStatus === USER_STATUS.APPLIED}
-					<button class="text-green-700 hover:scale-110 duration-300">참여 요청완료</button>
-					<button class="hover:scale-110 duration-300">세션 둘러보기</button>
-				{:else if userStatus === USER_STATUS.LOGOUT}
-					<button class="hover:scale-110 duration-300">세션 둘러보기</button>
+				<!-- 모집중 이라면 -->
+				{#if activityData.recruiting}
+					{#if userStatus === USER_STATUS.NOTAPPLIED}
+						<button class="text-green-700 hover:scale-110 duration-300">참여 신청하기</button>
+						<button class="hover:scale-110 duration-300">세션 둘러보기</button>
+					{:else if userStatus === USER_STATUS.APPLIED}
+						<button class="text-green-700 hover:scale-110 duration-300">참여 요청완료</button>
+						<button class="hover:scale-110 duration-300">세션 둘러보기</button>
+					{:else if userStatus === USER_STATUS.LOGOUT}
+						<button class="hover:scale-110 duration-300">세션 둘러보기</button>
+					{:else}
+						<button class="text-green-700 hover:scale-110 duration-300">세션 목록으로</button>
+					{/if}
+					<!-- 모집중이 아니라면 -->
 				{:else}
-					<button class="text-green-700 hover:scale-110 duration-300">세션 목록으로</button>
+					<button class="hover:scale-110 duration-300">세션 둘러보기</button>
 				{/if}
 			</div>
 		</div>
