@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import { _checkNameDuplication } from './+page';
+import { _checkNameDuplication } from './+layout';
 import { supabaseWithToken } from '$lib/supabase';
 
 //** POST : checking email, name value */

@@ -14,3 +14,16 @@ export const toast = writable('');
 
 // Main
 export const activitiesToShow = writable(ACTIVITY_TYPE.ALL);
+
+// MyPage
+export const mypageSidebar = writable('default');
+export const myProfile: Writable<{
+	email: string;
+	name: string;
+	descriptions: string;
+	image_id: string;
+	images: { storage_id: string };
+} | null> = writable(null);
+export const myStacks: Writable<
+	{ id: string; stacks: { id: string; url: string; name: string } }[]
+> = writable([]);
