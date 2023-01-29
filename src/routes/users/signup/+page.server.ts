@@ -1,7 +1,7 @@
 import type { Actions } from './$types';
 import { admin } from '$lib/admin';
 import * as EmailValidator from 'email-validator';
-import { invalid } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 
 //** email 유효성 검사 */
 const isValidEmailType = (email: string) => {
@@ -78,7 +78,7 @@ export const actions: Actions = {
 
 		const validationResult = await validations(email, password, passwordcheck, name);
 
-		if (validationResult) return invalid(400, { message: validationResult });
+		if (validationResult) return fail(400, { message: validationResult });
 		else {
 			// 회원가입 등록
 			const { data, error } = await admin.auth.admin.createUser({
@@ -88,11 +88,11 @@ export const actions: Actions = {
 					name
 				}
 			});
-			if (error) return invalid(400, { message: '회원가입이 불가능합니다!' });
+			if (error) return fail(400, { message: '회원가입이 불가능합니다!' });
 			else {
 				// confirm 메일 전송
 				const { data, error } = await admin.auth.admin.inviteUserByEmail(email);
-				if (error) return invalid(400, { message: '회원가입이 불가능합니다!' });
+				if (error) return fail(400, { message: '회원가입이 불가능합니다!' });
 				else return { success: true };
 			}
 		}
