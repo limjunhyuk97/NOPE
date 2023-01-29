@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import { checkNameDuplication } from './+page';
+import { _checkNameDuplication } from './+page';
 import { supabaseWithToken } from '$lib/supabase';
 
 //** POST : checking email, name value */
@@ -8,7 +8,7 @@ export const POST: RequestHandler = async ({ request }: any) => {
 	const { name, descriptions, id } = await request.json();
 	const bearer = request.headers.get('bearer');
 
-	const duplicated = await checkNameDuplication(name, id);
+	const duplicated = await _checkNameDuplication(name, id);
 
 	if (duplicated) return new Response('중복된 이름이 있습니다', { status: 400 });
 
