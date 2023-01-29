@@ -3447,6 +3447,7 @@ __metadata:
     marked: ^4.1.0
     moment: ^2.29.4
     postcss: ^8.4.16
+    postcss-100vh-fix: ^1.0.2
     postcss-nesting: ^10.2.0
     prettier: ^2.6.2
     prettier-plugin-svelte: ^2.7.0
@@ -3635,6 +3636,15 @@ __metadata:
   bin:
     playwright: cli.js
   checksum: 4c5693f27245a1168f94708ecd8e1eb0d200de435b25cc07cfa25b97a094633818954dc00baf24e0ff551825f672050b83d1309362c1f97213fe8ebd2a147ed9
+  languageName: node
+  linkType: hard
+
+"postcss-100vh-fix@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "postcss-100vh-fix@npm:1.0.2"
+  peerDependencies:
+    postcss: ^8.1.0
+  checksum: 67c2f3433705b79b593782de6f33740877a27221b7d4d7007f5b2c7f8f04a35f501ec482026fe6454885604cf4acf892480f7782356994c9846b8c4180700ac2
   languageName: node
   linkType: hard
 

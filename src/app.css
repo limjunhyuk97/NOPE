@@ -3,14 +3,24 @@
 @tailwind utilities;
 
 @layer component {
-	/* TEMPLATE WIDTH */
-	.TEMPLATE-WIDTH {
-		@apply 2xl:w-[1536px] xl:w-[1320px] lg:w-[1024px] w-[960px];
+	/* VIEW-PORT SIZE */
+	.VIEWPORT {
+		@apply w-screen h-screen;
 	}
 
-	/* SIDEBAR WIDTH */
-	.SIDEBAR-WIDTH {
-		@apply 2xl:w-[300px] lg:w-[200px] w-[200px];
+	/* CONTAINER-PORT SIZE */
+	.CONTAINERPORT {
+		@apply 2xl:w-[1536px] xl:w-[1320px] lg:w-[1024px] w-[960px] h-full;
+	}
+
+	/* SIDEBAR-PORT SIZE */
+	.SIDEBARPORT {
+		@apply 2xl:w-[300px] lg:w-[200px] w-[200px] h-full;
+	}
+
+	/* CONTENT-PORT SIZE */
+	.CONTENTPORT {
+		@apply w-full h-full;
 	}
 
 	/* HIDE SCROLL*/

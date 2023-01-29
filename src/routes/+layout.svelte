@@ -33,8 +33,8 @@
 	});
 </script>
 
-<div class="w-screen h-screen bg-gray-100 font-NOPE">
-	<div class="flex TEMPLATE-WIDTH h-full relative mx-auto bg-white">
+<div class="VIEWPORT bg-gray-100 font-NOPE">
+	<div class="flex CONTAINERPORT relative mx-auto bg-white">
 		{#if spinner}
 			<!-- 대기 -->
 			<div class="w-full h-screen flex flex-col justify-center items-center text-gray-400">
@@ -44,7 +44,7 @@
 		{:else}
 			<!-- 데스크톱, 태블릿 사이드 바 -->
 			<div
-				class="fixed top-0 SIDEBAR-WIDTH min-h-screen relative flex flex-col border-r-2 border-gray-200 shadow-xl overflow-hidden"
+				class="fixed top-0 SIDEBARPORT relative flex flex-col border-r-2 border-gray-200 shadow-xl overflow-hidden"
 			>
 				<Logo />
 				<nav class="flex flex-col text-xl font-bold border-t">
@@ -59,7 +59,7 @@
 				</nav>
 			</div>
 			<!-- 컨텐츠 들어가는 곳 -->
-			<div class="relative w-full min-h-screen overflow-x-auto scrollbar-hide">
+			<div class="relative CONTENTPORT overflow-x-auto scrollbar-hide">
 				<slot />
 				<Modal />
 			</div>
