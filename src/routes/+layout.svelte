@@ -33,8 +33,8 @@
 	});
 </script>
 
-<div class="bg-gray-100 font-NOPE">
-	<div class="flex TEMPLATE-WIDTH min-h-full relative mx-auto bg-white">
+<div class="w-screen h-screen bg-gray-100 font-NOPE">
+	<div class="flex TEMPLATE-WIDTH h-full relative mx-auto bg-white">
 		{#if spinner}
 			<!-- 대기 -->
 			<div class="w-full h-screen flex flex-col justify-center items-center text-gray-400">
