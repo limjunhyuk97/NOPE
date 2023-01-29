@@ -8,5 +8,5 @@ module.exports = {
 			sans: ['sans-serif']
 		}
 	},
-	plugins: [require('tailwind-scrollbar-hide')]
+	plugins: [require('tailwind-scrollbar-hide'), require('autoprefixer')]
 };
