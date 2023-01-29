@@ -156,15 +156,16 @@
 			in:fly|local={{ x: -64 }}
 			class="flex flex-col w-1/2 h-screen pt-12 px-12 gap-12 text-start"
 		>
-			<div class="flex flex-col gap-12">
-				<h2 class="w-40 text-3xl">스택 선택</h2>
-				<div class="relative w-full mt-1">
+			<div class="flex items-center gap-6">
+				<h2 class="w-48 text-3xl">스택 선택</h2>
+				<div class="relative w-full">
 					<input
 						type="text"
-						class="w-full text-xl border-b border-gray-300 focus:outline-none focus:border-blue-300"
+						class="w-full py-0.5 px-1 text-lg placeholder:text-sm rounded bg-gray-100 focus:outline-none focus:border-blue-300"
+						placeholder="찾고자 하는 스택 입력"
 						bind:value={searchedStack}
 					/>
-					<div class="absolute right-0 top-0"><Icon icon="search" /></div>
+					<div class="absolute right-1 top-1"><Icon icon="search" /></div>
 				</div>
 			</div>
 			<div class="grid grid-cols-3 gap-3 gap-y-4 pb-12 overflow-y-auto scrollbar-hide">
