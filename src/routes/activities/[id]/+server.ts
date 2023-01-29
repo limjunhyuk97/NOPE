@@ -7,19 +7,21 @@ import { admin } from '$lib/admin';
 // 로그인 + 지원 완료 -> participant
 // 로그인 + 관리자 -> admin
 const compareUserStatus = (
-	response: { owner_id: string; participants: { user_id: string; status: string } }[],
+	response: { user_id: string; status: string; activities: { owner_id: string } }[],
 	userID: string
 ) => {
-	if (response[0].owner_id === userID) return USER_STATUS.SUPER;
+	if (response.length === 0) return USER_STATUS.LOGOUT;
+	else if (response[0].activities.owner_id === userID) return USER_STATUS.SUPER;
 	else {
-		const filteredResponse = response.filter((res) => res.participants.user_id === userID);
+		const filteredResponse = response.filter((res) => res.user_id === userID);
 		if (filteredResponse.length === 0) return USER_STATUS.NOTAPPLIED;
-		const status = filteredResponse[0].participants.status;
+		const status = filteredResponse[0].status;
 		if (status === 'quit') return USER_STATUS.NOTAPPLIED;
 		if (status === 'denied') return USER_STATUS.NOTAPPLIED;
 		if (status === 'pending') return USER_STATUS.APPLIED;
 		if (status === 'granted') return USER_STATUS.PARTICIPANT;
 		if (status === 'admin') return USER_STATUS.ADMIN;
+		if (status === 'super') return USER_STATUS.SUPER;
 		return USER_STATUS.LOGOUT;
 	}
 };
@@ -29,9 +31,10 @@ export async function POST({ request }: { request: Request }) {
 	const { userID, activityID } = await request.json();
 	if (userID) {
 		const { data, error } = await admin
-			.from('activities')
-			.select('owner_id, participants(user_id, status)')
-			.match({ id: activityID });
+			.from('participants')
+			.select('user_id, status, activities("owner_id")')
+			.match({ activity_id: activityID });
+
 		return error
 			? new Response(null, { status: 400 })
 			: new Response(compareUserStatus(data, userID).description, { status: 200 });
