@@ -67,7 +67,7 @@
 	const addStackHandler = async (stack_id: string) => {
 		const result = await _addUserStack(stack_id, $user?.id);
 		$toast = result ? '스택 뱃지 추가 성공' : '추가 실패';
-		if (result) userStacks = await getUserStacks();
+		if (result) userStacks = await _getUserStacks();
 	};
 
 	const deletStackHandler = async (id: string) => {
