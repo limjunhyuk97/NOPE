@@ -17,7 +17,7 @@ const getActivityData = async (id: string) => {
 export const _getCommentData = async (id: string) => {
 	const { data, error } = await supabase
 		.from('comments')
-		.select('id, users(name, id, images("storage_id")), contents, created_at')
+		.select('id, users(name, id, descriptions, images("storage_id")), contents, created_at')
 		.eq('activity_id', id)
 		.order('created_at');
 	return error ? [] : data;
