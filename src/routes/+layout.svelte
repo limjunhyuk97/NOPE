@@ -47,7 +47,7 @@
 				class="fixed top-0 SIDEBARPORT relative flex flex-col border-r-2 border-gray-200 shadow-xl overflow-hidden"
 			>
 				<Logo />
-				<nav class="flex flex-col text-xl font-bold border-t">
+				<nav class="flex flex-col w-full text-xl font-bold border-t">
 					<UserBtn />
 					<Ongoing {activityTypes} />
 					{#if $user}
@@ -55,7 +55,7 @@
 						<Notices />
 						<SignOut />
 					{/if}
-					<div class="absolute bottom-0"><Version /></div>
+					<div class="absolute bottom-0 "><Version /></div>
 				</nav>
 			</div>
 			<!-- 컨텐츠 들어가는 곳 -->
