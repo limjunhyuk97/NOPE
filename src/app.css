@@ -22,18 +22,13 @@
 	.CONTENTPORT {
 		@apply w-full h-full;
 	}
-
-	/* HIDE SCROLL*/
-	.hide-scroll::-webkit-scrollbar {
-		display: none;
-	}
 }
 
-/* md 문서를 위한 스타일 정의 */
 @layer utilities {
 	pre {
 		font-family: 'Jua';
 	}
+	/* md 문서를 위한 스타일 정의 */
 	.md-body {
 		font-size: 16px;
 		font-weight: 200;
@@ -89,7 +84,7 @@
 			border-radius: 20px;
 			padding: 5px 20px;
 			overflow: scroll;
-			code {
+			.code {
 				font-size: 14px;
 			}
 		}
@@ -115,5 +110,11 @@
 		p {
 			margin-bottom: 10px;
 		}
+	}
+
+	/* 활동 창 높이 */
+	.h-activity {
+		height: 100%;
+		min-height: calc(var(--vh, 1vh) * 100);
 	}
 }
