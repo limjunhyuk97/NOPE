@@ -61,10 +61,10 @@
 			<!-- 컨텐츠 들어가는 곳 -->
 			<div class="relative CONTENTPORT overflow-x-auto scrollbar-hide">
 				<slot />
-				<Modal />
 			</div>
 		{/if}
 	</div>
 </div>
 
 <Toast />
+<Modal />

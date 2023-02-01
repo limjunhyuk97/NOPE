@@ -11,7 +11,6 @@
 
 	export let comment: Comment;
 	const editable = $user?.id === comment.users.id;
-	console.log(comment);
 
 	// 댓글 리로딩
 	const reloadComment = createEventDispatcher();
