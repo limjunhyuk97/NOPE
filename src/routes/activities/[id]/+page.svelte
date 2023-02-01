@@ -34,22 +34,27 @@
 	};
 </script>
 
-<div class="relative flex w-full h-screen">
-	<div class="relative w-3/4 h-full overflow-y-auto scrollbar-hide">
-		{#if activityImage}
-			<img
-				class="top-0 left-0 w-full h-40 object-cover"
-				src={activityImage}
-				alt={activityData.title}
-			/>
-		{:else}
-			<div class="top-0 left-0 w-full h-40 bg-gray-400 opacity-40" />
-		{/if}
-		<div class="absolute top-16 p-12">
-			<h1 class="w-fit p-5 text-3xl bg-white rounded-t">{activityData.title}</h1>
-			<div class="min-h-[80%] md-body bg-white"><Viewer value={activityData.details} /></div>
+<div class="relative flex w-full h-full">
+	<div class="w-3/4 h-full overflow-y-auto scrollbar-hide">
+		<div class="relative w-full h-40">
+			{#if activityImage}
+				<img
+					class="top-0 left-0 w-full h-40 object-cover"
+					src={activityImage}
+					alt={activityData.title}
+				/>
+			{:else}
+				<div class="top-0 left-0 w-full h-40 opacity-40 bg-gray-300" />
+			{/if}
+			<h1 class="absolute bottom-0 left-12 w-fit py-3 px-5 text-3xl bg-white rounded-t">
+				{activityData.title}
+			</h1>
+		</div>
+		<div class="p-12">
+			<div class="min-h-[728px] md-body bg-white">
+				<Viewer value={activityData.details} />
+			</div>
 			<div class="flex gap-12 text-xl bg-white">
-				<!-- 모집중 이라면 -->
 				{#if activityData.recruiting}
 					{#if userStatus === USER_STATUS.NOTAPPLIED}
 						<button class="text-green-700 hover:scale-110 duration-300">참여 신청하기</button>
@@ -70,8 +75,8 @@
 		</div>
 	</div>
 	<div class="w-1/4 h-screen border border-l overflow-y-auto scrollbar-hide">
-		<h1 class="sticky top-0 flex items-center h-16 px-6 text-xl bg-white">댓글</h1>
-		<div class="flex flex-col gap-6 w-full min-h-full py-3 ">
+		<h1 class="sticky top-0 flex items-center h-16 px-6 text-xl bg-white z-10">댓글</h1>
+		<div class="flex flex-col gap-6 w-full h-activity-comments py-3 ">
 			{#if comments.length > 0}
 				{#each comments as comment}
 					<Comment {comment} on:reload={reloadComments} />
@@ -82,7 +87,7 @@
 		</div>
 		{#if $user}
 			<form
-				class="sticky bottom-0 flex items-center justify-center w-full h-16 z-10 border-t"
+				class="sticky bottom-0 flex items-center justify-center w-full h-16 z-10 bg-white border-t"
 				on:submit|preventDefault={writCommentHandler}
 			>
 				<input
