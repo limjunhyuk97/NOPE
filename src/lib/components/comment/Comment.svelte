@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { Comment } from '$lib/types/activities';
 	import { handleDelete } from './Comment';
+	import Friend from '$lib/components/modal/friend.svelte';
 	import Icon from '$lib/Icon.svelte';
-	import { getSignedUrl } from '$lib/utils';
-	import { user, toast } from '$lib/stores';
+	import { getSignedUrl, showModal } from '$lib/utils';
+	import { user, toast, modalComponent } from '$lib/stores';
 	import { createEventDispatcher } from 'svelte';
 	import moment from 'moment/min/moment-with-locales';
 
@@ -21,25 +22,31 @@
 		reloadComment('reload');
 		$toast = result ? '삭제 되었습니다.' : '삭제 오류';
 	};
+
+	// 타 사용자
+	const showFriendHandler = (e: Event) => {
+		showModal();
+		$modalComponent = Friend;
+	};
 </script>
 
 <div class="relative flex flex-col gap-2 w-full px-6">
-	<div class="flex items-center gap-4 w-full">
+	<button class="flex items-center gap-4 w-full" on:click|preventDefault={showFriendHandler}>
 		{#await getSignedUrl(comment.users.images?.storage_id)}
-			<div class="w-9 h-9 p-1 rounded-full bg-gray-300" />
+			<div class="w-10 h-10 p-1 rounded-full bg-gray-300" />
 		{:then image}
 			{#if image}
 				<img src={image} alt="profile" class="w-10 h-10 rounded-full object-cover" />
 			{:else}
 				<div class="p-1 rounded-full bg-gray-500">
-					<Icon icon="user" size={28} stroke_width={1.5} fill={'white'} />
+					<Icon icon="user" size={32} stroke_width={1.5} fill={'white'} />
 				</div>
 			{/if}
 		{:catch error}
-			<div class="p-1 rounded-full border border-black"><Icon icon="user" size={28} /></div>
+			<div class="p-1 rounded-full border border-black"><Icon icon="user" size={32} /></div>
 		{/await}
-		<span class="xl:w-36 w-24 truncate">{comment.users.name}</span>
-	</div>
+		<span class="xl:w-36 w-24 truncate text-start">{comment.users.name}</span>
+	</button>
 	<div class="flex flex-col gap-1">
 		<p class="break-all">{comment.contents}</p>
 		<div class="flex gap-1 items-center text-xs text-gray-600">

@@ -4,7 +4,7 @@
 	import { USER_STATUS } from '$lib/constants';
 	import { user, toast } from '$lib/stores';
 	import { _getCommentData, _writeComment } from './+page';
-	import Comment from '$lib/components/comments/Comment.svelte';
+	import Comment from '$lib/components/comment/Comment.svelte';
 	import { Viewer } from 'bytemd';
 
 	/** @type {import('./$types').PageData} */

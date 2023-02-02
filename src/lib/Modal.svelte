@@ -1,12 +1,10 @@
 <script>
-	$: {
-	}
+	import { modal } from '$lib/stores';
 </script>
 
-{#if false}
-	<div class="absolute top-0 w-full h-full bg-black opacity-40 z-10" />
-
-	<div class="absolute top-0 flex justify-center items-center  w-full h-full z-10 ">
-		<div class="flex flex-col max-w-md px-12 py-8 bg-white " />
+{#if $modal}
+	<div class="fixed top-0 left-0 w-screen h-screen bg-black opacity-40 z-10" />
+	<div class="fixed top-0 left-0 flex items-center justify-center w-screen h-screen z-10">
+		<slot />
 	</div>
 {/if}
