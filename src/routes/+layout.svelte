@@ -3,7 +3,7 @@
 	import '../app.css';
 	import Logo from '$lib/components/common/Logo.svelte';
 	import Toast from '$lib/Toast.svelte';
-	import { user } from '$lib/stores';
+	import { user, showmodal, modalComponent } from '$lib/stores';
 	import { supabase } from '$lib/supabase';
 	import { ScaleOut } from 'svelte-loading-spinners';
 	import { onMount } from 'svelte';
@@ -66,5 +66,12 @@
 	</div>
 </div>
 
+<!-- Toast -->
 <Toast />
-<Modal />
+
+<!-- Modal -->
+{#if $showmodal}
+	<Modal>
+		<svelte:component this={$modalComponent} />
+	</Modal>
+{/if}

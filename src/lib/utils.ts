@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '$lib/supabase';
 import ImageResize from 'image-resize';
+import { showmodal, modalComponent, modalData } from './stores';
 
 // bucket에 넣고 key를 반환해줌
 export const getImageKey = async (file: File, bucket = 'app') => {
@@ -72,4 +73,18 @@ export const resizeImage = async (file: File, width = 400, quality = 0.7) => {
 // 빈문자열인지 아닌지 체크
 export const isEmptyString = (target: string | null) => {
 	return target?.length === 0;
+};
+
+// 모달 생성
+export const showModal = ({ component, data }) => {
+	modalData.set(data);
+	modalComponent.set(component);
+	showmodal.set(true);
+};
+
+// 모달 끄기
+export const deleteModal = () => {
+	showmodal.set(false);
+	modalData.set({});
+	modalComponent.set(null);
 };

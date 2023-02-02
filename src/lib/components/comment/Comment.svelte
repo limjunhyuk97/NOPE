@@ -4,7 +4,7 @@
 	import Friend from '$lib/components/modal/friend.svelte';
 	import Icon from '$lib/Icon.svelte';
 	import { getSignedUrl, showModal } from '$lib/utils';
-	import { user, toast, modalComponent } from '$lib/stores';
+	import { user, toast } from '$lib/stores';
 	import { createEventDispatcher } from 'svelte';
 	import moment from 'moment/min/moment-with-locales';
 
@@ -24,9 +24,9 @@
 	};
 
 	// 타 사용자
-	const showFriendHandler = (e: Event) => {
-		showModal();
-		$modalComponent = Friend;
+	const showFriendHandler = async (e: Event) => {
+		const imageUrl = await getSignedUrl(comment.users.images?.storage_id);
+		showModal({ component: Friend, data: { ...comment.users, imageUrl } });
 	};
 </script>
 

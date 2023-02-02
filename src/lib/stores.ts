@@ -6,8 +6,10 @@ import { writable, type Writable } from 'svelte/store';
 export const user: Writable<User | null> = writable(null);
 export const profile = writable(null);
 
-// UX
-export const modal = writable(null);
+// modal
+export const showmodal = writable(false);
+export const modalComponent = writable(null);
+export const modalData = writable({});
 
 // Toast
 export const toast = writable('');
