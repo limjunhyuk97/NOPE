@@ -42,7 +42,7 @@
 
 <a
 	href="/activities/{id}"
-	class="w-full relative 2xl:h-[560px] lg:h-[440px] h-[400px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm {isLikePage &&
+	class="w-full relative h-[440px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm {isLikePage &&
 	!liked
 		? 'hidden '
 		: ''}"
@@ -50,7 +50,7 @@
 	<!-- 상단 : 이미지 노출부분 -->
 	{#if !hovering}
 		<div
-			class="w-full h-60 lg:h-72 2xl:h-96 flex justify-center items-center bg-gray-100 lg:rounded-t-lg overflow-hidden"
+			class="w-full h-72 flex justify-center items-center bg-gray-100 lg:rounded-t-lg overflow-hidden"
 			in:fade|local={{ duration: 400 }}
 			out:slide|local={{ duration: 600 }}
 		>
@@ -65,7 +65,7 @@
 					<img
 						src={image}
 						alt={title}
-						class="w-full h-full hover:scale-125 duration-200 object-cover"
+						class="w-full h-full scale-110 hover:scale-125 duration-200 object-cover"
 					/>
 				{:else}
 					<div

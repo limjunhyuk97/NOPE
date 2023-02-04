@@ -45,7 +45,7 @@
 	</div>
 
 	{#if filteredActivities()?.length}
-		<div class="grid grid-cols-3 2xl:gap-10 gap-3 mb-8 ">
+		<div class="grid xl:grid-cols-4 grid-cols-3 gap-4 gap-y-0 mb-8 ">
 			{#each filteredActivities() as { title, recruiting, start_at, end_at, id, status, images, short_details }}
 				<Activity
 					imgUrl={images?.storage_id}
