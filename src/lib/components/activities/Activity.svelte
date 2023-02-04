@@ -18,6 +18,7 @@
 	export let endDate = '';
 	export let status = '';
 	export let liked = true;
+	export let activity_types;
 
 	// 좋아요 handler
 	const likeHandler = async () => {
@@ -31,7 +32,7 @@
 
 	// 진행상태 메시지 가공 위한 객체
 	const statusVariation: { [key: string]: { content: string; color: string } } = {
-		[ACTIVITY_STATUS.PENDING]: { content: '활동 시작전', color: 'text-gray-200' },
+		[ACTIVITY_STATUS.PENDING]: { content: '활동 시작전', color: 'text-gray-600' },
 		[ACTIVITY_STATUS.STARTED]: { content: '활동 진행중', color: 'text-green-600' },
 		[ACTIVITY_STATUS.FINISHED]: { content: '활동 종료', color: 'text-red-600' }
 	};
@@ -101,11 +102,15 @@
 		</div>
 
 		<!-- 활동 진행 상태 -->
-		<div class="mt-3 ${statusVariation[status].color}">{statusVariation[status].content}</div>
+		<div class="mt-3 {statusVariation[status].color}">
+			<span class="text-blue-600">{activity_types.type_kor}</span>
+			<span class="text-black"> / </span>
+			{statusVariation[status].content}
+		</div>
 
 		<!-- 지원 가능 여부 -->
 		{#if recruiting}
-			<div class="mt-1 text-blue-600">지원 가능</div>
+			<div class="mt-1 text-green-600">지원 가능</div>
 		{:else}
 			<div class="mt-1 text-red-600">지원 불가</div>
 		{/if}
