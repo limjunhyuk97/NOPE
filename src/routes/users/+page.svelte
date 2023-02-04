@@ -19,6 +19,7 @@
 	let userImage = data.userImage;
 	let hoveringImageUpload = false;
 
+	// 프로필 이미지 업로드
 	const uploadImageHandler = async (event: Event) => {
 		if (event.target.files.length > 0) {
 			const image = event.target.files[0];
@@ -30,7 +31,7 @@
 				const access_token = await supabase.auth
 					.getSession()
 					.then(({ data }) => data.session?.access_token);
-				const result = await _upsertUserProfileImage($myProfile.image_id, key, access_token);
+				const result = await _upsertUserProfileImage($myProfile?.image_id, key, access_token);
 				if (result) {
 					$toast = '이미지 등록 완료';
 					$myProfile = await _getUser();
@@ -42,6 +43,7 @@
 		}
 	};
 
+	// 프로필 이미지 제거
 	const removeImageHandler = async (event: Event) => {
 		const result = await _removeUserProfileImage($myProfile.image_id);
 		if (result) {
@@ -53,16 +55,19 @@
 		}
 	};
 
+	// 기술 스택 제거
 	const deletStackHandler = async (id: string) => {
 		const result = await _deleteUserStack(id);
 		$toast = result ? '스택 뱃지 삭제 성공' : '삭제 실패';
 		if (result) $myStacks = await _getUserStacks();
 	};
 
+	// 마이페이지 상태 default, edit 사이로 변경 (전체 : default / edit / stack)
 	const changePageState = () => {
 		$mypageSidebar = $mypageSidebar === 'default' ? 'edit' : 'default';
 	};
 
+	// 마이페이지 상태 default, stack 사이로 변경 (전체 : default / edit / stack)
 	const selectStackState = () => {
 		$mypageSidebar = $mypageSidebar === 'stack' ? 'default' : 'stack';
 	};
