@@ -78,7 +78,7 @@
 		<h1 class="sticky top-0 flex items-center h-16 px-6 text-xl bg-white z-10">댓글</h1>
 		<div class="flex flex-col gap-6 w-full h-activity-comments py-3 ">
 			{#if comments.length > 0}
-				{#each comments as comment}
+				{#each comments as comment (comment.id)}
 					<Comment {comment} on:reload={reloadComments} />
 				{/each}
 			{:else}
