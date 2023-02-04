@@ -46,7 +46,7 @@
 
 	{#if filteredActivities()?.length}
 		<div class="grid xl:grid-cols-4 grid-cols-3 gap-4 gap-y-0 mb-8 ">
-			{#each filteredActivities() as { title, recruiting, start_at, end_at, id, status, images, short_details }}
+			{#each filteredActivities() as { title, recruiting, start_at, end_at, id, status, images, short_details, activity_types }}
 				<Activity
 					imgUrl={images?.storage_id}
 					{id}
@@ -54,6 +54,7 @@
 					{recruiting}
 					{status}
 					{short_details}
+					{activity_types}
 					startDate={moment(start_at).format('YYYY-MM-DD')}
 					endDate={moment(end_at).format('YYYY-MM-DD')}
 					liked={data.likes.some((likedActivityId) => likedActivityId.activity_id === id)}

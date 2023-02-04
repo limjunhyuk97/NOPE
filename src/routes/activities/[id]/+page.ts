@@ -39,12 +39,13 @@ const getUserStatus = async (user_id: string | undefined, activity_id: string | 
 };
 
 export const _writeComment = async (user_id: string, activity_id: string, contents: string) => {
-	const { data, error } = await supabase
-		.from('comments')
-		.insert({ activity_id, user_id, contents });
+	const { error } = await supabase.from('comments').insert({ activity_id, user_id, contents });
+	if (error) return false;
+	return true;
 };
 
-const getUserLike = async (user_id: string | null, activity_id: string) => {
+const getUserLike = async (user_id: string | undefined, activity_id: string) => {
+	if (!user_id) return false;
 	const { data, error } = await supabase
 		.from('activity_likes')
 		.select('*')
