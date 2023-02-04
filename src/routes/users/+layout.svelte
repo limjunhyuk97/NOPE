@@ -74,8 +74,8 @@
 		>
 			<h2 class="text-3xl pb-4">활동 관리</h2>
 			<a class="text-start text-gray-500 text-xl" href="/activities/form">활동 개설</a>
-			<button class="text-start text-gray-500 text-xl">주최 활동 관리</button>
-			<button class="text-start text-gray-500 text-xl">참여 활동 관리</button>
+			<a class="text-start text-gray-500 text-xl" href="/users/activities">주최 활동 관리</a>
+			<a class="text-start text-gray-500 text-xl" href="/users/activities/admin">참여 활동 관리</a>
 			<button class="text-start text-gray-500 text-xl">게시글 관리</button>
 			<button class="text-start text-gray-500 text-xl">지원 내역 조회</button>
 			<button class="text-start text-gray-500 text-xl">회원 탈퇴</button>
