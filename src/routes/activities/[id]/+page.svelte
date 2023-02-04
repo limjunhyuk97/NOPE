@@ -51,7 +51,7 @@
 			</h1>
 		</div>
 		<div class="p-12">
-			<div class="min-h-[728px] md-body bg-white">
+			<div class="min-h-[600px] md-body bg-white">
 				<Viewer value={activityData.details} />
 			</div>
 			<div class="flex gap-12 text-xl bg-white">
