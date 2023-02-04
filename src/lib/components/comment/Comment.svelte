@@ -23,10 +23,15 @@
 		$toast = result ? '삭제 되었습니다.' : '삭제 오류';
 	};
 
-	// 타 사용자
+	// 타 사용자 정보 확인
 	const showFriendHandler = async (e: Event) => {
 		const imageUrl = await getSignedUrl(comment.users.images?.storage_id);
-		showModal({ component: Friend, data: { ...comment.users, imageUrl } });
+		// 로그인 한 경우에만 확인할 수 있음
+		if ($user) {
+			showModal({ component: Friend, data: { ...comment.users, imageUrl } });
+		} else {
+			$toast = '로그인 해주세요!';
+		}
 	};
 </script>
 
