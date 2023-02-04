@@ -14,7 +14,7 @@
 	<div class="lg:mt-8 mb-4 lg:text-3xl text-xl">찜한 활동</div>
 	{#if Likes?.length}
 		<div class="grid xl:grid-cols-4 grid-cols-3 gap-4 gap-y-0 mb-8 ">
-			{#each Likes as { activities: { title, recruiting, start_at, end_at, id, status, images, short_details } }}
+			{#each Likes as { activities: { title, recruiting, start_at, end_at, id, status, images, short_details, activity_types } }}
 				<Activity
 					imgUrl={images?.storage_id}
 					{id}
@@ -22,6 +22,7 @@
 					{recruiting}
 					{status}
 					{short_details}
+					{activity_types}
 					startDate={moment(start_at).format('YYYY-MM-DD')}
 					endDate={moment(end_at).format('YYYY-MM-DD')}
 					isLikePage={true}
