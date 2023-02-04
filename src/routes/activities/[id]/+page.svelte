@@ -3,7 +3,7 @@
 	import Icon from '$lib/Icon.svelte';
 	import { USER_STATUS } from '$lib/constants';
 	import { user, toast } from '$lib/stores';
-	import { _getCommentData, _writeComment } from './+page';
+	import { _getCommentData, _writeComment, _likeActivity, _unlikeActivity } from './+page';
 	import Comment from '$lib/components/comment/Comment.svelte';
 	import { Viewer } from 'bytemd';
 
@@ -14,6 +14,7 @@
 	const activityImage = data.activityImage;
 	const userStatus = Symbol.for(data?.userStatus ? data?.userStatus : USER_STATUS.LOGOUT);
 
+	let userLike = data.userLike;
 	let comments = data.comments;
 
 	// reload comments
@@ -32,6 +33,15 @@
 		await _writeComment($user?.id, activityData.id, myComment);
 		await reloadComments();
 	};
+
+	// handle like
+	const likeHandler = async () => {
+		userLike = !userLike;
+		const result = userLike
+			? await _likeActivity($user?.id, activityData.id)
+			: _unlikeActivity($user?.id, activityData.id);
+		$toast = result ? (userLike ? '찜하기 완료' : '찜한항목 제거') : '찜하기 실패';
+	};
 </script>
 
 <div class="relative flex w-full h-full">
@@ -49,6 +59,13 @@
 			<h1 class="absolute bottom-0 left-12 w-fit py-3 px-5 text-3xl bg-white rounded-t">
 				{activityData.title}
 			</h1>
+			<button class="absolute bottom-4 right-4" on:click|preventDefault={likeHandler}>
+				{#if userLike}
+					<Icon icon="heart-fill" fill="red" stroke="none" />
+				{:else}
+					<Icon icon="heart-fill" fill="#fcfcfc" stroke="none" />
+				{/if}
+			</button>
 		</div>
 		<div class="p-12">
 			<div class="min-h-[600px] md-body bg-white">

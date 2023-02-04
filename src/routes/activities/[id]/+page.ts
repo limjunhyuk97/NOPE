@@ -44,6 +44,28 @@ export const _writeComment = async (user_id: string, activity_id: string, conten
 		.insert({ activity_id, user_id, contents });
 };
 
+const getUserLike = async (user_id: string | null, activity_id: string) => {
+	const { data, error } = await supabase
+		.from('activity_likes')
+		.select('*')
+		.match({ user_id, activity_id });
+	if (error) return false;
+	if (data.length === 0) return false;
+	return true;
+};
+
+export const _likeActivity = async (user_id: string, activity_id: string) => {
+	const { error } = await supabase.from('activity_likes').insert({ user_id, activity_id });
+	if (!error) return true;
+	else false;
+};
+
+export const _unlikeActivity = async (user_id: string, activity_id: string) => {
+	const { error } = await supabase.from('activity_likes').delete().match({ user_id, activity_id });
+	if (!error) return true;
+	else return false;
+};
+
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, parent }) {
 	await parent();
@@ -51,6 +73,7 @@ export async function load({ params, parent }) {
 	const userStatus = await getUserStatus(get(user)?.id, params.id);
 	const activityImage = await getSignedUrl(activityData.images?.storage_id);
 	const comments = await _getCommentData(params.id);
+	const userLike = await getUserLike(get(user)?.id, params.id);
 
-	return { activityData, userStatus: userStatus, activityImage, comments };
+	return { activityData, userStatus: userStatus, activityImage, comments, userLike };
 }
