@@ -30,8 +30,12 @@
 			$toast = '내용을 입력해주세요!';
 			return;
 		}
-		await _writeComment($user?.id, activityData.id, myComment);
-		await reloadComments();
+		const written = await _writeComment($user?.id, activityData.id, myComment);
+		if (written) {
+			await reloadComments();
+		} else {
+			$toast = '댓글 달기 실패';
+		}
 	};
 
 	// handle like
@@ -60,10 +64,12 @@
 				{activityData.title}
 			</h1>
 			<button class="absolute bottom-4 right-4" on:click|preventDefault={likeHandler}>
-				{#if userLike}
-					<Icon icon="heart-fill" fill="red" stroke="none" />
-				{:else}
-					<Icon icon="heart-fill" fill="#fcfcfc" stroke="none" />
+				{#if $user}
+					{#if userLike}
+						<Icon icon="heart-fill" fill="red" stroke="none" />
+					{:else}
+						<Icon icon="heart-fill" fill="#fcfcfc" stroke="none" />
+					{/if}
 				{/if}
 			</button>
 		</div>
