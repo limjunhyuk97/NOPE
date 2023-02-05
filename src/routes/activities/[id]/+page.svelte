@@ -5,7 +5,7 @@
 	import { user, toast } from '$lib/stores';
 	import { _getCommentData, _writeComment, _likeActivity, _unlikeActivity } from './+page';
 	import Comment from '$lib/components/comment/Comment.svelte';
-	import { Viewer } from 'bytemd';
+	import MDViewer from '$lib/components/common/MDViewer.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data: any;
@@ -75,7 +75,7 @@
 		</div>
 		<div class="p-12">
 			<div class="min-h-[600px] md-body bg-white">
-				<Viewer value={activityData.details} />
+				<MDViewer mdTypeContent={activityData.details} />
 			</div>
 			<div class="flex gap-12 text-xl bg-white">
 				{#if activityData.recruiting}
