@@ -18,7 +18,7 @@
 	};
 </script>
 
-<input type="text" class="hidden" {name} value={selectedTrueValue} />
+<input type="text" class="hidden" {name} value={options[0][`${trueValue}`]} />
 
 <div class="relative flex flex-col gap-4 w-full h-full">
 	<button
@@ -30,8 +30,15 @@
 		{selectedNamedValue}
 	</button>
 	{#if selected}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
-			transition:slide|local={{ duration: 500 }}
+			class="fixed top-0 left-0 w-full h-full"
+			on:click={() => {
+				selected = !selected;
+			}}
+		/>
+		<div
+			transition:slide|local={{ duration: 300 }}
 			class="absolute top-16 flex flex-col gap-4 w-full p-4 bg-gray-100 rounded-lg z-10"
 		>
 			{#each options as option}

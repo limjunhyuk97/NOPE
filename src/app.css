@@ -30,30 +30,28 @@
 	}
 	/* md 문서를 위한 스타일 정의 */
 	.md-body {
-		font-size: 16px;
+		width: 100%;
+		font-size: 18px;
 		font-weight: 200;
-		padding: 10px 0px;
+		padding: 16px 12px;
 		/* h1 */
 		h1 {
 			margin-bottom: 14px;
-			font-size: 24px;
-			color: #850e35;
-		}
-		/* a */
-		a {
-			text-decoration: underline;
+			font-size: 32px;
 		}
 		/* h2 */
 		h2 {
-			margin-bottom: 8px;
-			font-size: 20px;
-			color: #850e35;
+			margin-bottom: 10px;
+			font-size: 26px;
 		}
 		/* h3 */
 		h3 {
 			margin-bottom: 6px;
-			font-size: 20px;
-			color: #850e35;
+			font-size: 24px;
+		}
+		h4 {
+			margin-bottom: 6px;
+			font-size: 22px;
 		}
 		/* ol */
 		ol {
@@ -65,12 +63,11 @@
 		ul {
 			list-style-type: disc;
 			margin-top: 10px;
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 		}
 		/* li */
 		li {
 			margin-left: 20px;
-			margin-bottom: 10px;
 		}
 		/* strong */
 		strong {
@@ -78,37 +75,43 @@
 		}
 		/* pre - code */
 		pre {
-			padding: 5px 20px;
+			max-width: 100%;
+			padding: 8px;
 			margin-bottom: 20px;
-			background-color: #c8c8c8;
-			border-radius: 20px;
-			padding: 5px 20px;
-			overflow: scroll;
-			.code {
+			background-color: #dfdfdf;
+			border-radius: 4px;
+			padding: 4px 16px;
+			overflow-x: scroll;
+			code {
+				width: 100%;
 				font-size: 14px;
 			}
 		}
-		/* code */
-		code {
-			padding: 1px 2px;
-			font-size: 14px;
-			background-color: #c8c8c8;
-			border-radius: 5px;
-		}
 		/* table */
 		table {
-			width: 100%;
-			border: 2px solid gray;
+			overflow-x: auto;
+			border: 0.5px solid black;
 		}
-		/* th */
+		tbody {
+			width: 100%;
+			border: 0.5px solid black;
+		}
 		th,
 		td {
+			width: 50%;
 			border: 2px solid gray;
 			text-align: center;
 		}
-		/* p */
-		p {
-			margin-bottom: 10px;
+		/* a */
+		a {
+			text-decoration: underline;
+		}
+		/* blockquote */
+		blockquote {
+			border-left: 4px solid #dedede;
+			margin: 12px;
+			padding: 12px;
+			color: grey;
 		}
 	}
 
