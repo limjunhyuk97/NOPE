@@ -74,7 +74,7 @@
 			</button>
 		</div>
 		<div class="p-12">
-			<div class="min-h-[600px] md-body bg-white">
+			<div class="w-full bg-white">
 				<MDViewer mdTypeContent={activityData.details} />
 			</div>
 			<div class="flex gap-12 text-xl bg-white">
