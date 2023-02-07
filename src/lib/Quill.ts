@@ -22,8 +22,9 @@ export function quill(node: HTMLElement, options: any) {
 	const container = node.getElementsByClassName('ql-editor')[0];
 
 	//* 클릭시 .ql-picker-options 바로 사라지는 문제 해결 *//
-	const toolBar = node.parentElement.getElementsByClassName('ql-toolbar')[0];
-	const pickers = toolBar.getElementsByClassName('ql-picker');
+	const toolBar = node?.parentElement?.getElementsByClassName('ql-toolbar')[0];
+	const pickers = toolBar?.getElementsByClassName('ql-picker');
+
 	for (const picker of pickers) {
 		const optionsContainer = picker.getElementsByClassName('ql-picker-options')[0];
 		const options = optionsContainer.getElementsByClassName('ql-picker-item');

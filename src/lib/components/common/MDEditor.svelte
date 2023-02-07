@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { quill } from '$lib/Quill';
-	import DOMPurify from 'isomorphic-dompurify';
 
 	export let name = 'none';
 
@@ -29,7 +28,7 @@
 
 	// quil text change handler
 	const quilTextChangeHandler = (e: any) => {
-		contentsInHTML = DOMPurify.sanitize(e.detail.html);
+		contentsInHTML = e.detail.html;
 		contentsInEditor = e.detail.text;
 	};
 </script>
