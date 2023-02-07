@@ -155,7 +155,7 @@
 	<!-- 상세 설명 -->
 	<label class="relative flex flex-col gap-4 w-full" for="details">
 		{#if showDetail}
-			<p class="absolute left-28 w-72 p-3 rounded-lg bg-gray-200 text-xs z-10">
+			<p class="absolute left-24 w-72 p-3 rounded-lg bg-gray-200 text-xs z-10">
 				활동 상세 페이지에서 노출되는 활동 상세 정보입니다.<br /> 활동에 대한 구체적인 설명을 적어주세요!
 			</p>
 		{/if}

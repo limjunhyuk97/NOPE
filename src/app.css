@@ -33,7 +33,6 @@
 		width: 100%;
 		font-size: 18px;
 		font-weight: 200;
-		padding: 16px 12px;
 		/* h1 */
 		h1 {
 			margin-bottom: 14px;
@@ -82,10 +81,6 @@
 			border-radius: 4px;
 			padding: 4px 16px;
 			overflow-x: scroll;
-			code {
-				width: 100%;
-				font-size: 14px;
-			}
 		}
 		/* table */
 		table {
