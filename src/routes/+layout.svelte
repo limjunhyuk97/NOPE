@@ -3,7 +3,7 @@
 	import '../app.css';
 	import Logo from '$lib/components/common/Logo.svelte';
 	import Toast from '$lib/Toast.svelte';
-	import { user, showmodal, modalComponent } from '$lib/stores';
+	import { user, showmodal, modalComponent, toast } from '$lib/stores';
 	import { supabase } from '$lib/supabase';
 	import { ScaleOut } from 'svelte-loading-spinners';
 	import { onMount } from 'svelte';
