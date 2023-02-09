@@ -55,7 +55,7 @@
 				{@html contentsInHTML}
 			{:else}
 				<div class="flex justify-center items-center w-full h-[640px] p-2 text-gray-400">
-					상세 설명을 md 형식으로 작성해주시면 미리보기가 제공됩니다
+					에디터에 작성한 글의 미리보기가 제공됩니다
 				</div>
 			{/if}
 		</div>

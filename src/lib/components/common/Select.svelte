@@ -2,14 +2,14 @@
 	import { slide } from 'svelte/transition';
 
 	export let options: {}[];
-	export let defaultValue: string;
+
 	export let name = 'none';
 	export let trueValue = 'id';
 	export let namedValue = 'type_kor';
 
 	let selected = false;
-	let selectedTrueValue = '';
-	let selectedNamedValue = defaultValue;
+	let selectedTrueValue = options[0][`${trueValue}`];
+	let selectedNamedValue = options[0][`${namedValue}`];
 
 	const selectHandler = (option: { id: string; value: string }) => {
 		selectedTrueValue = option[`${trueValue}`];
@@ -18,7 +18,7 @@
 	};
 </script>
 
-<input type="text" class="hidden" {name} value={options[0][`${trueValue}`]} />
+<input type="text" class="hidden" {name} value={selectedTrueValue} />
 
 <div class="relative flex flex-col gap-4 w-full h-full">
 	<button
