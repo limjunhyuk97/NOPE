@@ -40,7 +40,9 @@
 					bind:value={query}
 					placeholder="질문을 입력해주세요!"
 				/>
-				<div class="absolute bottom-3 right-2 text-sm">{query.length} / 210</div>
+				<div class="absolute bottom-3 right-2 text-sm">
+					<span class="text-green-500">{query.length}</span> / 210
+				</div>
 			</div>
 			<div class="flex justify-center w-full mt-1">
 				<button on:click|preventDefault={createQuery} class="px-4 py-1 text-xl">생성하기</button>
