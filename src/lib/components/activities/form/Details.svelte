@@ -157,13 +157,12 @@
 		<textarea
 			name="short_details"
 			id="activity_short_details"
-			class="p-1 bg-gray-100 rounded-lg resize-none"
 			bind:value={short_details}
 			rows="4"
 			maxlength="210"
 		/>
 		<div class="absolute bottom-1 right-2 text-sm">
-			<span class="text-green-500">{short_details.length}</span> / 205
+			<span class="text-green-500">{short_details.length}</span> / 210
 		</div>
 	</label>
 	<!-- 상세 설명 -->

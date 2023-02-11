@@ -138,7 +138,7 @@
 	</button>
 </div>
 <!-- 내 정보 섹션 -->
-<div class="flex flex-col gap-16 mt-14">
+<div class="flex flex-col gap-12 mt-14">
 	<div class="flex gap-12">
 		<div class="w-24 text-blue-300">이름</div>
 		<p class="w-full text-start">{$myProfile?.name}</p>
@@ -166,7 +166,7 @@
 				><Icon icon="plus" size={12} stroke_width={4} /></button
 			>
 		</div>
-		<div class="grid grid-cols-3 gap-2 h-40 overflow-y-auto scrollbar-hide">
+		<div class="grid grid-cols-3 gap-2 h-full">
 			{#each $myStacks as stack}
 				<button
 					class="flex flex-col items-center relative w-full h-16 hover:bg-gray-200 rounded "
