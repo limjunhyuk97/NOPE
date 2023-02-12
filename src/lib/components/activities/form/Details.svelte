@@ -16,6 +16,7 @@
 	let image_source: any;
 	const imageUploadeHandler = async (e: any) => {
 		const file = e.target?.files[0];
+
 		if (file) {
 			// FileReader 객체 생성
 			const Reader = new FileReader();

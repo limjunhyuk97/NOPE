@@ -60,19 +60,93 @@
 		}
 		/* ol */
 		ol {
-			list-style-type: decimal;
-			margin-top: 10px;
-			margin-bottom: 20px;
+			margin: 10px 0px;
+			counter-reset: i0;
+			/* li */
+			li::before {
+				content: counter(i0) '. ';
+			}
+			li {
+				margin-left: 24px;
+				list-style-type: none;
+				counter-increment: i0;
+				counter-reset: i1;
+			}
+
+			/* li.ql-indent-1 */
+			li.ql-indent-1::before {
+				content: counter(i1) '. ';
+			}
+			li.ql-indent-1 {
+				margin-left: 48px;
+				list-style-type: none;
+				counter-increment: i1;
+				counter-reset: i2;
+			}
+			/* li.ql-indent-2 */
+			li.ql-indent-2::before {
+				content: counter(i2) '. ';
+			}
+			li.ql-indent-2 {
+				margin-left: 72px;
+				list-style-type: none;
+				counter-increment: i2;
+				counter-reset: i3;
+			}
+			/* li.ql-indent-3 */
+			li.ql-indent-3::before {
+				content: counter(i3) '. ';
+			}
+			li.ql-indent-3 {
+				margin-left: 96px;
+				list-style-type: none;
+				counter-increment: i3;
+				counter-reset: i4;
+			}
+			/* li.ql-indent-4 */
+			li.ql-indent-4::before {
+				content: counter(i4) '. ';
+			}
+			li.ql-indent-4 {
+				margin-left: 120px;
+				list-style-type: none;
+				counter-increment: i4;
+				counter-reset: i5;
+			}
+			/* li.ql-indent-5 */
+			li.ql-indent-5::before {
+				content: counter(i4) '. ';
+			}
+			li.ql-indent-5 {
+				margin-left: 120px;
+				list-style-type: none;
+				counter-increment: i5;
+				counter-reset: i6;
+			}
 		}
 		/* ul */
 		ul {
-			list-style-type: disc;
 			margin-top: 10px;
 			margin-bottom: 10px;
-		}
-		/* li */
-		li {
-			margin-left: 20px;
+			list-style-type: disc;
+			li {
+				margin-left: 48px;
+			}
+			li.ql-indent-1 {
+				margin-left: 72px;
+			}
+			li.ql-indent-2 {
+				margin-left: 96px;
+			}
+			li.ql-indent-3 {
+				margin-left: 120px;
+			}
+			li.ql-indent-4 {
+				margin-left: 144px;
+			}
+			li.ql-indent-5 {
+				margin-left: 168px;
+			}
 		}
 		/* strong */
 		strong {

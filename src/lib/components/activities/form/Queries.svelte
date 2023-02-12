@@ -25,6 +25,8 @@
 	};
 </script>
 
+<input type="text" name="queires" value={queries} class="hidden" />
+
 <div class="flex w-full h-full">
 	<div class="flex flex-col gap-4 w-1/2 h-[85vh] p-4 border-r">
 		<h1 class="text-3xl">지원서 생성</h1>
@@ -32,8 +34,6 @@
 		<div class="flex flex-col gap-4 w-full mt-4">
 			<div class="relative w-full">
 				<textarea
-					name=""
-					id=""
 					rows="10"
 					maxlength="210"
 					class="w-full"

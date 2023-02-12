@@ -66,6 +66,7 @@ export const resizeImage = async (file: File, width = 400, quality = 0.7) => {
 		});
 		return await imageResize.play(file);
 	} catch (e) {
+		console.log(e);
 		return null;
 	}
 };

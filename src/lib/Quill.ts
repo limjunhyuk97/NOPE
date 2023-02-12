@@ -1,5 +1,6 @@
 import Quill from 'quill';
 
+// quill 함수가 실행되면, node(DOM element)가 editor를 포함하도록 한다.
 export function quill(node: HTMLElement, options: any) {
 	const quill = new Quill(node, {
 		modules: {
@@ -8,7 +9,7 @@ export function quill(node: HTMLElement, options: any) {
 				['bold', 'italic', 'underline', 'strike'],
 				['blockquote', 'code-block', 'link'],
 
-				[{ list: 'ordered' }, { list: 'bullet' }],
+				[{ list: 'list' }, { list: 'bullet' }],
 				[{ script: 'sub' }, { script: 'super' }],
 
 				[{ color: ['red', 'green'] }, { background: [] }]
@@ -39,7 +40,8 @@ export function quill(node: HTMLElement, options: any) {
 	}
 	//* 클릭시 .ql-picker-options 바로 사라지는 문제 해결 *//
 
-	quill.on('text-change', function () {
+	// editor의 text-change 시 발생하는 event를 dispatch
+	quill.on('text-change', function (range, oldRange, source) {
 		node.dispatchEvent(
 			new CustomEvent('text-change', {
 				detail: {

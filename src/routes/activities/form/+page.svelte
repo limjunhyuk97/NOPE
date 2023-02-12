@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { toast, user } from '$lib/stores';
 	import { enhance } from '$app/forms';
+	import Icon from '$lib/Icon.svelte';
 	import Details from '$lib/components/activities/form/Details.svelte';
 	import Queires from '$lib/components/activities/form/Queries.svelte';
 	import { beforeUpdate } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { fade } from 'svelte/transition';
 
 	export let data;
 
@@ -37,21 +37,32 @@
 
 <form
 	method="POST"
-	use:enhance={({ form, data, cancel }) => {}}
+	use:enhance={({ form, data, cancel }) => {
+		return ({ result }) => {};
+	}}
 	class="flex flex-col items-center gap-6 w-full h-full py-12 px-6 text-lg"
 >
+	<!-- 활동 상세 정보 -->
 	<div class={isInDetail(phase) ? 'w-full' : 'w-full hidden'}>
 		<Details activityTypes={data.activityTypes} />
 	</div>
+	<!-- 활동 설문지 -->
 	<div class={isInDetail(phase) ? 'w-full h-full hidden' : 'w-full h-full'}>
 		<Queires />
 	</div>
+	<!-- 생성자 id -->
 	{#if isInDetail(phase)}
 		<button
-			class="w-fit pb-6 text-2xl"
-			on:click|preventDefault={changePhaseHandler(Symbol.for(WRITE_QUERIES))}>다음 단계로</button
+			class="flex w-fit pb-6 text-xl"
+			on:click|preventDefault={changePhaseHandler(Symbol.for(WRITE_QUERIES))}
+			>다음 단계로 <span><Icon icon="chevron-right" /></span></button
 		>
 	{:else}
-		<button class="pb-6 text-2xl">활동 생성 완료</button>
+		<div class="flex gap-12 pb-6 text-xl">
+			<button on:click|preventDefault={changePhaseHandler(Symbol.for(WRITE_DETAILS))} class="flex"
+				><span><Icon icon="chevron-left" /> </span>이전 단계로
+			</button>
+			<button class="flex">활동 생성 완료 <span><Icon icon="chevron-right" /></span></button>
+		</div>
 	{/if}
 </form>
