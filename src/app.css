@@ -60,14 +60,14 @@
 		}
 		/* ol */
 		ol {
-			margin: 10px 0px;
+			margin: 8px 0px;
 			counter-reset: i0;
 			/* li */
 			li::before {
 				content: counter(i0) '. ';
 			}
 			li {
-				margin-left: 24px;
+				margin-left: 16px;
 				list-style-type: none;
 				counter-increment: i0;
 				counter-reset: i1;
@@ -78,7 +78,7 @@
 				content: counter(i1) '. ';
 			}
 			li.ql-indent-1 {
-				margin-left: 48px;
+				margin-left: 32px;
 				list-style-type: none;
 				counter-increment: i1;
 				counter-reset: i2;
@@ -88,7 +88,7 @@
 				content: counter(i2) '. ';
 			}
 			li.ql-indent-2 {
-				margin-left: 72px;
+				margin-left: 48px;
 				list-style-type: none;
 				counter-increment: i2;
 				counter-reset: i3;
@@ -98,7 +98,7 @@
 				content: counter(i3) '. ';
 			}
 			li.ql-indent-3 {
-				margin-left: 96px;
+				margin-left: 64px;
 				list-style-type: none;
 				counter-increment: i3;
 				counter-reset: i4;
@@ -108,7 +108,7 @@
 				content: counter(i4) '. ';
 			}
 			li.ql-indent-4 {
-				margin-left: 120px;
+				margin-left: 80px;
 				list-style-type: none;
 				counter-increment: i4;
 				counter-reset: i5;
@@ -118,7 +118,7 @@
 				content: counter(i4) '. ';
 			}
 			li.ql-indent-5 {
-				margin-left: 120px;
+				margin-left: 96px;
 				list-style-type: none;
 				counter-increment: i5;
 				counter-reset: i6;
@@ -126,26 +126,24 @@
 		}
 		/* ul */
 		ul {
-			margin-top: 10px;
-			margin-bottom: 10px;
 			list-style-type: disc;
 			li {
-				margin-left: 48px;
+				margin-left: 44px;
 			}
 			li.ql-indent-1 {
-				margin-left: 72px;
+				margin-left: 60px;
 			}
 			li.ql-indent-2 {
-				margin-left: 96px;
+				margin-left: 76px;
 			}
 			li.ql-indent-3 {
-				margin-left: 120px;
+				margin-left: 92px;
 			}
 			li.ql-indent-4 {
-				margin-left: 144px;
+				margin-left: 108px;
 			}
 			li.ql-indent-5 {
-				margin-left: 168px;
+				margin-left: 124px;
 			}
 		}
 		/* strong */
@@ -164,7 +162,7 @@
 		}
 		/* p */
 		p {
-			margin-bottom: 8px;
+			margin-bottom: 12px;
 		}
 		/* table */
 		table {
