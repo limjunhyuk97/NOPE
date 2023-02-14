@@ -5,6 +5,7 @@ import { resizeImage } from '$lib/utils';
 
 const WRITE_DETAILS = 'upload_details';
 
+// 제목 유효성 검사
 const hasTitleData = (title: string) => {
 	return title !== '';
 };
@@ -13,7 +14,7 @@ const hasTitleData = (title: string) => {
 export const actions: Actions = {
 	default: async ({ request }): Promise<any> => {
 		const data = await request.formData();
-		const thumbnail = data.get('thumbnail');
+		const thumbnail = data.get('thumbnail') as File;
 		const activity_type = data.get('type_id');
 		const title = data.get('title');
 		const start_at = data.get('start_at');
@@ -23,7 +24,8 @@ export const actions: Actions = {
 		const details = data.get('details');
 		const questions = data.get('queries');
 
-		console.log(thumbnail);
+		const resized = await resizeImage(thumbnail);
+		console.log(data);
 
 		// 제목 유효성 검사
 		if (!hasTitleData(title))
