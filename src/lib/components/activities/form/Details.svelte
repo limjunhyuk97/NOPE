@@ -5,6 +5,7 @@
 	import Calendar from '$lib/components/common/Calendar.svelte';
 	import Radio from '$lib/components/common/Radio.svelte';
 	import MdEditor from '$lib/components/common/MDEditor.svelte';
+	import { resizeImage, getImageKey } from '$lib/utils';
 
 	// 활동 타입 정보
 	export let activityTypes: { type: string; type_kor: string }[];
@@ -14,16 +15,24 @@
 
 	// 이미지 업로드 관련
 	let image_source: any;
+	let image_id: string;
 	const imageUploadeHandler = async (e: any) => {
 		const file = e.target?.files[0];
 
+		// 이미지 bucket에 업로드
+		const resizedFile = resizeImage(file);
+
 		if (file) {
 			// FileReader 객체 생성
-			const Reader = new FileReader();
-			Reader.readAsDataURL(file);
+			const UrlReader = new FileReader();
 
-			await Reader.addEventListener('load', async (e: any) => {
-				image_source = Reader.result;
+			// FileReader가 Blob 타입이나, File 타입의 content를 URL형식으로 읽어들인다
+			// content를 읽는 과정이 다 끝나면 readyState가 DONE으로 변경되고, loadend가 트리거 된다.
+			// event의 result객체가 data:URL 정보를 담고 있게 된다.
+			UrlReader.readAsDataURL(file);
+
+			await UrlReader.addEventListener('load', async (e: any) => {
+				image_source = UrlReader.result;
 			});
 		}
 	};
@@ -92,6 +101,7 @@
 				<div class="xl:w-96 w-72 xl:h-80 h-60 rounded" />
 				<div class="absolute text-gray-400">활동 썸네일 이미지 등록</div>
 			{/if}
+			<input id="thumbnail_id" type="text" value={image_id} class="hidden" />
 			<input
 				id="thumbnail"
 				name="thumbnail"
