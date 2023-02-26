@@ -102,10 +102,9 @@
 		</div>
 
 		<!-- 활동 진행 상태 -->
-		<div class="mt-3 {statusVariation[status].color}">
-			<span class="text-blue-600">{activity_types.type_kor}</span>
-			<span class="text-black"> / </span>
-			{statusVariation[status].content}
+		<div class="mt-3">
+			<span>{activity_types.type_kor} / </span>
+			<span class={statusVariation[status].color}> {statusVariation[status].content} </span>
 		</div>
 
 		<!-- 지원 가능 여부 -->

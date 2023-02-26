@@ -25,7 +25,10 @@
 	};
 </script>
 
-<input type="text" name="queires" value={queries} class="hidden" />
+<input type="number" name="query-count" value={queries.length} class="hidden" />
+{#each queries as query, id}
+	<input type="text" name="queiry-{id}" value={query} class="hidden" />
+{/each}
 
 <div class="flex w-full h-full">
 	<div class="flex flex-col gap-4 w-1/2 h-[85vh] p-4 border-r">
