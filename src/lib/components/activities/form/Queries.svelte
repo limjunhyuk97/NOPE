@@ -33,18 +33,18 @@
 <div class="flex w-full h-full">
 	<div class="flex flex-col gap-4 w-1/2 h-[85vh] p-4 border-r">
 		<h1 class="text-3xl">지원서 생성</h1>
-		<h2 class="text-xl">참가자 신청자에게 물어볼 질문지를 생성합니다.</h2>
+		<h2 class="mt-8 text-xl">참가 신청자에게 물어보고 싶은 내용을 생성합니다.</h2>
 		<div class="flex flex-col gap-4 w-full mt-4">
 			<div class="relative w-full">
 				<textarea
-					rows="10"
-					maxlength="210"
+					rows="20"
+					maxlength="1000"
 					class="w-full"
 					bind:value={query}
 					placeholder="질문을 입력해주세요!"
 				/>
 				<div class="absolute bottom-3 right-2 text-sm">
-					<span class="text-green-500">{query.length}</span> / 210
+					<span class="text-green-500">{query.length}</span> / 1000
 				</div>
 			</div>
 			<div class="flex justify-center w-full mt-1">
@@ -53,8 +53,7 @@
 		</div>
 	</div>
 	<div class="flex flex-col gap-4 w-1/2 h-[85vh] p-4 overflow-y-auto scrollbar-hide">
-		<div class="w-full h-9" />
-		<h2 class="text-xl">등록된 질문({queries.length})</h2>
+		<h2 class="mb-4 text-xl">등록된 질문 ({queries.length})</h2>
 		{#each queries as query, id}
 			<div class="text-xs">질문 {id + 1}</div>
 			<!-- svelte-ignore a11y-mouse-events-have-key-events -->

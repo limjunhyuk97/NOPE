@@ -80,8 +80,8 @@
 	];
 </script>
 
-<div class="flex flex-col gap-12 w-full h-full">
-	<h1 class="text-3xl">활동 개설</h1>
+<div class="flex flex-col gap-8 w-full h-full">
+	<h1 class="mt-8 text-3xl">활동 개설</h1>
 	<div class="flex 2xl:gap-20 lg:gap-12 gap-4 w-full">
 		<!-- 이미지 업로드 -->
 		<!-- svelte-ignore a11y-mouse-events-have-key-events -->
