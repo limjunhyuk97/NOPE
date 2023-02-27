@@ -77,7 +77,7 @@
 			<div class="w-full bg-white">
 				<MDViewer mdTypeContent={activityData.details} />
 			</div>
-			<div class="flex gap-12 text-xl bg-white">
+			<div class="flex gap-12 mt-12 text-xl bg-white">
 				{#if activityData.recruiting}
 					{#if userStatus === USER_STATUS.NOTAPPLIED}
 						<button class="text-green-700 ">참여 신청하기</button>

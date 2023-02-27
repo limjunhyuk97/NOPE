@@ -41,33 +41,36 @@
 		font-weight: 200;
 		/* h1 */
 		h1 {
-			margin-bottom: 16px;
+			margin: 16px 0px;
 			font-size: 32px;
 		}
 		/* h2 */
 		h2 {
-			margin-bottom: 14px;
+			margin-bottom: 12px 0px;
 			font-size: 26px;
 		}
 		/* h3 */
 		h3 {
-			margin-bottom: 12px;
+			margin-bottom: 8px;
 			font-size: 24px;
 		}
 		h4 {
-			margin-bottom: 12px;
+			margin-bottom: 4px;
 			font-size: 22px;
 		}
 		/* ol */
 		ol {
-			margin: 8px 0px;
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+			margin: 4px 0px;
 			counter-reset: i0;
 			/* li */
 			li::before {
 				content: counter(i0) '. ';
 			}
 			li {
-				margin-left: 16px;
+				margin-left: 4px;
 				list-style-type: none;
 				counter-increment: i0;
 				counter-reset: i1;
@@ -78,7 +81,7 @@
 				content: counter(i1) '. ';
 			}
 			li.ql-indent-1 {
-				margin-left: 32px;
+				margin-left: 12px;
 				list-style-type: none;
 				counter-increment: i1;
 				counter-reset: i2;
@@ -88,7 +91,7 @@
 				content: counter(i2) '. ';
 			}
 			li.ql-indent-2 {
-				margin-left: 48px;
+				margin-left: 20px;
 				list-style-type: none;
 				counter-increment: i2;
 				counter-reset: i3;
@@ -98,7 +101,7 @@
 				content: counter(i3) '. ';
 			}
 			li.ql-indent-3 {
-				margin-left: 64px;
+				margin-left: 24px;
 				list-style-type: none;
 				counter-increment: i3;
 				counter-reset: i4;
@@ -108,7 +111,7 @@
 				content: counter(i4) '. ';
 			}
 			li.ql-indent-4 {
-				margin-left: 80px;
+				margin-left: 32px;
 				list-style-type: none;
 				counter-increment: i4;
 				counter-reset: i5;
@@ -118,7 +121,7 @@
 				content: counter(i4) '. ';
 			}
 			li.ql-indent-5 {
-				margin-left: 96px;
+				margin-left: 40px;
 				list-style-type: none;
 				counter-increment: i5;
 				counter-reset: i6;
@@ -126,24 +129,28 @@
 		}
 		/* ul */
 		ul {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+			margin: 8px 0px;
 			list-style-type: disc;
 			li {
-				margin-left: 44px;
+				margin-left: 16px;
 			}
 			li.ql-indent-1 {
-				margin-left: 60px;
+				margin-left: 24px;
 			}
 			li.ql-indent-2 {
-				margin-left: 76px;
+				margin-left: 32px;
 			}
 			li.ql-indent-3 {
-				margin-left: 92px;
+				margin-left: 40px;
 			}
 			li.ql-indent-4 {
-				margin-left: 108px;
+				margin-left: 48px;
 			}
 			li.ql-indent-5 {
-				margin-left: 124px;
+				margin-left: 52px;
 			}
 		}
 		/* strong */
