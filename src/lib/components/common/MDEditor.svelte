@@ -4,8 +4,8 @@
 	export let name = 'none';
 
 	// 에디터 텍스트
-	let contentsInHTML = '';
-	let contentsInEditor = '';
+	export let contentsInHTML = '';
+	export let contentsInEditor = '';
 
 	// svelte-quill 에디터
 	const options = {

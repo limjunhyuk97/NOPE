@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Comment } from '$lib/types/activities';
 	import { handleDelete } from './Comment';
-	import Friend from '$lib/components/modal/friend.svelte';
+	import Friend from '$lib/components/modal/Friend.svelte';
 	import Icon from '$lib/Icon.svelte';
 	import { getSignedUrl, showModal } from '$lib/utils';
 	import { user, toast } from '$lib/stores';

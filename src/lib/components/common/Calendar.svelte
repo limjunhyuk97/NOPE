@@ -18,8 +18,6 @@
 		return date.join('-');
 	};
 
-	makeDateString(dateSelected);
-
 	const showCalendar = () => {
 		isVisible = !isVisible;
 	};
