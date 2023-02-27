@@ -8,7 +8,6 @@
 	export let namedValue = 'type_kor';
 
 	let selected = false;
-	let selectedTrueValue = options[0][`${trueValue}`];
 	let selectedNamedValue = options[0][`${namedValue}`];
 
 	const selectHandler = (option: { id: string; value: string }) => {
@@ -16,6 +15,8 @@
 		selectedNamedValue = option[`${namedValue}`];
 		selected = !selected;
 	};
+
+	export let selectedTrueValue = options[0][`${trueValue}`];
 </script>
 
 <input type="text" class="hidden" {name} value={selectedTrueValue} />

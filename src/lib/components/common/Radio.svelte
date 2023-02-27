@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	export let choices: { innerText: string; value: boolean }[];
+	export let choices: { innerText: string; value: boolean | string }[];
 	export let name: string;
 
 	let selectedID = 0;

@@ -9,7 +9,7 @@
 
 	export let data;
 
-	// 'upload_details' -> 'upload_queries'
+	// 'upload_details'(활동 상세 정보) -> 'upload_queries'(활동 질문 정보)
 	const WRITE_DETAILS = 'upload_details';
 	const WRITE_QUERIES = 'upload_queries';
 
@@ -38,9 +38,10 @@
 <form
 	method="POST"
 	use:enhance={({ form, data, cancel }) => {
+		console.log(data);
 		return ({ result }) => {};
 	}}
-	class="flex flex-col items-center gap-6 w-full h-full py-12 px-6 text-lg"
+	class="flex flex-col items-center gap-6 w-full h-full lg:p-10 py-14 px-6 text-lg"
 >
 	<!-- 활동 상세 정보 -->
 	<div class={isInDetail(phase) ? 'w-full' : 'w-full hidden'}>

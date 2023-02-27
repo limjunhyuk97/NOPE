@@ -10,17 +10,24 @@
 	// 활동 타입 정보
 	export let activityTypes: { type: string; type_kor: string }[];
 
-	// 시작 시간 - 종료 시간 설정 위한 반응형 변수
-	$: start_at = new Date();
+	// 데이터
+	export let thumbnail,
+		type,
+		title,
+		start_at = new Date(),
+		end_at,
+		short_details = '',
+		details,
+		isRecruiting,
+		isStarted;
 
 	// 이미지 업로드 관련
 	let image_source: any;
-	let image_id: string;
 	const imageUploadeHandler = async (e: any) => {
 		const file = e.target?.files[0];
 
 		// 이미지 bucket에 업로드
-		const resizedFile = resizeImage(file);
+		thumbnail = resizeImage(file);
 
 		if (file) {
 			// FileReader 객체 생성
@@ -40,9 +47,10 @@
 	// 이미지 제거 관련
 	let hovering_image_delete = false;
 	const imageDeleteHandler = (e: Event) => {
-		const thumbnail = document.querySelector('#thumbnail');
-		thumbnail.files = new DataTransfer().files;
+		const imgElement = document.querySelector('#thumbnail');
+		imgElement.files = new DataTransfer().files;
 		image_source = null;
+		thumbnail = null;
 		$toast = '썸네일 이미지 삭제';
 	};
 
@@ -54,9 +62,6 @@
 	const hideShortDetailDescriptionHandler = () => {
 		showShortDetail = false;
 	};
-
-	// 간단한 설명 텍스트
-	let short_details = '';
 
 	// 설명 보여주기 위한 핸들러
 	let showDetail = false;
@@ -101,7 +106,6 @@
 				<div class="xl:w-96 w-72 xl:h-80 h-60 rounded" />
 				<div class="absolute text-gray-400">활동 썸네일 이미지 등록</div>
 			{/if}
-			<input id="thumbnail_id" type="text" value={image_id} class="hidden" />
 			<input
 				id="thumbnail"
 				name="thumbnail"
@@ -205,7 +209,7 @@
 	</div>
 
 	<div class="relative flex flex-col gap-4 w-full">
-		<div>현재 지원 가능 여부</div>
+		<div>프로젝트 시작 여부</div>
 		<div class="flex justify-start">
 			<Radio choices={groupForStatus} name="status" />
 		</div>
