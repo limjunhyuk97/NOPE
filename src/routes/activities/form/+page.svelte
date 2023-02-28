@@ -89,9 +89,9 @@
 			status,
 			queries
 		});
-		console.log(response);
-		$toast = response.msg;
-		goto(`/activities/form/done?id=${response.id}`);
+		if (response) {
+			goto(`/activities/form/done?id=${response.id}`);
+		}
 	};
 
 	// 활동 생성 완료

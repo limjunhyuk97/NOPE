@@ -22,6 +22,21 @@
 	.CONTENTPORT {
 		@apply w-full h-full;
 	}
+
+	/* OWNER COMPONENT */
+	.bg-super {
+		@apply bg-[#182747];
+	}
+
+	/* ADMIN COMPONENT */
+	.bg-admin {
+		@apply bg-[#7799AA];
+	}
+
+	/* PARTICIPANT COMPONENT */
+	.bg-granted {
+		@apply bg-[#D9D9D9];
+	}
 }
 
 @layer utilities {

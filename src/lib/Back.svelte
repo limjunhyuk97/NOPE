@@ -1,7 +1,7 @@
 <script>
-	import LeftArrow from './components/common/LeftArrow.svelte';
+	import Icon from '$lib/Icon.svelte';
 </script>
 
-<button type="button" class="w-8 absolute" on:click={() => window.history.go(-1)}>
-	<LeftArrow />
+<button on:click={() => window.history.go(-1)}>
+	<Icon icon="arrow-left" size={36} />
 </button>

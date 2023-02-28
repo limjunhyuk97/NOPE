@@ -2,7 +2,7 @@
 	import Outlayer from '$lib/template/ContentLayer.svelte';
 </script>
 
-<Outlayer title="활동 개설">
+<Outlayer title="활동 개설" hasBack={true}>
 	<div class="flex flex-col gap-8">
 		<div class="flex 2xl:gap-20 lg:gap-12 gap-4 w-full">
 			<slot name="thumbnail" />

@@ -73,12 +73,13 @@
 			class="flex flex-col w-1/2 h-screen pt-40 pl-12 gap-8 text-start"
 		>
 			<h2 class="text-3xl pb-4">활동 관리</h2>
+			<a class="text-start text-gray-500 text-xl" href="/users">마이 페이지</a>
 			<a class="text-start text-gray-500 text-xl" href="/activities/form">활동 개설</a>
-			<a class="text-start text-gray-500 text-xl" href="/users/activities">주최 활동 관리</a>
-			<a class="text-start text-gray-500 text-xl" href="/users/activities/admin">참여 활동 관리</a>
-			<button class="text-start text-gray-500 text-xl">게시글 관리</button>
-			<button class="text-start text-gray-500 text-xl">지원 내역 조회</button>
-			<button class="text-start text-gray-500 text-xl">회원 탈퇴</button>
+			<a class="text-start text-gray-500 text-xl" href="/users/activities/admin">주최 활동 관리</a>
+			<a class="text-start text-gray-500 text-xl" href="/users/activities">참여 활동 관리</a>
+			<a class="text-start text-gray-500 text-xl" href="/users/articles">게시글 관리</a>
+			<a class="text-start text-gray-500 text-xl" href="/users/applications">지원 내역 조회</a>
+			<a class="text-start text-gray-500 text-xl" href="/users/signout">회원 탈퇴</a>
 		</div>
 	{:else if $mypageSidebar === 'edit'}
 		<!-- 내 정보 변경 -->
