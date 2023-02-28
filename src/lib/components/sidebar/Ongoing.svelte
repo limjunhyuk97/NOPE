@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { ActivityType } from '$lib/types/activities';
+	import type { ActivityTypes } from '$lib/types';
 	import { slide } from 'svelte/transition';
 	import { activitiesToShow } from '$lib/stores';
 	import { goto } from '$app/navigation';
 
 	// 활동 타입 정보
-	export let activityTypes: ArrayLike<ActivityType>;
+	export let activityTypes: ArrayLike<ActivityTypes>;
 
 	let hovering = false;
 	const mouseEnter = () => {
