@@ -32,20 +32,6 @@ export const POST: RequestHandler = async ({ request }: any) => {
 	const start_at_date = new Date(start_at);
 	const end_at_date = new Date(end_at);
 
-	console.log(
-		owner_id,
-		thumbnail,
-		activity_type,
-		title,
-		start_at,
-		end_at,
-		short_details,
-		details,
-		recruiting,
-		status,
-		queries
-	);
-
 	const titleCheck = invalidTitle(title);
 
 	if (titleCheck) {
