@@ -4,7 +4,7 @@ import ImageResize from 'image-resize';
 import { showmodal, modalComponent, modalData } from './stores';
 
 // bucket에 넣고 key를 반환해줌
-export const getImageKey = async (file: File, bucket = 'app') => {
+export const getImageKey = async (file: File | Blob | null, bucket = 'app') => {
 	if (!file) {
 		return null;
 	}
@@ -49,7 +49,7 @@ export const getSignedUrl = async (key: string | null, bucket = 'app') => {
 
 //* images table에 {id, storage_id} 정보 저장 후 id 반환 */
 export const upsertImage = async ({ id, storage_id }: { id: string; storage_id: string }) => {
-	if (id === null) id = `${uuidv4()}`;
+	if (id === undefined) id = `${uuidv4()}`;
 
 	const { error } = await supabase.from('images').upsert({ id, storage_id }, { onConflict: 'id' });
 
@@ -88,4 +88,9 @@ export const deleteModal = () => {
 	showmodal.set(false);
 	modalData.set({});
 	modalComponent.set(null);
+};
+
+// 쿼리스트링 가져오기
+export const getQueryString = (key: string) => {
+	return new URLSearchParams(location.search).get(key);
 };

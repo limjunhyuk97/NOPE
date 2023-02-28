@@ -1,19 +1,21 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	export let choices: { innerText: string; value: boolean | string }[];
+	export let options: { innerText: string; value: boolean | string }[];
 	export let name: string;
 
 	let selectedID = 0;
+	export let result = options[0].value;
 
 	const selectHandler = (id: number) => {
 		return (e: Event) => {
 			selectedID = id;
+			result = options[selectedID].value;
 		};
 	};
 </script>
 
 <div class="flex flex-col gap-2">
-	{#each choices as choice, id}
+	{#each options as choice, id}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<label
 			for={String(id)}

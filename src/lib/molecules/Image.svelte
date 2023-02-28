@@ -1,17 +1,29 @@
 <script lang="ts">
 	import Icon from '$lib/Icon.svelte';
+	import { supabase } from '$lib/supabase';
 	import { toast } from '$lib/stores';
-	import { resizeImage } from '$lib/utils';
+	import { resizeImage, getImageKey, upsertImage } from '$lib/utils';
 
 	// 이미지 변수
 	let image_source: string | null;
-	export let result: any;
+
+	export let title: string;
+	export let result: string | boolean | null;
 
 	// 이미지 업로드 관련
-	const imageUploadeHandler = async (e: any) => {
+	const imageUploadeHandler = async (e: Event) => {
 		const file = e.target?.files[0];
-		// 이미지 bucket에 업로드
-		result = resizeImage(file);
+
+		const resized = await resizeImage(file);
+		const imageKey = await getImageKey(resized);
+		result = await upsertImage({ storage_id: imageKey });
+
+		if (result === false) {
+			$toast = '이미지 등록 실패';
+			image_source = null;
+			result = null;
+		}
+
 		if (file) {
 			// FileReader 객체 생성
 			const UrlReader = new FileReader();
@@ -28,16 +40,17 @@
 	// 이미지 제거 관련
 	let hovering_image_delete = false;
 	const imageDeleteHandler = (e: Event) => {
-		const imgElement = document.querySelector('#thumbnail');
+		const imgElement = document.querySelector('#image_upload');
 		imgElement.files = new DataTransfer().files;
 		image_source = null;
 		result = null;
-		$toast = '썸네일 이미지 삭제';
+		$toast = `${title} 이미지 삭제`;
 	};
 </script>
 
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-<div
+<label
+	for="image_upload"
 	class="relative flex justify-center items-center w-fit h-fit bg-gray-100 rounded-lg hover:cursor-pointer"
 	on:mouseover={() => (hovering_image_delete = true)}
 	on:mouseleave={() => {
@@ -50,10 +63,10 @@
 		</div>
 	{:else}
 		<div class="xl:w-96 w-72 xl:h-80 h-60 rounded" />
-		<div class="absolute text-gray-400">활동 썸네일 이미지 등록</div>
+		<div class="absolute text-gray-400">{title} 이미지 등록</div>
 	{/if}
 	<input
-		id="thumbnail"
+		id="image_upload"
 		name="thumbnail"
 		type="file"
 		class="hidden"
@@ -67,4 +80,4 @@
 			? ''
 			: 'hidden'}"><Icon icon="x" /></button
 	>
-</div>
+</label>
