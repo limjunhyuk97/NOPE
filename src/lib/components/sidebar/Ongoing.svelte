@@ -25,7 +25,7 @@
 	on:mouseleave={mouseOut}
 	class="p-4 border-b text-start"
 >
-	진행중인 활동
+	활동
 	{#if hovering}
 		<div class="pt-4 flex flex-col items-start gap-4 text-sm" transition:slide>
 			{#each activityTypes as activity}
