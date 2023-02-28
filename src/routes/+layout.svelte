@@ -16,6 +16,7 @@
 	import Notices from '$lib/components/sidebar/Notices.svelte';
 	import UserBtn from '$lib/components/sidebar/UserBtn.svelte';
 	import Version from '$lib/components/sidebar/Version.svelte';
+	import Articles from '$lib/components/sidebar/Articles.svelte';
 	import Likes from '$lib/components/sidebar/Likes.svelte';
 	import Modal from '$lib/Modal.svelte';
 	import Ongoing from '$lib/components/sidebar/Ongoing.svelte';
@@ -50,6 +51,7 @@
 				<nav class="flex flex-col w-full text-xl font-bold border-t">
 					<UserBtn />
 					<Ongoing {activityTypes} />
+					<Articles />
 					{#if $user}
 						<Likes />
 						<Notices />
