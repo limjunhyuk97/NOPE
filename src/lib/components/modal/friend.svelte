@@ -1,6 +1,4 @@
-<script>
-	// @ts-nocheck
-
+<script lang="ts">
 	import Icon from '$lib/Icon.svelte';
 	import { modalData } from '$lib/stores';
 	import { deleteModal } from '$lib/utils';
