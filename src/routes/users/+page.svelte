@@ -126,17 +126,17 @@
 			</button>
 		</div>
 	</label>
-	<div class="flex flex-col gap-12 py-4">
+	<div class="flex flex-col gap-12 py-4 font-semibold">
 		<div class="flex items-center gap-12">
-			<div class="w-24 text-xl text-blue-300 font-semibold">이름</div>
-			<p class="w-full text-star">{$myProfile?.name}</p>
+			<div class="w-24 text-xl text-blue-300">이름</div>
+			<p class="w-full text-start">{$myProfile?.name}</p>
 		</div>
 		<div class="flex items-center gap-12">
-			<div class="w-24 text-xl text-blue-300 font-semibold">이메일</div>
+			<div class="w-24 text-xl text-blue-300">이메일</div>
 			<p class="w-full truncate text-start">{$myProfile?.email}</p>
 		</div>
 		<div class="flex items-center gap-9">
-			<div class="w-28 text-xl text-blue-300 font-semibold">비밀번호</div>
+			<div class="w-28 text-xl text-blue-300">비밀번호</div>
 			<p class="w-full text-start">********</p>
 		</div>
 	</div>
@@ -157,7 +157,7 @@
 <div class="flex flex-col gap-12 mt-14">
 	<div class="flex flex-col gap-2">
 		<div class="text-blue-300 text-xl font-semibold">자기소개</div>
-		<p class="w-full h-56 py-2 border-y overflow-y-auto scrollbar-hide">
+		<p class="w-full h-56 py-2 border-y overflow-y-auto scrollbar-hide font-semibold">
 			{$myProfile?.descriptions ? $myProfile?.descriptions : `자기소개를 작성해주세요!`}
 		</p>
 	</div>

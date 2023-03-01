@@ -85,7 +85,7 @@
 		<!-- 내 정보 변경 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/3 h-screen pt-24 px-12 gap-8 text-start text-base font-semibold"
+			class="flex flex-col w-1/3 h-screen pt-24 px-12 gap-8 text-start font-semibold"
 		>
 			<h2 class="text-2xl pb-4 font-bold">내 정보 변경</h2>
 			<form class="flex flex-col gap-16 w-full" on:submit|preventDefault={submitProfileHandler}>
@@ -145,7 +145,7 @@
 			class="flex flex-col w-1/3 h-screen pt-12 px-12 gap-12 text-start"
 		>
 			<div class="flex items-center gap-6">
-				<h2 class="w-48 text-3xl">스택 선택</h2>
+				<h2 class="w-48 text-2xl font-bold">스택 선택</h2>
 				<div class="relative w-full">
 					<input
 						type="text"
