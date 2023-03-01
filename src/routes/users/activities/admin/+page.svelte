@@ -17,6 +17,7 @@
 					pariticpant_status={status}
 					title={activities.title}
 					activity_status={activities.status}
+					isAdmin={true}
 				/>
 			{/each}
 		</div>

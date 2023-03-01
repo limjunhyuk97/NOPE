@@ -1,7 +1,7 @@
 <script type="ts">
 	import Icon from '$lib/Icon.svelte';
 	import { fade, fly } from 'svelte/transition';
-	import { toast, user, mypageSidebar, myProfile, myStacks } from '$lib/stores';
+	import { toast, user, mypageSidebar, mypageSidebarParam, myProfile, myStacks } from '$lib/stores';
 	import axios from 'axios';
 	import { supabase } from '$lib/supabase';
 	import {
@@ -73,13 +73,24 @@
 			class="flex flex-col w-1/3 h-screen pt-24 pl-12 gap-8 text-start font-semibold"
 		>
 			<h2 class="text-2xl pb-4 font-bold">활동 관리</h2>
-			<a class="text-start text-gray-500 text-xl" href="/users">마이 페이지</a>
-			<a class="text-start text-gray-500 text-xl" href="/activities/form">활동 개설</a>
-			<a class="text-start text-gray-500 text-xl" href="/users/activities/admin">주최 활동 관리</a>
-			<a class="text-start text-gray-500 text-xl" href="/users/activities">참여 활동 관리</a>
-			<a class="text-start text-gray-500 text-xl" href="/users/articles">게시글 관리</a>
-			<a class="text-start text-gray-500 text-xl" href="/users/applications">지원 내역 조회</a>
-			<a class="text-start text-gray-500 text-xl" href="/users/signout">회원 탈퇴</a>
+			<a class="text-start text-gray-500 text-xl hover:underline" href="/users">마이 페이지</a>
+			<a class="text-start text-gray-500 text-xl hover:underline" href="/activities/form"
+				>활동 개설</a
+			>
+			<a class="text-start text-gray-500 text-xl hover:underline" href="/users/activities/admin"
+				>주최 활동 관리</a
+			>
+			<a class="text-start text-gray-500 text-xl hover:underline" href="/users/activities"
+				>참여 활동 관리</a
+			>
+			<a class="text-start text-gray-500 text-xl hover:underline" href="/users/articles"
+				>게시글 관리</a
+			>
+			<a class="text-start text-gray-500 text-xl hover:underline" href="/users/applications"
+				>지원 내역 조회</a
+			>
+			<a class="text-start text-gray-500 text-xl hover:underline" href="/users/signout">회원 탈퇴</a
+			>
 		</div>
 	{:else if $mypageSidebar === 'edit'}
 		<!-- 내 정보 변경 -->
@@ -87,7 +98,9 @@
 			in:fly|local={{ x: -64 }}
 			class="flex flex-col w-1/3 h-screen pt-24 px-12 gap-8 text-start font-semibold"
 		>
-			<h2 class="text-2xl pb-4 font-bold">내 정보 변경</h2>
+			<h2 class="flex items-center gap-2 text-2xl pb-4 font-bold">
+				내 정보 변경 <Icon icon="edit-2" />
+			</h2>
 			<form class="flex flex-col gap-16 w-full" on:submit|preventDefault={submitProfileHandler}>
 				<div class="flex gap-6 w-full">
 					<div class="w-24 text-xl text-blue-300">이름</div>
@@ -130,10 +143,10 @@
 					/>
 				</div>
 				<input type="text" class="hidden" value={$user?.id} name="user_id" />
-				<div class="flex justify-end w-full">
+				<div class="flex justify-center w-full">
 					<button
-						class="flex items-center gap-2 {nameDuplicated ? '' : 'hover:scale-110 duration-300'}"
-						disabled={nameDuplicated}>수정완료<Icon icon="edit-2" size={20} /></button
+						class="text-xl {nameDuplicated ? '' : 'hover:underline'}"
+						disabled={nameDuplicated}>수정완료</button
 					>
 				</div>
 			</form>
@@ -173,6 +186,29 @@
 					</button>
 				{/each}
 			</div>
+		</div>
+	{:else if $mypageSidebar === 'participating'}
+		<!-- 활동 관리 섹션 -->
+		<div
+			in:fly|local={{ x: -64 }}
+			class="flex flex-col w-1/3 h-screen pt-36 pl-12 gap-8 text-start font-semibold"
+		>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/activities/{$mypageSidebarParam}">활동 메인 페이지로</a
+			>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/activities/{$mypageSidebarParam}/sessions">세션 보러가기</a
+			>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/users/articles?id={$mypageSidebarParam}">게시글 관리</a
+			>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/users/activities/{$mypageSidebarParam}/signout">활동 탈퇴</a
+			>
 		</div>
 	{/if}
 </div>
