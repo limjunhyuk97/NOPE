@@ -3,6 +3,7 @@
 	export let title: string;
 	export let pariticpant_status: string;
 	export let activity_status: string;
+	export let isAdmin = true;
 
 	const activitiyStatus = (status: string) => {
 		if (status === 'pending') return '시작전';
@@ -18,8 +19,8 @@
 </script>
 
 <a
-	href="/users/activities/{id}"
-	class="flex flex-col justify-between w-full h-44 p-4 bg-{pariticpant_status} rounded text-{pariticpant_status ===
+	href="/users/activities/{isAdmin ? id : 'admin/' + id}"
+	class="flex flex-col justify-between w-full h-44 p-4 bg-{pariticpant_status} hover:opacity-90 rounded text-{pariticpant_status ===
 	'super'
 		? 'white'
 		: 'black'}"
