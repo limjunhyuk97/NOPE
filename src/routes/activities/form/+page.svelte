@@ -119,7 +119,7 @@
 			/>
 			<Input slot="title" bind:result={title} title="활동명" />
 			<Calendar slot="start_at" bind:result={start_at} title="시작일" />
-			<Calendar slot="end_at" bind:result={end_at} title="시작일" />
+			<Calendar slot="end_at" bind:result={end_at} title="종료일" />
 			<TextArea
 				slot="short_details"
 				bind:result={short_details}
@@ -183,7 +183,7 @@
 				class="flex ml-5"
 				><span><Icon icon="chevron-left" /> </span>이전 단계로
 			</button>
-			<button class="flex" on:click|preventDefault={createActivities}
+			<button class="flex" on:click|preventDefault|once={createActivities}
 				>활동 생성 완료 <span><Icon icon="chevron-right" /></span></button
 			>
 		</div>
