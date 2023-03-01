@@ -1,8 +1,8 @@
 <script>
-	import Outlayer from '$lib/template/ContentLayer.svelte';
+	import ContentLayer from '$lib/template/ContentLayer.svelte';
 </script>
 
-<Outlayer title="활동 개설" hasBack={true}>
+<ContentLayer title="활동 개설" hasBack={true}>
 	<div class="flex flex-col gap-8">
 		<div class="flex 2xl:gap-20 lg:gap-12 gap-4 w-full">
 			<slot name="thumbnail" />
@@ -18,4 +18,4 @@
 		<slot name="recruiting" />
 		<slot name="status" />
 	</div>
-</Outlayer>
+</ContentLayer>
