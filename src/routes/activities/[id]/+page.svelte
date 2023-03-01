@@ -80,19 +80,19 @@
 			<div class="flex gap-12 mt-12 text-xl bg-white">
 				{#if activityData.recruiting}
 					{#if userStatus === USER_STATUS.NOTAPPLIED}
-						<button class="text-green-700 ">참여 신청하기</button>
+						<button class="text-green-700 hover:underline">참여 신청하기</button>
 						<button>세션 둘러보기</button>
 					{:else if userStatus === USER_STATUS.APPLIED}
-						<button class="text-green-700 ">참여 요청완료</button>
-						<button>세션 둘러보기</button>
+						<button class="text-green-700 hover:underline">참여 요청완료</button>
+						<button class="hover:underline">세션 둘러보기</button>
 					{:else if userStatus === USER_STATUS.LOGOUT}
-						<button>세션 둘러보기</button>
+						<button class="hover:underline">세션 둘러보기</button>
 					{:else}
-						<button class="text-green-700 ">세션 목록으로</button>
+						<button class="text-green-700 hover:underline">세션 목록으로</button>
 					{/if}
 					<!-- 모집중이 아니라면 -->
 				{:else}
-					<button class="hover:scale-110 duration-300">세션 둘러보기</button>
+					<button class="duration-300 hover:underline">세션 둘러보기</button>
 				{/if}
 			</div>
 		</div>

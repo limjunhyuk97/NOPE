@@ -38,11 +38,11 @@
 			}}
 			class="flex flex-col gap-12 w-full px-16"
 		>
-			<h1 class="w-full text-2xl">로그인</h1>
+			<h1 class="w-full text-2xl font-bold">로그인</h1>
 
 			<!-- 아이디 -->
 			<label class="w-full">
-				<div>아이디</div>
+				<div class="font-semibold">아이디</div>
 				<input
 					type="email"
 					name="email"
@@ -54,7 +54,7 @@
 
 			<!-- 비밀번호 -->
 			<label class="w-full">
-				<div>비밀번호</div>
+				<div class="font-semibold">비밀번호</div>
 				<input
 					type="password"
 					name="password"
@@ -62,15 +62,15 @@
 					placeholder="비밀번호를 입력해주세요"
 					required
 				/>
-				<div class="w-full mt-8 flex gap-2 justify-end text-xs text-gray-700">
+				<div class="w-full mt-8 flex gap-2 justify-end text-xs text-gray-700 hover:underline">
 					<a href="/signup">회원가입</a>
 				</div>
 			</label>
 
 			<!-- 버튼 -->
 			<div class="w-full px-12 flex justify-between">
-				<button type="submit" class="drop-shadow-xl">로그인</button>
-				<a href="/reset" class="drop-shadow-xl">비밀번호 재설정</a>
+				<button type="submit" class="hover:underline">로그인</button>
+				<a href="/reset" class="hover:underline">비밀번호 재설정</a>
 			</div>
 		</form>
 	</div>

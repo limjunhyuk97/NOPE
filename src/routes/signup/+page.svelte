@@ -101,11 +101,11 @@
 				};
 			}}
 		>
-			<h1 class="w-full text-2xl ">회원가입</h1>
+			<h1 class="w-full text-2xl font-bold">회원가입</h1>
 
 			<!-- 아이디 -->
 			<label class="w-full">
-				<div>아이디</div>
+				<div class="font-semibold">아이디</div>
 				<input
 					type="email"
 					name="email"
@@ -133,7 +133,7 @@
 
 			<!-- 비밀번호 -->
 			<label class="w-full">
-				<div>비밀번호</div>
+				<div class="font-semibold">비밀번호</div>
 				<input
 					type="password"
 					name="password"
@@ -161,7 +161,7 @@
 
 			<!-- 비밀번호 확인 -->
 			<label class="w-full " on:click|preventDefault={passwordErrorHandler}>
-				<div>비밀번호 확인</div>
+				<div class="font-semibold">비밀번호 확인</div>
 				<input
 					type="password"
 					name="passwordcheck"
@@ -199,7 +199,7 @@
 
 			<!-- 이름 -->
 			<label class="w-full">
-				<div>이름</div>
+				<div class="font-semibold">이름</div>
 				<input
 					type="text"
 					name="name"
@@ -225,9 +225,9 @@
 
 			<!-- 회원가입 완료 -->
 			<button
-				class="flex justify-center drop-shadow-xl {disableSubmit
+				class="flex justify-center  {disableSubmit
 					? 'text-gray-600 hover:cursor-not-allowed'
-					: 'text-black'}"
+					: 'text-black hover:underline'}"
 				disabled={disableSubmit}
 			>
 				회원가입 완료
