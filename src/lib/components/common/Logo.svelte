@@ -8,7 +8,7 @@
 
 <div class="w-full py-8 flex items-center justify-center">
 	<button
-		class="flex flex-col gap-1 items-center"
+		class="flex flex-col gap-1 items-center "
 		bind:clientWidth={parentWidth}
 		on:click={() => {
 			$activitiesToShow = 'all';
@@ -18,7 +18,7 @@
 		<svg
 			version="1.0"
 			xmlns="http://www.w3.org/2000/svg"
-			width={parentWidth > 192 ? '162pt' : '112pt'}
+			width={parentWidth > 192 ? '144pt' : '100pt'}
 			viewBox="0 0 1912.000000 762.000000"
 			preserveAspectRatio="xMidYMid meet"
 		>
