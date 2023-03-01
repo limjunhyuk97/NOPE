@@ -4,6 +4,7 @@ import Quill from 'quill';
 export function quill(node: HTMLElement, options: any) {
 	const quill = new Quill(node, {
 		modules: {
+			syntax: true,
 			toolbar: [
 				[{ header: [1, 2, 3, 4, false] }],
 				['bold', 'italic', 'underline', 'strike'],
