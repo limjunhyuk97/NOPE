@@ -50,7 +50,7 @@
 		{:catch error}
 			<div class="p-1 rounded-full border border-black"><Icon icon="user" size={32} /></div>
 		{/await}
-		<span class="xl:w-36 w-24 truncate text-start">{comment.users.name}</span>
+		<span class="xl:w-36 w-24 truncate text-start font-semibold">{comment.users.name}</span>
 	</button>
 	<div class="flex flex-col gap-1">
 		<p class="break-all">{comment.contents}</p>
