@@ -61,18 +61,18 @@
 	};
 </script>
 
-<div in:fade|local class="flex text-xl">
+<div in:fade|local class="flex">
 	<!-- 내 정보 섹션 -->
-	<div class=" w-1/2 h-screen py-12 px-6 border-r overflow-y-auto scrollbar-hide">
+	<div class="w-2/3 h-screen py-12 px-6 border-r overflow-y-auto scrollbar-hide">
 		<slot />
 	</div>
 	{#if $mypageSidebar === 'default'}
 		<!-- 활동 관리 섹션 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/2 h-screen pt-40 pl-12 gap-8 text-start"
+			class="flex flex-col w-1/3 h-screen pt-24 pl-12 gap-8 text-start font-semibold"
 		>
-			<h2 class="text-3xl pb-4">활동 관리</h2>
+			<h2 class="text-2xl pb-4 font-bold">활동 관리</h2>
 			<a class="text-start text-gray-500 text-xl" href="/users">마이 페이지</a>
 			<a class="text-start text-gray-500 text-xl" href="/activities/form">활동 개설</a>
 			<a class="text-start text-gray-500 text-xl" href="/users/activities/admin">주최 활동 관리</a>
@@ -85,17 +85,17 @@
 		<!-- 내 정보 변경 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/2 h-screen pt-40 px-12 gap-8 text-start"
+			class="flex flex-col w-1/3 h-screen pt-24 px-12 gap-8 text-start text-base font-semibold"
 		>
-			<h2 class="text-3xl pb-4">내 정보 변경</h2>
+			<h2 class="text-2xl pb-4 font-bold">내 정보 변경</h2>
 			<form class="flex flex-col gap-16 w-full" on:submit|preventDefault={submitProfileHandler}>
 				<div class="flex gap-6 w-full">
-					<div class="w-24 text-blue-300">이름</div>
+					<div class="w-24 text-xl text-blue-300">이름</div>
 					<div class="relative w-full">
 						<input
 							class="w-full border-b {nameDuplicated
 								? 'border-red-300'
-								: 'border-blue-300'} focus:outline-none"
+								: 'border-green-300'} focus:outline-none"
 							name="name"
 							value={$myProfile?.name}
 							on:keyup={async (e) => {
@@ -111,18 +111,18 @@
 					</div>
 				</div>
 				<div class="flex gap-6">
-					<div class="w-24 text-blue-300">이메일</div>
+					<div class="w-24 text-xl text-blue-300">이메일</div>
 					<p class="w-full truncate text-start">{$myProfile?.email}</p>
 				</div>
 				<div class="flex justify-between gap-6 w-full">
-					<div class="w-24 text-blue-300">비밀번호</div>
+					<div class="w-24 text-xl text-blue-300">비밀번호</div>
 					<a
 						class="flex items-center w-fit px-2 text-sm rounded bg-blue-300 text-white"
 						href="/reset/password">비밀번호 변경</a
 					>
 				</div>
 				<div class="flex flex-col gap-2">
-					<div class="text-blue-300">자기소개</div>
+					<div class="text-xl text-blue-300">자기소개</div>
 					<textarea
 						class="w-full h-56 py-2 border-y overflow-y-auto scrollbar-hide resize-none"
 						name="descriptions"
@@ -142,7 +142,7 @@
 		<!-- 스택 선택 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/2 h-screen pt-12 px-12 gap-12 text-start"
+			class="flex flex-col w-1/3 h-screen pt-12 px-12 gap-12 text-start"
 		>
 			<div class="flex items-center gap-6">
 				<h2 class="w-48 text-3xl">스택 선택</h2>
@@ -156,10 +156,10 @@
 					<div class="absolute right-1 top-1"><Icon icon="search" /></div>
 				</div>
 			</div>
-			<div class="grid grid-cols-3 gap-3 gap-y-4 pb-12 overflow-y-auto scrollbar-hide">
+			<div class="grid grid-cols-3 gap-3 gap-y-2 pb-12 overflow-y-auto scrollbar-hide">
 				{#each searchState(searchedStack) as stack}
 					<button
-						class="w-full h-18 hover:bg-gray-200 rounded"
+						class="w-full h-20 hover:bg-gray-200 rounded"
 						on:click|preventDefault={async () => {
 							addStackHandler(stack.id);
 						}}

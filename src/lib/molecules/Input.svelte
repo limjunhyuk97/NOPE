@@ -4,7 +4,7 @@
 </script>
 
 <label for="activity_name" class="flex items-center gap-2 w-full">
-	<div class="w-24">{title}</div>
+	<div class="w-24 font-semibold">{title}</div>
 	<input
 		type="text"
 		name="title"

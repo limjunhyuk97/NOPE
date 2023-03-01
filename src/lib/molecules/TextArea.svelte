@@ -25,23 +25,22 @@
 
 <label for="activity_short_details" class="relative flex flex-col gap-4">
 	{#if showHelp && help.length > 0}
-		<p class="absolute left-28 w-72 p-3 rounded-lg bg-gray-200 text-xs z-10">
+		<p class="absolute left-28 w-84 p-3 rounded-lg bg-blue-400 text-sm text-white z-10">
 			{@html help}
 		</p>
 	{/if}
 	{#if title.length > 0}
-		<div class="flex items-center gap-3 w-fit">
+		<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+		<div
+			class="flex items-center gap-3 w-fit font-semibold"
+			on:mouseover={showHelpHandler}
+			on:mouseleave={hideHelpHandler}
+		>
 			<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 			{title}
 			<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 			{#if help.length > 0}
-				<span
-					class="text-xs text-gray-400"
-					on:mouseover={showHelpHandler}
-					on:mouseleave={hideHelpHandler}
-				>
-					?
-				</span>
+				<span class="text-xs text-gray-400"> ? </span>
 			{/if}
 		</div>
 	{/if}
@@ -58,7 +57,8 @@
 </label>
 
 {#if submission.length > 0}
-	<button class="flex justify-center w-full pt-6" on:click|preventDefault={innerHandler}
-		>생성하기</button
+	<button
+		class="flex justify-center w-full pt-6 font-semibold"
+		on:click|preventDefault={innerHandler}>생성하기</button
 	>
 {/if}

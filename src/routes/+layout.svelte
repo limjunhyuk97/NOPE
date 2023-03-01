@@ -78,6 +78,7 @@
 	</Modal>
 {/if}
 
+<!-- 새로운 폰트 적용 -->
 <style global>
 	body {
 		font-family: 'Noto Sans', 'Montserrat', 'Noto Sans KR', sans-serif;

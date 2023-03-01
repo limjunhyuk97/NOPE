@@ -11,10 +11,10 @@
 			{#if hasBack}
 				<Back />
 			{/if}
-			<h1 class="h-8 text-3xl">{title}</h1>
+			<h1 class="h-7 text-2xl font-bold">{title}</h1>
 		</div>
 		{#if subtitle.length > 0}
-			<h2 class="mb-4 text-xl">{subtitle}</h2>
+			<h2 class="mb-4 text-xl font-semibold">{subtitle}</h2>
 		{/if}
 	</div>
 	<slot />

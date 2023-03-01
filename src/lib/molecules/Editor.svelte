@@ -18,21 +18,20 @@
 
 <label class="relative flex flex-col gap-4 w-full" for="details">
 	{#if showDetail && help.length > 0}
-		<p class="absolute left-24 w-72 p-3 rounded-lg bg-gray-200 text-xs z-10">
+		<p class="absolute left-28 w-84 p-3 rounded-lg bg-blue-400 text-sm text-white z-10">
 			{@html help}
 		</p>
 	{/if}
-	<div class="flex items-center gap-3 w-fit">
+	<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+	<div
+		class="flex items-center gap-3 w-fit font-semibold"
+		on:mouseover={showDetailDescriptionHandler}
+		on:mouseleave={hideDetailDescriptionHandler}
+	>
 		{title}
 		<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 		{#if help.length > 0}
-			<span
-				class="text-xs text-gray-400"
-				on:mouseover={showDetailDescriptionHandler}
-				on:mouseleave={hideDetailDescriptionHandler}
-			>
-				?
-			</span>
+			<span class="text-xs text-gray-400"> ? </span>
 		{/if}
 	</div>
 	<MdEditor name="details" bind:contentsInHTML={result} />

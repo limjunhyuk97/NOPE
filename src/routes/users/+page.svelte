@@ -84,7 +84,7 @@
 	});
 </script>
 
-<div class="flex justify-between items-end">
+<div class="relative flex items-center gap-12 w-full mt-12">
 	<!-- 프로필 사진 업로드 -->
 	<label
 		on:mouseenter={() => {
@@ -106,10 +106,10 @@
 		/>
 		<div class="bg-black rounded-full text-white">
 			{#if userImage}
-				<img src={userImage} class="w-36 h-36 rounded-full object-cover" alt="프로필사진" />
+				<img src={userImage} class="w-52 h-52 rounded-full object-cover" alt="프로필사진" />
 			{:else}
 				<div
-					class="flex items-center justify-center w-36 h-36 rounded-full bg-blue-100 border-2 border-gray-100"
+					class="flex items-center justify-center w-52 h-52 rounded-full bg-blue-100 border-2 border-gray-100"
 				>
 					<Icon icon="user" size={132} stroke_width={0.5} />
 				</div>
@@ -126,47 +126,51 @@
 			</button>
 		</div>
 	</label>
+	<div class="flex flex-col gap-12 py-4">
+		<div class="flex items-center gap-12">
+			<div class="w-24 text-xl text-blue-300 font-semibold">이름</div>
+			<p class="w-full text-star">{$myProfile?.name}</p>
+		</div>
+		<div class="flex items-center gap-12">
+			<div class="w-24 text-xl text-blue-300 font-semibold">이메일</div>
+			<p class="w-full truncate text-start">{$myProfile?.email}</p>
+		</div>
+		<div class="flex items-center gap-9">
+			<div class="w-28 text-xl text-blue-300 font-semibold">비밀번호</div>
+			<p class="w-full text-start">********</p>
+		</div>
+	</div>
 	<!-- 내 정보 변경 / 활동 관리 선택 -->
-	<button on:click={changePageState} class="flex gap-4">
+	<button
+		on:click={changePageState}
+		class="absolute top-0 right-0 flex items-center gap-2 text-blue-300"
+	>
 		{#if $mypageSidebar === 'default'}
-			<div>내 정보</div>
-			<Icon icon="settings" />
+			<div>수정</div>
+			<Icon icon="settings" size={20} />
 		{:else}
-			<div>활동 관리</div>
-			<Icon icon="list" />
+			<div>메뉴</div>
+			<Icon icon="list" size={20} />
 		{/if}
 	</button>
 </div>
-<!-- 내 정보 섹션 -->
 <div class="flex flex-col gap-12 mt-14">
-	<div class="flex gap-12">
-		<div class="w-24 text-blue-300">이름</div>
-		<p class="w-full text-start">{$myProfile?.name}</p>
-	</div>
-	<div class="flex gap-12">
-		<div class="w-24 text-blue-300">이메일</div>
-		<p class="w-full truncate text-start">{$myProfile?.email}</p>
-	</div>
-	<div class="flex gap-12">
-		<div class="w-24 text-blue-300">비밀번호</div>
-		<p class="w-full text-start">****</p>
-	</div>
 	<div class="flex flex-col gap-2">
-		<div class="text-blue-300">자기소개</div>
+		<div class="text-blue-300 text-xl font-semibold">자기소개</div>
 		<p class="w-full h-56 py-2 border-y overflow-y-auto scrollbar-hide">
 			{$myProfile?.descriptions ? $myProfile?.descriptions : `자기소개를 작성해주세요!`}
 		</p>
 	</div>
 	<div class="flex flex-col gap-2">
-		<div class="flex gap-4">
-			<div class="text-blue-300">나의 관심/주력 스택</div>
+		<div class="flex gap-4 items-center">
+			<div class="h-7 text-xl text-blue-300 font-semibold">나의 관심/주력 스택</div>
 			<button
-				class="flex items-center justify-center w-6 h-6 rounded-full border-2 border-blue-300 text-sm font-bold text-blue-300"
+				class="flex items-center justify-center w-5 h-5 rounded-full border-2 border-blue-300 text-sm font-bold text-blue-300"
 				on:click|preventDefault={selectStackState}
 				><Icon icon="plus" size={12} stroke_width={4} /></button
 			>
 		</div>
-		<div class="grid grid-cols-3 gap-2 h-full">
+		<div class="grid grid-cols-5 gap-2 h-full">
 			{#each $myStacks as stack}
 				<button
 					class="flex flex-col items-center relative w-full h-16 hover:bg-gray-200 rounded "

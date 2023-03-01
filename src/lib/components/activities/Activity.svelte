@@ -43,7 +43,7 @@
 
 <a
 	href="/activities/{id}"
-	class="w-full relative h-[440px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm {isLikePage &&
+	class="w-full relative h-[440px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm font-semibold {isLikePage &&
 	!liked
 		? 'hidden '
 		: ''}"
@@ -70,14 +70,14 @@
 					/>
 				{:else}
 					<div
-						class="flex items-center justify-center w-full h-full hover:scale-125 duration-200 text-lg"
+						class="flex items-center justify-center w-full h-full hover:scale-125 duration-200 text-lg font-bold"
 					>
 						{title}
 					</div>
 				{/if}
 			{:catch error}
 				<div
-					class="flex items-center justify-center w-full h-full hover:scale-125 duration-200 text-lg"
+					class="flex items-center justify-center w-full h-full hover:scale-125 duration-200 text-lg font-bold"
 				>
 					{title}
 				</div>
@@ -95,7 +95,7 @@
 		}}
 	>
 		<!-- 활동 설명 -->
-		<div class="flex justify-between items-center">
+		<div class="flex justify-between items-center font-bold">
 			<p class="w-full mt-2 text-lg {hovering ? '' : 'truncate'}">
 				{title}
 			</p>
@@ -109,9 +109,9 @@
 
 		<!-- 지원 가능 여부 -->
 		{#if recruiting}
-			<div class="mt-1 text-green-600">지원 가능</div>
+			<div class="mt-1 font-semibold text-green-600">지원 가능</div>
 		{:else}
-			<div class="mt-1 text-red-600">지원 불가</div>
+			<div class="mt-1 font-semibold text-red-600">지원 불가</div>
 		{/if}
 
 		<!-- 시작일, 종료일 -->

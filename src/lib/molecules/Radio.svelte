@@ -7,7 +7,7 @@
 </script>
 
 <div class="relative flex flex-col gap-4 w-full">
-	<div>{title}</div>
+	<div class="font-semibold">{title}</div>
 	<div class="flex justify-start">
 		<Radio {options} name="recruiting" bind:result />
 	</div>

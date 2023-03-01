@@ -148,13 +148,13 @@
 			<TextArea
 				slot="query_input"
 				constraint={1000}
-				rows={20}
+				rows={22}
 				title=""
 				submission="생성하기"
 				submithandler={createQueries}
 			/>
 			<div slot="query_details" class="py-4">
-				<h2 class="mb-4 text-xl">등록된 질문 ({queries.length})</h2>
+				<h2 class="mb-4 text-xl font-semibold">등록된 질문 ({queries.length})</h2>
 				<div class="flex flex-col gap-4 w-full">
 					{#each queries as query, idx}
 						<h3>질문 {idx + 1}</h3>
@@ -172,12 +172,12 @@
 	</div>
 	{#if isInDetail(phase)}
 		<button
-			class="flex w-fit pb-6 text-xl"
+			class="flex w-fit pb-6 text-xl font-semibold"
 			on:click|preventDefault={changePhaseHandler(Symbol.for(WRITE_QUERIES))}
 			>다음 단계로 <span><Icon icon="chevron-right" /></span></button
 		>
 	{:else}
-		<div class="flex gap-12 pb-6 text-xl">
+		<div class="flex gap-12 pb-6 text-xl font-semibold">
 			<button
 				on:click|preventDefault={changePhaseHandler(Symbol.for(WRITE_DETAILS))}
 				class="flex ml-5"

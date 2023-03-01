@@ -11,7 +11,7 @@
 </script>
 
 <div class="w-full lg:p-10 py-14 px-6" in:fade={{ duration: 500 }}>
-	<div class="lg:mt-8 mb-4 lg:text-3xl text-xl">찜한 활동</div>
+	<div class="mt-8 mb-4 text-2xl font-bold">찜한 활동</div>
 	{#if Likes?.length}
 		<div class="grid xl:grid-cols-4 grid-cols-3 gap-4 gap-y-0 mb-8 ">
 			{#each Likes as { activities: { title, recruiting, start_at, end_at, id, status, images, short_details, activity_types } }}

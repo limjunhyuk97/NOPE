@@ -60,7 +60,7 @@
 			{:else}
 				<div class="top-0 left-0 w-full h-40 opacity-40 bg-gray-300" />
 			{/if}
-			<h1 class="absolute bottom-0 left-12 w-fit py-3 px-5 text-3xl bg-white rounded-t">
+			<h1 class="absolute bottom-0 left-12 w-fit py-3 px-5 text-2xl font-bold bg-white rounded-t">
 				{activityData.title}
 			</h1>
 			<button class="absolute bottom-4 right-4" on:click|preventDefault={likeHandler}>
@@ -98,7 +98,8 @@
 		</div>
 	</div>
 	<div class="w-1/4 h-screen border border-l overflow-y-auto scrollbar-hide">
-		<h1 class="sticky top-0 flex items-center h-16 px-6 text-xl bg-white z-10">댓글</h1>
+		<h1 class="sticky top-0 flex items-center h-16 px-6 text-xl font-bold bg-white z-10">댓글</h1>
+		<div class="w-full h-1 bg-gray-100" />
 		<div class="flex flex-col gap-6 w-full h-activity-comments py-3 ">
 			{#if comments.length > 0}
 				{#each comments as comment (comment.id)}

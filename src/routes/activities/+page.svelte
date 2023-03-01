@@ -39,8 +39,8 @@
 </script>
 
 <div class="lg:p-10 py-14 px-6" in:fade={{ duration: 500 }}>
-	<div class="flex items-center gap-8 w-full lg:mt-8 mb-4 ">
-		<div class="lg:text-3xl text-xl">{filteredActivityType}</div>
+	<div class="flex items-center gap-8 w-full mt-8 mb-4 ">
+		<div class="text-2xl font-bold">{filteredActivityType}</div>
 		<ActivityFilter bind:filtered={recruitFilter} />
 	</div>
 
