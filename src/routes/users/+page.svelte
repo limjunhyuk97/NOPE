@@ -84,7 +84,7 @@
 	});
 </script>
 
-<div class="relative flex items-center gap-12 w-full mt-12">
+<div class="relative flex items-center lg:gap-12 gap-4 w-full mt-12">
 	<!-- 프로필 사진 업로드 -->
 	<label
 		on:mouseenter={() => {
@@ -106,10 +106,14 @@
 		/>
 		<div class="bg-black rounded-full text-white">
 			{#if userImage}
-				<img src={userImage} class="w-52 h-52 rounded-full object-cover" alt="프로필사진" />
+				<img
+					src={userImage}
+					class="xl:w-52 xl:h-52 w-36 h-36 rounded-full object-cover"
+					alt="프로필사진"
+				/>
 			{:else}
 				<div
-					class="flex items-center justify-center w-52 h-52 rounded-full bg-blue-100 border-2 border-gray-100"
+					class="flex items-center justify-center xl:w-52 xl:h-52 w-36 h-36 rounded-full bg-blue-100 border-2 border-gray-100"
 				>
 					<Icon icon="user" size={132} stroke_width={0.5} />
 				</div>
@@ -126,7 +130,7 @@
 			</button>
 		</div>
 	</label>
-	<div class="flex flex-col gap-12 py-4 font-semibold">
+	<div class="flex flex-col gap-8 xl:gap-12 py-4 font-semibold">
 		<div class="flex items-center gap-12">
 			<div class="w-24 text-xl text-blue-300">이름</div>
 			<p class="w-full text-start">{$myProfile?.name}</p>
