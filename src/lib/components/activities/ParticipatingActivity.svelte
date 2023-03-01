@@ -19,7 +19,7 @@
 </script>
 
 <a
-	href="/users/activities/{isAdmin ? id : 'admin/' + id}"
+	href="/users/activities/{isAdmin ? 'admin/' + id : id}"
 	class="flex flex-col justify-between w-full h-44 p-4 bg-{pariticpant_status} hover:opacity-90 rounded text-{pariticpant_status ===
 	'super'
 		? 'white'
