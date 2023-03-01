@@ -40,9 +40,6 @@
 }
 
 @layer utilities {
-	pre {
-		font-family: 'Jua';
-	}
 	textarea {
 		padding: 12px;
 		background-color: #f3f4f6;

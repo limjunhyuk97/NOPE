@@ -34,7 +34,7 @@
 	});
 </script>
 
-<div class="VIEWPORT bg-gray-100 font-NOPE">
+<div class="VIEWPORT bg-gray-100">
 	<div class="flex CONTAINERPORT relative mx-auto bg-white">
 		{#if spinner}
 			<!-- 대기 -->
@@ -77,3 +77,76 @@
 		<svelte:component this={$modalComponent} />
 	</Modal>
 {/if}
+
+<style global>
+	body {
+		font-family: 'Noto Sans', 'Montserrat', 'Noto Sans KR', sans-serif;
+	}
+	@font-face {
+		font-family: 'Noto Sans KR';
+		src: url('https://fonts.gstatic.com/s/notosanskr/v27/PbykFmXiEBPT4ITbgNA5Cgm203Tq4JJWq209pU0DPdWuqxJFA4GNDCBYtw.1.woff2')
+			format('woff2');
+		font-weight: 400;
+		unicode-range: U+AC00-D7A3;
+	}
+	@font-face {
+		font-family: 'Noto Sans KR';
+		src: url('https://fonts.gstatic.com/s/notosanskr/v27/PbykFmXiEBPT4ITbgNA5Cgm203Tq4JJWq209pU0DPdWuqxJFA4GNDCBYtw.1.woff2')
+			format('woff2');
+		font-weight: 600;
+		unicode-range: U+AC00-D7A3;
+	}
+	@font-face {
+		font-family: 'Noto Sans KR';
+		src: url('https://fonts.gstatic.com/s/notosanskr/v27/PbykFmXiEBPT4ITbgNA5Cgm203Tq4JJWq209pU0DPdWuqxJFA4GNDCBYtw.1.woff2')
+			format('woff2');
+		font-weight: 700;
+		unicode-range: U+AC00-D7A3;
+	}
+
+	/* number */
+	@font-face {
+		font-family: 'Montserrat';
+		src: url('https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2')
+			format('woff2');
+		font-weight: 400;
+		unicode-range: U+0030-0039;
+	}
+	@font-face {
+		font-family: 'Montserrat';
+		src: url('https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2')
+			format('woff2');
+		font-weight: 600;
+		unicode-range: U+0030-0039;
+	}
+	@font-face {
+		font-family: 'Montserrat';
+		src: url('https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2')
+			format('woff2');
+		font-weight: 700;
+		unicode-range: U+0030-0039;
+	}
+
+	/* english */
+	@font-face {
+		font-family: 'Noto Sans';
+		src: url('https://fonts.gstatic.com/s/notosans/v27/o-0NIpQlx3QUlC5A4PNjXhFVZ9yBx2pqPIif.woff2')
+			format('woff2');
+		font-weight: 400;
+		unicode-range: U+0041-005A, U+0061-007A;
+	}
+	@font-face {
+		font-family: 'Noto Sans';
+		src: url('https://fonts.gstatic.com/s/notosans/v27/o-0NIpQlx3QUlC5A4PNjXhFVZ9yBx2pqPIif.woff2')
+			format('woff2');
+		font-weight: 600;
+		unicode-range: U+0041-005A, U+0061-007A;
+	}
+	@font-face {
+		font-family: 'Noto Sans';
+		src: url('https://fonts.gstatic.com/s/notosans/v27/o-0NIpQlx3QUlC5A4PNjXhFVZ9yBx2pqPIif.woff2')
+			format('woff2');
+		font-weight: 700;
+		unicode-range: U+0041-005A, U+0061-007A;
+	}
+</style>

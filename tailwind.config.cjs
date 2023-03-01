@@ -2,11 +2,7 @@
 module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {},
-		fontFamily: {
-			NOPE: ['Jua', 'sans-serif'],
-			sans: ['sans-serif']
-		}
+		extend: {}
 	},
 	plugins: [require('tailwind-scrollbar-hide'), require('autoprefixer')]
 };
