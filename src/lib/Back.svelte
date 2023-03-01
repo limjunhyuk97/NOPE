@@ -3,5 +3,5 @@
 </script>
 
 <button on:click={() => window.history.go(-1)}>
-	<Icon icon="arrow-left" size={28} />
+	<Icon icon="chevron-left" size={28} />
 </button>
