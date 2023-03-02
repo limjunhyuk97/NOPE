@@ -5,14 +5,15 @@
 	import MDViewer from '$lib/components/common/MDViewer.svelte';
 	export let data;
 
-	console.log(data);
-
 	const activity = data.activityData;
-	$mypageSidebar = 'participating';
+	const userStatus = data.userStatus;
+
+	$mypageSidebar =
+		userStatus === 'super' ? Symbol.for('participant/super') : Symbol.for('participant');
 	$mypageSidebarParam = activity.id;
 
 	onDestroy(() => {
-		$mypageSidebar = 'default';
+		$mypageSidebar = Symbol.for('default');
 	});
 </script>
 
