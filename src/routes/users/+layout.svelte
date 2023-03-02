@@ -87,10 +87,10 @@
 				>활동 개설</a
 			>
 			<a class="text-start text-gray-500 text-xl hover:underline" href="/users/activities/admin"
-				>주최 활동 관리</a
+				>관리 활동 목록</a
 			>
 			<a class="text-start text-gray-500 text-xl hover:underline" href="/users/activities"
-				>참여 활동 관리</a
+				>참여 활동 목록</a
 			>
 			<a class="text-start text-gray-500 text-xl hover:underline" href="/users/articles"
 				>게시글 관리</a
@@ -202,13 +202,14 @@
 			in:fly|local={{ x: -64 }}
 			class="flex flex-col w-1/3 h-screen pt-36 pl-12 gap-8 text-start font-semibold"
 		>
+			<h2 class="text-2xl pb-4 font-bold">활동 참가자 메뉴</h2>
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
-				href="/activities/{$mypageSidebarParam}">활동 메인 페이지로</a
+				href="/activities/{$mypageSidebarParam}">활동 메인 페이지</a
 			>
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
-				href="/activities/{$mypageSidebarParam}/sessions">세션 보러가기</a
+				href="/activities/{$mypageSidebarParam}/sessions">세션 목록</a
 			>
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
@@ -225,17 +226,48 @@
 			in:fly|local={{ x: -64 }}
 			class="flex flex-col w-1/3 h-screen pt-36 pl-12 gap-8 text-start font-semibold"
 		>
+			<h2 class="text-2xl pb-4 font-bold">활동 참가자 메뉴</h2>
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
-				href="/activities/{$mypageSidebarParam}">활동 메인 페이지로</a
+				href="/activities/{$mypageSidebarParam}">활동 메인 페이지</a
 			>
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
-				href="/activities/{$mypageSidebarParam}/sessions">세션 보러가기</a
+				href="/activities/{$mypageSidebarParam}/sessions">세션 목록</a
 			>
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
 				href="/users/articles?id={$mypageSidebarParam}">게시글 관리</a
+			>
+		</div>
+	{:else if $mypageSidebar === Symbol.for('super')}
+		<div
+			in:fly|local={{ x: -64 }}
+			class="flex flex-col w-1/3 h-screen pt-36 pl-12 gap-8 text-start font-semibold"
+		>
+			<h2 class="text-2xl pb-4 font-bold">활동 오너 메뉴</h2>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/activities/{$mypageSidebarParam}/form">활동 메인 수정</a
+			>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/activities/{$mypageSidebarParam}/admin/sessions">세션 목록 수정</a
+			>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/users/{$mypageSidebarParam}/admin/participants">지원 정보 관리</a
+			>
+		</div>
+	{:else if $mypageSidebar === Symbol.for('admin')}
+		<div
+			in:fly|local={{ x: -64 }}
+			class="flex flex-col w-1/3 h-screen pt-36 pl-12 gap-8 text-start font-semibold"
+		>
+			<h2 class="text-2xl pb-4 font-bold">활동 관리자 메뉴</h2>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/activities/{$mypageSidebarParam}/admin/sessions">세션 목록 수정</a
 			>
 		</div>
 	{/if}
