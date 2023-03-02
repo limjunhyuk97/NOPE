@@ -95,7 +95,7 @@
 					{/if}
 					<!-- 모집중이 아니라면 -->
 				{:else}
-					<button class="duration-300 hover:underline">세션 둘러보기</button>
+					<button class="duration-300 hover:underline">세션 둘러보기 (모집 종료)</button>
 				{/if}
 			</div>
 		</div>
