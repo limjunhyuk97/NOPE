@@ -22,6 +22,7 @@
 		comments = await _getCommentData(activityData.id);
 	};
 
+	let commentBlock;
 	let myComment = '';
 
 	// write comment
@@ -32,7 +33,9 @@
 		}
 		const written = await _writeComment($user?.id, activityData.id, myComment);
 		if (written) {
+			myComment = '';
 			await reloadComments();
+			commentBlock.scrollTop = commentBlock.scrollHeight;
 		} else {
 			$toast = '댓글 달기 실패';
 		}
@@ -97,7 +100,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="w-1/4 h-screen border border-l overflow-y-auto scrollbar-hide">
+	<div
+		class="w-1/4 h-screen border border-l overflow-y-auto scrollbar-hide"
+		bind:this={commentBlock}
+	>
 		<h1 class="sticky top-0 flex items-center h-16 px-6 text-xl font-bold bg-white z-10 border-b-2">
 			댓글
 		</h1>
