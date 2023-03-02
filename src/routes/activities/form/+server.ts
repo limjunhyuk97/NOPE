@@ -1,5 +1,15 @@
+import { supabase } from '$lib/supabase';
 import type { RequestHandler } from './$types';
 import { admin } from '$lib/admin';
+
+const checkActivityCreationCount = async (user_id: string) => {
+	const { data, error } = await supabase
+		.from('users')
+		.select('activity_created')
+		.eq('id', user_id)
+		.single();
+	return error ? 2 : data.activity_created;
+};
 
 const invalidTitle = (title: any) => {
 	if (typeof title !== 'string') return { msg: '활동 제목은 필수 입력 항목입니다.', page: 1 };
@@ -44,6 +54,14 @@ export const POST: RequestHandler = async ({ request }: any) => {
 		return new Response(JSON.stringify(timeCheck), { status: 400 });
 	}
 
+	const activityCreationCountCheck = await checkActivityCreationCount(owner_id);
+
+	if (activityCreationCountCheck > 1) {
+		return new Response(JSON.stringify({ msg: '하루동안 개설 가능한 활동 갯수를 초과했습니다!' }), {
+			status: 400
+		});
+	}
+
 	// 활동 등록
 	const { data, error } = await admin
 		.from('activities')
@@ -73,8 +91,22 @@ export const POST: RequestHandler = async ({ request }: any) => {
 			.from('participants')
 			.insert({ user_id: owner_id, activity_id: data.id, status: 'super' });
 		console.log(error);
+
 		if (error) {
 			console.log(error);
+			return new Response(JSON.stringify({ msg: '네트워크 오류' }), {
+				status: 500
+			});
+		}
+
+		// 유저의 활동 개설 갯수 증가
+		const response = await admin
+			.from('users')
+			.update({ activity_created: activityCreationCountCheck + 1 })
+			.eq('id', owner_id);
+
+		if (response.error) {
+			console.log(response.error);
 			return new Response(JSON.stringify({ msg: '네트워크 오류' }), {
 				status: 500
 			});
