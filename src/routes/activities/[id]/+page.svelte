@@ -98,8 +98,9 @@
 		</div>
 	</div>
 	<div class="w-1/4 h-screen border border-l overflow-y-auto scrollbar-hide">
-		<h1 class="sticky top-0 flex items-center h-16 px-6 text-xl font-bold bg-white z-10">댓글</h1>
-		<div class="w-full h-1 bg-gray-100" />
+		<h1 class="sticky top-0 flex items-center h-16 px-6 text-xl font-bold bg-white z-10 border-b-2">
+			댓글
+		</h1>
 		<div class="flex flex-col gap-6 w-full h-activity-comments py-3 ">
 			{#if comments.length > 0}
 				{#each comments as comment (comment.id)}
@@ -111,7 +112,7 @@
 		</div>
 		{#if $user}
 			<form
-				class="sticky bottom-0 flex items-center justify-center w-full h-16 z-10 bg-white border-t"
+				class="sticky bottom-0 flex items-center justify-center w-full h-16 z-10 bg-white border-t-2"
 				on:submit|preventDefault={writCommentHandler}
 			>
 				<input
