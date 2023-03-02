@@ -44,7 +44,7 @@
 		padding: 12px;
 		background-color: #f3f4f6;
 		border-radius: 8px;
-		border: none;
+		outline-color: gray;
 		resize: none;
 	}
 	/* md 문서를 위한 스타일 정의 */
