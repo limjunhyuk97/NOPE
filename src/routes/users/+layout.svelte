@@ -13,6 +13,8 @@
 		_upsertUserProfileImage,
 		_removeUserProfileImage
 	} from './+layout';
+	import { beforeUpdate } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let data: any;
 
@@ -23,7 +25,7 @@
 	$myStacks = data.userStacks;
 	let nameDuplicated = false;
 
-	$mypageSidebar = 'default';
+	$mypageSidebar = Symbol.for('default');
 
 	const addStackHandler = async (stack_id: string) => {
 		const result = await _addUserStack(stack_id, $user?.id);
@@ -59,6 +61,13 @@
 	const searchState = (stackName: string) => {
 		return stacks.filter((stack) => stack.name.toLowerCase().includes(stackName.toLowerCase()));
 	};
+
+	beforeUpdate(() => {
+		if (!$user) {
+			$toast = '로그인을 해주세요';
+			goto('/');
+		}
+	});
 </script>
 
 <div in:fade|local class="flex">
@@ -66,7 +75,7 @@
 	<div class="w-2/3 h-screen py-12 px-6 border-r overflow-y-auto scrollbar-hide">
 		<slot />
 	</div>
-	{#if $mypageSidebar === 'default'}
+	{#if $mypageSidebar === Symbol.for('default')}
 		<!-- 활동 관리 섹션 -->
 		<div
 			in:fly|local={{ x: -64 }}
@@ -92,7 +101,7 @@
 			<a class="text-start text-gray-500 text-xl hover:underline" href="/users/signout">회원 탈퇴</a
 			>
 		</div>
-	{:else if $mypageSidebar === 'edit'}
+	{:else if $mypageSidebar === Symbol.for('edit')}
 		<!-- 내 정보 변경 -->
 		<div
 			in:fly|local={{ x: -64 }}
@@ -151,7 +160,7 @@
 				</div>
 			</form>
 		</div>
-	{:else if $mypageSidebar === 'stack'}
+	{:else if $mypageSidebar === Symbol.for('stack')}
 		<!-- 스택 선택 -->
 		<div
 			in:fly|local={{ x: -64 }}
@@ -187,7 +196,7 @@
 				{/each}
 			</div>
 		</div>
-	{:else if $mypageSidebar === 'participating'}
+	{:else if $mypageSidebar === Symbol.for('participant')}
 		<!-- 활동 관리 섹션 -->
 		<div
 			in:fly|local={{ x: -64 }}
@@ -208,6 +217,25 @@
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
 				href="/users/activities/{$mypageSidebarParam}/signout">활동 탈퇴</a
+			>
+		</div>
+	{:else if $mypageSidebar === Symbol.for('participant/super')}
+		<!-- 활동 관리 섹션 -->
+		<div
+			in:fly|local={{ x: -64 }}
+			class="flex flex-col w-1/3 h-screen pt-36 pl-12 gap-8 text-start font-semibold"
+		>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/activities/{$mypageSidebarParam}">활동 메인 페이지로</a
+			>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/activities/{$mypageSidebarParam}/sessions">세션 보러가기</a
+			>
+			<a
+				class="text-start text-gray-500 text-xl hover:underline"
+				href="/users/articles?id={$mypageSidebarParam}">게시글 관리</a
 			>
 		</div>
 	{/if}
