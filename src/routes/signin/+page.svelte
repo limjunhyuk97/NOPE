@@ -63,14 +63,14 @@
 					required
 				/>
 				<div class="w-full mt-8 flex gap-2 justify-end text-xs text-gray-700 hover:underline">
-					<a href="/signup">회원가입</a>
+					<a href="/signup" class="font-semibold">회원가입</a>
 				</div>
 			</label>
 
 			<!-- 버튼 -->
 			<div class="w-full px-12 flex justify-between">
-				<button type="submit" class="hover:underline">로그인</button>
-				<a href="/reset" class="hover:underline">비밀번호 재설정</a>
+				<button type="submit" class="font-semibold hover:underline">로그인</button>
+				<a href="/reset" class="font-semibold hover:underline">비밀번호 재설정</a>
 			</div>
 		</form>
 	</div>

@@ -160,6 +160,7 @@
 			</label>
 
 			<!-- 비밀번호 확인 -->
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<label class="w-full " on:click|preventDefault={passwordErrorHandler}>
 				<div class="font-semibold">비밀번호 확인</div>
 				<input
@@ -225,7 +226,7 @@
 
 			<!-- 회원가입 완료 -->
 			<button
-				class="flex justify-center  {disableSubmit
+				class="flex justify-center font-semibold {disableSubmit
 					? 'text-gray-600 hover:cursor-not-allowed'
 					: 'text-black hover:underline'}"
 				disabled={disableSubmit}
