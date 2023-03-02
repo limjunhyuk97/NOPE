@@ -12,7 +12,7 @@
 		_getUserStacks
 	} from './+layout';
 	import { supabase } from '$lib/supabase';
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy, beforeUpdate } from 'svelte';
 
 	export let data;
 
@@ -64,15 +64,17 @@
 
 	// 마이페이지 상태 default, edit 사이로 변경 (전체 : default / edit / stack)
 	const changePageState = () => {
-		$mypageSidebar = $mypageSidebar === 'default' ? 'edit' : 'default';
+		$mypageSidebar =
+			$mypageSidebar === Symbol.for('default') ? Symbol.for('edit') : Symbol.for('default');
 	};
 
 	// 마이페이지 상태 default, stack 사이로 변경 (전체 : default / edit / stack)
 	const selectStackState = () => {
-		$mypageSidebar = $mypageSidebar === 'stack' ? 'default' : 'stack';
+		$mypageSidebar =
+			$mypageSidebar === Symbol.for('stack') ? Symbol.for('default') : Symbol.for('stack');
 	};
 
-	onMount(() => {
+	beforeUpdate(() => {
 		if (!$user) {
 			$toast = '로그인을 해주세요';
 			goto('/');
@@ -80,7 +82,7 @@
 	});
 
 	onDestroy(() => {
-		$mypageSidebar = 'default';
+		$mypageSidebar = Symbol.for('default');
 	});
 </script>
 
@@ -149,7 +151,7 @@
 		on:click={changePageState}
 		class="absolute top-0 right-0 flex items-center gap-2 text-blue-300"
 	>
-		{#if $mypageSidebar === 'default'}
+		{#if $mypageSidebar === Symbol.for('default')}
 			<div>수정</div>
 			<Icon icon="settings" size={20} />
 		{:else}
