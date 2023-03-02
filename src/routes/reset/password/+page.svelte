@@ -42,12 +42,12 @@
 		}}
 	>
 		<div class="flex items-center gap-4">
-			<h1 class="text-2xl">비밀번호 재설정</h1>
+			<h1 class="text-2xl font-bold">비밀번호 재설정</h1>
 		</div>
 
 		<!-- 새 비밀번호 -->
 		<label class="w-full mt-20">
-			<div>새 비밀번호</div>
+			<div class="font-semibold">새 비밀번호</div>
 			<input
 				type="password"
 				name="password"
@@ -61,7 +61,7 @@
 
 		<!-- 비밀번호 -->
 		<label class="w-full mt-12">
-			<div>비밀번호 확인</div>
+			<div class="font-semibold">비밀번호 확인</div>
 			<input
 				type="password"
 				name="passwordcheck"
@@ -75,7 +75,11 @@
 
 		<!-- 버튼 -->
 		<div class="w-full mt-12 px-12 flex justify-center">
-			<button type="submit" class="drop-shadow-xl" on:click={submitHandler}>비밀번호 변경</button>
+			<button
+				type="submit"
+				class="drop-shadow-xl font-semibold hover:underline"
+				on:click={submitHandler}>비밀번호 변경</button
+			>
 		</div>
 	</form>
 </div>

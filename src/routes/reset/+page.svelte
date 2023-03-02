@@ -20,7 +20,7 @@
 
 <div class="w-full h-full flex justify-center items-center">
 	<div
-		class="flex flex-col justify-center items-center w-1/2 h-[440px] border rounded shadow-2xl text-xl"
+		class="flex flex-col justify-center items-center w-1/2 h-[440px] border rounded shadow-2xl text-lg"
 	>
 		<form
 			class="flex flex-col w-full px-16"
@@ -32,7 +32,7 @@
 			}}
 		>
 			<div class="flex items-center gap-4">
-				<h1 class="text-2xl">비밀번호 재설정</h1>
+				<h1 class="text-2xl font-bold">비밀번호 재설정</h1>
 				{#if send}
 					<Jumper color={THEME_COLOR} size={32} />
 				{/if}
@@ -40,7 +40,7 @@
 
 			<!-- 아이디 -->
 			<label class="w-full mt-20">
-				<div>아이디</div>
+				<div class="font-semibold">아이디</div>
 				<input
 					type="email"
 					name="email"
@@ -57,7 +57,9 @@
 
 			<!-- 버튼 -->
 			<div class="w-full mt-12 px-12 flex justify-center">
-				<button type="submit" class="drop-shadow-xl">본인확인 이메일 전송</button>
+				<button type="submit" class="font-semibold drop-shadow-xl hover:underline"
+					>본인확인 이메일 전송</button
+				>
 			</div>
 		</form>
 	</div>

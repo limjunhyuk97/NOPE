@@ -105,7 +105,7 @@
 		<!-- 내 정보 변경 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/3 h-screen pt-24 px-12 gap-8 text-start font-semibold"
+			class="flex flex-col w-1/3 h-screen pt-24 px-4 gap-8 text-start font-semibold"
 		>
 			<h2 class="flex items-center gap-2 text-2xl pb-4 font-bold">
 				내 정보 변경 <Icon icon="edit-2" />
