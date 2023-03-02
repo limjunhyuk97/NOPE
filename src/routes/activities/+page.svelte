@@ -46,13 +46,12 @@
 
 	{#if filteredActivities()?.length}
 		<div class="grid xl:grid-cols-4 grid-cols-3 gap-4 gap-y-0 mb-8">
-			{#each filteredActivities() as { title, recruiting, start_at, end_at, id, status, images, short_details, activity_types }}
+			{#each filteredActivities() as { title, recruiting, start_at, end_at, id, images, short_details, activity_types }}
 				<Activity
 					imgUrl={images?.storage_id}
 					{id}
 					{title}
 					{recruiting}
-					{status}
 					{short_details}
 					{activity_types}
 					startDate={moment(start_at).format('YYYY-MM-DD')}

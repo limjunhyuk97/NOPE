@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { handleLike, handleUnLike } from './Activity';
-	import { ACTIVITY_STATUS } from '$lib/constants';
 	import { slide, fade } from 'svelte/transition';
 	import { user, toast } from '$lib/stores';
 	import { getSignedUrl } from '$lib/utils';
@@ -16,7 +15,6 @@
 	export let recruiting = true;
 	export let startDate = '';
 	export let endDate = '';
-	export let status = '';
 	export let liked = true;
 	export let activity_types;
 
@@ -30,20 +28,13 @@
 	// 좋아요 여부 확인 (찜하기에서는 무조건 찜한 항목 띄워주기)
 	export let isLikePage = false;
 
-	// 진행상태 메시지 가공 위한 객체
-	const statusVariation: { [key: string]: { content: string; color: string } } = {
-		[ACTIVITY_STATUS.PENDING]: { content: '활동 시작전', color: 'text-gray-600' },
-		[ACTIVITY_STATUS.STARTED]: { content: '활동 진행중', color: 'text-green-600' },
-		[ACTIVITY_STATUS.FINISHED]: { content: '활동 종료', color: 'text-red-600' }
-	};
-
 	// 간단한 설명 보여주기
 	let hovering = false;
 </script>
 
 <a
 	href="/activities/{id}"
-	class="w-full relative h-[440px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm font-semibold {isLikePage &&
+	class="w-full relative h-[420px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm font-semibold {isLikePage &&
 	!liked
 		? 'hidden '
 		: ''}"
@@ -103,16 +94,15 @@
 
 		<!-- 활동 진행 상태 -->
 		<div class="mt-3">
-			<span>{activity_types.type_kor} / </span>
-			<span class={statusVariation[status].color}> {statusVariation[status].content} </span>
+			<div>
+				{activity_types.type_kor} / {#if recruiting}
+					<span class="mt-1 font-semibold text-green-600">지원 가능</span>
+				{:else}
+					<span class="mt-1 font-semibold text-red-600">지원 불가</span>
+				{/if}
+			</div>
+			<!-- 지원 가능 여부 -->
 		</div>
-
-		<!-- 지원 가능 여부 -->
-		{#if recruiting}
-			<div class="mt-1 font-semibold text-green-600">지원 가능</div>
-		{:else}
-			<div class="mt-1 font-semibold text-red-600">지원 불가</div>
-		{/if}
 
 		<!-- 시작일, 종료일 -->
 		<div class="mt-3">시작일 {moment(startDate).format('YYYY.MM.DD')}</div>
