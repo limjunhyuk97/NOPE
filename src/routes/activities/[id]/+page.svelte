@@ -86,7 +86,7 @@
 						<button class="text-green-700 hover:underline">참여 신청하기</button>
 						<button>세션 둘러보기</button>
 					{:else if userStatus === USER_STATUS.APPLIED}
-						<button class="text-green-700 hover:underline">참여 요청완료</button>
+						<div class="text-green-700">참여 요청완료</div>
 						<button class="hover:underline">세션 둘러보기</button>
 					{:else if userStatus === USER_STATUS.LOGOUT}
 						<button class="hover:underline">세션 둘러보기</button>
