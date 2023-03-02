@@ -18,7 +18,7 @@ export const toast = writable('');
 export const activitiesToShow = writable(ACTIVITY_TYPE.ALL);
 
 // MyPage
-export const mypageSidebar = writable('default');
+export const mypageSidebar = writable(Symbol.for('default'));
 export const mypageSidebarParam = writable('');
 export const myProfile: Writable<{
 	email: string;
