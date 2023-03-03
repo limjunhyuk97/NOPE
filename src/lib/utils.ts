@@ -48,12 +48,18 @@ export const getSignedUrl = async (key: string | null, bucket = 'app') => {
 };
 
 //* images table에 {id, storage_id} 정보 저장 후 id 반환 */
-export const upsertImage = async ({ id, storage_id }: { id: string; storage_id: string }) => {
+export const upsertImage = async ({
+	id,
+	storage_id
+}: {
+	id: string | undefined;
+	storage_id: string;
+}) => {
 	if (id === undefined) id = `${uuidv4()}`;
 
 	const { error } = await supabase.from('images').upsert({ id, storage_id }, { onConflict: 'id' });
 
-	return error ? false : id;
+	return error ? null : id;
 };
 
 export const resizeImage = async (file: File, width = 400, quality = 0.7) => {

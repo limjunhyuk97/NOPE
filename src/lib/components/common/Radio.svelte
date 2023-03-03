@@ -3,44 +3,42 @@
 	export let options: { innerText: string; value: boolean | string }[];
 	export let name: string;
 
-	let selectedID = 0;
 	export let result = options[0].value;
 
-	const selectHandler = (id: number) => {
+	const selectHandler = (value: boolean | string) => {
 		return (e: Event) => {
-			selectedID = id;
-			result = options[selectedID].value;
+			result = value;
 		};
 	};
 </script>
 
 <div class="flex flex-col gap-2">
-	{#each options as choice, id}
+	{#each options as { innerText, value }, id}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<label
 			for={String(id)}
 			class="flex items-center gap-2"
-			on:click|preventDefault={selectHandler(id)}
+			on:click|preventDefault={selectHandler(value)}
 		>
 			<input
 				type="radio"
 				id={String(id)}
 				{name}
-				value={choice.value}
+				{value}
 				class="hidden"
-				checked={selectedID === id}
+				checked={result === value}
 			/>
 			<div class="flex justify-center items-center w-5 h-5 bg-gray-200 rounded-full">
-				{#key selectedID}
+				{#key result}
 					<div
 						transition:fade|local={{ duration: 100 }}
-						class="w-3 h-3 rounded-full bg-blue-400 drop-shadow-md {selectedID === id
+						class="w-3 h-3 rounded-full bg-blue-400 drop-shadow-md {result === value
 							? ''
 							: 'hidden'} transition ease-in"
 					/>
 				{/key}
 			</div>
-			{choice.innerText}
+			{innerText}
 		</label>
 	{/each}
 </div>

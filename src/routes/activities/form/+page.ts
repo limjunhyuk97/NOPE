@@ -15,7 +15,7 @@ export const _createActivity = async ({
 	queries
 }: {
 	owner_id: string;
-	thumbnail: Blob;
+	thumbnail: string;
 	activity_type: string;
 	title: string;
 	start_at: Date;

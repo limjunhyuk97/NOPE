@@ -23,7 +23,8 @@
 			]
 		},
 		placeholder: '',
-		theme: 'snow'
+		theme: 'snow',
+		html: contentsInHTML
 	};
 
 	// quil text change handler
@@ -51,7 +52,7 @@
 		<div
 			class="w-full h-[640px] p-2 bg-gray-100 rounded-b-lg md-body overflow-y-auto scrollbar-hide"
 		>
-			{#if contentsInEditor.length > 1}
+			{#if contentsInHTML.length > 1}
 				{@html contentsInHTML}
 			{:else}
 				<div class="flex justify-center items-center w-full h-[640px] p-2 text-gray-400">

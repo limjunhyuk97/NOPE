@@ -19,7 +19,9 @@
 	const activity = data.activity;
 
 	// 업데이트 데이터
-	let thumbnail: Blob,
+	// thumbnail, activity_type, title, ewnd_at, start_at, short_details, details, recruiting, status : update
+	// queries : 기존 데이터 delete 후 update
+	let thumbnail = activity.image_id,
 		activity_type = activity.type_id,
 		title = activity.title,
 		end_at = new Date(activity.end_at),
@@ -48,8 +50,25 @@
 	// 현재 활동 진행 상태 : pending, started
 	const optionForStatus = [
 		{ innerText: '시작 전 대기', value: 'pending' },
-		{ innerText: '시작됨', value: 'started' }
+		{ innerText: '시작됨', value: 'started' },
+		{ innerText: '종료됨', value: 'finished' }
 	];
+
+	// 질문 생성 핸들러
+	const createQueries = (value: string) => {
+		if (value === '') {
+			$toast = '내용을 입력해주세요!';
+			return;
+		}
+		queries = [...queries, value];
+	};
+
+	// 질문 제거
+	const deleteQueries = (deleteTarget: string) => {
+		return (event: Event) => {
+			queries = queries.filter((query) => query !== deleteTarget);
+		};
+	};
 
 	// 활동 생성 페이지 상태 변경
 	const changePhaseHandler = (nextPhase: symbol) => {
@@ -59,7 +78,9 @@
 	};
 
 	// 활동 등록
-	const updateActivities = async (e: Event) => {};
+	const updateActivities = async (e: Event) => {
+		console.log(thumbnail);
+	};
 
 	beforeUpdate(async () => {
 		if (!$user) {
@@ -77,8 +98,8 @@
 <div class="flex flex-col items-center gap-6 w-full h-full lg:p-10 py-14 px-6 text-lg">
 	<!-- 활동 상세 정보 -->
 	<div class={isInDetail(phase) ? 'w-full' : 'w-full hidden'}>
-		<Details>
-			<Image slot="thumbnail" bind:result={thumbnail} title="활동 썸네일" />
+		<Details title="활동 정보 수정">
+			<Image slot="thumbnail" bind:image_id={thumbnail} title="활동 썸네일" />
 			<Select
 				slot="activity_type"
 				title="활동 타입"
@@ -116,7 +137,14 @@
 	<!-- 활동 설문지 -->
 	<div class={isInDetail(phase) ? 'w-full h-full hidden' : 'w-full h-full'}>
 		<Queires>
-			<TextArea slot="query_input" constraint={1000} rows={22} title="" submission="생성하기" />
+			<TextArea
+				slot="query_input"
+				constraint={1000}
+				rows={22}
+				title=""
+				submission="생성하기"
+				submithandler={createQueries}
+			/>
 			<div slot="query_details" class="py-4">
 				<h2 class="mb-4 text-xl font-semibold">등록된 질문 ({queries.length})</h2>
 				<div class="flex flex-col gap-4 w-full">
@@ -124,8 +152,9 @@
 						<h3>질문 {idx + 1}</h3>
 						<p class="relative w-full h-fit p-2 text-left break-words rounded-lg bg-gray-100">
 							<span>{query}</span>
-							<button class="absolute top-2 right-2 bg-white rounded-full" on:click|preventDefault
-								><Icon icon="x" /></button
+							<button
+								class="absolute top-2 right-2 bg-white rounded-full"
+								on:click|preventDefault={deleteQueries(query)}><Icon icon="x" /></button
 							>
 						</p>
 					{/each}

@@ -1,40 +1,31 @@
 <script lang="ts">
 	import Icon from '$lib/Icon.svelte';
-	import { supabase } from '$lib/supabase';
 	import { toast } from '$lib/stores';
-	import { resizeImage, getImageKey, upsertImage } from '$lib/utils';
+	import { supabase } from '$lib/supabase';
+	import { resizeImage, getImageKey, upsertImage, getSignedUrl } from '$lib/utils';
+	import { onMount } from 'svelte';
 
-	// 이미지 변수
-	let image_source: string | null;
-
+	// result 는 image 테이블에서의 id 값
+	// storage_id는 bucket에 있는 이미지 id 값
 	export let title: string;
-	export let result: string | boolean | null;
+	export let image_id: string | null;
+	let storage_id: string | null;
 
 	// 이미지 업로드 관련
 	const imageUploadeHandler = async (e: Event) => {
 		const file = e.target?.files[0];
 
 		const resized = await resizeImage(file);
-		const imageKey = await getImageKey(resized);
-		result = await upsertImage({ storage_id: imageKey });
+		storage_id = await getImageKey(resized);
+		image_id = await upsertImage({ storage_id });
 
-		if (result === false) {
+		if (image_id === null) {
 			$toast = '이미지 등록 실패';
-			image_source = null;
-			result = null;
+			image_id = null;
+			return;
 		}
 
-		if (file) {
-			// FileReader 객체 생성
-			const UrlReader = new FileReader();
-			// FileReader가 Blob 타입이나, File 타입의 content를 URL형식으로 읽어들인다
-			// content를 읽는 과정이 다 끝나면 readyState가 DONE으로 변경되고, loadend가 트리거 된다.
-			// event의 result객체가 data:URL 정보를 담고 있게 된다.
-			UrlReader.readAsDataURL(file);
-			await UrlReader.addEventListener('load', async (e: any) => {
-				image_source = UrlReader.result;
-			});
-		}
+		$toast = '이미지 등록 완료';
 	};
 
 	// 이미지 제거 관련
@@ -42,10 +33,21 @@
 	const imageDeleteHandler = (e: Event) => {
 		const imgElement = document.querySelector('#image_upload');
 		imgElement.files = new DataTransfer().files;
-		image_source = null;
-		result = null;
+		image_id = null;
+		storage_id = null;
 		$toast = `${title} 이미지 삭제`;
 	};
+
+	onMount(async () => {
+		if (image_id) {
+			const { data, error } = await supabase
+				.from('images')
+				.select('storage_id')
+				.eq('id', image_id)
+				.single();
+			storage_id = data?.storage_id;
+		}
+	});
 </script>
 
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
@@ -57,9 +59,17 @@
 		hovering_image_delete = false;
 	}}
 >
-	{#if image_source}
+	{#if storage_id}
 		<div class="xl:w-96 w-72 xl:h-80 h-60 rounded-lg">
-			<img src={image_source} alt="썸네일" class="w-full h-full object-cover rounded-lg" />
+			{#await getSignedUrl(storage_id)}
+				<div class="w-full h-full rounded bg-gray-100" />
+			{:then image_source}
+				<img src={image_source} alt="썸네일" class="w-full h-full object-cover rounded-lg" />
+			{:catch}
+				<div class="flex items-center justify-center relative w-full h-full rounded bg-gray-100">
+					<span>이미지 등록 실패</span>
+				</div>
+			{/await}
 		</div>
 	{:else}
 		<div class="xl:w-96 w-72 xl:h-80 h-60 rounded" />

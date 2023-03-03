@@ -17,7 +17,7 @@
 	export let data;
 
 	// 업로드할 데이터
-	export let thumbnail: Blob,
+	export let thumbnail: string,
 		activity_type: string,
 		title: string,
 		end_at = new Date(),
@@ -107,7 +107,7 @@
 	<!-- 활동 상세 정보 -->
 	<div class={isInDetail(phase) ? 'w-full' : 'w-full hidden'}>
 		<Details>
-			<Image slot="thumbnail" bind:result={thumbnail} title="활동 썸네일" />
+			<Image slot="thumbnail" bind:image_id={thumbnail} title="활동 썸네일" />
 			<Select
 				slot="activity_type"
 				title="활동 타입"

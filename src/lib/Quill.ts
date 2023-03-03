@@ -41,6 +41,11 @@ export function quill(node: HTMLElement, options: any) {
 	}
 	//* 클릭시 .ql-picker-options 바로 사라지는 문제 해결 *//
 
+	//* HTML 있는 경우 역으로 에디터에 넣기 */
+	const delta = quill.clipboard.convert(options.html);
+	quill.setContents(delta, 'silent');
+	//* HTML 있는 경우 역으로 에디터에 넣기 */
+
 	// editor의 text-change 시 발생하는 event를 dispatch
 	quill.on('text-change', function (range, oldRange, source) {
 		node.dispatchEvent(
