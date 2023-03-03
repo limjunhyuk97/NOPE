@@ -44,7 +44,7 @@
 		<div
 			class="w-full h-72 flex justify-center items-center bg-gray-100 lg:rounded-t-lg overflow-hidden"
 			in:fade|local={{ duration: 400 }}
-			out:slide|local={{ delay: 400, duration: 600 }}
+			out:slide|local={{ delay: 200, duration: 600 }}
 		>
 			{#await getSignedUrl(imgUrl)}
 				<div
