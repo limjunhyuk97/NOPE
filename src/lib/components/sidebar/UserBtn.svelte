@@ -22,7 +22,12 @@
 		<div in:fly={{ x: 64 }}>마이페이지</div>
 	</button>
 {:else}
-	<a href="/" class="border-b p-4 text-left" on:mouseenter={mouseEnter} on:mouseleave={mouseOut}>
+	<a
+		href="/"
+		class="border-b p-4 text-left hover:bg-gray-500 hover:text-white"
+		on:mouseenter={mouseEnter}
+		on:mouseleave={mouseOut}
+	>
 		함께하기
 		{#if hovering}
 			<div class="pt-4 flex flex-col items-start gap-4 text-sm" transition:slide>
