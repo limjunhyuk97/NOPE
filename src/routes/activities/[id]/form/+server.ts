@@ -74,24 +74,24 @@ export const POST: RequestHandler = async ({ request }: any) => {
 			return new Response(JSON.stringify({ msg: '네트워크 오류' }), {
 				status: 500
 			});
-		}
-
-		// 설문 있는 경우 등록
-		if (queries.length > 0) {
-			const { error } = await admin.from('activity_forms').insert(
-				queries.map((query: string) => {
-					return { question: query, activity_id: id };
-				})
-			);
-			if (error) {
-				console.log(error);
-				return new Response(JSON.stringify({ msg: '네트워크 오류' }), {
-					status: 500
+		} else {
+			// 설문 있는 경우 등록
+			if (queries.length > 0) {
+				const { error } = await admin.from('activity_forms').insert(
+					queries.map((query: string) => {
+						return { question: query, activity_id: id };
+					})
+				);
+				if (error) {
+					console.log(error);
+					return new Response(JSON.stringify({ msg: '네트워크 오류' }), {
+						status: 500
+					});
+				}
+				return new Response(JSON.stringify({ msg: '활동 등록 성공', id }), {
+					status: 200
 				});
 			}
-			return new Response(JSON.stringify({ msg: '활동 등록 성공', id }), {
-				status: 200
-			});
 		}
 
 		// 모두 잘 끝나면 응답

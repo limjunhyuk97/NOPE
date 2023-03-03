@@ -95,6 +95,7 @@
 			queries
 		});
 		if (response) {
+			$toast = '활동 수정 완료';
 			goto(`/users/activities/admin/${activity.id}`);
 		}
 	};

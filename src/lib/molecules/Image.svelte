@@ -30,12 +30,16 @@
 
 	// 이미지 제거 관련
 	let hovering_image_delete = false;
-	const imageDeleteHandler = (e: Event) => {
+	const imageDeleteHandler = async (e: Event) => {
 		const imgElement = document.querySelector('#image_upload');
 		imgElement.files = new DataTransfer().files;
+		const { error } = await supabase.from('images').update({ storage_id: '' }).eq('id', image_id);
 		image_id = null;
 		storage_id = null;
-		$toast = `${title} 이미지 삭제`;
+		if (error) {
+			console.log(error);
+			$toast = '이미지 삭제 실패';
+		} else $toast = `${title} 이미지 삭제`;
 	};
 
 	onMount(async () => {
