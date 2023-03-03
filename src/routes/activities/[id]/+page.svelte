@@ -84,7 +84,7 @@
 				{#if activityData.recruiting}
 					{#if userStatus === USER_STATUS.NOTAPPLIED}
 						<button class="text-green-700 hover:underline">참여 신청하기</button>
-						<button>세션 둘러보기</button>
+						<button class="hover:underline">세션 둘러보기</button>
 					{:else if userStatus === USER_STATUS.APPLIED}
 						<div class="text-green-700">참여 요청완료</div>
 						<button class="hover:underline">세션 둘러보기</button>

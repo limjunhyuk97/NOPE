@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { _isSuper } from './+page';
+	import { _isSuper, _updateActivity } from './+page';
 	import { user, toast } from '$lib/stores';
 	import Icon from '$lib/Icon.svelte';
 	import Details from '$lib/template/activities/Details.svelte';
@@ -31,6 +31,8 @@
 		recruiting = activity.recruiting,
 		status = activity.status,
 		queries = data.queries.map((query) => query.question);
+
+	$: if (start_at > end_at) end_at = start_at;
 
 	// 'upload_details'(활동 상세 정보) -> 'upload_queries'(활동 질문 정보)
 	const WRITE_DETAILS = 'upload_details';
@@ -79,7 +81,22 @@
 
 	// 활동 등록
 	const updateActivities = async (e: Event) => {
-		console.log(thumbnail);
+		const response = await _updateActivity({
+			thumbnail,
+			id: activity.id,
+			activity_type,
+			title,
+			start_at,
+			end_at,
+			short_details,
+			details,
+			recruiting,
+			status,
+			queries
+		});
+		if (response) {
+			goto(`/users/activities/admin/${activity.id}`);
+		}
 	};
 
 	beforeUpdate(async () => {
@@ -136,7 +153,7 @@
 	</div>
 	<!-- 활동 설문지 -->
 	<div class={isInDetail(phase) ? 'w-full h-full hidden' : 'w-full h-full'}>
-		<Queires>
+		<Queires title="질문지 수정">
 			<TextArea
 				slot="query_input"
 				constraint={1000}
@@ -176,7 +193,7 @@
 				><span><Icon icon="chevron-left" /> </span>이전 단계로
 			</button>
 			<button class="flex" on:click|preventDefault|once={updateActivities}
-				>활동 생성 완료 <span><Icon icon="chevron-right" /></span></button
+				>활동 수정 완료 <span><Icon icon="chevron-right" /></span></button
 			>
 		</div>
 	{/if}

@@ -1,4 +1,6 @@
 import { supabase } from '$lib/supabase';
+import axios from 'axios';
+import { toast } from '$lib/stores';
 
 export const _isSuper = async (user_id: string, activity_id: string) => {
 	const { data, error } = await supabase
@@ -29,6 +31,56 @@ const _getQueryData = async (activity_id: string) => {
 		.eq('activity_id', activity_id);
 
 	return error ? [] : data;
+};
+
+export const _updateActivity = async ({
+	thumbnail,
+	id,
+	activity_type,
+	title,
+	start_at,
+	end_at,
+	short_details,
+	details,
+	recruiting,
+	status,
+	queries
+}: {
+	thumbnail: string;
+	id: string;
+	activity_type: string;
+	title: string;
+	start_at: Date;
+	end_at: Date;
+	short_details: string;
+	details: string;
+	recruiting: boolean;
+	status: string;
+	queries: string[];
+}) => {
+	try {
+		const response = await axios({
+			method: 'post',
+			url: `/activities/${id}/form`,
+			data: {
+				thumbnail,
+				id,
+				activity_type,
+				title,
+				start_at,
+				end_at,
+				short_details,
+				details,
+				recruiting,
+				status,
+				queries
+			}
+		});
+		return response.data;
+	} catch (err) {
+		toast.set(err.response.data.msg);
+		console.log(err);
+	}
 };
 
 export async function load({ parent, params }) {
