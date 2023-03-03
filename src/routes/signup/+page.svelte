@@ -210,18 +210,20 @@
 					on:keyup|preventDefault={duplicationHandler(verifyName)}
 					required
 				/>
-				<!-- 이름 유효성 문구 -->
-				<div
-					class="w-max h-1 mt-1 text-xs {nameVerified === UNIFICATION_STATUS.VERIFIED
-						? 'text-green-600'
-						: 'text-red-600'}"
-				>
-					{#if nameVerified === UNIFICATION_STATUS.VERIFIED}
-						사용가능한 이름입니다.
-					{:else if nameVerified === UNIFICATION_STATUS.DUPLICATED}
-						이미 존재하는 이름입니다.
-					{/if}
-				</div>
+				{#if name.length > 0}
+					<!-- 이름 유효성 문구 -->
+					<div
+						class="w-max h-1 mt-1 text-xs {nameVerified === UNIFICATION_STATUS.VERIFIED
+							? 'text-green-600'
+							: 'text-red-600'}"
+					>
+						{#if nameVerified === UNIFICATION_STATUS.VERIFIED}
+							사용가능한 이름입니다.
+						{:else if nameVerified === UNIFICATION_STATUS.DUPLICATED}
+							이미 존재하는 이름입니다.
+						{/if}
+					</div>
+				{/if}
 			</label>
 
 			<!-- 회원가입 완료 -->
