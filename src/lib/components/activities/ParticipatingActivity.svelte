@@ -3,6 +3,7 @@
 	export let title: string;
 	export let pariticpant_status: string;
 	export let activity_status: string;
+	export let activity_type_kor: string;
 	export let isAdmin = true;
 
 	const activitiyStatus = (status: string) => {
@@ -29,5 +30,5 @@
 		<h2 class="text-2xl">{title}</h2>
 		<span class="text-base"> {participantStatus(pariticpant_status)}</span>
 	</div>
-	<h3>{activitiyStatus(activity_status)}</h3>
+	<h3>{activitiyStatus(activity_status)} / <span>{activity_type_kor}</span></h3>
 </a>

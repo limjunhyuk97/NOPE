@@ -8,7 +8,7 @@ const _getParticipatingActivities = async () => {
 	const user_id = get(user)?.id;
 	const { data, error } = await supabase
 		.from('participants')
-		.select('status, activities(id, title, status)')
+		.select('status, activities(id, title, status, activity_types(type_kor))')
 		.eq('user_id', user_id);
 
 	if (error) return null;

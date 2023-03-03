@@ -17,6 +17,7 @@
 					pariticpant_status={status}
 					title={activities.title}
 					activity_status={activities.status}
+					activity_type_kor={activities.activity_types.type_kor}
 					isAdmin={true}
 				/>
 			{/each}
