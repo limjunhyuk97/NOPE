@@ -14,7 +14,7 @@
 			goto('/activities');
 		}
 	}}
-	class="border-b text-start p-4"
+	class="border-b text-start p-4 hover:bg-gray-500 hover:text-white"
 >
 	로그아웃</button
 >

@@ -15,7 +15,7 @@
 	href="/likes"
 	on:mouseenter={mouseEnter}
 	on:mouseleave={mouseOut}
-	class="p-4 border-b text-start"
+	class="p-4 border-b text-start hover:bg-gray-500 hover:text-white"
 >
 	찜한 내역
 	{#if hovering}

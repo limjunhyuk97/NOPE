@@ -17,7 +17,7 @@
 		on:click|preventDefault={() => {
 			goto('/users');
 		}}
-		class="border-b p-4 text-left"
+		class="border-b p-4 text-left hover:bg-gray-500 hover:text-white"
 	>
 		<div in:fly={{ x: 64 }}>마이페이지</div>
 	</button>

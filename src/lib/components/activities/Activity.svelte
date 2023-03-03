@@ -29,22 +29,22 @@
 	export let isLikePage = false;
 
 	// 간단한 설명 보여주기
-	let hovering = false;
+	$: hoverExplanation = false;
 </script>
 
 <a
 	href="/activities/{id}"
-	class="w-full relative h-[420px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm font-semibold {isLikePage &&
+	class="w-full relative h-[390px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm font-semibold {isLikePage &&
 	!liked
 		? 'hidden '
 		: ''}"
 >
 	<!-- 상단 : 이미지 노출부분 -->
-	{#if !hovering}
+	{#if !hoverExplanation}
 		<div
-			class="w-full h-72 flex justify-center items-center bg-gray-100 lg:rounded-t-lg overflow-hidden"
+			class="w-full h-64 flex justify-center items-center bg-gray-100 lg:rounded-t-lg overflow-hidden"
 			in:fade|local={{ duration: 400 }}
-			out:slide|local={{ delay: 200, duration: 600 }}
+			out:slide|local={{ duration: 400 }}
 		>
 			{#await getSignedUrl(imgUrl)}
 				<div
@@ -79,15 +79,15 @@
 	<div
 		class="w-full h-full px-4 flex flex-col"
 		on:mouseenter={() => {
-			hovering = true;
+			hoverExplanation = true;
 		}}
 		on:mouseleave={(e) => {
-			hovering = false;
+			hoverExplanation = false;
 		}}
 	>
 		<!-- 활동 설명 -->
 		<div class="flex justify-between items-center font-bold">
-			<p class="w-full mt-2 text-lg {hovering ? '' : 'truncate'}">
+			<p class="w-full mt-2 text-lg {hoverExplanation ? '' : 'truncate'}">
 				{title}
 			</p>
 		</div>
@@ -107,7 +107,7 @@
 		<!-- 시작일, 종료일 -->
 		<div class="mt-3">시작일 {moment(startDate).format('YYYY.MM.DD')}</div>
 		<div class="mt-1">종료일 {moment(endDate).format('YYYY.MM.DD')}</div>
-		{#if hovering}
+		{#if hoverExplanation}
 			<p class="w-full h-full pt-8 text-sm text-ellipsis" in:fade={{ duration: 800 }}>
 				{short_details}
 			</p>

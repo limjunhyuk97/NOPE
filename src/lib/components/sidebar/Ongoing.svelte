@@ -23,7 +23,7 @@
 	}}
 	on:mouseenter={mouseEnter}
 	on:mouseleave={mouseOut}
-	class="p-4 border-b text-start"
+	class="p-4 border-b text-start hover:bg-gray-500 hover:text-white"
 >
 	활동
 	{#if hovering}
