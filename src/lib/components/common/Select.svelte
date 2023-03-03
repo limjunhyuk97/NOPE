@@ -6,17 +6,19 @@
 	export let name = 'none';
 	export let trueValue = 'id';
 	export let namedValue = 'type_kor';
+	export let selectedTrueValue = options[0][`${trueValue}`];
 
 	let selected = false;
-	let selectedNamedValue = options[0][`${namedValue}`];
 
-	const selectHandler = (option: { id: string; value: string }) => {
+	$: selectedNamedValue = options.filter(
+		(option) => option[`${trueValue}`] === selectedTrueValue
+	)[0][`${namedValue}`];
+
+	const selectHandler = (option) => {
 		selectedTrueValue = option[`${trueValue}`];
 		selectedNamedValue = option[`${namedValue}`];
 		selected = !selected;
 	};
-
-	export let selectedTrueValue = options[0][`${trueValue}`];
 </script>
 
 <input type="text" class="hidden" {name} value={selectedTrueValue} />

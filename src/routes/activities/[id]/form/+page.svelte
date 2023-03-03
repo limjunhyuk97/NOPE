@@ -13,17 +13,14 @@
 	import Radio from '$lib/molecules/Radio.svelte';
 	import { beforeUpdate } from 'svelte';
 	import { goto } from '$app/navigation';
-	import Activity from '$lib/components/activities/Activity.svelte';
 
 	export let data;
 
 	const activity = data.activity;
 
-	console.log(data.queries);
-
 	// 업데이트 데이터
 	let thumbnail: Blob,
-		activity_type = activity.activity_type,
+		activity_type = activity.type_id,
 		title = activity.title,
 		end_at = new Date(activity.end_at),
 		start_at = new Date(activity.start_at),
