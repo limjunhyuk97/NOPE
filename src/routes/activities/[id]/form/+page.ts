@@ -28,7 +28,7 @@ const _getQueryData = async (activity_id: string) => {
 	const { data, error } = await supabase
 		.from('activity_forms')
 		.select('*')
-		.eq('activity_id', activity_id);
+		.match({ activity_id, is_valid: true });
 
 	return error ? [] : data;
 };
