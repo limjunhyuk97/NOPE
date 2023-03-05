@@ -83,19 +83,32 @@
 			<div class="flex gap-12 mt-12 text-xl bg-white">
 				{#if activityData.recruiting}
 					{#if userStatus === USER_STATUS.NOTAPPLIED}
-						<button class="text-green-700 hover:underline">참여 신청하기</button>
-						<button class="hover:underline">세션 둘러보기</button>
+						<a
+							href="/activities/{activityData.id}/application"
+							class="text-green-700 hover:underline">참여 신청하기</a
+						>
+						<a href="/activities/{activityData.id}/sessions" class="hover:underline"
+							>세션 둘러보기</a
+						>
 					{:else if userStatus === USER_STATUS.APPLIED}
 						<div class="text-green-700">참여 요청완료</div>
-						<button class="hover:underline">세션 둘러보기</button>
+						<a href="/activities/{activityData.id}/sessions" class="hover:underline"
+							>세션 둘러보기</a
+						>
 					{:else if userStatus === USER_STATUS.LOGOUT}
-						<button class="hover:underline">세션 둘러보기</button>
+						<a href="/activities/{activityData.id}/sessions" class="hover:underline"
+							>세션 둘러보기</a
+						>
 					{:else}
-						<button class="text-green-700 hover:underline">세션 목록으로</button>
+						<a href="/activities/{activityData.id}/sessions" class="text-green-700 hover:underline"
+							>세션 목록으로</a
+						>
 					{/if}
 					<!-- 모집중이 아니라면 -->
 				{:else}
-					<button class="duration-300 hover:underline">세션 둘러보기 (모집 종료)</button>
+					<a href="/activities/{activityData.id}/sessions" class="duration-300 hover:underline"
+						>세션 둘러보기 (모집 종료)</a
+					>
 				{/if}
 			</div>
 		</div>
