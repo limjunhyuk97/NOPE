@@ -5,12 +5,12 @@
 	import Icon from '$lib/Icon.svelte';
 	import { onMount } from 'svelte';
 	import moment from 'moment';
-	import goto from '$app/navigation';
+	import { goto } from '$app/navigation';
 	moment.locale('ko');
 
 	// 필요한 데이터 주입
 	export let imgUrl = '';
-	export let imgSrc = '';
+	export let imgSrc = null;
 	export let title = '';
 	export let id = '';
 	export let short_details = '';
@@ -27,6 +27,14 @@
 		$toast = result ? (liked ? '찜하기 완료' : '찜한항목 제거') : '찜하기 실패';
 	};
 
+	// 페이지 이동 handler
+	const hrefHandler = () => {
+		const interval = setInterval(() => {
+			goto(`/activities/${id}`);
+			clearInterval(interval);
+		}, 400);
+	};
+
 	// 좋아요 여부 확인 (찜하기에서는 무조건 찜한 항목 띄워주기)
 	export let isLikePage = false;
 
@@ -39,8 +47,8 @@
 	});
 </script>
 
-<a
-	href="/activities/{id}"
+<button
+	on:click|preventDefault={hrefHandler}
 	class="w-full relative h-[390px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm font-semibold {isLikePage &&
 	!liked
 		? 'hidden '
@@ -70,7 +78,7 @@
 	{/if}
 	<!-- 하단 : 설명부분 -->
 	<div
-		class="w-full h-full px-4 flex flex-col"
+		class="flex flex-col items-start w-full h-full px-4 flex flex-col"
 		on:mouseenter={() => {
 			hoverExplanation = true;
 		}}
@@ -122,4 +130,4 @@
 			/>
 		</button>
 	{/if}
-</a>
+</button>
