@@ -66,8 +66,11 @@ export const POST: RequestHandler = async ({ request }: any) => {
 			status: 500
 		});
 	} else {
-		// 이미 등록된 설문 삭제
-		const { error } = await admin.from('activity_forms').delete().eq('activity_id', id);
+		// 이미 등록된 설문 비활성화 처리
+		const { error } = await admin
+			.from('activity_forms')
+			.update({ is_valid: false })
+			.eq('activity_id', id);
 
 		if (error) {
 			console.log(error);
