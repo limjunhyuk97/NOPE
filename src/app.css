@@ -23,6 +23,11 @@
 		@apply w-full h-full;
 	}
 
+	/* MODAL LEFT MARGIN */
+	.MODALMARGIN {
+		@apply 2xl:ml-[300px] lg:ml-[200px] ml-[200px];
+	}
+
 	/* OWNER COMPONENT */
 	.bg-super {
 		@apply bg-[#182747];

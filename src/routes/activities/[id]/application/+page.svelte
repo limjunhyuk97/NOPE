@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { _createAnswer } from './+page';
 	import { toast } from '$lib/stores';
+	import Warn from '$lib/components/modal/Warn.svelte';
 	import ContentLayer from '$lib/template/ContentLayer.svelte';
 	import TextArea from '$lib/molecules/TextArea.svelte';
 	import { user } from '$lib/stores';
+	import { showModal } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { beforeUpdate } from 'svelte';
 	export let data;
@@ -18,12 +20,25 @@
 
 	const generateQuestion = (id: number, query: string) => id + 1 + '. ' + query;
 
-	const submitHandler = async (event: Event) => {
+	const submitAnswer = async () => {
 		const reponse = await _createAnswer({ user_id: $user?.id, activity_id, answers });
 		if (reponse) {
-			$toast = '지원 성공!';
 			goto(`/activities/${activity_id}/application/done?id=${reponse.msg}`);
 		}
+	};
+
+	const submitHandler = (event: Event) => {
+		if (answers.length > 0) {
+			showModal({
+				component: Warn,
+				data: {
+					title: '한번 작성한 지원서는 수정이 불가능해요!',
+					subtitle: '작성하신 내용은 아래와 같습니다. 한번 더 확인 부탁드릴게요!',
+					answers,
+					handleConfirm: submitAnswer
+				}
+			});
+		} else submitAnswer();
 	};
 
 	beforeUpdate(() => {
@@ -53,7 +68,7 @@
 				</div>
 			{/if}
 			<button
-				on:click|preventDefault|once={submitHandler}
+				on:click|preventDefault={submitHandler}
 				class="flex justify-center w-full text-xl font-semibold hover:underline">지원서 제출</button
 			>
 		</div>
