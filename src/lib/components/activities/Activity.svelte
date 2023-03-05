@@ -109,7 +109,7 @@
 		<div class="mt-3">시작일 {moment(startDate).format('YYYY.MM.DD')}</div>
 		<div class="mt-1">종료일 {moment(endDate).format('YYYY.MM.DD')}</div>
 		{#if hoverExplanation}
-			<p class="w-full h-full pt-8 text-sm text-ellipsis" in:fade={{ duration: 800 }}>
+			<p class="w-full h-full pt-8 text-left text-sm text-ellipsis" in:fade={{ duration: 800 }}>
 				{short_details}
 			</p>
 		{/if}
