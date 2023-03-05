@@ -58,13 +58,17 @@
 				</div>
 			</div>
 			{#await getSignedUrl(activity.images.storage_id)}
-				<div class="w-64 h-64 rounded object-cover bg-gray-200" />
+				<div class="w-64 h-full min-h-[216px] rounded object-cover bg-gray-200" />
 			{:then thumbnail}
 				{#if thumbnail}
-					<img src={thumbnail} alt={activity.title} class="w-64 h-64 rounded object-cover" />
+					<img
+						src={thumbnail}
+						alt={activity.title}
+						class="w-64 h-full min-h-[216px] rounded object-cover"
+					/>
 				{:else}
 					<div
-						class="flex items-center justify-center w-64 h-64 rounded object-cover bg-gray-200 font-semibold"
+						class="flex items-center justify-center w-64 h-full min-h-[216px] rounded object-cover bg-gray-200 font-semibold"
 					>
 						이미지가 없습니다
 					</div>
