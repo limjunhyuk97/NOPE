@@ -5,7 +5,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class=" flex flex-col p-8 MODALMARGIN bg-white rounded-xl" on:click|stopPropagation>
+<div class=" flex flex-col p-8 MODALMARGIN bg-white rounded-xl" on:click={deleteModal}>
 	<div class="relative flex flex-col w-[480px] max-h-[720px]">
 		<div class="absolute top-0 left-0 w-full bg-white">
 			<button class="absolute right-0" on:click={deleteModal}><Icon icon="x" /></button>
@@ -31,7 +31,7 @@
 		</div>
 		<div class="w-full h-1 my-4 bg-gray-100" />
 	</div>
-	<div class="flex justify-around gap-16 pt-4">
+	<div class="flex justify-around gap-16 pt-4" on:click|stopPropagation>
 		<button class="font-semibold text-xl hover:underline" on:click={deleteModal}>다시 작성</button>
 		<button
 			class="font-semibold text-xl hover:underline"
