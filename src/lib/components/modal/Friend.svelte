@@ -5,8 +5,8 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="relative flex flex-col p-4 pr-16 bg-white rounded-xl" on:click|stopPropagation>
-	<button class="absolute right-4" on:click={deleteModal}><Icon icon="x" /></button>
+<div class="relative flex flex-col p-8 bg-white rounded-xl" on:click|stopPropagation>
+	<button class="absolute right-3 top-3" on:click={deleteModal}><Icon icon="x" /></button>
 	<div class="flex flex-col gap-4 w-[440px]">
 		<div class="flex gap-8">
 			{#if $modalData?.imageUrl}
@@ -18,7 +18,7 @@
 			{/if}
 			<div class="flex flex-col gap-2">
 				<h1 class="text-lg font-bold">{$modalData?.name}</h1>
-				<p class="w-64 h-28 overflow-y-auto">
+				<p class="w-64 h-32 overflow-y-auto scrollbar-hide">
 					{$modalData?.descriptions ? $modalData?.descriptions : '아직 소개가 없습니다!'}
 				</p>
 			</div>
