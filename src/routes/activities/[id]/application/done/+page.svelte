@@ -1,7 +1,6 @@
 <script>
 	import Done from '$lib/template/Done.svelte';
 	import qs from 'query-string';
-	import { onMount } from 'svelte';
 
 	export let data;
 
