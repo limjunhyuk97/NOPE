@@ -100,3 +100,13 @@ export const deleteModal = () => {
 export const getQueryString = (key: string) => {
 	return new URLSearchParams(location.search).get(key);
 };
+
+// 네트워크 에러
+export const networkErrorResponse = (error: any) => {
+	return new Response(JSON.stringify({ msg: error }), { status: 500 });
+};
+
+// 유효성 에러 메시지
+export const invalidErrorResponse = (error: string) => {
+	return new Response(JSON.stringify({ msg: error }), { status: 500 });
+};
