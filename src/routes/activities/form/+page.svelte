@@ -75,7 +75,7 @@
 	};
 
 	// 활동 등록
-	const createActivities = async (e: Event) => {
+	const submitHandler = async (e: Event) => {
 		const response = await _createActivity({
 			owner_id: $user?.id,
 			thumbnail,
@@ -183,7 +183,7 @@
 				class="flex ml-5"
 				><span><Icon icon="chevron-left" /> </span>이전 단계로
 			</button>
-			<button class="flex" on:click|preventDefault|once={createActivities}
+			<button class="flex" on:click|preventDefault|once={submitHandler}
 				>활동 생성 완료 <span><Icon icon="chevron-right" /></span></button
 			>
 		</div>
