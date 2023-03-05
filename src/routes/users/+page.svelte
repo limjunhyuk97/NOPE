@@ -110,12 +110,12 @@
 			{#if userImage}
 				<img
 					src={userImage}
-					class="xl:w-52 xl:h-52 w-36 h-36 rounded-full object-cover"
+					class="xl:w-52 xl:h-52 w-28 h-28 rounded-full object-cover"
 					alt="프로필사진"
 				/>
 			{:else}
 				<div
-					class="flex items-center justify-center xl:w-52 xl:h-52 w-36 h-36 rounded-full bg-blue-100 border-2 border-gray-100"
+					class="flex items-center justify-center xl:w-52 xl:h-52 w-28 h-28 rounded-full bg-blue-100 border-2 border-gray-100"
 				>
 					<Icon icon="user" size={132} stroke_width={0.5} />
 				</div>
@@ -132,7 +132,7 @@
 			</button>
 		</div>
 	</label>
-	<div class="flex flex-col gap-8 xl:gap-12 py-4 font-semibold">
+	<div class="flex flex-col gap-6 xl:gap-12 py-4 font-semibold">
 		<div class="flex items-center gap-12">
 			<div class="w-24 text-xl text-blue-300">이름</div>
 			<p class="w-full text-start">{$myProfile?.name}</p>
