@@ -1,4 +1,11 @@
 import { supabase } from '$lib/supabase';
+import { getSignedUrl } from '$lib/utils';
+
+// 이미지 받아오기
+export const getImage = async (storage_id: string) => {
+	const data = await getSignedUrl(storage_id);
+	return data;
+};
 
 // 좋아요
 export const handleLike = async (user_id: string, activity_id: string) => {

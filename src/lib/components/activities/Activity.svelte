@@ -1,14 +1,16 @@
 <script lang="ts">
-	import { handleLike, handleUnLike } from './Activity';
+	import { handleLike, handleUnLike, getImage } from './Activity';
 	import { slide, fade } from 'svelte/transition';
 	import { user, toast } from '$lib/stores';
-	import { getSignedUrl } from '$lib/utils';
 	import Icon from '$lib/Icon.svelte';
+	import { onMount } from 'svelte';
 	import moment from 'moment';
+	import goto from '$app/navigation';
 	moment.locale('ko');
 
 	// 필요한 데이터 주입
 	export let imgUrl = '';
+	export let imgSrc = '';
 	export let title = '';
 	export let id = '';
 	export let short_details = '';
@@ -30,6 +32,11 @@
 
 	// 간단한 설명 보여주기
 	$: hoverExplanation = false;
+
+	// 이미지 가져오기
+	onMount(async () => {
+		imgSrc = await getImage(imgUrl);
+	});
 </script>
 
 <a
@@ -46,33 +53,19 @@
 			in:fade|local={{ duration: 400 }}
 			out:slide|local={{ duration: 400 }}
 		>
-			{#await getSignedUrl(imgUrl)}
-				<div
-					class="flex items-center justify-center w-full h-full hover:scale-125 duration-200 text-lg"
-				>
-					{title}
-				</div>
-			{:then image}
-				{#if image}
-					<img
-						src={image}
-						alt={title}
-						class="w-full h-full scale-110 hover:scale-125 duration-200 object-cover"
-					/>
-				{:else}
-					<div
-						class="flex items-center justify-center w-full h-full hover:scale-125 duration-200 text-lg font-bold"
-					>
-						{title}
-					</div>
-				{/if}
-			{:catch error}
+			{#if imgSrc}
+				<img
+					src={imgSrc}
+					alt={title}
+					class="w-full h-full scale-110 hover:scale-125 duration-200 object-cover"
+				/>
+			{:else}
 				<div
 					class="flex items-center justify-center w-full h-full hover:scale-125 duration-200 text-lg font-bold"
 				>
 					{title}
 				</div>
-			{/await}
+			{/if}
 		</div>
 	{/if}
 	<!-- 하단 : 설명부분 -->
