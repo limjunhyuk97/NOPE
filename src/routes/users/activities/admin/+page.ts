@@ -4,6 +4,7 @@ import { supabase } from '$lib/supabase';
 
 const exceptedStatus = ['pending', 'denied', 'quit', 'granted'];
 
+// 내가 등록하였고, 운영하는 활동들
 const _getParticipatingActivities = async () => {
 	const user_id = get(user)?.id;
 	const { data, error } = await supabase
