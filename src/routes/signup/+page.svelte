@@ -90,7 +90,7 @@
 
 <div class="w-full h-full flex justify-center items-center">
 	<div
-		class="flex flex-col justify-center items-center 2xl:w-1/2 lg:w-3/4 w-4/5 h-4/5 border rounded shadow-2xl text-xl"
+		class="flex flex-col justify-center items-center 2xl:w-1/2 lg:w-3/4 w-4/5 border rounded shadow-2xl text-xl"
 	>
 		<form
 			method="POST"
