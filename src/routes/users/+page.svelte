@@ -22,15 +22,18 @@
 	// 프로필 이미지 업로드
 	const uploadImageHandler = async (event: Event) => {
 		if (event.target.files.length > 0) {
+			// bucket에 저장
 			const image = event.target.files[0];
 			const resized = await resizeImage(image);
 			const key = await getImageKey(resized);
 			if (!key) {
 				$toast = '이미지 등록이 불가능합니다.';
 			} else {
+				// access_token 수령
 				const access_token = await supabase.auth
 					.getSession()
 					.then(({ data }) => data.session?.access_token);
+				// 이미지 업데이트 (images 테이블에 저장 + image_id 정보 갱신)
 				const result = await _upsertUserProfileImage($myProfile?.image_id, key, access_token);
 				if (result) {
 					$toast = '이미지 등록 완료';
