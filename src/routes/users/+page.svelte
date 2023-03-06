@@ -124,11 +124,11 @@
 		<div
 			class="{hoveringImageUpload
 				? ''
-				: 'hidden'} absolute left-24 bottom-0 flex gap-2 p-2 bg-white rounded-full border border-gray-800"
+				: 'hidden'} absolute right-0 bottom-0 flex gap-2 p-2 bg-white rounded-full border border-gray-800"
 		>
-			<Icon icon="edit-2" />
+			<Icon icon="edit-2" size={16} />
 			<button on:click|preventDefault={removeImageHandler}>
-				<Icon icon="x" />
+				<Icon icon="x" size={16} />
 			</button>
 		</div>
 	</label>
