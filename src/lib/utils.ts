@@ -52,10 +52,10 @@ export const upsertImage = async ({
 	id,
 	storage_id
 }: {
-	id: string | undefined;
+	id: string | undefined | null;
 	storage_id: string;
 }) => {
-	if (id === undefined) id = `${uuidv4()}`;
+	if (id === undefined || id === null) id = `${uuidv4()}`;
 
 	const { error } = await supabase.from('images').upsert({ id, storage_id }, { onConflict: 'id' });
 
