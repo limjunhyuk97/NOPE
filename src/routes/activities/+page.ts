@@ -6,6 +6,7 @@ const getActivities = async () => {
 	const { data, error } = await supabase
 		.from('activities')
 		.select('*, activity_types("type", "type_kor"), images("storage_id")')
+		.eq('confirmation', 'confirmed')
 		.order('created_at', { ascending: false });
 	return error ? [] : data;
 };

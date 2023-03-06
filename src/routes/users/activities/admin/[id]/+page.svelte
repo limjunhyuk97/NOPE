@@ -19,6 +19,12 @@
 		return 'ERR TYPE';
 	};
 
+	const convertConfirmationToKor = (status: string) => {
+		if (status === 'confirmed') return '승인됨';
+		if (status === 'pending') return '승인 대기중인';
+		if (status === 'denied') return '승인 거절된';
+	};
+
 	$mypageSidebar = userStatus === 'super' ? Symbol.for('super') : Symbol.for('admin');
 	$mypageSidebarParam = activity.id;
 
@@ -55,6 +61,10 @@
 				<div class="flex gap-4">
 					<h2 class="w-28 font-bold">종료 일자</h2>
 					<span class="flex-1">{moment(activity.end_at).format('YYYY년 MM월 DD일')}</span>
+				</div>
+				<div class="flex gap-4">
+					<h2 class="w-28 font-bold">승인 여부</h2>
+					<span class="flex-1">{convertConfirmationToKor(activity.confirmation)}</span>
 				</div>
 			</div>
 			{#await getSignedUrl(activity.images.storage_id)}

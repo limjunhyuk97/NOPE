@@ -19,6 +19,7 @@
 					activity_status={activities.status}
 					activity_type_kor={activities.activity_types.type_kor}
 					isAdmin={true}
+					isConfirmed={activities.confirmation}
 				/>
 			{/each}
 		</div>

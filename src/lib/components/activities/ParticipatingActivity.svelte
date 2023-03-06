@@ -5,6 +5,7 @@
 	export let activity_status: string;
 	export let activity_type_kor: string;
 	export let isAdmin = true;
+	export let isConfirmed = 'confirmed';
 
 	const activitiyStatus = (status: string) => {
 		if (status === 'pending') return '시작전';
@@ -16,6 +17,12 @@
 		if (status === 'super') return '활동 오너';
 		if (status === 'admin') return '활동 관리자';
 		if (status === 'granted') return '참가자';
+	};
+
+	const approvalStatus = (status: string) => {
+		if (status === 'confirmed') return '';
+		if (status === 'pending') return '승인 대기중인';
+		if (status === 'denied') return '승인 거절된';
 	};
 </script>
 
@@ -30,5 +37,8 @@
 		<h2 class="text-2xl">{title}</h2>
 		<span class="text-base"> {participantStatus(pariticpant_status)}</span>
 	</div>
-	<h3>{activitiyStatus(activity_status)} / <span>{activity_type_kor}</span></h3>
+	<h3>
+		{activitiyStatus(activity_status)} /
+		<span>{approvalStatus(isConfirmed)} {activity_type_kor}</span>
+	</h3>
 </a>
