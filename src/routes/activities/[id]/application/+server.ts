@@ -10,8 +10,6 @@ export const POST = async ({ request }: any) => {
 		.select('id')
 		.match({ activity_id, user_id, status: 'pending' });
 
-	console.log(data, error);
-
 	if (error) {
 		return networkErrorResponse(error);
 	}

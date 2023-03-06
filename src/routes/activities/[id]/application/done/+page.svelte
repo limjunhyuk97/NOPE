@@ -5,7 +5,6 @@
 	export let data;
 
 	const { id } = qs.parse(window.location.search);
-	console.log(id);
 
 	const done_message = '지원서 제출을 완료했습니다!';
 	const links = [

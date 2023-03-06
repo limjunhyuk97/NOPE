@@ -22,7 +22,7 @@
 	const convertConfirmationToKor = (status: string) => {
 		if (status === 'confirmed') return '승인됨';
 		if (status === 'pending') return '승인 대기중';
-		if (status === 'denied') return '승인 거절된';
+		if (status === 'denied') return '승인 거절됨';
 	};
 
 	const convertConfirmationColor = (status: string) => {
@@ -61,7 +61,6 @@
 			</div>
 		{/await}
 	</div>
-
 	<div class="w-full h-1 my-12 bg-gray-100" />
 	<div class="w-full px-4">
 		<div class="flex flex-col items-start gap-4">
@@ -91,7 +90,7 @@
 			</div>
 			<div class="flex gap-4">
 				<h2 class="w-28 font-bold">승인 여부</h2>
-				<span class="flex-1 {convertConfirmationColor(activity.confirmation)}"
+				<span class="flex-1 font-bold {convertConfirmationColor(activity.confirmation)}"
 					>{convertConfirmationToKor(activity.confirmation)}</span
 				>
 			</div>
