@@ -5,10 +5,11 @@ import { get } from 'svelte/store';
 const getAnswers = async () => {
 	const { data, error } = await supabase
 		.from('participants')
-		.select('*, activity_answers(*, activity_forms(*))')
+		.select(
+			'*, activities(title, activity_types(type_kor)), activity_answers(*, activity_forms(*))'
+		)
 		.eq('user_id', get(user)?.id)
 		.neq('status', 'super');
-	console.log(error);
 	return error ? [] : data;
 };
 

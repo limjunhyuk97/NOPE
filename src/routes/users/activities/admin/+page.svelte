@@ -1,12 +1,12 @@
 <script lang="ts">
 	import ContentLayer from '$lib/template/ContentLayer.svelte';
-	import ParticipatingActivity from '$lib/components/activities/ParticipatingActivity.svelte';
+	import ParticipatingActivity from '$lib/components/users/ParticipatingActivity.svelte';
 
 	export let data;
 	const activityList = data.activityList;
 </script>
 
-<ContentLayer title="주최 활동 목록({activityList.length})">
+<ContentLayer title="주최 활동 목록 ({activityList.length})">
 	{#if activityList === null || activityList.length === 0}
 		<div>아직 관리중인 활동이 없습니다!</div>
 	{:else}
