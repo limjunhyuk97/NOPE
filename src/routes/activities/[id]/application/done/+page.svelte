@@ -9,7 +9,7 @@
 	const done_message = '지원서 제출을 완료했습니다!';
 	const links = [
 		{ text: '홈으로', href: '/' },
-		{ text: '지원서 보러가기', href: `/users/applications/${id}` }
+		{ text: '지원서 보러가기', href: `/applications/${id}` }
 	];
 </script>
 
