@@ -28,7 +28,7 @@
 	class="flex flex-col justify-between w-full h-44 p-4 hover:opacity-90 rounded bg-apply"
 >
 	<div class="flex flex-col w-full h-full py-2">
-		<h2 class="text-2xl">{title}</h2>
+		<h2 class="text-2xl font-bold">{title}</h2>
 	</div>
 	<h3>
 		<span class="font-bold {applyStatusColor(apply_status)}">{applyStatus(apply_status)}</span> /

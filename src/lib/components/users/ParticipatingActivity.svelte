@@ -34,7 +34,7 @@
 		: 'black'}"
 >
 	<div class="flex flex-col w-full h-full py-2">
-		<h2 class="text-2xl">{title}</h2>
+		<h2 class="text-2xl font-bold">{title}</h2>
 		<span class="text-base"> {participantStatus(pariticpant_status)}</span>
 	</div>
 	<h3>

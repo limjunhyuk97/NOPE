@@ -5,8 +5,6 @@
 	export let data;
 
 	const answers = data.answers;
-
-	console.log(answers);
 </script>
 
 <ContentLayer title="지원 내역 조회 ({answers.length})">
