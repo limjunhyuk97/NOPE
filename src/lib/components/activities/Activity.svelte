@@ -49,7 +49,7 @@
 
 <button
 	on:click|preventDefault={hrefHandler}
-	class="w-full relative h-[390px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm font-semibold {isLikePage &&
+	class="w-full relative h-[390px] mb-12 shadow-2xl rounded-lg overflow-hidden text-sm {isLikePage &&
 	!liked
 		? 'hidden '
 		: ''}"
@@ -96,7 +96,8 @@
 		<!-- 활동 진행 상태 -->
 		<div class="mt-3">
 			<div>
-				{activity_types.type_kor} / {#if recruiting}
+				{activity_types.type_kor} /
+				{#if recruiting}
 					<span class="mt-1 font-semibold text-green-600">지원 가능</span>
 				{:else}
 					<span class="mt-1 font-semibold text-red-600">지원 불가</span>

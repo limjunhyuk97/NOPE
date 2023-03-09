@@ -61,7 +61,7 @@ export const _updateActivity = async ({
 	try {
 		const response = await axios({
 			method: 'post',
-			url: `/activities/${id}/form`,
+			url: `/activities/${id}/admin/form`,
 			data: {
 				thumbnail,
 				id,

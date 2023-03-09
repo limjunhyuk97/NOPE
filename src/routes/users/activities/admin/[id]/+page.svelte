@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ContentLayer from '$lib/template/ContentLayer.svelte';
+	import Icon from '$lib/Icon.svelte';
 	import { mypageSidebar, mypageSidebarParam } from '$lib/stores';
 	import { getSignedUrl } from '$lib/utils';
 	import { onDestroy } from 'svelte';
@@ -11,6 +12,7 @@
 
 	const activity = data.activityData;
 	const userStatus = data.userStatus;
+	const activityForms = data.activityData.activity_forms.filter((form) => form.is_valid);
 
 	const convertStatusToKor = (status: string) => {
 		if (status === 'pending') return '활동 시작 전';
@@ -64,6 +66,10 @@
 	<div class="w-full h-1 my-12 bg-gray-100" />
 	<div class="w-full px-4">
 		<div class="flex flex-col items-start gap-4">
+			<div class="flex items-start gap-4 text-xl font-bold">
+				<h1>활동 정보</h1>
+				<Icon icon="archive" />
+			</div>
 			<div class="flex gap-4">
 				<h2 class="w-28 font-bold">활동 타입</h2>
 				<span class="flex-1">{activity.activity_types.type_kor}</span>
@@ -94,6 +100,19 @@
 					>{convertConfirmationToKor(activity.confirmation)}</span
 				>
 			</div>
+		</div>
+		<div class="w-full h-1 my-12 bg-gray-100" />
+		<div class="flex flex-col items-start gap-4">
+			<div class="flex items-start gap-4 text-xl font-bold">
+				<h1>설문지 질문</h1>
+				<Icon icon="message-square" />
+			</div>
+			{#each activityForms as form, id}
+				<div class="flex gap-4">
+					<h2 class="w-28 font-bold">질문 {id + 1}</h2>
+					<span class="flex-1">{form.question}</span>
+				</div>
+			{/each}
 		</div>
 		<div class="w-full h-1 my-12 bg-gray-100" />
 		<MDViewer mdTypeContent={activity.details} />

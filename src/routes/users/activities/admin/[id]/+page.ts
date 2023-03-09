@@ -5,7 +5,7 @@ import { supabase } from '$lib/supabase';
 const getActivityData = async (id: string) => {
 	const { data, error } = await supabase
 		.from('activities')
-		.select('*, activity_types("type", "type_kor"), images("storage_id")')
+		.select('*, activity_forms(*), activity_types("type", "type_kor"), images("storage_id")')
 		.match({ id });
 	return error ? [] : data[0];
 };

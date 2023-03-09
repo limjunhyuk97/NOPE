@@ -248,7 +248,7 @@
 			<h2 class="text-2xl pb-4 font-bold">활동 오너 메뉴</h2>
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
-				href="/activities/{$mypageSidebarParam}/form">활동 정보 수정</a
+				href="/activities/{$mypageSidebarParam}/admin/form">활동 정보 수정</a
 			>
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
@@ -256,7 +256,7 @@
 			>
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
-				href="/users/{$mypageSidebarParam}/admin/participants">지원 정보 관리</a
+				href="/activities/{$mypageSidebarParam}/admin/participants">지원 정보 관리</a
 			>
 		</div>
 	{:else if $mypageSidebar === Symbol.for('admin')}
