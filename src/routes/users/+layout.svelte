@@ -256,7 +256,7 @@
 			>
 			<a
 				class="text-start text-gray-500 text-xl hover:underline"
-				href="/activities/{$mypageSidebarParam}/admin/participants">지원 정보 관리</a
+				href="/activities/{$mypageSidebarParam}/admin/applications">지원 정보 관리</a
 			>
 		</div>
 	{:else if $mypageSidebar === Symbol.for('admin')}
