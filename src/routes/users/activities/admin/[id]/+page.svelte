@@ -107,12 +107,16 @@
 				<h1>설문지 질문</h1>
 				<Icon icon="message-square" />
 			</div>
-			{#each activityForms as form, id}
-				<div class="flex gap-4">
-					<h2 class="w-28 font-bold">질문 {id + 1}</h2>
-					<span class="flex-1">{form.question}</span>
-				</div>
-			{/each}
+			{#if activityForms.length > 0}
+				{#each activityForms as form, id}
+					<div class="flex gap-4">
+						<h2 class="w-28 font-bold">질문 {id + 1}</h2>
+						<span class="flex-1">{form.question}</span>
+					</div>
+				{/each}
+			{:else}
+				<div>아직 질문이 없습니다!</div>
+			{/if}
 		</div>
 		<div class="w-full h-1 my-12 bg-gray-100" />
 		<MDViewer mdTypeContent={activity.details} />
