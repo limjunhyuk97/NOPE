@@ -1,26 +1,9 @@
 <script lang="ts">
+	import { applyStatusColor, applyStatus } from '$lib/utils';
 	export let id: string;
 	export let title: string;
 	export let apply_status: string;
 	export let activity_type_kor: string;
-
-	const applyStatus = (status: string) => {
-		if (status === 'pending') return '참여 대기중';
-		if (status === 'denied') return '참여 거절됨';
-		if (status === 'quit') return '활동 탈퇴';
-		if (status === 'granted') return '참여중';
-		if (status === 'admin') return '참여중';
-		if (status === 'super') return '참여중';
-	};
-
-	const applyStatusColor = (status: string) => {
-		if (status === 'pending') return 'text-black';
-		if (status === 'denied') return 'text-red-600';
-		if (status === 'quit') return 'text-black';
-		if (status === 'granted') return 'text-green-600';
-		if (status === 'admin') return 'text-green-600';
-		if (status === 'super') return 'text-green-600';
-	};
 </script>
 
 <a

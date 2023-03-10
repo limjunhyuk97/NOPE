@@ -62,11 +62,6 @@
 		outline-color: gray;
 		resize: none;
 	}
-	input {
-		padding: 0px 8px;
-		background-color: #f3f4f6;
-		outline: none;
-	}
 	/* md 문서를 위한 스타일 정의 */
 	.md-body {
 		width: 100%;

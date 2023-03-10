@@ -110,3 +110,23 @@ export const networkErrorResponse = (error: any) => {
 export const invalidErrorResponse = (error: string) => {
 	return new Response(JSON.stringify({ msg: error }), { status: 500 });
 };
+
+// 활동 상태 텍스트 색상
+export const applyStatusColor = (status: string) => {
+	if (status === 'pending') return 'text-black';
+	if (status === 'denied') return 'text-red-600';
+	if (status === 'quit') return 'text-black';
+	if (status === 'granted') return 'text-green-600';
+	if (status === 'admin') return 'text-green-600';
+	if (status === 'super') return 'text-green-600';
+};
+
+// 활동 참여 상태
+export const applyStatus = (status: string) => {
+	if (status === 'pending') return '참여 대기중';
+	if (status === 'denied') return '참여 거절됨';
+	if (status === 'quit') return '활동 탈퇴';
+	if (status === 'granted') return '참여중';
+	if (status === 'admin') return '관리자';
+	if (status === 'super') return '활동 오너';
+};
