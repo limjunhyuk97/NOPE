@@ -39,7 +39,7 @@
 	export let isLikePage = false;
 
 	// 간단한 설명 보여주기
-	$: hoverExplanation = false;
+	let hoverExplanation = false;
 
 	// 이미지 가져오기
 	onMount(async () => {
