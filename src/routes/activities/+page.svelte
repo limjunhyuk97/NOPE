@@ -3,6 +3,7 @@
 	import type { ActivityTypes } from '$lib/types';
 	import { activitiesToShow } from '$lib/stores';
 	import { ACTIVITY_TYPE, ACTIVITY_FILTER } from '$lib/constants';
+	import PageWrapper from '$lib/template/PageWrapper.svelte';
 	import Activity from '$lib/components/activities/Activity.svelte';
 	import ActivityFilter from '$lib/components/filter/Filter.svelte';
 	import { fade } from 'svelte/transition';
@@ -38,7 +39,7 @@
 	};
 </script>
 
-<div class="lg:p-10 py-14 px-6" in:fade={{ duration: 500 }}>
+<PageWrapper>
 	<div class="flex items-center gap-8 w-full mt-8 mb-4 ">
 		<div class="text-2xl font-bold">{filteredActivityType}</div>
 		<ActivityFilter bind:filtered={recruitFilter} />
@@ -63,4 +64,4 @@
 	{:else}
 		<div class="mt-12">해당되는 활동이 없습니다!</div>
 	{/if}
-</div>
+</PageWrapper>

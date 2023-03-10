@@ -28,6 +28,11 @@
 		@apply 2xl:ml-[300px] lg:ml-[200px] ml-[200px];
 	}
 
+	/* PAGE TITLE */
+	.PAGETITLE {
+		@apply mt-8 mb-4 text-2xl font-bold;
+	}
+
 	/* OWNER COMPONENT */
 	.bg-super {
 		@apply bg-[#182747];

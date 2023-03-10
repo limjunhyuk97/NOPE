@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Like } from '$lib/types/likes';
+	import PageWrapper from '$lib/template/PageWrapper.svelte';
 	import Activity from '$lib/components/activities/Activity.svelte';
 	import { fade } from 'svelte/transition';
 	import moment from 'moment';
@@ -10,8 +11,8 @@
 	const Likes: ArrayLike<Like> = data.likes;
 </script>
 
-<div class="w-full lg:p-10 py-14 px-6" in:fade={{ duration: 500 }}>
-	<div class="mt-8 mb-4 text-2xl font-bold">찜한 활동</div>
+<PageWrapper>
+	<div class="PAGETITLE">찜한 활동</div>
 	{#if Likes?.length}
 		<div class="grid xl:grid-cols-4 grid-cols-3 gap-4 gap-y-0 mb-8 ">
 			{#each Likes as { activities: { title, recruiting, start_at, end_at, id, status, images, short_details, activity_types } }}
@@ -32,4 +33,4 @@
 	{:else}
 		<div class="mt-12">아직 찜한 활동이 없습니다!</div>
 	{/if}
-</div>
+</PageWrapper>

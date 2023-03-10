@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageWrapper from '$lib/template/PageWrapper.svelte';
 	import Back from '$lib/Back.svelte';
 	export let data;
 
@@ -24,7 +25,7 @@
 	};
 </script>
 
-<div class="w-full lg:p-10 py-14 px-6">
+<PageWrapper>
 	<div class="flex items-start gap-2 mt-8 mb-4 text-2xl font-bold">
 		<Back />
 		<h1>{participant.activities.title} 지원서</h1>
@@ -46,4 +47,4 @@
 			>{convertStatus(participant.status)}</span
 		>
 	</div>
-</div>
+</PageWrapper>

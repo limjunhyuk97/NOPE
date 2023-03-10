@@ -1,3 +1,7 @@
-<div class="w-full lg:p-10 py-14 px-6">
+<script>
+	import PageWrapper from '$lib/template/PageWrapper.svelte';
+</script>
+
+<PageWrapper>
 	<h1 class="mt-8 mb-4 text-2xl font-bold">게시글 목록</h1>
-</div>
+</PageWrapper>

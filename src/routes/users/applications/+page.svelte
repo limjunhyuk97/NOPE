@@ -1,5 +1,5 @@
 <script>
-	import ContentLayer from '$lib/template/ContentLayer.svelte';
+	import ContentWrapper from '$lib/template/ContentWrapper.svelte';
 	import AppliedActivity from '$lib/components/users/AppliedActivity.svelte';
 
 	export let data;
@@ -7,7 +7,7 @@
 	const answers = data.answers;
 </script>
 
-<ContentLayer title="지원 내역 조회 ({answers.length})">
+<ContentWrapper title="지원 내역 조회 ({answers.length})">
 	{#if answers === null || answers.length === 0}
 		<div>아직 지원한 내역이 없습니다!</div>
 	{:else}
@@ -22,4 +22,4 @@
 			{/each}
 		</div>
 	{/if}
-</ContentLayer>
+</ContentWrapper>

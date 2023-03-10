@@ -2,7 +2,7 @@
 	import { _createAnswer } from './+page';
 	import { toast } from '$lib/stores';
 	import Warn from '$lib/components/modal/Warn.svelte';
-	import ContentLayer from '$lib/template/ContentLayer.svelte';
+	import ContentWrapper from '$lib/template/ContentWrapper.svelte';
 	import TextArea from '$lib/molecules/TextArea.svelte';
 	import { user } from '$lib/stores';
 	import { showModal } from '$lib/utils';
@@ -50,7 +50,7 @@
 </script>
 
 <div class="w-full lg:p-10 py-14 px-6">
-	<ContentLayer {title} hasBack={true}>
+	<ContentWrapper {title} hasBack={true}>
 		<div class="flex flex-col gap-8 mt-12">
 			<h2 class="text-xl font-bold">지원서 작성</h2>
 			{#if answers.length > 0}
@@ -72,5 +72,5 @@
 				class="flex justify-center w-full text-xl font-semibold hover:underline">지원서 제출</button
 			>
 		</div>
-	</ContentLayer>
+	</ContentWrapper>
 </div>

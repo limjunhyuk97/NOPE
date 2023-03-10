@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ContentLayer from '$lib/template/ContentLayer.svelte';
+	import ContentWrapper from '$lib/template/ContentWrapper.svelte';
 	import Icon from '$lib/Icon.svelte';
 	import { mypageSidebar, mypageSidebarParam } from '$lib/stores';
 	import { getSignedUrl } from '$lib/utils';
@@ -41,7 +41,7 @@
 	});
 </script>
 
-<ContentLayer title={activity.title} hasBack={true}>
+<ContentWrapper title={activity.title} hasBack={true}>
 	<div class="flex justify-center items-center w-full">
 		{#await getSignedUrl(activity?.images?.storage_id)}
 			<div class="w-64 min-h-[216px] rounded object-cover bg-gray-200" />
@@ -121,4 +121,4 @@
 		<div class="w-full h-1 my-12 bg-gray-100" />
 		<MDViewer mdTypeContent={activity.details} />
 	</div>
-</ContentLayer>
+</ContentWrapper>

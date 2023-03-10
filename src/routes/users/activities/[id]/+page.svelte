@@ -1,5 +1,5 @@
 <script>
-	import ContentLayer from '$lib/template/ContentLayer.svelte';
+	import ContentWrapper from '$lib/template/ContentWrapper.svelte';
 	import { mypageSidebar, mypageSidebarParam } from '$lib/stores';
 	import { onDestroy } from 'svelte';
 	import MDViewer from '$lib/components/common/MDViewer.svelte';
@@ -17,8 +17,8 @@
 	});
 </script>
 
-<ContentLayer title={activity.title} hasBack={true}>
+<ContentWrapper title={activity.title} hasBack={true}>
 	<div class="w-full px-4">
 		<MDViewer mdTypeContent={activity.details} />
 	</div>
-</ContentLayer>
+</ContentWrapper>
