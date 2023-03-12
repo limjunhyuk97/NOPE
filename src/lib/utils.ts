@@ -119,6 +119,7 @@ export const applyStatusColor = (status: string) => {
 	if (status === 'granted') return 'text-green-600';
 	if (status === 'admin') return 'text-green-600';
 	if (status === 'super') return 'text-green-600';
+	if (status === 'ejected') return 'text-red-600';
 };
 
 // 활동 참여 상태
@@ -129,4 +130,5 @@ export const applyStatus = (status: string) => {
 	if (status === 'granted') return '참여중';
 	if (status === 'admin') return '관리자';
 	if (status === 'super') return '활동 오너';
+	if (status === 'ejected') return '퇴출됨';
 };

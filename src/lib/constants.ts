@@ -69,5 +69,6 @@ export const USER_STATUS = {
 	APPLIED: Symbol.for('applied'),
 	PARTICIPANT: Symbol.for('participant'),
 	ADMIN: Symbol.for('admin'),
-	SUPER: Symbol.for('super')
+	SUPER: Symbol.for('super'),
+	EJECTED: Symbol.for('ejected')
 };

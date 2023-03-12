@@ -9,7 +9,7 @@
 
 	export let data;
 
-	const enrollStatus = ['admin', 'granted', 'quit'];
+	const enrollStatus = ['admin', 'granted', 'quit', 'ejected'];
 	const participatingStatus = ['denied', 'pending'];
 
 	let {
@@ -19,7 +19,9 @@
 	} = { ...data };
 
 	let applicants = [];
+	let applicants_length = 0;
 	let enrolled = [];
+	let enrolled_length = 0;
 
 	const filterApplicants = () => {
 		applicants = participants
@@ -28,12 +30,14 @@
 				if (applicant1.status === 'pending' && applicant2.status === 'denied') return -1;
 				else return 1;
 			});
+		applicants_length = applicants.length;
 	};
 
 	const filterEnrolled = () => {
 		enrolled = participants.filter((participant) =>
 			enrollStatus.some((status) => status === participant.status)
 		);
+		enrolled_length = enrolled.length;
 	};
 
 	const changeParticipantStatusHalder = async (participant_id: string, status: string) => {
@@ -48,8 +52,7 @@
 	};
 
 	const searchApplicants = (e: Event) => {
-		console.log(e.target.value);
-		applicants = data.participants.filter(
+		applicants = participants.filter(
 			(participant) =>
 				participatingStatus.some((status) => status === participant.status) &&
 				participant.users.name.includes(e.target.value)
@@ -57,8 +60,7 @@
 	};
 
 	const searchEnrolled = (e: Event) => {
-		console.log(e.target.value);
-		enrolled = data.participants.filter(
+		enrolled = participants.filter(
 			(participant) =>
 				enrollStatus.some((status) => status === participant.status) &&
 				participant.users.name.includes(e.target.value)
@@ -79,11 +81,11 @@
 			<div
 				class="absolute top-0 left-0 flex justify-between items-center w-1/2 px-4 mb-8 bg-white border-r"
 			>
-				<h1 class="w-48 text-xl font-semibold">지원자 목록 ({applicants.length})</h1>
+				<h1 class="w-48 text-xl font-semibold">지원자 목록 ({applicants_length})</h1>
 				<div class="flex flex-1 items-center relative">
 					<input
 						value=""
-						placeholder="이름을 입력하세요"
+						placeholder="이름으로 검색"
 						type="text"
 						class="w-full h-8 bg-gray-100 px-4 rounded outline-none placeholder:text-sm"
 						on:keyup|preventDefault={searchApplicants}
@@ -94,7 +96,7 @@
 			<!-- 지원자 목록 데이터 -->
 			<div class="w-full h-16" />
 			<div class="flex flex-col gap-4">
-				{#if data.participants.length > 0}
+				{#if applicants_length > 0}
 					{#each applicants as participant}
 						<ApplicationCard
 							name={participant.users.name}
@@ -138,23 +140,56 @@
 			<div
 				class="absolute top-0 right-0 flex justify-between items-center w-1/2 px-4 mb-8 bg-white"
 			>
-				<h1 class="w-48 text-xl font-semibold">참가자 목록 ({enrolled.length})</h1>
+				<h1 class="w-48 text-xl font-semibold">참가자 목록 ({enrolled_length})</h1>
 				<div class="flex flex-1 items-center relative">
-					<input type="text" class="w-full h-8 bg-gray-100 px-4 rounded outline-none" />
+					<input
+						value=""
+						placeholder="이름으로 검색"
+						type="text"
+						class="w-full h-8 bg-gray-100 px-4 rounded outline-none placeholder:text-sm"
+						on:keyup={searchEnrolled}
+					/>
 					<div class="absolute right-2"><Icon icon="search" /></div>
 				</div>
 			</div>
 			<!-- 참가자 목록 데이터 -->
 			<div class="w-full h-16" />
 			<div class="flex flex-col gap-4">
-				{#if enrolled.length > 0}
+				{#if enrolled_length > 0}
 					{#each enrolled as participant}
 						<ApplicationCard
 							name={participant.users.name}
 							status={participant.status}
 							image_id={participant.users.images.storage_id}
 							href="/activities/{activity_id}/admin/applications/{participant.id}"
-						/>
+						>
+							<!-- granted -->
+							{#if participant.status === 'granted'}
+								<button
+									class="hover:underline"
+									on:click|preventDefault={(e) => {
+										changeParticipantStatusHalder(participant.id, 'admin');
+									}}>관리자지정</button
+								>
+								<!-- admin -->
+							{:else if participant.status === 'admin'}
+								<button
+									class="hover:underline"
+									on:click|preventDefault={(e) => {
+										changeParticipantStatusHalder(participant.id, 'granted');
+									}}>관리자해제</button
+								>
+								<!-- quit -->
+							{/if}
+							{#if participant.status === 'admin' || participant.status === 'granted'}
+								<button
+									class="hover:underline"
+									on:click|preventDefault={(e) => {
+										changeParticipantStatusHalder(participant.id, 'ejected');
+									}}>활동퇴출</button
+								>
+							{/if}
+						</ApplicationCard>
 					{/each}
 				{:else}
 					<div class="flex flex-col w-full h-24 py-2 font-semibold">

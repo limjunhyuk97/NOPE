@@ -22,6 +22,7 @@ const compareUserStatus = (
 		if (status === 'granted') return USER_STATUS.PARTICIPANT;
 		if (status === 'admin') return USER_STATUS.ADMIN;
 		if (status === 'super') return USER_STATUS.SUPER;
+		if (status === 'ejected') return USER_STATUS.EJECTED;
 		return USER_STATUS.LOGOUT;
 	}
 };

@@ -1,28 +1,11 @@
 <script lang="ts">
 	import PageWrapper from '$lib/template/PageWrapper.svelte';
 	import Back from '$lib/Back.svelte';
+	import { applyStatusColor, applyStatus } from '$lib/utils';
 	export let data;
 
 	const participant = data.answer[0];
 	const answers = participant.activity_answers;
-
-	const convertStatus = (status: string) => {
-		if (status === 'super') return '수락됨';
-		if (status === 'admin') return '수락됨';
-		if (status === 'granted') return '수락됨';
-		if (status === 'quit') return '수락됨 (탈퇴)';
-		if (status === 'denied') return '거절됨';
-		if (status === 'pending') return '대기중';
-	};
-
-	const convertTextColor = (status: string) => {
-		if (status === 'super') return 'text-green-600';
-		if (status === 'admin') return 'text-green-600';
-		if (status === 'granted') return 'text-green-600';
-		if (status === 'quit') return 'text-green-600';
-		if (status === 'denied') return 'text-red-500';
-		if (status === 'pending') return 'text-gray-500';
-	};
 </script>
 
 <PageWrapper>
@@ -49,8 +32,8 @@
 	</div>
 	<div class="flex flex-col">
 		<h2 class="text-xl font-bold mt-12">지원 결과</h2>
-		<span class="text-2xl mt-8 font-bold {convertTextColor(participant.status)}"
-			>{convertStatus(participant.status)}</span
+		<span class="text-2xl mt-8 font-bold {applyStatusColor(participant.status)}"
+			>{applyStatus(participant.status)}</span
 		>
 	</div>
 </PageWrapper>

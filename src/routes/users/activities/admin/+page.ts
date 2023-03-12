@@ -2,7 +2,7 @@ import { user } from '$lib/stores';
 import { get } from 'svelte/store';
 import { supabase } from '$lib/supabase';
 
-const exceptedStatus = ['pending', 'denied', 'quit', 'granted'];
+const exceptedStatus = ['pending', 'denied', 'quit', 'granted', 'ejected'];
 
 // 내가 등록하였고, 운영하는 활동들
 const _getParticipatingActivities = async () => {

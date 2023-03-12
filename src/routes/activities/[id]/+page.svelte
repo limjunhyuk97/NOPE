@@ -82,7 +82,7 @@
 			</div>
 			<div class="flex gap-12 mt-12 text-xl bg-white">
 				{#if activityData.recruiting}
-					{#if userStatus === USER_STATUS.NOTAPPLIED}
+					{#if userStatus === USER_STATUS.NOTAPPLIED || userStatus === USER_STATUS.EJECTED}
 						<a
 							href="/activities/{activityData.id}/application"
 							class="text-green-700 hover:underline">참여 신청하기</a

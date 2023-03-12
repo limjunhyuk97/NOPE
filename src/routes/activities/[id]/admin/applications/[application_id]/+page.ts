@@ -1,0 +1,4 @@
+export async function load({ parent, params }) {
+	await parent();
+	console.log(params.id, params.application_id);
+}
