@@ -2,7 +2,7 @@ import { supabase } from '$lib/supabase';
 import { user } from '$lib/stores';
 import { get } from 'svelte/store';
 
-const getAnswers = async () => {
+export const _getAnswers = async () => {
 	const { data, error } = await supabase
 		.from('participants')
 		.select(
@@ -15,7 +15,7 @@ const getAnswers = async () => {
 
 export async function load({ parent }) {
 	await parent();
-	const answers = await getAnswers();
+	const answers = await _getAnswers();
 
 	return { answers };
 }

@@ -12,6 +12,8 @@ const _getParticipatingActivities = async () => {
 		.select('status, activities(id, title, status, confirmation, activity_types(type_kor))')
 		.eq('user_id', user_id);
 
+	console.log(data, error);
+
 	if (error) return [];
 	return data.filter((activity) => !exceptedStatus.some((status) => status === activity.status));
 };
