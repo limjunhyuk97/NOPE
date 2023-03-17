@@ -52,7 +52,7 @@
 			</div>
 			<div>
 				<h2 class="text-xl font-semibold">지원자 자기소개</h2>
-				{#if user?.users.descriptions.length > 0}
+				{#if user?.users.descriptions?.length > 0}
 					<p class="p-4 mt-4 bg-gray-100 rounded">{user?.users.descriptions}</p>
 				{:else}
 					<span class="block mt-4">작성한 자기소개가 없습니다!</span>
