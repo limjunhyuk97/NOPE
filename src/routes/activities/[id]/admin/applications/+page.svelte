@@ -101,7 +101,7 @@
 						<ApplicationCard
 							name={participant.users.name}
 							status={participant.status}
-							image_id={participant.users.images.storage_id}
+							image_id={participant.users.images?.storage_id}
 							href="/activities/{activity_id}/admin/applications/{participant.id}"
 						>
 							<!-- 대기중인 지원자 -->
@@ -160,7 +160,7 @@
 						<ApplicationCard
 							name={participant.users.name}
 							status={participant.status}
-							image_id={participant.users.images.storage_id}
+							image_id={participant.users.images?.storage_id}
 							href="/activities/{activity_id}/admin/applications/{participant.id}"
 						>
 							<!-- granted -->

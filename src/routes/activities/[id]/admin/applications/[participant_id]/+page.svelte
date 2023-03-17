@@ -23,7 +23,7 @@
 	};
 
 	onMount(async () => {
-		userImage = await getSignedUrl(user?.users.images.storage_id);
+		userImage = await getSignedUrl(user?.users.images?.storage_id);
 	});
 </script>
 
