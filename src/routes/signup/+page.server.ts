@@ -9,7 +9,11 @@ const isValidEmailType = (email: string) => {
 };
 
 const isUniqueEmail = async (email: string) => {
-	const { data, error } = await admin.from('users').select('status').eq('email', email);
+	const { data, error } = await admin
+		.from('users')
+		.select('status')
+		.eq('email', email)
+		.neq('status', 'leaved');
 	return data?.length > 0 ? false : true;
 };
 
@@ -29,7 +33,11 @@ const isValidName = (name: string) => {
 };
 
 const isUniqueName = async (name: string) => {
-	const { data, error } = await admin.from('users').select('status').eq('name', name);
+	const { data, error } = await admin
+		.from('users')
+		.select('status')
+		.eq('name', name)
+		.neq('status', 'leaved');
 	return data?.length > 0 ? false : true;
 };
 
