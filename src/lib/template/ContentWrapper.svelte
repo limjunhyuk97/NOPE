@@ -5,7 +5,7 @@
 	export let hasBack = false;
 </script>
 
-<div class="w-full">
+<div class="flex flex-col w-full h-full">
 	<div class="flex flex-col gap-4 my-8">
 		<div class="flex items-center gap-4">
 			{#if hasBack}

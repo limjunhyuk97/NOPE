@@ -96,6 +96,7 @@ export const actions: Actions = {
 					name
 				}
 			});
+			console.log(error);
 			if (error) return fail(400, { message: '회원가입이 불가능합니다!' });
 			else {
 				// confirm 메일 전송

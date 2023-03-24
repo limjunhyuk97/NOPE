@@ -72,14 +72,14 @@
 
 <div in:fade|local class="flex">
 	<!-- 내 정보 섹션 -->
-	<div class="w-2/3 h-screen py-12 px-6 border-r overflow-y-auto scrollbar-hide">
+	<div class="w-2/3 h-screen py-12 px-6 overflow-y-auto scrollbar-hide">
 		<slot />
 	</div>
 	{#if $mypageSidebar === Symbol.for('default')}
 		<!-- 활동 관리 섹션 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/3 h-screen pt-24 pl-12 gap-8 text-start font-semibold"
+			class="flex flex-col w-1/3 h-screen border-l pt-24 pl-12 gap-8 text-start font-semibold"
 		>
 			<h2 class="text-2xl pb-4 font-bold">활동 관리</h2>
 			<a class="text-start text-gray-500 text-xl hover:underline" href="/users">마이 페이지</a>
@@ -105,7 +105,7 @@
 		<!-- 내 정보 변경 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/3 h-screen pt-24 px-4 gap-8 text-start font-semibold"
+			class="flex flex-col w-1/3 h-screen border-l pt-24 px-4 gap-8 text-start font-semibold"
 		>
 			<h2 class="flex items-center gap-2 text-2xl pb-4 font-bold">
 				내 정보 변경 <Icon icon="edit-2" />
@@ -164,7 +164,7 @@
 		<!-- 스택 선택 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/3 h-screen pt-12 px-12 gap-12 text-start"
+			class="flex flex-col w-1/3 h-screen pt-12 px-12 border-l gap-12 text-start"
 		>
 			<div class="flex items-center gap-6">
 				<h2 class="w-48 text-2xl font-bold">스택 선택</h2>
@@ -200,7 +200,7 @@
 		<!-- 활동 관리 섹션 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/3 h-screen pt-36 pl-12 gap-8 text-start font-semibold"
+			class="flex flex-col w-1/3 h-screen pt-36 pl-12 border-l gap-8 text-start font-semibold"
 		>
 			<h2 class="text-2xl pb-4 font-bold">활동 참가자 메뉴</h2>
 			<a
@@ -224,7 +224,7 @@
 		<!-- 활동 관리 섹션 -->
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/3 h-screen pt-36 pl-12 gap-8 text-start font-semibold"
+			class="flex flex-col w-1/3 h-screen pt-36 pl-12 border-l  gap-8 text-start font-semibold"
 		>
 			<h2 class="text-2xl pb-4 font-bold">활동 참가자 메뉴</h2>
 			<a
@@ -243,7 +243,7 @@
 	{:else if $mypageSidebar === Symbol.for('super')}
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/3 h-screen pt-36 pl-12 gap-8 text-start font-semibold"
+			class="flex flex-col w-1/3 h-screen pt-36 pl-12 border-l gap-8 text-start font-semibold"
 		>
 			<h2 class="text-2xl pb-4 font-bold">활동 오너 메뉴</h2>
 			<a
@@ -262,7 +262,7 @@
 	{:else if $mypageSidebar === Symbol.for('admin')}
 		<div
 			in:fly|local={{ x: -64 }}
-			class="flex flex-col w-1/3 h-screen pt-36 pl-12 gap-8 text-start font-semibold"
+			class="flex flex-col w-1/3 h-screen pt-36 pl-12 border-l gap-8 text-start font-semibold"
 		>
 			<h2 class="text-2xl pb-4 font-bold">활동 관리자 메뉴</h2>
 			<a
@@ -270,5 +270,5 @@
 				href="/activities/{$mypageSidebarParam}/admin/sessions">세션 목록 수정</a
 			>
 		</div>
-	{/if}
+	{:else}{/if}
 </div>

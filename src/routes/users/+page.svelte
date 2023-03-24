@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Icon from '$lib/Icon.svelte';
-	import { goto } from '$app/navigation';
 	import { toast, mypageSidebar, myProfile, myStacks, user } from '$lib/stores';
 	import { resizeImage, getImageKey, getSignedUrl } from '$lib/utils';
 	import {
@@ -12,7 +11,7 @@
 		_getUserStacks
 	} from './+layout';
 	import { supabase } from '$lib/supabase';
-	import { onDestroy, beforeUpdate } from 'svelte';
+	import { onDestroy } from 'svelte';
 
 	export let data;
 
@@ -76,13 +75,6 @@
 		$mypageSidebar =
 			$mypageSidebar === Symbol.for('stack') ? Symbol.for('default') : Symbol.for('stack');
 	};
-
-	beforeUpdate(() => {
-		if (!$user) {
-			$toast = '로그인을 해주세요';
-			goto('/');
-		}
-	});
 
 	onDestroy(() => {
 		$mypageSidebar = Symbol.for('default');

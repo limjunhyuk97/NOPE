@@ -13,7 +13,11 @@ export const actions: Actions = {
 		const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
 		if (error) {
-			const { data, error } = await admin.from('users').select('*').match({ email });
+			const { data, error } = await admin
+				.from('users')
+				.select('*')
+				.match({ email })
+				.eq('status', 'active');
 			if (error) {
 				return fail(500, { message: '네트워크 오류' });
 			} else {

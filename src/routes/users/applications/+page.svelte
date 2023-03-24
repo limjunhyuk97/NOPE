@@ -24,7 +24,7 @@
 			: answers.filter((answer) => answer.status === filteredStatus.status);
 </script>
 
-<ContentWrapper title="지원 내역 조회 ({answers.length})">
+<ContentWrapper title="지원 내역 조회 ({filteredAnswers.length})">
 	<!-- 필터 -->
 	<button
 		class="flex items-center justify-between w-32 px-2 py-2 mb-4 bg-gray-100 rounded-lg"
